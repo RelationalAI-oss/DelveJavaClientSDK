@@ -20,7 +20,7 @@ import ai.relational.client.ApiClient;
 import ai.relational.client.ApiException;
 import ai.relational.client.Configuration;
 import ai.relational.client.models.*;
-import org.openapitools.client.api.DefaultApi;
+import ai.relational.client.api.DefaultApi;
 
 public class Example {
   public static void main(String[] args) {
