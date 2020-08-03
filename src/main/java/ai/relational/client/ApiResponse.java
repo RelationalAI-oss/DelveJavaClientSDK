@@ -11,7 +11,7 @@
  */
 
 
-package org.openapitools.client;
+package ai.relational.client;
 
 import java.util.List;
 import java.util.Map;

@@ -13,7 +13,7 @@
 
 package org.openapitools.client.api;
 
-import org.openapitools.client.ApiException;
+import ai.relational.client.ApiException;
 import org.openapitools.client.model.Transaction;
 import org.openapitools.client.model.TransactionResult;
 import org.junit.Test;

@@ -31,7 +31,7 @@ import org.openapitools.client.model.RelKey;
 /**
  * ListEdbActionResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-08-03T02:10:24.995237-07:00[America/Vancouver]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ListEdbActionResult extends ActionResult {
   public static final String SERIALIZED_NAME_RELS = "rels";
   @SerializedName(SERIALIZED_NAME_RELS)

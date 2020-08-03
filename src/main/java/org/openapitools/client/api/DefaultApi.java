@@ -13,14 +13,14 @@
 
 package org.openapitools.client.api;
 
-import org.openapitools.client.ApiCallback;
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.Pair;
-import org.openapitools.client.ProgressRequestBody;
-import org.openapitools.client.ProgressResponseBody;
+import ai.relational.client.ApiCallback;
+import ai.relational.client.ApiClient;
+import ai.relational.client.ApiException;
+import ai.relational.client.ApiResponse;
+import ai.relational.client.Configuration;
+import ai.relational.client.Pair;
+import ai.relational.client.ProgressRequestBody;
+import ai.relational.client.ProgressResponseBody;
 
 import com.google.gson.reflect.TypeToken;
 

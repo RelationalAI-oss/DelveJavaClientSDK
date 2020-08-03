@@ -28,7 +28,7 @@ import org.openapitools.client.model.ActionResult;
 /**
  * LoadDataActionResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-08-03T02:10:24.995237-07:00[America/Vancouver]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class LoadDataActionResult extends ActionResult {
   public LoadDataActionResult() {
     this.objtp = this.getClass().getSimpleName();

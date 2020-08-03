@@ -11,9 +11,9 @@
  */
 
 
-package org.openapitools.client.auth;
+package ai.relational.client.auth;
 
-import org.openapitools.client.Pair;
+import ai.relational.client.Pair;
 
 import okhttp3.Credentials;
 

@@ -29,7 +29,7 @@ import org.openapitools.client.model.LoadData;
 /**
  * LoadDataAction
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-08-03T02:10:24.995237-07:00[America/Vancouver]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class LoadDataAction extends Action {
   public static final String SERIALIZED_NAME_REL = "rel";
   @SerializedName(SERIALIZED_NAME_REL)

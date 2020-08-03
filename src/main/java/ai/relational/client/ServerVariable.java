@@ -1,4 +1,4 @@
-package org.openapitools.client;
+package ai.relational.client;
 
 import java.util.HashSet;
 

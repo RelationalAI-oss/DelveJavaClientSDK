@@ -11,7 +11,7 @@
  */
 
 
-package org.openapitools.client;
+package ai.relational.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -2,7 +2,6 @@
 
 Delve Client SDK
 - API version: 1.0.0
-  - Build date: 2020-08-03T02:10:24.995237-07:00[America/Vancouver]
 
 This is a Client SDK for Delve API
 
@@ -39,7 +38,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>org.openapitools</groupId>
+  <groupId>ai.relational</groupId>
   <artifactId>openapi-java-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
@@ -51,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "org.openapitools:openapi-java-client:1.0.0"
+compile "ai.relational:openapi-java-client:1.0.0"
 ```
 
 ### Others
@@ -74,10 +73,10 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```java
 
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.models.*;
+import ai.relational.client.ApiClient;
+import ai.relational.client.ApiException;
+import ai.relational.client.Configuration;
+import ai.relational.client.models.*;
 import org.openapitools.client.api.DefaultApi;
 
 public class Example {

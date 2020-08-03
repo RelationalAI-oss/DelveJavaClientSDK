@@ -28,7 +28,7 @@ import org.openapitools.client.model.DBType;
 /**
  * WrappedType
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-08-03T02:10:24.995237-07:00[America/Vancouver]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class WrappedType extends DBType {
   public static final String SERIALIZED_NAME_VALUE = "_value";
   @SerializedName(SERIALIZED_NAME_VALUE)

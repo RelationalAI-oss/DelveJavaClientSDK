@@ -11,7 +11,7 @@
  */
 
 
-package org.openapitools.client;
+package ai.relational.client;
 
 import okhttp3.*;
 import okio.Buffer;

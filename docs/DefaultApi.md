@@ -16,10 +16,10 @@ Issues a transaction to be executed
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.models.*;
+import ai.relational.client.ApiClient;
+import ai.relational.client.ApiException;
+import ai.relational.client.Configuration;
+import ai.relational.client.models.*;
 import org.openapitools.client.api.DefaultApi;
 
 public class Example {

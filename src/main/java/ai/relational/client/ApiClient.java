@@ -11,7 +11,7 @@
  */
 
 
-package org.openapitools.client;
+package ai.relational.client;
 
 import okhttp3.*;
 import okhttp3.internal.http.HttpMethod;
@@ -47,10 +47,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openapitools.client.auth.Authentication;
-import org.openapitools.client.auth.HttpBasicAuth;
-import org.openapitools.client.auth.HttpBearerAuth;
-import org.openapitools.client.auth.ApiKeyAuth;
+import ai.relational.client.auth.Authentication;
+import ai.relational.client.auth.HttpBasicAuth;
+import ai.relational.client.auth.HttpBearerAuth;
+import ai.relational.client.auth.ApiKeyAuth;
 
 public class ApiClient {
 

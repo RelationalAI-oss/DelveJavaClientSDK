@@ -30,7 +30,7 @@ import org.openapitools.client.model.Action;
 /**
  * ModifyWorkspaceAction
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-08-03T02:10:24.995237-07:00[America/Vancouver]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ModifyWorkspaceAction extends Action {
   public static final String SERIALIZED_NAME_DELETE_SOURCE = "delete_source";
   @SerializedName(SERIALIZED_NAME_DELETE_SOURCE)
