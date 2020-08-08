@@ -6,13 +6,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**startPoint** | [**Point**](Point.md) |  | 
 **endPoint** | [**Point**](Point.md) |  | 
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**startPoint** | [**Point**](Point.md) |  | 
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

@@ -8,15 +8,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contentType** | **String** |  |  [optional]
 **data** | **String** |  |  [optional]
-**path** | **String** |  |  [optional]
-**key** | [**AnyValue**](AnyValue.md) |  |  [optional]
-**fileSyntax** | [**FileSyntax**](FileSyntax.md) |  | 
 **fileSchema** | [**FileSchema**](FileSchema.md) |  | 
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**fileSyntax** | [**FileSyntax**](FileSyntax.md) |  | 
+**key** | [**AnyValue**](AnyValue.md) |  |  [optional]
+**path** | **String** |  |  [optional]
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**deleteSource** | **List&lt;String&gt;** |  |  [optional]
 **deleteEdb** | **String** |  |  [optional]
+**deleteSource** | **List&lt;String&gt;** |  |  [optional]
 **enableLibrary** | **String** |  |  [optional]
 
 

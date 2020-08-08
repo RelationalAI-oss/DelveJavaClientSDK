@@ -6,15 +6,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**output** | [**RelDict**](RelDict.md) |  |  [optional]
-**problems** | [**List&lt;AbstractProblem&gt;**](AbstractProblem.md) |  |  [optional]
-**actions** | [**List&lt;LabeledActionResult&gt;**](LabeledActionResult.md) |  |  [optional]
 **aborted** | **Boolean** |  |  [optional]
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**actions** | [**List&lt;LabeledActionResult&gt;**](LabeledActionResult.md) |  |  [optional]
+**output** | [**List&lt;Relation&gt;**](Relation.md) |  |  [optional]
+**problems** | [**List&lt;AbstractProblem&gt;**](AbstractProblem.md) |  |  [optional]
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

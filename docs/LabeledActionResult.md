@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** |  |  [optional]
 **result** | [**ActionResult**](ActionResult.md) |  | 
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

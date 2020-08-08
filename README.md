@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>ai.relational</groupId>
+  <groupId>com.relationalai</groupId>
   <artifactId>openapi-java-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "ai.relational:openapi-java-client:1.0.0"
+compile "com.relationalai:openapi-java-client:1.0.0"
 ```
 
 ### Others
@@ -73,11 +73,11 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```java
 
 // Import classes:
-import ai.relational.client.ApiClient;
-import ai.relational.client.ApiException;
-import ai.relational.client.Configuration;
-import ai.relational.client.models.*;
-import ai.relational.client.api.DefaultApi;
+import com.relationalai.client.ApiClient;
+import com.relationalai.client.ApiException;
+import com.relationalai.client.Configuration;
+import com.relationalai.client.models.*;
+import com.relationalai.client.api.DefaultApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -128,7 +128,6 @@ Class | Method | HTTP request | Description
  - [Cons](docs/Cons.md)
  - [ConstantType](docs/ConstantType.md)
  - [DBType](docs/DBType.md)
- - [DictElementRelKeyAnyValue](docs/DictElementRelKeyAnyValue.md)
  - [ExceptionProblem](docs/ExceptionProblem.md)
  - [FileSchema](docs/FileSchema.md)
  - [FileSyntax](docs/FileSyntax.md)
@@ -156,7 +155,6 @@ Class | Method | HTTP request | Description
  - [Nil](docs/Nil.md)
  - [OutputProblem](docs/OutputProblem.md)
  - [PairAnyValueAnyValue](docs/PairAnyValueAnyValue.md)
- - [PairRelKeyAnyValue](docs/PairRelKeyAnyValue.md)
  - [ParseAction](docs/ParseAction.md)
  - [ParseActionResult](docs/ParseActionResult.md)
  - [PersistProblem](docs/PersistProblem.md)
@@ -164,8 +162,8 @@ Class | Method | HTTP request | Description
  - [QueryAction](docs/QueryAction.md)
  - [QueryActionResult](docs/QueryActionResult.md)
  - [Range](docs/Range.md)
- - [RelDict](docs/RelDict.md)
  - [RelKey](docs/RelKey.md)
+ - [Relation](docs/Relation.md)
  - [SetOptionsAction](docs/SetOptionsAction.md)
  - [SetOptionsActionResult](docs/SetOptionsActionResult.md)
  - [Source](docs/Source.md)

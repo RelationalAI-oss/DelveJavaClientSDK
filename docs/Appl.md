@@ -6,11 +6,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**symbol** | **String** |  |  [optional]
 **arguments** | [**List&lt;SyntaxNode&gt;**](SyntaxNode.md) |  |  [optional]
-**range** | [**Range**](Range.md) |  | 
-**missing** | **Boolean** |  |  [optional]
 **error** | **Boolean** |  |  [optional]
+**missing** | **Boolean** |  |  [optional]
+**range** | [**Range**](Range.md) |  | 
+**symbol** | **String** |  |  [optional]
 
 
 
