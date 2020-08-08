@@ -1,4 +1,4 @@
-package ai.relational.client.api;
+package com.relationalai.client.api;
 
 public class Connection {
     String dbname;

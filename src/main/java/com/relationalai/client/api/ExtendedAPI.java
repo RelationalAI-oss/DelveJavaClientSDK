@@ -1,18 +1,9 @@
-package ai.relational.client.api;
+package com.relationalai.client.api;
 
-import ai.relational.client.ApiException;
-import ai.relational.client.model.*;
+import com.relationalai.client.ApiException;
+import com.relationalai.client.model.*;
 
 public class ExtendedAPI extends DefaultApi{
-
-    public boolean create_database(Connection conn, boolean overwrite) throws ApiException {
-        Transaction xact = new Transaction();
-        xact.setMode(overwrite ? Transaction.ModeEnum.CREATE_OVERWRITE : Transaction.ModeEnum.CREATE);
-        xact.setDbname(conn.dbname);
-        TransactionResult response = this.transactionPost(xact);
-
-        return !response.getAborted() && response.getProblems().isEmpty();
-    }
 
     public ActionResult run_action(Connection conn, String name, Action action) throws ApiException {
         Transaction xact = new Transaction();
@@ -35,6 +26,15 @@ public class ExtendedAPI extends DefaultApi{
             }
         }
         return null;
+    }
+
+    public boolean create_database(Connection conn, boolean overwrite) throws ApiException {
+        Transaction xact = new Transaction();
+        xact.setMode(overwrite ? Transaction.ModeEnum.CREATE_OVERWRITE : Transaction.ModeEnum.CREATE);
+        xact.setDbname(conn.dbname);
+        TransactionResult response = this.transactionPost(xact);
+
+        return !response.getAborted() && response.getProblems().isEmpty();
     }
 
     public InstallActionResult install_source(Connection conn, String name, String path, String src_str) throws ApiException {

@@ -11,9 +11,9 @@
  */
 
 
-package ai.relational.client.api;
+package com.relationalai.client.api;
 
-import ai.relational.client.ApiException;
+import com.relationalai.client.ApiException;
 import org.junit.Test;
 
 /**
