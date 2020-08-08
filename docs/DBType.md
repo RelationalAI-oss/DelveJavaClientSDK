@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**objtp** | **String** |  | 
+**type** | **String** |  | 
 
 
 

@@ -8,15 +8,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **first** | [**AnyValue**](AnyValue.md) |  |  [optional]
 **second** | [**AnyValue**](AnyValue.md) |  |  [optional]
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----
-PAIR_ANYVALUE_ANYVALUE | &quot;Pair_AnyValue_AnyValue&quot;
+PAIR_ANYVALUE_ANYVALUE_ | &quot;Pair_AnyValue_AnyValue_&quot;
 
 
 

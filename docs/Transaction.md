@@ -6,12 +6,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**abort** | **Boolean** |  |  [optional]
+**actions** | [**List&lt;LabeledAction&gt;**](LabeledAction.md) |  |  [optional]
 **dbname** | **String** |  |  [optional]
 **mode** | [**ModeEnum**](#ModeEnum) |  | 
 **readonly** | **Boolean** |  |  [optional]
-**actions** | [**List&lt;LabeledAction&gt;**](LabeledAction.md) |  |  [optional]
-**abort** | **Boolean** |  |  [optional]
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
@@ -26,7 +26,7 @@ OPEN_OR_CREATE | &quot;OPEN_OR_CREATE&quot;
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

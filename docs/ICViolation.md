@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **relKey** | [**RelKey**](RelKey.md) |  | 
 **source** | **String** |  |  [optional]
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

@@ -6,15 +6,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**input** | [**AnyValue**](AnyValue.md) |  |  [optional]
 **area** | [**Area**](Area.md) |  | 
-**startByte** | **Integer** |  |  [optional]
 **endByte** | **Integer** |  |  [optional]
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**input** | [**AnyValue**](AnyValue.md) |  |  [optional]
+**startByte** | **Integer** |  |  [optional]
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

@@ -6,13 +6,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  |  [optional]
 **action** | [**Action**](Action.md) |  | 
-**objtp** | [**ObjtpEnum**](#ObjtpEnum) |  | 
+**name** | **String** |  |  [optional]
+**type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
 
-## Enum: ObjtpEnum
+## Enum: TypeEnum
 
 Name | Value
 ---- | -----

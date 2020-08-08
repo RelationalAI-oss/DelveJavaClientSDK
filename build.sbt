@@ -1,6 +1,6 @@
 lazy val root = (project in file(".")).
   settings(
-    organization := "ai.relational",
+    organization := "com.relationalai",
     name := "openapi-java-client",
     version := "1.0.0",
     scalaVersion := "2.11.4",

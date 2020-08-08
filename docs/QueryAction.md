@@ -6,10 +6,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source** | [**Source**](Source.md) |  | 
-**inputs** | [**RelDict**](RelDict.md) |  |  [optional]
-**persist** | **List&lt;String&gt;** |  |  [optional]
+**inputs** | [**List&lt;Relation&gt;**](Relation.md) |  |  [optional]
 **outputs** | **List&lt;String&gt;** |  |  [optional]
+**persist** | **List&lt;String&gt;** |  |  [optional]
+**source** | [**Source**](Source.md) |  | 
 
 
 

@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inputs** | [**RelDict**](RelDict.md) |  |  [optional]
+**inputs** | [**List&lt;Relation&gt;**](Relation.md) |  |  [optional]
 
 
 

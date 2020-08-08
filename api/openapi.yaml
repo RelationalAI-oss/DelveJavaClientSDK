@@ -43,15 +43,15 @@ components:
   schemas:
     Action:
       discriminator:
-        propertyName: objtp
+        propertyName: type
       example:
-        objtp: objtp
+        type: type
       properties:
-        objtp:
+        type:
           default: ""
           type: string
       required:
-      - objtp
+      - type
       type: object
     CardinalityAction:
       allOf:
@@ -65,29 +65,29 @@ components:
       allOf:
       - $ref: '#/components/schemas/Action'
       type: object
-    DBType:
-      discriminator:
-        propertyName: objtp
-      example:
-        objtp: objtp
-      properties:
-        objtp:
-          default: ""
-          type: string
-      required:
-      - objtp
-      type: object
     AnyValue:
       example:
-        objtp: AnyValue
+        type: AnyValue
       properties:
-        objtp:
+        type:
           default: AnyValue
           enum:
           - AnyValue
           type: string
       required:
-      - objtp
+      - type
+      type: object
+    DBType:
+      discriminator:
+        propertyName: type
+      example:
+        type: type
+      properties:
+        type:
+          default: ""
+          type: string
+      required:
+      - type
       type: object
     ConstantType:
       allOf:
@@ -107,149 +107,69 @@ components:
     RelKey:
       example:
         keys:
-        - objtp: objtp
-        - objtp: objtp
+        - type: type
+        - type: type
         values:
-        - objtp: objtp
-        - objtp: objtp
+        - type: type
+        - type: type
         name: name
-        objtp: RelKey
+        type: RelKey
       properties:
-        name:
-          default: ""
-          type: string
         keys:
           items:
             $ref: '#/components/schemas/DBType'
           type: array
+        name:
+          default: ""
+          type: string
         values:
           items:
             $ref: '#/components/schemas/DBType'
           type: array
-        objtp:
+        type:
           default: RelKey
           enum:
           - RelKey
           type: string
       required:
-      - objtp
+      - type
       type: object
-    Pair_RelKey_AnyValue:
+    Relation:
       example:
-        objtp: Pair_RelKey_AnyValue
-        first:
+        columns:
+          type: AnyValue
+        rel_key:
           keys:
-          - objtp: objtp
-          - objtp: objtp
+          - type: type
+          - type: type
           values:
-          - objtp: objtp
-          - objtp: objtp
+          - type: type
+          - type: type
           name: name
-          objtp: RelKey
-        second:
-          objtp: AnyValue
+          type: RelKey
+        type: Relation
       properties:
-        first:
-          $ref: '#/components/schemas/RelKey'
-        second:
+        columns:
           $ref: '#/components/schemas/AnyValue'
-        objtp:
-          default: Pair_RelKey_AnyValue
+        rel_key:
+          $ref: '#/components/schemas/RelKey'
+        type:
+          default: Relation
           enum:
-          - Pair_RelKey_AnyValue
+          - Relation
           type: string
       required:
-      - first
-      - objtp
-      type: object
-    DictElement_RelKey_AnyValue:
-      example:
-        objtp: DictElement_RelKey_AnyValue
-        dict_arr:
-        - objtp: Pair_RelKey_AnyValue
-          first:
-            keys:
-            - objtp: objtp
-            - objtp: objtp
-            values:
-            - objtp: objtp
-            - objtp: objtp
-            name: name
-            objtp: RelKey
-          second:
-            objtp: AnyValue
-        - objtp: Pair_RelKey_AnyValue
-          first:
-            keys:
-            - objtp: objtp
-            - objtp: objtp
-            values:
-            - objtp: objtp
-            - objtp: objtp
-            name: name
-            objtp: RelKey
-          second:
-            objtp: AnyValue
-      properties:
-        dict_arr:
-          items:
-            $ref: '#/components/schemas/Pair_RelKey_AnyValue'
-          type: array
-        objtp:
-          default: DictElement_RelKey_AnyValue
-          enum:
-          - DictElement_RelKey_AnyValue
-          type: string
-      required:
-      - objtp
-      type: object
-    RelDict:
-      example:
-        dict_elem:
-          objtp: DictElement_RelKey_AnyValue
-          dict_arr:
-          - objtp: Pair_RelKey_AnyValue
-            first:
-              keys:
-              - objtp: objtp
-              - objtp: objtp
-              values:
-              - objtp: objtp
-              - objtp: objtp
-              name: name
-              objtp: RelKey
-            second:
-              objtp: AnyValue
-          - objtp: Pair_RelKey_AnyValue
-            first:
-              keys:
-              - objtp: objtp
-              - objtp: objtp
-              values:
-              - objtp: objtp
-              - objtp: objtp
-              name: name
-              objtp: RelKey
-            second:
-              objtp: AnyValue
-        objtp: RelDict
-      properties:
-        dict_elem:
-          $ref: '#/components/schemas/DictElement_RelKey_AnyValue'
-        objtp:
-          default: RelDict
-          enum:
-          - RelDict
-          type: string
-      required:
-      - objtp
+      - rel_key
+      - type
       type: object
     ImportAction:
       allOf:
       - $ref: '#/components/schemas/Action'
       properties:
         inputs:
-          $ref: '#/components/schemas/RelDict'
+          items:
+            $ref: '#/components/schemas/Relation'
+          type: array
       type: object
     Source:
       properties:
@@ -262,13 +182,13 @@ components:
         value:
           default: ""
           type: string
-        objtp:
+        type:
           default: Source
           enum:
           - Source
           type: string
       required:
-      - objtp
+      - type
       type: object
     InstallAction:
       allOf:
@@ -291,61 +211,15 @@ components:
       allOf:
       - $ref: '#/components/schemas/Action'
       type: object
-    FileSyntax:
-      discriminator:
-        propertyName: objtp
-      properties:
-        objtp:
-          default: ""
-          type: string
-      required:
-      - objtp
-      type: object
-    CSVFileSyntax:
-      allOf:
-      - $ref: '#/components/schemas/FileSyntax'
-      properties:
-        header:
-          items:
-            type: string
-          type: array
-        header_row:
-          type: int
-        normalizenames:
-          default: false
-          type: boolean
-        datarow:
-          type: int
-        missingstrings:
-          items:
-            type: string
-          type: array
-        delim:
-          default: ""
-          type: string
-        ignorerepeated:
-          default: false
-          type: boolean
-        quotechar:
-          default: ""
-          type: string
-        escapechar:
-          default: ""
-          type: string
-      type: object
-    JSONFileSyntax:
-      allOf:
-      - $ref: '#/components/schemas/FileSyntax'
-      type: object
     FileSchema:
       discriminator:
-        propertyName: objtp
+        propertyName: type
       properties:
-        objtp:
+        type:
           default: ""
           type: string
       required:
-      - objtp
+      - type
       type: object
     CSVFileSchema:
       allOf:
@@ -356,6 +230,52 @@ components:
             type: string
           type: array
       type: object
+    FileSyntax:
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          default: ""
+          type: string
+      required:
+      - type
+      type: object
+    CSVFileSyntax:
+      allOf:
+      - $ref: '#/components/schemas/FileSyntax'
+      properties:
+        datarow:
+          type: int
+        delim:
+          default: ""
+          type: string
+        escapechar:
+          default: ""
+          type: string
+        header:
+          items:
+            type: string
+          type: array
+        header_row:
+          type: int
+        ignorerepeated:
+          default: false
+          type: boolean
+        missingstrings:
+          items:
+            type: string
+          type: array
+        normalizenames:
+          default: false
+          type: boolean
+        quotechar:
+          default: ""
+          type: string
+      type: object
+    JSONFileSyntax:
+      allOf:
+      - $ref: '#/components/schemas/FileSyntax'
+      type: object
     LoadData:
       properties:
         content_type:
@@ -364,16 +284,16 @@ components:
         data:
           default: ""
           type: string
+        file_schema:
+          $ref: '#/components/schemas/FileSchema'
+        file_syntax:
+          $ref: '#/components/schemas/FileSyntax'
+        key:
+          $ref: '#/components/schemas/AnyValue'
         path:
           default: ""
           type: string
-        key:
-          $ref: '#/components/schemas/AnyValue'
-        file_syntax:
-          $ref: '#/components/schemas/FileSyntax'
-        file_schema:
-          $ref: '#/components/schemas/FileSchema'
-        objtp:
+        type:
           default: LoadData
           enum:
           - LoadData
@@ -381,7 +301,7 @@ components:
       required:
       - file_schema
       - file_syntax
-      - objtp
+      - type
       type: object
     LoadDataAction:
       allOf:
@@ -399,13 +319,13 @@ components:
       allOf:
       - $ref: '#/components/schemas/Action'
       properties:
+        delete_edb:
+          default: ""
+          type: string
         delete_source:
           items:
             type: string
           type: array
-        delete_edb:
-          default: ""
-          type: string
         enable_library:
           default: ""
           type: string
@@ -426,18 +346,20 @@ components:
       allOf:
       - $ref: '#/components/schemas/Action'
       properties:
-        source:
-          $ref: '#/components/schemas/Source'
         inputs:
-          $ref: '#/components/schemas/RelDict'
-        persist:
           items:
-            type: string
+            $ref: '#/components/schemas/Relation'
           type: array
         outputs:
           items:
             type: string
           type: array
+        persist:
+          items:
+            type: string
+          type: array
+        source:
+          $ref: '#/components/schemas/Source'
       required:
       - source
       type: object
@@ -445,132 +367,108 @@ components:
       allOf:
       - $ref: '#/components/schemas/Action'
       properties:
+        abort_on_error:
+          default: false
+          type: boolean
+        broken:
+          default: false
+          type: boolean
         debug:
           default: false
           type: boolean
         debug_trace:
           default: false
           type: boolean
-        broken:
-          default: false
-          type: boolean
         silent:
           default: false
           type: boolean
-        abort_on_error:
-          default: false
-          type: boolean
       type: object
-    Pair_AnyValue_AnyValue:
+    Pair_AnyValue_AnyValue_:
       properties:
         first:
           $ref: '#/components/schemas/AnyValue'
         second:
           $ref: '#/components/schemas/AnyValue'
-        objtp:
-          default: Pair_AnyValue_AnyValue
+        type:
+          default: Pair_AnyValue_AnyValue_
           enum:
-          - Pair_AnyValue_AnyValue
+          - Pair_AnyValue_AnyValue_
           type: string
       required:
-      - objtp
+      - type
       type: object
     UpdateAction:
       allOf:
       - $ref: '#/components/schemas/Action'
       properties:
+        delta:
+          items:
+            $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
+          type: array
         rel:
           $ref: '#/components/schemas/RelKey'
         updates:
           items:
-            $ref: '#/components/schemas/Pair_AnyValue_AnyValue'
-          type: array
-        delta:
-          items:
-            $ref: '#/components/schemas/Pair_AnyValue_AnyValue'
+            $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
           type: array
       required:
       - rel
       type: object
-    LabeledAction:
+    ActionResult:
+      discriminator:
+        propertyName: type
       example:
-        name: name
-        action:
-          objtp: objtp
-        objtp: LabeledAction
+        type: type
       properties:
-        name:
+        type:
           default: ""
           type: string
-        action:
-          $ref: '#/components/schemas/Action'
-        objtp:
-          default: LabeledAction
-          enum:
-          - LabeledAction
-          type: string
       required:
-      - action
-      - objtp
+      - type
       type: object
-    Transaction:
-      example:
-        mode: OPEN
-        dbname: dbname
-        readonly: false
-        abort: false
-        objtp: Transaction
-        actions:
-        - name: name
-          action:
-            objtp: objtp
-          objtp: LabeledAction
-        - name: name
-          action:
-            objtp: objtp
-          objtp: LabeledAction
+    CardinalityActionResult:
+      allOf:
+      - $ref: '#/components/schemas/ActionResult'
       properties:
-        dbname:
-          default: ""
-          type: string
-        mode:
-          default: OPEN
-          enum:
-          - OPEN
-          - CREATE
-          - CREATE_OVERWRITE
-          - OPEN_OR_CREATE
-          type: string
-        readonly:
-          default: false
-          type: boolean
-        actions:
+        result:
           items:
-            $ref: '#/components/schemas/LabeledAction'
+            $ref: '#/components/schemas/Relation'
           type: array
-        abort:
-          default: false
-          type: boolean
-        objtp:
-          default: Transaction
-          enum:
-          - Transaction
-          type: string
-      required:
-      - mode
-      - objtp
       type: object
     AbstractProblem:
       discriminator:
-        propertyName: objtp
+        propertyName: type
       example:
-        objtp: objtp
+        type: type
       properties:
-        objtp:
+        type:
           default: ""
           type: string
       required:
-      - objtp
+      - type
+      type: object
+    ClientProblem:
+      allOf:
+      - $ref: '#/components/schemas/AbstractProblem'
+      properties:
+        error_code:
+          default: ""
+          type: string
+        is_error:
+          default: false
+          type: boolean
+        is_exception:
+          default: false
+          type: boolean
+        message:
+          default: ""
+          type: string
+        path:
+          default: ""
+          type: string
+        report:
+          default: ""
+          type: string
       type: object
     ExceptionProblem:
       allOf:
@@ -591,17 +489,42 @@ components:
           default: ""
           type: string
       type: object
+    ICViolation:
+      properties:
+        rel_key:
+          $ref: '#/components/schemas/RelKey'
+        source:
+          default: ""
+          type: string
+        type:
+          default: ICViolation
+          enum:
+          - ICViolation
+          type: string
+      required:
+      - rel_key
+      - type
+      type: object
+    IntegrityConstraintViolation:
+      allOf:
+      - $ref: '#/components/schemas/AbstractProblem'
+      properties:
+        sources:
+          items:
+            $ref: '#/components/schemas/ICViolation'
+          type: array
+      type: object
     OutputProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
       properties:
-        name:
-          default: ""
-          type: string
         exception:
           default: ""
           type: string
         exception_stacktrace:
+          default: ""
+          type: string
+        name:
           default: ""
           type: string
       type: object
@@ -616,92 +539,84 @@ components:
           default: ""
           type: string
       type: object
-    WorkspaceLoadProblem:
-      allOf:
-      - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-      type: object
     SyntaxNode:
       discriminator:
-        propertyName: objtp
+        propertyName: type
       properties:
-        objtp:
+        type:
           default: ""
           type: string
       required:
-      - objtp
+      - type
       type: object
     Point:
       properties:
-        row:
-          type: int
         column:
           type: int
-        objtp:
+        row:
+          type: int
+        type:
           default: Point
           enum:
           - Point
           type: string
       required:
-      - objtp
+      - type
       type: object
     Area:
       properties:
-        start_point:
-          $ref: '#/components/schemas/Point'
         end_point:
           $ref: '#/components/schemas/Point'
-        objtp:
+        start_point:
+          $ref: '#/components/schemas/Point'
+        type:
           default: Area
           enum:
           - Area
           type: string
       required:
       - end_point
-      - objtp
       - start_point
+      - type
       type: object
     Range:
       properties:
-        input:
-          $ref: '#/components/schemas/AnyValue'
         area:
           $ref: '#/components/schemas/Area'
-        start_byte:
-          type: int
         end_byte:
           type: int
-        objtp:
+        input:
+          $ref: '#/components/schemas/AnyValue'
+        start_byte:
+          type: int
+        type:
           default: Range
           enum:
           - Range
           type: string
       required:
       - area
-      - objtp
+      - type
       type: object
     Appl:
       allOf:
       - $ref: '#/components/schemas/SyntaxNode'
       properties:
-        symbol:
-          default: ""
-          type: string
         arguments:
           items:
             $ref: '#/components/schemas/SyntaxNode'
           type: array
-        range:
-          $ref: '#/components/schemas/Range'
-        missing:
-          default: false
-          type: boolean
         error:
           default: false
           type: boolean
+        missing:
+          default: false
+          type: boolean
+        range:
+          $ref: '#/components/schemas/Range'
+        symbol:
+          default: ""
+          type: string
       required:
       - range
       type: object
@@ -709,14 +624,14 @@ components:
       allOf:
       - $ref: '#/components/schemas/SyntaxNode'
       properties:
-        value:
-          default: ""
-          type: string
-        range:
-          $ref: '#/components/schemas/Range'
         missing:
           default: false
           type: boolean
+        range:
+          $ref: '#/components/schemas/Range'
+        value:
+          default: ""
+          type: string
       required:
       - range
       type: object
@@ -724,23 +639,23 @@ components:
       allOf:
       - $ref: '#/components/schemas/SyntaxNode'
       properties:
+        range:
+          $ref: '#/components/schemas/Range'
         value:
           default: ""
           type: string
-        range:
-          $ref: '#/components/schemas/Range'
       required:
       - range
       type: object
     LinkedList:
       discriminator:
-        propertyName: objtp
+        propertyName: type
       properties:
-        objtp:
+        type:
           default: ""
           type: string
       required:
-      - objtp
+      - type
       type: object
     Cons:
       allOf:
@@ -762,12 +677,12 @@ components:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
       properties:
+        next:
+          $ref: '#/components/schemas/SyntaxNode'
         node:
           $ref: '#/components/schemas/SyntaxNode'
         trace:
           $ref: '#/components/schemas/LinkedList'
-        next:
-          $ref: '#/components/schemas/SyntaxNode'
       required:
       - next
       - node
@@ -785,72 +700,13 @@ components:
       required:
       - range
       type: object
-    ClientProblem:
+    WorkspaceLoadProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
       properties:
-        error_code:
+        exception:
           default: ""
           type: string
-        is_error:
-          default: false
-          type: boolean
-        is_exception:
-          default: false
-          type: boolean
-        report:
-          default: ""
-          type: string
-        message:
-          default: ""
-          type: string
-        path:
-          default: ""
-          type: string
-      type: object
-    ICViolation:
-      properties:
-        rel_key:
-          $ref: '#/components/schemas/RelKey'
-        source:
-          default: ""
-          type: string
-        objtp:
-          default: ICViolation
-          enum:
-          - ICViolation
-          type: string
-      required:
-      - objtp
-      - rel_key
-      type: object
-    IntegrityConstraintViolation:
-      allOf:
-      - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        sources:
-          items:
-            $ref: '#/components/schemas/ICViolation'
-          type: array
-      type: object
-    ActionResult:
-      discriminator:
-        propertyName: objtp
-      example:
-        objtp: objtp
-      properties:
-        objtp:
-          default: ""
-          type: string
-      required:
-      - objtp
-      type: object
-    CardinalityActionResult:
-      allOf:
-      - $ref: '#/components/schemas/ActionResult'
-      properties:
-        result:
-          $ref: '#/components/schemas/RelDict'
       type: object
     CollectProblemsActionResult:
       allOf:
@@ -914,7 +770,9 @@ components:
       - $ref: '#/components/schemas/ActionResult'
       properties:
         output:
-          $ref: '#/components/schemas/RelDict'
+          items:
+            $ref: '#/components/schemas/Relation'
+          type: array
       type: object
     SetOptionsActionResult:
       allOf:
@@ -924,92 +782,158 @@ components:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
       type: object
+    LabeledAction:
+      example:
+        name: name
+        action:
+          type: type
+        type: LabeledAction
+      properties:
+        action:
+          $ref: '#/components/schemas/Action'
+        name:
+          default: ""
+          type: string
+        type:
+          default: LabeledAction
+          enum:
+          - LabeledAction
+          type: string
+      required:
+      - action
+      - type
+      type: object
+    Transaction:
+      example:
+        mode: OPEN
+        dbname: dbname
+        readonly: false
+        abort: false
+        type: Transaction
+        actions:
+        - name: name
+          action:
+            type: type
+          type: LabeledAction
+        - name: name
+          action:
+            type: type
+          type: LabeledAction
+      properties:
+        abort:
+          default: false
+          type: boolean
+        actions:
+          items:
+            $ref: '#/components/schemas/LabeledAction'
+          type: array
+        dbname:
+          default: ""
+          type: string
+        mode:
+          default: OPEN
+          enum:
+          - OPEN
+          - CREATE
+          - CREATE_OVERWRITE
+          - OPEN_OR_CREATE
+          type: string
+        readonly:
+          default: false
+          type: boolean
+        type:
+          default: Transaction
+          enum:
+          - Transaction
+          type: string
+      required:
+      - mode
+      - type
+      type: object
     LabeledActionResult:
       example:
         result:
-          objtp: objtp
+          type: type
         name: name
-        objtp: LabeledActionResult
+        type: LabeledActionResult
       properties:
         name:
           default: ""
           type: string
         result:
           $ref: '#/components/schemas/ActionResult'
-        objtp:
+        type:
           default: LabeledActionResult
           enum:
           - LabeledActionResult
           type: string
       required:
-      - objtp
       - result
+      - type
       type: object
     TransactionResult:
       example:
         output:
-          dict_elem:
-            objtp: DictElement_RelKey_AnyValue
-            dict_arr:
-            - objtp: Pair_RelKey_AnyValue
-              first:
-                keys:
-                - objtp: objtp
-                - objtp: objtp
-                values:
-                - objtp: objtp
-                - objtp: objtp
-                name: name
-                objtp: RelKey
-              second:
-                objtp: AnyValue
-            - objtp: Pair_RelKey_AnyValue
-              first:
-                keys:
-                - objtp: objtp
-                - objtp: objtp
-                values:
-                - objtp: objtp
-                - objtp: objtp
-                name: name
-                objtp: RelKey
-              second:
-                objtp: AnyValue
-          objtp: RelDict
+        - columns:
+            type: AnyValue
+          rel_key:
+            keys:
+            - type: type
+            - type: type
+            values:
+            - type: type
+            - type: type
+            name: name
+            type: RelKey
+          type: Relation
+        - columns:
+            type: AnyValue
+          rel_key:
+            keys:
+            - type: type
+            - type: type
+            values:
+            - type: type
+            - type: type
+            name: name
+            type: RelKey
+          type: Relation
         aborted: false
-        objtp: TransactionResult
+        type: TransactionResult
         actions:
         - result:
-            objtp: objtp
+            type: type
           name: name
-          objtp: LabeledActionResult
+          type: LabeledActionResult
         - result:
-            objtp: objtp
+            type: type
           name: name
-          objtp: LabeledActionResult
+          type: LabeledActionResult
         problems:
-        - objtp: objtp
-        - objtp: objtp
+        - type: type
+        - type: type
       properties:
-        output:
-          $ref: '#/components/schemas/RelDict'
-        problems:
-          items:
-            $ref: '#/components/schemas/AbstractProblem'
-          type: array
+        aborted:
+          default: false
+          type: boolean
         actions:
           items:
             $ref: '#/components/schemas/LabeledActionResult'
           type: array
-        aborted:
-          default: false
-          type: boolean
-        objtp:
+        output:
+          items:
+            $ref: '#/components/schemas/Relation'
+          type: array
+        problems:
+          items:
+            $ref: '#/components/schemas/AbstractProblem'
+          type: array
+        type:
           default: TransactionResult
           enum:
           - TransactionResult
           type: string
       required:
-      - objtp
+      - type
       type: object
 

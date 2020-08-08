@@ -16,11 +16,11 @@ Issues a transaction to be executed
 ### Example
 ```java
 // Import classes:
-import ai.relational.client.ApiClient;
-import ai.relational.client.ApiException;
-import ai.relational.client.Configuration;
-import ai.relational.client.models.*;
-import ai.relational.client.api.DefaultApi;
+import com.relationalai.client.ApiClient;
+import com.relationalai.client.ApiException;
+import com.relationalai.client.Configuration;
+import com.relationalai.client.models.*;
+import com.relationalai.client.api.DefaultApi;
 
 public class Example {
   public static void main(String[] args) {
