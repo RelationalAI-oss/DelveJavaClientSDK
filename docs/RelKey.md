@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**keys** | [**List&lt;DBType&gt;**](DBType.md) |  |  [optional]
+**keys** | **List&lt;String&gt;** |  |  [optional]
 **name** | **String** |  |  [optional]
-**values** | [**List&lt;DBType&gt;**](DBType.md) |  |  [optional]
+**values** | **List&lt;String&gt;** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 

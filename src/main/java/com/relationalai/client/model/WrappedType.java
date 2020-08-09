@@ -30,36 +30,9 @@ import java.io.IOException;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class WrappedType extends DBType {
-  public static final String SERIALIZED_NAME_VALUE = "_value";
-  @SerializedName(SERIALIZED_NAME_VALUE)
-  private String value = "";
-
   public WrappedType() {
     this.type = this.getClass().getSimpleName();
   }
-
-  public WrappedType value(String value) {
-    
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * Get value
-   * @return value
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getValue() {
-    return value;
-  }
-
-
-  public void setValue(String value) {
-    this.value = value;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -69,14 +42,12 @@ public class WrappedType extends DBType {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    WrappedType wrappedType = (WrappedType) o;
-    return Objects.equals(this.value, wrappedType.value) &&
-        super.equals(o);
+    return super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(value, super.hashCode());
+    return Objects.hash(super.hashCode());
   }
 
 
@@ -85,7 +56,6 @@ public class WrappedType extends DBType {
     StringBuilder sb = new StringBuilder();
     sb.append("class WrappedType {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("}");
     return sb.toString();
   }

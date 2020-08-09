@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AnyValue;
 import com.relationalai.client.model.FileSchema;
 import com.relationalai.client.model.FileSyntax;
 import io.swagger.annotations.ApiModel;
@@ -50,7 +49,7 @@ public class LoadData {
 
   public static final String SERIALIZED_NAME_KEY = "key";
   @SerializedName(SERIALIZED_NAME_KEY)
-  private AnyValue key;
+  private Object key = null;
 
   public static final String SERIALIZED_NAME_PATH = "path";
   @SerializedName(SERIALIZED_NAME_PATH)
@@ -196,7 +195,7 @@ public class LoadData {
   }
 
 
-  public LoadData key(AnyValue key) {
+  public LoadData key(Object key) {
     
     this.key = key;
     return this;
@@ -209,12 +208,12 @@ public class LoadData {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AnyValue getKey() {
+  public Object getKey() {
     return key;
   }
 
 
-  public void setKey(AnyValue key) {
+  public void setKey(Object key) {
     this.key = key;
   }
 

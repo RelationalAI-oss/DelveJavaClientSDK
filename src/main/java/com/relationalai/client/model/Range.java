@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AnyValue;
 import com.relationalai.client.model.Area;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -41,7 +40,7 @@ public class Range {
 
   public static final String SERIALIZED_NAME_INPUT = "input";
   @SerializedName(SERIALIZED_NAME_INPUT)
-  private AnyValue input;
+  private Object input = null;
 
   public static final String SERIALIZED_NAME_START_BYTE = "start_byte";
   @SerializedName(SERIALIZED_NAME_START_BYTE)
@@ -142,7 +141,7 @@ public class Range {
   }
 
 
-  public Range input(AnyValue input) {
+  public Range input(Object input) {
     
     this.input = input;
     return this;
@@ -155,12 +154,12 @@ public class Range {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AnyValue getInput() {
+  public Object getInput() {
     return input;
   }
 
 
-  public void setInput(AnyValue input) {
+  public void setInput(Object input) {
     this.input = input;
   }
 

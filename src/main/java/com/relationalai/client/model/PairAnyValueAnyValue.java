@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AnyValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -32,11 +31,11 @@ import java.io.IOException;
 public class PairAnyValueAnyValue {
   public static final String SERIALIZED_NAME_FIRST = "first";
   @SerializedName(SERIALIZED_NAME_FIRST)
-  private AnyValue first;
+  private Object first = null;
 
   public static final String SERIALIZED_NAME_SECOND = "second";
   @SerializedName(SERIALIZED_NAME_SECOND)
-  private AnyValue second;
+  private Object second = null;
 
   /**
    * Gets or Sets type
@@ -88,7 +87,7 @@ public class PairAnyValueAnyValue {
   private TypeEnum type = TypeEnum.PAIR_ANYVALUE_ANYVALUE_;
 
 
-  public PairAnyValueAnyValue first(AnyValue first) {
+  public PairAnyValueAnyValue first(Object first) {
     
     this.first = first;
     return this;
@@ -101,17 +100,17 @@ public class PairAnyValueAnyValue {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AnyValue getFirst() {
+  public Object getFirst() {
     return first;
   }
 
 
-  public void setFirst(AnyValue first) {
+  public void setFirst(Object first) {
     this.first = first;
   }
 
 
-  public PairAnyValueAnyValue second(AnyValue second) {
+  public PairAnyValueAnyValue second(Object second) {
     
     this.second = second;
     return this;
@@ -124,12 +123,12 @@ public class PairAnyValueAnyValue {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AnyValue getSecond() {
+  public Object getSecond() {
     return second;
   }
 
 
-  public void setSecond(AnyValue second) {
+  public void setSecond(Object second) {
     this.second = second;
   }
 

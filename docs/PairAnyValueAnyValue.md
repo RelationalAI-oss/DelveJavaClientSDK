@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**first** | [**AnyValue**](AnyValue.md) |  |  [optional]
-**second** | [**AnyValue**](AnyValue.md) |  |  [optional]
+**first** | **Object** |  |  [optional]
+**second** | **Object** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 

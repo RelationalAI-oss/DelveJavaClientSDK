@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**columns** | [**AnyValue**](AnyValue.md) |  |  [optional]
+**columns** | **Object** |  |  [optional]
 **relKey** | [**RelKey**](RelKey.md) |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
