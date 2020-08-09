@@ -115,7 +115,6 @@ Class | Method | HTTP request | Description
  - [AbstractProblem](docs/AbstractProblem.md)
  - [Action](docs/Action.md)
  - [ActionResult](docs/ActionResult.md)
- - [AnyValue](docs/AnyValue.md)
  - [Appl](docs/Appl.md)
  - [Area](docs/Area.md)
  - [CSVFileSchema](docs/CSVFileSchema.md)
@@ -126,8 +125,6 @@ Class | Method | HTTP request | Description
  - [CollectProblemsAction](docs/CollectProblemsAction.md)
  - [CollectProblemsActionResult](docs/CollectProblemsActionResult.md)
  - [Cons](docs/Cons.md)
- - [ConstantType](docs/ConstantType.md)
- - [DBType](docs/DBType.md)
  - [ExceptionProblem](docs/ExceptionProblem.md)
  - [FileSchema](docs/FileSchema.md)
  - [FileSyntax](docs/FileSyntax.md)
@@ -176,7 +173,6 @@ Class | Method | HTTP request | Description
  - [UpdateAction](docs/UpdateAction.md)
  - [UpdateActionResult](docs/UpdateActionResult.md)
  - [WorkspaceLoadProblem](docs/WorkspaceLoadProblem.md)
- - [WrappedType](docs/WrappedType.md)
 
 
 ## Documentation for Authorization

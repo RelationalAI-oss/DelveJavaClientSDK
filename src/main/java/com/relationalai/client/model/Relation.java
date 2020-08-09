@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AnyValue;
 import com.relationalai.client.model.RelKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,7 +32,7 @@ import java.io.IOException;
 public class Relation {
   public static final String SERIALIZED_NAME_COLUMNS = "columns";
   @SerializedName(SERIALIZED_NAME_COLUMNS)
-  private AnyValue columns;
+  private Object columns = null;
 
   public static final String SERIALIZED_NAME_REL_KEY = "rel_key";
   @SerializedName(SERIALIZED_NAME_REL_KEY)
@@ -89,7 +88,7 @@ public class Relation {
   private TypeEnum type = TypeEnum.RELATION;
 
 
-  public Relation columns(AnyValue columns) {
+  public Relation columns(Object columns) {
     
     this.columns = columns;
     return this;
@@ -102,12 +101,12 @@ public class Relation {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AnyValue getColumns() {
+  public Object getColumns() {
     return columns;
   }
 
 
-  public void setColumns(AnyValue columns) {
+  public void setColumns(Object columns) {
     this.columns = columns;
   }
 

@@ -41,6 +41,9 @@ paths:
       x-accepts: application/json
 components:
   schemas:
+    AnyValue: {}
+    DBType:
+      type: string
     Action:
       discriminator:
         propertyName: type
@@ -65,53 +68,14 @@ components:
       allOf:
       - $ref: '#/components/schemas/Action'
       type: object
-    AnyValue:
-      example:
-        type: AnyValue
-      properties:
-        type:
-          default: AnyValue
-          enum:
-          - AnyValue
-          type: string
-      required:
-      - type
-      type: object
-    DBType:
-      discriminator:
-        propertyName: type
-      example:
-        type: type
-      properties:
-        type:
-          default: ""
-          type: string
-      required:
-      - type
-      type: object
-    ConstantType:
-      allOf:
-      - $ref: '#/components/schemas/DBType'
-      properties:
-        _constant:
-          $ref: '#/components/schemas/AnyValue'
-      type: object
-    WrappedType:
-      allOf:
-      - $ref: '#/components/schemas/DBType'
-      properties:
-        _value:
-          default: ""
-          type: string
-      type: object
     RelKey:
       example:
         keys:
-        - type: type
-        - type: type
+        - null
+        - null
         values:
-        - type: type
-        - type: type
+        - null
+        - null
         name: name
         type: RelKey
       properties:
@@ -136,21 +100,19 @@ components:
       type: object
     Relation:
       example:
-        columns:
-          type: AnyValue
+        columns: ""
         rel_key:
           keys:
-          - type: type
-          - type: type
+          - null
+          - null
           values:
-          - type: type
-          - type: type
+          - null
+          - null
           name: name
           type: RelKey
         type: Relation
       properties:
-        columns:
-          $ref: '#/components/schemas/AnyValue'
+        columns: {}
         rel_key:
           $ref: '#/components/schemas/RelKey'
         type:
@@ -288,8 +250,7 @@ components:
           $ref: '#/components/schemas/FileSchema'
         file_syntax:
           $ref: '#/components/schemas/FileSyntax'
-        key:
-          $ref: '#/components/schemas/AnyValue'
+        key: {}
         path:
           default: ""
           type: string
@@ -385,10 +346,8 @@ components:
       type: object
     Pair_AnyValue_AnyValue_:
       properties:
-        first:
-          $ref: '#/components/schemas/AnyValue'
-        second:
-          $ref: '#/components/schemas/AnyValue'
+        first: {}
+        second: {}
         type:
           default: Pair_AnyValue_AnyValue_
           enum:
@@ -585,8 +544,7 @@ components:
           $ref: '#/components/schemas/Area'
         end_byte:
           type: int
-        input:
-          $ref: '#/components/schemas/AnyValue'
+        input: {}
         start_byte:
           type: int
         type:
@@ -874,27 +832,25 @@ components:
     TransactionResult:
       example:
         output:
-        - columns:
-            type: AnyValue
+        - columns: ""
           rel_key:
             keys:
-            - type: type
-            - type: type
+            - null
+            - null
             values:
-            - type: type
-            - type: type
+            - null
+            - null
             name: name
             type: RelKey
           type: Relation
-        - columns:
-            type: AnyValue
+        - columns: ""
           rel_key:
             keys:
-            - type: type
-            - type: type
+            - null
+            - null
             values:
-            - type: type
-            - type: type
+            - null
+            - null
             name: name
             type: RelKey
           type: Relation

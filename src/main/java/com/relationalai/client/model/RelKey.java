@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.DBType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -34,7 +33,7 @@ import java.util.List;
 public class RelKey {
   public static final String SERIALIZED_NAME_KEYS = "keys";
   @SerializedName(SERIALIZED_NAME_KEYS)
-  private List<DBType> keys = null;
+  private List<String> keys = null;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -42,7 +41,7 @@ public class RelKey {
 
   public static final String SERIALIZED_NAME_VALUES = "values";
   @SerializedName(SERIALIZED_NAME_VALUES)
-  private List<DBType> values = null;
+  private List<String> values = null;
 
   /**
    * Gets or Sets type
@@ -94,15 +93,15 @@ public class RelKey {
   private TypeEnum type = TypeEnum.RELKEY;
 
 
-  public RelKey keys(List<DBType> keys) {
+  public RelKey keys(List<String> keys) {
     
     this.keys = keys;
     return this;
   }
 
-  public RelKey addKeysItem(DBType keysItem) {
+  public RelKey addKeysItem(String keysItem) {
     if (this.keys == null) {
-      this.keys = new ArrayList<DBType>();
+      this.keys = new ArrayList<String>();
     }
     this.keys.add(keysItem);
     return this;
@@ -115,12 +114,12 @@ public class RelKey {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public List<DBType> getKeys() {
+  public List<String> getKeys() {
     return keys;
   }
 
 
-  public void setKeys(List<DBType> keys) {
+  public void setKeys(List<String> keys) {
     this.keys = keys;
   }
 
@@ -148,15 +147,15 @@ public class RelKey {
   }
 
 
-  public RelKey values(List<DBType> values) {
+  public RelKey values(List<String> values) {
     
     this.values = values;
     return this;
   }
 
-  public RelKey addValuesItem(DBType valuesItem) {
+  public RelKey addValuesItem(String valuesItem) {
     if (this.values == null) {
-      this.values = new ArrayList<DBType>();
+      this.values = new ArrayList<String>();
     }
     this.values.add(valuesItem);
     return this;
@@ -169,12 +168,12 @@ public class RelKey {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public List<DBType> getValues() {
+  public List<String> getValues() {
     return values;
   }
 
 
-  public void setValues(List<DBType> values) {
+  public void setValues(List<String> values) {
     this.values = values;
   }
 
