@@ -14,6 +14,7 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
+import com.relationalai.client.model.*;
 import org.junit.Test;
 
 /**
