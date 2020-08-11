@@ -48,4 +48,17 @@ public class ExtendedAPI extends DefaultApi{
 
         return (InstallActionResult) run_action(conn, "single", action);
     }
+
+    public QueryActionResult query(Connection conn, String name, String path, String src_str, String out) throws ApiException {
+        Source src = new Source();
+        src.setName(name);
+        src.setPath(path);
+        src.setValue(src_str);
+
+        QueryAction action = new QueryAction();
+        action.setSource(src);
+        action.addOutputsItem(out);
+
+        return (QueryActionResult) run_action(conn, "single", action);
+    }
 }

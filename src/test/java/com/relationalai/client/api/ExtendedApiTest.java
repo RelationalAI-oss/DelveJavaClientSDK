@@ -40,6 +40,8 @@ public class ExtendedApiTest {
 
 
         assert  api.install_source(conn, "name", "name", "def foo = 1") != null;
+        QueryActionResult query_res = api.query(conn, "name", "name", "def bar = 2", "bar");
+        System.out.println(query_res);
     }
 
 
