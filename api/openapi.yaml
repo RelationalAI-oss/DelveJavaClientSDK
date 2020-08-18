@@ -30,6 +30,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TransactionResult'
           description: A successful result is wrapped inside a TransactionResult
+        "403":
+          description: Unauthorized
         default:
           content:
             application/json:

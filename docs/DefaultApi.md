@@ -66,5 +66,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A successful result is wrapped inside a TransactionResult |  -  |
+**403** | Unauthorized |  -  |
 **0** | All errors are also wrapped inside a TransactionResult |  -  |
 
