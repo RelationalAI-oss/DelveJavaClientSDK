@@ -769,6 +769,7 @@ components:
         dbname: dbname
         readonly: false
         abort: false
+        source_dbname: source_dbname
         type: Transaction
         actions:
         - name: name
@@ -797,10 +798,14 @@ components:
           - CREATE
           - CREATE_OVERWRITE
           - OPEN_OR_CREATE
+          - BRANCH
           type: string
         readonly:
           default: false
           type: boolean
+        source_dbname:
+          default: ""
+          type: string
         type:
           default: Transaction
           enum:

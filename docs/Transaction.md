@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **dbname** | **String** |  |  [optional]
 **mode** | [**ModeEnum**](#ModeEnum) |  | 
 **readonly** | **Boolean** |  |  [optional]
+**sourceDbname** | **String** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
@@ -23,6 +24,7 @@ OPEN | &quot;OPEN&quot;
 CREATE | &quot;CREATE&quot;
 CREATE_OVERWRITE | &quot;CREATE_OVERWRITE&quot;
 OPEN_OR_CREATE | &quot;OPEN_OR_CREATE&quot;
+BRANCH | &quot;BRANCH&quot;
 
 
 

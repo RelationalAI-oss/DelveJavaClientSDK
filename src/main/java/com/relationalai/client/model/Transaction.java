@@ -55,7 +55,9 @@ public class Transaction {
     
     CREATE_OVERWRITE("CREATE_OVERWRITE"),
     
-    OPEN_OR_CREATE("OPEN_OR_CREATE");
+    OPEN_OR_CREATE("OPEN_OR_CREATE"),
+    
+    BRANCH("BRANCH");
 
     private String value;
 
@@ -102,6 +104,10 @@ public class Transaction {
   public static final String SERIALIZED_NAME_READONLY = "readonly";
   @SerializedName(SERIALIZED_NAME_READONLY)
   private Boolean readonly = false;
+
+  public static final String SERIALIZED_NAME_SOURCE_DBNAME = "source_dbname";
+  @SerializedName(SERIALIZED_NAME_SOURCE_DBNAME)
+  private String sourceDbname = "";
 
   /**
    * Gets or Sets type
@@ -275,6 +281,29 @@ public class Transaction {
   }
 
 
+  public Transaction sourceDbname(String sourceDbname) {
+    
+    this.sourceDbname = sourceDbname;
+    return this;
+  }
+
+   /**
+   * Get sourceDbname
+   * @return sourceDbname
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getSourceDbname() {
+    return sourceDbname;
+  }
+
+
+  public void setSourceDbname(String sourceDbname) {
+    this.sourceDbname = sourceDbname;
+  }
+
+
   public Transaction type(TypeEnum type) {
     
     this.type = type;
@@ -311,12 +340,13 @@ public class Transaction {
         Objects.equals(this.dbname, transaction.dbname) &&
         Objects.equals(this.mode, transaction.mode) &&
         Objects.equals(this.readonly, transaction.readonly) &&
+        Objects.equals(this.sourceDbname, transaction.sourceDbname) &&
         Objects.equals(this.type, transaction.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(abort, actions, dbname, mode, readonly, type);
+    return Objects.hash(abort, actions, dbname, mode, readonly, sourceDbname, type);
   }
 
 
@@ -329,6 +359,7 @@ public class Transaction {
     sb.append("    dbname: ").append(toIndentedString(dbname)).append("\n");
     sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
     sb.append("    readonly: ").append(toIndentedString(readonly)).append("\n");
+    sb.append("    sourceDbname: ").append(toIndentedString(sourceDbname)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
