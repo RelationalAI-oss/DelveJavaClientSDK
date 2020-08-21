@@ -31,6 +31,10 @@ paths:
                 $ref: '#/components/schemas/TransactionResult'
           description: A successful result is wrapped inside a TransactionResult
         "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfraError'
           description: Unauthorized
         default:
           content:
@@ -43,6 +47,16 @@ paths:
       x-accepts: application/json
 components:
   schemas:
+    InfraError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      - name
+      type: object
     AnyValue: {}
     DBType:
       type: string

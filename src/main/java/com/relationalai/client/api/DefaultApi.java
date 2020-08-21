@@ -27,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.relationalai.client.model.InfraError;
 import com.relationalai.client.model.Transaction;
 import com.relationalai.client.model.TransactionResult;
 

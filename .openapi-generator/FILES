@@ -24,6 +24,7 @@ docs/FileSyntax.md
 docs/ICViolation.md
 docs/ImportAction.md
 docs/ImportActionResult.md
+docs/InfraError.md
 docs/InstallAction.md
 docs/InstallActionResult.md
 docs/IntegrityConstraintProblem.md
@@ -113,6 +114,7 @@ src/main/java/com/relationalai/client/model/FileSyntax.java
 src/main/java/com/relationalai/client/model/ICViolation.java
 src/main/java/com/relationalai/client/model/ImportAction.java
 src/main/java/com/relationalai/client/model/ImportActionResult.java
+src/main/java/com/relationalai/client/model/InfraError.java
 src/main/java/com/relationalai/client/model/InstallAction.java
 src/main/java/com/relationalai/client/model/InstallActionResult.java
 src/main/java/com/relationalai/client/model/IntegrityConstraintProblem.java
@@ -156,4 +158,3 @@ src/main/java/com/relationalai/client/model/UndefinedError.java
 src/main/java/com/relationalai/client/model/UpdateAction.java
 src/main/java/com/relationalai/client/model/UpdateActionResult.java
 src/main/java/com/relationalai/client/model/WorkspaceLoadProblem.java
-src/test/java/com/relationalai/client/model/JSONFileSchemaTest.java

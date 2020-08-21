@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
  - [ICViolation](docs/ICViolation.md)
  - [ImportAction](docs/ImportAction.md)
  - [ImportActionResult](docs/ImportActionResult.md)
+ - [InfraError](docs/InfraError.md)
  - [InstallAction](docs/InstallAction.md)
  - [InstallActionResult](docs/InstallActionResult.md)
  - [IntegrityConstraintProblem](docs/IntegrityConstraintProblem.md)
