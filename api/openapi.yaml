@@ -194,6 +194,10 @@ components:
             type: string
           type: array
       type: object
+    JSONFileSchema:
+      allOf:
+      - $ref: '#/components/schemas/FileSchema'
+      type: object
     FileSyntax:
       discriminator:
         propertyName: type

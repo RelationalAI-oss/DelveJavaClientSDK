@@ -135,6 +135,7 @@ Class | Method | HTTP request | Description
  - [InstallActionResult](docs/InstallActionResult.md)
  - [IntegrityConstraintProblem](docs/IntegrityConstraintProblem.md)
  - [IntegrityConstraintViolation](docs/IntegrityConstraintViolation.md)
+ - [JSONFileSchema](docs/JSONFileSchema.md)
  - [JSONFileSyntax](docs/JSONFileSyntax.md)
  - [LabeledAction](docs/LabeledAction.md)
  - [LabeledActionResult](docs/LabeledActionResult.md)

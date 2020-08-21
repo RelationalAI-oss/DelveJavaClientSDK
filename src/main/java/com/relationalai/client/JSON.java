@@ -207,6 +207,7 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("CSVFileSchema", CSVFileSchema.class);
+                        classByDiscriminatorValue.put("JSONFileSchema", JSONFileSchema.class);
                         classByDiscriminatorValue.put("FileSchema", FileSchema.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
@@ -273,6 +274,15 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("IntegrityConstraintViolation", IntegrityConstraintViolation.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(JSONFileSchema.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("JSONFileSchema", JSONFileSchema.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }

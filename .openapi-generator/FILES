@@ -28,6 +28,7 @@ docs/InstallAction.md
 docs/InstallActionResult.md
 docs/IntegrityConstraintProblem.md
 docs/IntegrityConstraintViolation.md
+docs/JSONFileSchema.md
 docs/JSONFileSyntax.md
 docs/LabeledAction.md
 docs/LabeledActionResult.md
@@ -116,6 +117,7 @@ src/main/java/com/relationalai/client/model/InstallAction.java
 src/main/java/com/relationalai/client/model/InstallActionResult.java
 src/main/java/com/relationalai/client/model/IntegrityConstraintProblem.java
 src/main/java/com/relationalai/client/model/IntegrityConstraintViolation.java
+src/main/java/com/relationalai/client/model/JSONFileSchema.java
 src/main/java/com/relationalai/client/model/JSONFileSyntax.java
 src/main/java/com/relationalai/client/model/LabeledAction.java
 src/main/java/com/relationalai/client/model/LabeledActionResult.java
@@ -154,3 +156,4 @@ src/main/java/com/relationalai/client/model/UndefinedError.java
 src/main/java/com/relationalai/client/model/UpdateAction.java
 src/main/java/com/relationalai/client/model/UpdateActionResult.java
 src/main/java/com/relationalai/client/model/WorkspaceLoadProblem.java
+src/test/java/com/relationalai/client/model/JSONFileSchemaTest.java
