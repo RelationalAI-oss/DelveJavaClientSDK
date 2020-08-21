@@ -29,34 +29,34 @@ import java.io.IOException;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class InfraError {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String SERIALIZED_NAME_STATUS = "status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private String status;
 
   public static final String SERIALIZED_NAME_MESSAGE = "message";
   @SerializedName(SERIALIZED_NAME_MESSAGE)
   private String message;
 
 
-  public InfraError name(String name) {
+  public InfraError status(String status) {
     
-    this.name = name;
+    this.status = status;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get status
+   * @return status
   **/
   @ApiModelProperty(required = true, value = "")
 
-  public String getName() {
-    return name;
+  public String getStatus() {
+    return status;
   }
 
 
-  public void setName(String name) {
-    this.name = name;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
 
@@ -91,13 +91,13 @@ public class InfraError {
       return false;
     }
     InfraError infraError = (InfraError) o;
-    return Objects.equals(this.name, infraError.name) &&
+    return Objects.equals(this.status, infraError.status) &&
         Objects.equals(this.message, infraError.message);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, message);
+    return Objects.hash(status, message);
   }
 
 
@@ -105,7 +105,7 @@ public class InfraError {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InfraError {\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -49,13 +49,13 @@ components:
   schemas:
     InfraError:
       properties:
-        name:
+        status:
           type: string
         message:
           type: string
       required:
       - message
-      - name
+      - status
       type: object
     AnyValue: {}
     DBType:
