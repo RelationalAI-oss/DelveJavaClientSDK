@@ -5,15 +5,25 @@ import com.relationalai.client.ApiClient;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.Pair;
 import com.relationalai.client.model.*;
+import com.relationalai.util.RaiLogger;
 import com.relationalai.util.http.Http2Client;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import org.slf4j.Logger;
 
+import javax.net.ssl.*;
+import java.lang.invoke.MethodHandles;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DelveClient extends DefaultApi{
+    static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
+
     public final static String DEFAULT_SERVICE = "transaction";
 
     Connection conn;
@@ -35,6 +45,20 @@ public class DelveClient extends DefaultApi{
         super();
         this.conn = conn;
         this.service = service;
+        ApiClient api = this.getApiClient();
+        OkHttpClient client = api.getHttpClient();
+        if(!conn.isVerifySSL()) {
+            LOGGER.warn("Using the trustAllSslClient is highly discouraged and should not be used in Production!");
+            OkHttpClient.Builder builder = client.newBuilder();
+            builder.sslSocketFactory(trustAllSslSocketFactory, (X509TrustManager)trustAllCerts[0]);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+            api.setHttpClient(builder.build());
+        }
     }
 
     public Connection getConn() {
@@ -149,4 +173,34 @@ public class DelveClient extends DefaultApi{
 
         return (QueryActionResult) run_action(conn, "single", action);
     }
+
+    /*
+     * This is very bad practice and should NOT be used in production.
+     */
+    private static final TrustManager[] trustAllCerts = new TrustManager[] {
+        new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+            }
+
+            @Override
+            public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+            }
+
+            @Override
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                return new java.security.cert.X509Certificate[]{};
+            }
+        }
+    };
+    private static final SSLContext trustAllSslContext;
+    static {
+        try {
+            trustAllSslContext = SSLContext.getInstance("SSL");
+            trustAllSslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static final SSLSocketFactory trustAllSslSocketFactory = trustAllSslContext.getSocketFactory();
 }
