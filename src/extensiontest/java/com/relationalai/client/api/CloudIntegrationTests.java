@@ -14,15 +14,21 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
+import com.relationalai.client.model.Transaction;
 import org.junit.Test;
 
 /**
  * API tests for DefaultApi
  */
-public class LocalIntegrationTests {
+public class CloudIntegrationTests {
 
-    private final static String DATABSE_NAME = "testdb";
-    private final static DelveClient api = new DelveClient(DATABSE_NAME);
+    private final static String DATABSE_NAME = "testclientdb11";
+    public final static Transaction.ModeEnum DEFAULT_OPEN_MODE = Transaction.ModeEnum.OPEN;
+    public final static String DEFAULT_SCHEME = "https";
+    public final static String DEFAULT_HOST = "azure-ssh.relationalai.com";
+    public final static int DEFAULT_PORT = 443;
+
+    private final static DelveClient api = new DelveClient(new Connection(DATABSE_NAME, DEFAULT_OPEN_MODE, DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT));
 
     /**
      * Issues a transaction to be executed
