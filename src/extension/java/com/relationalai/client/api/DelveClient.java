@@ -33,6 +33,10 @@ public class DelveClient extends DefaultApi{
         this.service = service;
     }
 
+    public Connection getConn() {
+        return conn;
+    }
+
     public okhttp3.Call transactionPostCall(Transaction transaction, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = transaction;
 
