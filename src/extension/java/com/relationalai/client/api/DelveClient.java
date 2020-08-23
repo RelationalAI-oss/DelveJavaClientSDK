@@ -27,6 +27,10 @@ public class DelveClient extends DefaultApi{
         this(new Connection(dbname), service);
     }
 
+    public DelveClient(Connection conn) {
+        this(conn, DEFAULT_SERVICE);
+    }
+
     public DelveClient(Connection conn, String service) {
         super();
         this.conn = conn;
@@ -35,6 +39,10 @@ public class DelveClient extends DefaultApi{
 
     public Connection getConn() {
         return conn;
+    }
+
+    public void setConn(Connection conn) {
+        this.conn = conn;
     }
 
     public okhttp3.Call transactionPostCall(Transaction transaction, final ApiCallback _callback) throws ApiException {
