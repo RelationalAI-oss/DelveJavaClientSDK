@@ -22,8 +22,8 @@ import org.junit.Test;
  */
 public class DelveClientTests {
 
-
-    private final DelveClient api = new DelveClient();
+    private final String DATABSE_NAME = "testdb";
+    private final DelveClient api = new DelveClient(DATABSE_NAME);
 
     /**
      * Issues a transaction to be executed
