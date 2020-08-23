@@ -41,57 +41,31 @@ public class Connection
         this.port = port;
     }
 
-    public String getBaseUrl() {
-        return this.scheme + "://" + this.host + ":" + this.port;
-    }
+    public String getBaseUrl() { return this.scheme + "://" + this.host + ":" + this.port; }
 
     public String getDbname() {
         return dbname;
-    }
-
-    public void setDbname(String dbname) {
-        this.dbname = dbname;
     }
 
     public Transaction.ModeEnum getDefaultOpenMode() {
         return defaultOpenMode;
     }
 
-    public void setDefaultOpenMode(Transaction.ModeEnum defaultOpenMode) {
-        this.defaultOpenMode = defaultOpenMode;
-    }
-
     public String getScheme() {
         return scheme;
-    }
-
-    public void setScheme(String scheme) {
-        this.scheme = scheme;
     }
 
     public String getHost() {
         return host;
     }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
-
     public int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
+    public ClientConfig getClientConfig() { return null; }
 
-    public ClientConfig getClientConfig() {
-        return null;
-    }
-
-    public boolean isVerifySSL() {
-        return DEFAULT_VERIFY_SSL;
-    }
+    public boolean isVerifySSL() { return DEFAULT_VERIFY_SSL; }
 
     public String getComputeName() {
         return null;

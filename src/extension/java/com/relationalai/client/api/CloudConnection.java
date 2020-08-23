@@ -32,23 +32,11 @@ public class CloudConnection extends Connection{
         return clientConfig;
     }
 
-    public void setClientConfig(ClientConfig clientConfig) {
-        this.clientConfig = clientConfig;
-    }
-
     public boolean isVerifySSL() {
         return verifySSL;
     }
 
-    public void setVerifySSL(boolean verifySSL) {
-        this.verifySSL = verifySSL;
-    }
-
     public String getComputeName() {
         return computeName;
-    }
-
-    public void setComputeName(String computeName) {
-        this.computeName = computeName;
     }
 }
