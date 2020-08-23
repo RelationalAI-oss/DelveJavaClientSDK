@@ -2,51 +2,36 @@ package com.relationalai.util.auth;
 
 import com.google.common.escape.Escaper;
 import com.google.common.net.UrlEscapers;
-import io.netty.handler.codec.http.HttpHeaders;
-import io.netty.handler.codec.http.HttpMethod;
-
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.List;
-
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.io.UnsupportedEncodingException;
-import java.io.IOException;
-import java.io.File;
-import java.io.ByteArrayOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.QueryStringDecoder;
-
+import com.google.crypto.tink.CleartextKeysetHandle;
+import com.google.crypto.tink.JsonKeysetReader;
+import com.google.crypto.tink.JsonKeysetWriter;
+import com.google.crypto.tink.KeysetHandle;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.KeyPair;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
-
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.KeyPair;
-import com.jcraft.jsch.JSchException;
-
-import com.google.crypto.tink.JsonKeysetWriter;
-import com.google.crypto.tink.JsonKeysetReader;
-import com.google.crypto.tink.CleartextKeysetHandle;
-import com.google.crypto.tink.KeysetHandle;
-
-import java.security.GeneralSecurityException;
-
-import java.lang.invoke.MethodHandles;
-
-import org.slf4j.Logger;
-
+import com.relationalai.util.FormattingUtil;
 import com.relationalai.util.InvalidRequestException;
 import com.relationalai.util.RaiLogger;
-import com.relationalai.util.FormattingUtil;
+import io.netty.handler.codec.http.QueryStringDecoder;
+import okhttp3.Headers;
+import okhttp3.Request;
+import okio.Buffer;
+import org.slf4j.Logger;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.invoke.MethodHandles;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ClientSideAuthenticationUtil
 {
@@ -60,8 +45,8 @@ public class ClientSideAuthenticationUtil
      * CredentialScope + \n +
      * HashedCanonicalRequest
      **/
-    public static String getStringToSign(FullHttpRequest req, AuthorizationInfo authInfo)
-        throws NoSuchAlgorithmException, InvalidRequestException, UnsupportedEncodingException
+    public static String getStringToSign(Request req, AuthorizationInfo authInfo)
+            throws NoSuchAlgorithmException, InvalidRequestException, IOException
     {
         StringBuilder stringToSign = new StringBuilder();
 
@@ -76,8 +61,8 @@ public class ClientSideAuthenticationUtil
         return stringToSign.toString();
     }
 
-    public static String getStringToSign(FullHttpRequest req, String accessKey, String region, String service)
-        throws NoSuchAlgorithmException, InvalidRequestException, UnsupportedEncodingException
+    public static String getStringToSign(Request req, String accessKey, String region, String service)
+            throws NoSuchAlgorithmException, InvalidRequestException, IOException
     {
         StringBuilder stringToSign = new StringBuilder();
 
@@ -113,7 +98,7 @@ public class ClientSideAuthenticationUtil
      * <Algorithm (e.g. RAI01-ED25519-SHA256)> Credential=<CredentialScope>,SignedHeaders=<Headers>,Signature=<Signature>
      *
      **/
-    public static String makeAuthorizationHeader(FullHttpRequest req, String accessKey, String region, String serviceName, String signatureHex)
+    public static String makeAuthorizationHeader(Request req, String accessKey, String region, String serviceName, String signatureHex)
         throws NoSuchAlgorithmException, InvalidRequestException, UnsupportedEncodingException
     {
         // Create AuthorizatinoInfo
@@ -141,13 +126,13 @@ public class ClientSideAuthenticationUtil
      * SignedHeaders + '\n' +
      * HexEncode(Hash(RequestPayload))
      */
-    public static String hashedCanonicalRequest(FullHttpRequest req)
-        throws NoSuchAlgorithmException, InvalidRequestException, UnsupportedEncodingException
+    public static String hashedCanonicalRequest(Request req)
+            throws NoSuchAlgorithmException, InvalidRequestException, IOException
     {
-        HttpMethod reqMethod = req.method();
+        String reqMethod = req.method();
 
         StringBuilder canonicalRequest = new StringBuilder();
-        canonicalRequest.append(reqMethod.name() + "\n");
+        canonicalRequest.append(reqMethod + "\n");
 
         // add the path, query parameters & values;
         canonicalRequest.append(canonicalURI(req));
@@ -162,12 +147,11 @@ public class ClientSideAuthenticationUtil
         return hashBytes(canonicalRequest.toString().getBytes());
     }
 
-    public static String hashedPayload(FullHttpRequest req) throws NoSuchAlgorithmException
-    {
-        ByteBuf reqContent = req.content();
-        byte[] reqBytes = new byte[reqContent.readableBytes()];
-        int readerIndex = reqContent.readerIndex();
-        reqContent.getBytes(readerIndex, reqBytes);
+    public static String hashedPayload(Request req) throws NoSuchAlgorithmException, IOException {
+        final Request copy = req.newBuilder().build();
+        final Buffer buffer = new Buffer();
+        copy.body().writeTo(buffer);
+        byte[] reqBytes = buffer.readByteArray();
 
         String hashedPayload = hashBytes(reqBytes);
 
@@ -182,12 +166,12 @@ public class ClientSideAuthenticationUtil
         return FormattingUtil.toHexString(hash).toLowerCase();
     }
 
-    public static List<String> getSignedHeaders(FullHttpRequest req) throws InvalidRequestException
+    public static List<String> getSignedHeaders(Request req) throws InvalidRequestException
     {
         ArrayList<String> headers = new ArrayList<String>();
 
-        HttpHeaders reqHeaders = req.headers();
-        if ( !reqHeaders.contains("content-type"))
+        Headers reqHeaders = req.headers();
+        if ( reqHeaders.get("content-type") == null )
         {
             throw new InvalidRequestException("Missing required headers content-type");
         }
@@ -196,11 +180,11 @@ public class ClientSideAuthenticationUtil
             headers.add("content-type");
         }
 
-        if ( !reqHeaders.contains("authority") && !reqHeaders.contains("host"))
+        if ( reqHeaders.get("authority") == null && reqHeaders.get("host") == null)
         {
             throw new InvalidRequestException("Missing required headers authority");
         }
-        else if ( reqHeaders.contains("authority") )
+        else if ( reqHeaders.get("authority") != null )
         {
             headers.add("authority");
         }
@@ -213,17 +197,17 @@ public class ClientSideAuthenticationUtil
         return headers;
     }
 
-    public static String canonicalAndSignedHeaders(FullHttpRequest req) throws InvalidRequestException
+    public static String canonicalAndSignedHeaders(Request req) throws InvalidRequestException
     {
         StringBuilder canonicalHeaders = new StringBuilder();
 
-        HttpHeaders reqHeaders = req.headers();
-        if ( !reqHeaders.contains("content-type"))
+        Headers reqHeaders = req.headers();
+        if ( reqHeaders.get("content-type") == null)
         {
             throw new InvalidRequestException("Missing required headers content-type");
         }
 
-        if ( !reqHeaders.contains("authority") && !reqHeaders.contains("host"))
+        if ( reqHeaders.get("authority") == null && reqHeaders.get("host") == null )
         {
             throw new InvalidRequestException("Missing required headers authority");
         }
@@ -232,13 +216,13 @@ public class ClientSideAuthenticationUtil
         canonicalHeaders.append(reqHeaders.get("content-type").trim());
         canonicalHeaders.append("\n");
 
-        if ( reqHeaders.contains("authority"))
+        if ( reqHeaders.get("authority") != null )
         {
             canonicalHeaders.append("authority:");
             canonicalHeaders.append(reqHeaders.get("authority").trim());
             canonicalHeaders.append("\n");
         }
-        if ( reqHeaders.contains("host"))
+        if ( reqHeaders.get("host") != null )
         {
             canonicalHeaders.append("host:");
 
@@ -253,7 +237,7 @@ public class ClientSideAuthenticationUtil
         canonicalHeaders.append("\n");
 
         // add signed headers
-        if ( reqHeaders.contains("authority"))
+        if ( reqHeaders.get("authority") != null )
         {
             canonicalHeaders.append("authority;content-type");
         }
@@ -265,10 +249,10 @@ public class ClientSideAuthenticationUtil
         return canonicalHeaders.toString();
     }
 
-    public static String canonicalURI(FullHttpRequest req) throws UnsupportedEncodingException
+    public static String canonicalURI(Request req) throws UnsupportedEncodingException
     {
         // get the path, query parameters & values;
-        QueryStringDecoder queryString = new QueryStringDecoder(req.uri());
+        QueryStringDecoder queryString = new QueryStringDecoder(req.url().toString());
 
         // Canonical path
         StringBuilder canonicalRequest = new StringBuilder();
