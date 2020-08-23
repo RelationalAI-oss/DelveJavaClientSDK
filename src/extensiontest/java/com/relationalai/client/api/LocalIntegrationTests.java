@@ -14,13 +14,12 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
-import com.relationalai.client.model.*;
 import org.junit.Test;
 
 /**
  * API tests for DefaultApi
  */
-public class DelveClientTests {
+public class LocalIntegrationTests {
 
     private final String DATABSE_NAME = "testdb";
     private final DelveClient api = new DelveClient(DATABSE_NAME);
@@ -34,15 +33,7 @@ public class DelveClientTests {
     @Test
     public void transactionPostTest() throws ApiException {
 
-        String dbname = "testjavaclient";
-        Connection conn = new Connection(dbname);
-        assert api.create_database(conn, true);
-        assert ! api.create_database(conn, false);
-
-
-        assert  api.install_source(conn, "name", "name", "def foo = 1") != null;
-        QueryActionResult query_res = api.query(conn, "name", "name", "def bar = 2", "bar");
-        System.out.println(query_res);
+        IntegrationTestsCommons.transactionPostTest(api);
     }
 
 
