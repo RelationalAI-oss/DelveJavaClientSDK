@@ -3,7 +3,7 @@ package com.relationalai.client.api;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.model.*;
 
-public class ExtendedAPI extends DefaultApi{
+public class DelveClient extends DefaultApi{
 
     public ActionResult run_action(Connection conn, String name, Action action) throws ApiException {
         Transaction xact = new Transaction();

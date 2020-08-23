@@ -20,10 +20,10 @@ import org.junit.Test;
 /**
  * API tests for DefaultApi
  */
-public class ExtendedApiTest {
+public class DelveClientTests {
 
 
-    private final ExtendedAPI api = new ExtendedAPI();
+    private final DelveClient api = new DelveClient();
 
     /**
      * Issues a transaction to be executed
