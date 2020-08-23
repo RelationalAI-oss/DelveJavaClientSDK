@@ -23,12 +23,12 @@ public class ClientConfig
     public static final String AWS_DEFAULT_HOST = "aws.relationalai.com";
     public static final String AZURE_DEFAULT_HOST = "azure.relationalai.com";
 
-    public static final String CONFIG_FILE_NAME = "rai_config";
-    public static final String RAI_ACCESS_KEY = "rai_access_key";
-    public static final String RAI_PRIVATE_KEY = "rai_private_key";
-    public static final String RAI_INFRA = "rai_infra";
-    public static final String RAI_HOST = "rai_host";
-    public static final String RAI_PORT = "rai_port";
+    public static final String CONFIG_FILE_NAME = "config";
+    public static final String RAI_ACCESS_KEY = "access_key";
+    public static final String RAI_PRIVATE_KEY = "private_key_filename";
+    public static final String RAI_INFRA = "infra";
+    public static final String RAI_HOST = "host";
+    public static final String RAI_PORT = "port";
     public static final String REGION = "region";
     public static final String DEFAULT_PROFILE_NAME = "default";
 
