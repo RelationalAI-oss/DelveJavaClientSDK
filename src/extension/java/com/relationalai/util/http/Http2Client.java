@@ -23,7 +23,6 @@ import com.relationalai.util.InvalidRequestException;
 import com.relationalai.util.RaiLogger;
 import com.relationalai.util.auth.ClientSideAuthenticationUtil;
 import com.relationalai.util.auth.NullKeysetException;
-import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.util.CharsetUtil;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -43,7 +42,7 @@ public final class Http2Client
 
     static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
 
-    public static void signRequest(Request request, String accessKey, String regionName, KeysetHandle privateKeysetHandle, String serviceIdentifier)
+    public static Request signRequest(Request request, String accessKey, String regionName, KeysetHandle privateKeysetHandle, String serviceIdentifier)
             throws NullKeysetException, GeneralSecurityException, InvalidRequestException, IOException {
         if ( privateKeysetHandle == null )
             throw new NullKeysetException("Private keyset is null. Cannot sign request. Please make sure you have the appropriate entries in your rai_config file");
@@ -78,7 +77,7 @@ public final class Http2Client
         String authHeader = ClientSideAuthenticationUtil.makeAuthorizationHeader(request, accessKey, regionName, serviceIdentifier, hexSig);
 
         // shoved it into the headers
-        request.headers().newBuilder().add(HttpHeaderNames.AUTHORIZATION.toString(), authHeader);
+        return request.newBuilder().header("Authorization", authHeader).build();
     }
 
     public static String getResponseContent(Response response) throws IOException {

@@ -16,15 +16,13 @@ import java.lang.invoke.MethodHandles;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class DelveClient extends DefaultApi{
+public class DelveClient extends DefaultApi {
     static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
 
     public final static String DEFAULT_SERVICE = "transaction";
+    private static ApiClient defaultApiClient = new ExtendedApiClient();
 
     Connection conn;
     String service;
@@ -42,7 +40,7 @@ public class DelveClient extends DefaultApi{
     }
 
     public DelveClient(Connection conn, String service) {
-        super();
+        super(defaultApiClient);
         this.conn = conn;
         this.service = service;
         ApiClient api = this.getApiClient();
@@ -90,8 +88,17 @@ public class DelveClient extends DefaultApi{
 //            localVarHeaderParams.put("Accept", localVarAccept);
 //        }
 
+        if(conn instanceof CloudConnection) {
+            localVarQueryParams.add(new Pair("dbname", conn.getDbname()));
+            localVarQueryParams.add(new Pair("open_mode", transaction.getMode().toString()));
+            localVarQueryParams.add(new Pair("readonly", transaction.getReadonly() ? "true" : "false"));
+            localVarQueryParams.add(new Pair("empty", transaction.getActions() == null || transaction.getActions().isEmpty() ? "true" : "false"));
+            localVarQueryParams.add(new Pair("region", conn.getClientConfig().getRegionName()));
+            localVarQueryParams.add(new Pair("compute_name", conn.getComputeName()));
+        }
+
         final String[] localVarContentTypes = {
-                "application/json"
+                "application/json; charset=utf-8"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -108,7 +115,7 @@ public class DelveClient extends DefaultApi{
 
         if( clientConf != null ) {
             try {
-                Http2Client.signRequest(request, clientConf.getAccessKey(), clientConf.getRegionName(), clientConf.getPrivateKeysetHandle(), service);
+                request = Http2Client.signRequest(request, clientConf.getAccessKey(), clientConf.getRegionName(), clientConf.getPrivateKeysetHandle(), service);
             } catch (Exception e) {
                 throw new ApiException(e);
             }
@@ -144,7 +151,14 @@ public class DelveClient extends DefaultApi{
         Transaction xact = new Transaction();
         xact.setMode(overwrite ? Transaction.ModeEnum.CREATE_OVERWRITE : Transaction.ModeEnum.CREATE);
         xact.setDbname(conn.getDbname());
-        TransactionResult response = this.transactionPost(xact);
+        xact.setActions(Collections.emptyList());
+
+        TransactionResult response = null;
+        try {
+            response = this.transactionPost(xact);
+        } catch (Exception e) {
+            return false;
+        }
 
         return !response.getAborted() && response.getProblems().isEmpty();
     }

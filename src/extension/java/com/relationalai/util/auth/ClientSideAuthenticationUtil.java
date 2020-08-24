@@ -153,6 +153,13 @@ public class ClientSideAuthenticationUtil
         copy.body().writeTo(buffer);
         byte[] reqBytes = buffer.readByteArray();
 
+        LOGGER.debug(
+                "Http2Client.hashedPayload: \n" +
+                "stringToHash=\n" +
+                "*********************\n" +
+                new String(reqBytes) +
+                "\n****** End hashed-payload **** \n");
+
         String hashedPayload = hashBytes(reqBytes);
 
         return hashedPayload;
@@ -252,7 +259,7 @@ public class ClientSideAuthenticationUtil
     public static String canonicalURI(Request req) throws UnsupportedEncodingException
     {
         // get the path, query parameters & values;
-        QueryStringDecoder queryString = new QueryStringDecoder(req.url().toString());
+        QueryStringDecoder queryString = new QueryStringDecoder(req.url().uri());
 
         // Canonical path
         StringBuilder canonicalRequest = new StringBuilder();
