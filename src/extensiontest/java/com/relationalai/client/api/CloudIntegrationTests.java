@@ -23,12 +23,26 @@ import org.junit.Test;
 public class CloudIntegrationTests {
 
     private final static String DATABSE_NAME = "testclientdb11";
+    private final static String DEFAULT_COMPUTE_NAME = DATABSE_NAME;
     public final static Transaction.ModeEnum DEFAULT_OPEN_MODE = Transaction.ModeEnum.OPEN;
     public final static String DEFAULT_SCHEME = "https";
     public final static String DEFAULT_HOST = "azure-ssh.relationalai.com";
     public final static int DEFAULT_PORT = 443;
+    public final static boolean DEFAULT_VERIFY_SSL = false;
 
-    private final static DelveClient api = new DelveClient(new Connection(DATABSE_NAME, DEFAULT_OPEN_MODE, DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT));
+    private static DelveClient api = null;
+
+    static {
+        try {
+            api = new DelveClient(new CloudConnection(
+                        DATABSE_NAME, DEFAULT_OPEN_MODE, DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT,
+                        ClientConfig.loadConfig(ClientConfig.getConfigDir(ClientConfig.getDefaultConfigDir()), ClientConfig.DEFAULT_PROFILE_NAME),
+                        DEFAULT_VERIFY_SSL, DEFAULT_COMPUTE_NAME
+                ));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Issues a transaction to be executed
