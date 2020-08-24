@@ -25,7 +25,7 @@ public class ClientConfig
 
     public static final String CONFIG_FILE_NAME = "config";
     public static final String RAI_ACCESS_KEY = "access_key";
-    public static final String RAI_PRIVATE_KEY = "private_key_filename";
+    public static final String RAI_PRIVATE_KEY = "private_key_filename"; // pragma: allowlist secret
     public static final String RAI_INFRA = "infra";
     public static final String RAI_HOST = "host";
     public static final String RAI_PORT = "port";
