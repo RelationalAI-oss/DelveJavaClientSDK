@@ -31,11 +31,11 @@ import java.io.IOException;
 public class Point {
   public static final String SERIALIZED_NAME_COLUMN = "column";
   @SerializedName(SERIALIZED_NAME_COLUMN)
-  private Integer column = null;
+  private Integer column = 0;
 
   public static final String SERIALIZED_NAME_ROW = "row";
   @SerializedName(SERIALIZED_NAME_ROW)
-  private Integer row = null;
+  private Integer row = 0;
 
   /**
    * Gets or Sets type

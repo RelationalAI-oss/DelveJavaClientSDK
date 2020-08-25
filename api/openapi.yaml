@@ -227,7 +227,8 @@ components:
       - $ref: '#/components/schemas/FileSyntax'
       properties:
         datarow:
-          type: int
+          default: 0
+          type: integer
         delim:
           default: ""
           type: string
@@ -239,7 +240,8 @@ components:
             type: string
           type: array
         header_row:
-          type: int
+          default: 0
+          type: integer
         ignorerepeated:
           default: false
           type: boolean
@@ -531,9 +533,11 @@ components:
     Point:
       properties:
         column:
-          type: int
+          default: 0
+          type: integer
         row:
-          type: int
+          default: 0
+          type: integer
         type:
           default: Point
           enum:
@@ -563,10 +567,12 @@ components:
         area:
           $ref: '#/components/schemas/Area'
         end_byte:
-          type: int
+          default: 0
+          type: integer
         input: {}
         start_byte:
-          type: int
+          default: 0
+          type: integer
         type:
           default: Range
           enum:

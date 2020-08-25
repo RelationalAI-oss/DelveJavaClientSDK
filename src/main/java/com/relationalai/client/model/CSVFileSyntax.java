@@ -34,7 +34,7 @@ import java.util.List;
 public class CSVFileSyntax extends FileSyntax {
   public static final String SERIALIZED_NAME_DATAROW = "datarow";
   @SerializedName(SERIALIZED_NAME_DATAROW)
-  private Integer datarow = null;
+  private Integer datarow = 0;
 
   public static final String SERIALIZED_NAME_DELIM = "delim";
   @SerializedName(SERIALIZED_NAME_DELIM)
@@ -50,7 +50,7 @@ public class CSVFileSyntax extends FileSyntax {
 
   public static final String SERIALIZED_NAME_HEADER_ROW = "header_row";
   @SerializedName(SERIALIZED_NAME_HEADER_ROW)
-  private Integer headerRow = null;
+  private Integer headerRow = 0;
 
   public static final String SERIALIZED_NAME_IGNOREREPEATED = "ignorerepeated";
   @SerializedName(SERIALIZED_NAME_IGNOREREPEATED)

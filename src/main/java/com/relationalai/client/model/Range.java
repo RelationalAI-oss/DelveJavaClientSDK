@@ -36,7 +36,7 @@ public class Range {
 
   public static final String SERIALIZED_NAME_END_BYTE = "end_byte";
   @SerializedName(SERIALIZED_NAME_END_BYTE)
-  private Integer endByte = null;
+  private Integer endByte = 0;
 
   public static final String SERIALIZED_NAME_INPUT = "input";
   @SerializedName(SERIALIZED_NAME_INPUT)
@@ -44,7 +44,7 @@ public class Range {
 
   public static final String SERIALIZED_NAME_START_BYTE = "start_byte";
   @SerializedName(SERIALIZED_NAME_START_BYTE)
-  private Integer startByte = null;
+  private Integer startByte = 0;
 
   /**
    * Gets or Sets type
