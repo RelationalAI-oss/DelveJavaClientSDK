@@ -20,6 +20,7 @@ import java.util.*;
 
 public class DelveClient extends DefaultApi {
     static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
+    public final static boolean ENABLE_ACCEPT_HEADER = false;
 
     public final static String DEFAULT_SERVICE = "transaction";
     private static ApiClient defaultApiClient = new ExtendedApiClient();
@@ -73,20 +74,26 @@ public class DelveClient extends DefaultApi {
         ApiClient localVarApiClient = getApiClient();
 
         // create path and map variables
-        String localVarPath = "/transaction";
+        final String localVarPath = "/transaction";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-//        final String[] localVarAccepts = {
-//                "application/json"
-//        };
-//        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-//        if (localVarAccept != null) {
-//            localVarHeaderParams.put("Accept", localVarAccept);
-//        }
+
+        // The following section determines the `Accept` HTTP header, but we had to disable
+        // it for now, as the authentication mechanism on the infra side complains if any
+        // header other than `Host` and `Content-Type` is available. We can re-enable this
+        if(ENABLE_ACCEPT_HEADER) {
+            final String[] localVarAccepts = {
+                "application/json"
+            };
+            final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+            if (localVarAccept != null) {
+                localVarHeaderParams.put("Accept", localVarAccept);
+            }
+        }
 
         if(conn instanceof CloudConnection) {
             localVarQueryParams.add(new Pair("dbname", conn.getDbname()));
