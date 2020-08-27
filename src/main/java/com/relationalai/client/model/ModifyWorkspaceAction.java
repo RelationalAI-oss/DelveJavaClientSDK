@@ -34,7 +34,7 @@ import java.util.List;
 public class ModifyWorkspaceAction extends Action {
   public static final String SERIALIZED_NAME_DELETE_EDB = "delete_edb";
   @SerializedName(SERIALIZED_NAME_DELETE_EDB)
-  private String deleteEdb = "null";
+  private String deleteEdb;
 
   public static final String SERIALIZED_NAME_DELETE_SOURCE = "delete_source";
   @SerializedName(SERIALIZED_NAME_DELETE_SOURCE)
@@ -42,7 +42,7 @@ public class ModifyWorkspaceAction extends Action {
 
   public static final String SERIALIZED_NAME_ENABLE_LIBRARY = "enable_library";
   @SerializedName(SERIALIZED_NAME_ENABLE_LIBRARY)
-  private String enableLibrary = "null";
+  private String enableLibrary;
 
   public ModifyWorkspaceAction() {
     this.type = this.getClass().getSimpleName();

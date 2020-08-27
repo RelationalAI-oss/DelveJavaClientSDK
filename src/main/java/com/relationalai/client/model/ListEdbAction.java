@@ -32,7 +32,7 @@ import java.io.IOException;
 public class ListEdbAction extends Action {
   public static final String SERIALIZED_NAME_RELNAME = "relname";
   @SerializedName(SERIALIZED_NAME_RELNAME)
-  private String relname = "null";
+  private String relname;
 
   public ListEdbAction() {
     this.type = this.getClass().getSimpleName();

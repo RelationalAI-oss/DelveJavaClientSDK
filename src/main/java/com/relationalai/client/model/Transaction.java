@@ -107,7 +107,7 @@ public class Transaction {
 
   public static final String SERIALIZED_NAME_SOURCE_DBNAME = "source_dbname";
   @SerializedName(SERIALIZED_NAME_SOURCE_DBNAME)
-  private String sourceDbname = "null";
+  private String sourceDbname;
 
   /**
    * Gets or Sets type

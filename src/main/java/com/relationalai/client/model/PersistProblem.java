@@ -36,7 +36,7 @@ public class PersistProblem extends AbstractProblem {
 
   public static final String SERIALIZED_NAME_EXCEPTION_STACKTRACE = "exception_stacktrace";
   @SerializedName(SERIALIZED_NAME_EXCEPTION_STACKTRACE)
-  private String exceptionStacktrace = "null";
+  private String exceptionStacktrace;
 
   public PersistProblem() {
     this.type = this.getClass().getSimpleName();

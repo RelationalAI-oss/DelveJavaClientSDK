@@ -37,7 +37,7 @@ public class LoadData {
 
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
-  private String data = "null";
+  private String data;
 
   public static final String SERIALIZED_NAME_FILE_SCHEMA = "file_schema";
   @SerializedName(SERIALIZED_NAME_FILE_SCHEMA)
@@ -53,7 +53,7 @@ public class LoadData {
 
   public static final String SERIALIZED_NAME_PATH = "path";
   @SerializedName(SERIALIZED_NAME_PATH)
-  private String path = "null";
+  private String path;
 
   /**
    * Gets or Sets type

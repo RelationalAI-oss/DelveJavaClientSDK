@@ -77,7 +77,6 @@ components:
       - $ref: '#/components/schemas/Action'
       properties:
         relname:
-          default: "null"
           nullable: true
           type: string
       type: object
@@ -187,7 +186,6 @@ components:
       - $ref: '#/components/schemas/Action'
       properties:
         relname:
-          default: "null"
           nullable: true
           type: string
       type: object
@@ -280,7 +278,6 @@ components:
           default: ""
           type: string
         data:
-          default: "null"
           nullable: true
           type: string
         file_schema:
@@ -289,7 +286,6 @@ components:
           $ref: '#/components/schemas/FileSyntax'
         key: {}
         path:
-          default: "null"
           nullable: true
           type: string
         type:
@@ -320,7 +316,6 @@ components:
       - $ref: '#/components/schemas/Action'
       properties:
         delete_edb:
-          default: "null"
           nullable: true
           type: string
         delete_source:
@@ -328,7 +323,6 @@ components:
             type: string
           type: array
         enable_library:
-          default: "null"
           nullable: true
           type: string
       type: object
@@ -486,7 +480,6 @@ components:
           default: ""
           type: string
         exception_stacktrace:
-          default: "null"
           nullable: true
           type: string
       required:
@@ -536,7 +529,6 @@ components:
           default: ""
           type: string
         exception_stacktrace:
-          default: "null"
           nullable: true
           type: string
         name:
@@ -554,7 +546,6 @@ components:
           default: ""
           type: string
         exception_stacktrace:
-          default: "null"
           nullable: true
           type: string
       required:
@@ -846,7 +837,7 @@ components:
         dbname: dbname
         readonly: false
         abort: false
-        source_dbname: "null"
+        source_dbname: source_dbname
         type: Transaction
         actions:
         - name: name
@@ -881,7 +872,6 @@ components:
           default: false
           type: boolean
         source_dbname:
-          default: "null"
           nullable: true
           type: string
         type:
