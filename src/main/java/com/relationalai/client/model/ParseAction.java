@@ -53,8 +53,7 @@ public class ParseAction extends Action {
    * Get nonterm
    * @return nonterm
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getNonterm() {
     return nonterm;

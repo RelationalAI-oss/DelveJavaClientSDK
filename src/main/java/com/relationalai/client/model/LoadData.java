@@ -37,7 +37,7 @@ public class LoadData {
 
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
-  private String data = "";
+  private String data = "null";
 
   public static final String SERIALIZED_NAME_FILE_SCHEMA = "file_schema";
   @SerializedName(SERIALIZED_NAME_FILE_SCHEMA)
@@ -53,7 +53,7 @@ public class LoadData {
 
   public static final String SERIALIZED_NAME_PATH = "path";
   @SerializedName(SERIALIZED_NAME_PATH)
-  private String path = "";
+  private String path = "null";
 
   /**
    * Gets or Sets type
@@ -115,8 +115,7 @@ public class LoadData {
    * Get contentType
    * @return contentType
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getContentType() {
     return contentType;
@@ -161,7 +160,8 @@ public class LoadData {
    * Get fileSchema
    * @return fileSchema
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
   public FileSchema getFileSchema() {
     return fileSchema;
@@ -183,7 +183,8 @@ public class LoadData {
    * Get fileSyntax
    * @return fileSyntax
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
   public FileSyntax getFileSyntax() {
     return fileSyntax;
@@ -206,7 +207,7 @@ public class LoadData {
    * @return key
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Object getKey() {
     return key;

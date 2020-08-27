@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exception** | **String** |  |  [optional]
+**exception** | **String** |  | 
 **exceptionStacktrace** | **String** |  |  [optional]
-**name** | **String** |  |  [optional]
+**name** | **String** |  | 
 
 
 

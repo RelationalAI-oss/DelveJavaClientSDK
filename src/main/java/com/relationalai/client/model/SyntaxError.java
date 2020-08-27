@@ -58,7 +58,8 @@ public class SyntaxError extends AbstractProblem {
    * Get next
    * @return next
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
   public SyntaxNode getNext() {
     return next;

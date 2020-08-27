@@ -82,8 +82,7 @@ public class CSVFileSyntax extends FileSyntax {
    * Get datarow
    * @return datarow
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Integer getDatarow() {
     return datarow;
@@ -105,8 +104,7 @@ public class CSVFileSyntax extends FileSyntax {
    * Get delim
    * @return delim
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getDelim() {
     return delim;
@@ -128,8 +126,7 @@ public class CSVFileSyntax extends FileSyntax {
    * Get escapechar
    * @return escapechar
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getEscapechar() {
     return escapechar;
@@ -182,8 +179,7 @@ public class CSVFileSyntax extends FileSyntax {
    * Get headerRow
    * @return headerRow
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Integer getHeaderRow() {
     return headerRow;
@@ -205,8 +201,7 @@ public class CSVFileSyntax extends FileSyntax {
    * Get ignorerepeated
    * @return ignorerepeated
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getIgnorerepeated() {
     return ignorerepeated;
@@ -259,8 +254,7 @@ public class CSVFileSyntax extends FileSyntax {
    * Get normalizenames
    * @return normalizenames
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getNormalizenames() {
     return normalizenames;
@@ -282,8 +276,7 @@ public class CSVFileSyntax extends FileSyntax {
    * Get quotechar
    * @return quotechar
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getQuotechar() {
     return quotechar;

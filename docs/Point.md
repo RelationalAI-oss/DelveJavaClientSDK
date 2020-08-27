@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**column** | **Integer** |  |  [optional]
-**row** | **Integer** |  |  [optional]
+**column** | **Integer** |  | 
+**row** | **Integer** |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 

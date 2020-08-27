@@ -107,7 +107,7 @@ public class Transaction {
 
   public static final String SERIALIZED_NAME_SOURCE_DBNAME = "source_dbname";
   @SerializedName(SERIALIZED_NAME_SOURCE_DBNAME)
-  private String sourceDbname = "";
+  private String sourceDbname = "null";
 
   /**
    * Gets or Sets type
@@ -169,8 +169,7 @@ public class Transaction {
    * Get abort
    * @return abort
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getAbort() {
     return abort;
@@ -223,8 +222,7 @@ public class Transaction {
    * Get dbname
    * @return dbname
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getDbname() {
     return dbname;
@@ -268,8 +266,7 @@ public class Transaction {
    * Get readonly
    * @return readonly
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getReadonly() {
     return readonly;

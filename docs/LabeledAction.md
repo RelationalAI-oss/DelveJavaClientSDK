@@ -7,7 +7,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | [**Action**](Action.md) |  | 
-**name** | **String** |  |  [optional]
+**name** | **String** |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 

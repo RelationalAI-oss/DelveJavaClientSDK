@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**missing** | **Boolean** |  |  [optional]
+**missing** | **Boolean** |  | 
 **range** | [**Range**](Range.md) |  | 
-**value** | **String** |  |  [optional]
+**value** | **String** |  | 
 
 
 

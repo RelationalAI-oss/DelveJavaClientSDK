@@ -7,10 +7,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **arguments** | [**List&lt;SyntaxNode&gt;**](SyntaxNode.md) |  |  [optional]
-**error** | **Boolean** |  |  [optional]
-**missing** | **Boolean** |  |  [optional]
+**error** | **Boolean** |  | 
+**missing** | **Boolean** |  | 
 **range** | [**Range**](Range.md) |  | 
-**symbol** | **String** |  |  [optional]
+**symbol** | **String** |  | 
 
 
 

@@ -48,8 +48,7 @@ public class WorkspaceLoadProblem extends AbstractProblem {
    * Get exception
    * @return exception
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getException() {
     return exception;

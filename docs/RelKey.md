@@ -7,7 +7,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **keys** | **List&lt;String&gt;** |  |  [optional]
-**name** | **String** |  |  [optional]
+**name** | **String** |  | 
 **values** | **List&lt;String&gt;** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 

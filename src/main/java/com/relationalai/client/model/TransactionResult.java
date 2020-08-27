@@ -110,8 +110,7 @@ public class TransactionResult {
    * Get aborted
    * @return aborted
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getAborted() {
     return aborted;

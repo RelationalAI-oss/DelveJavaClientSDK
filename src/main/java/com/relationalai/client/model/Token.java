@@ -75,8 +75,7 @@ public class Token extends SyntaxNode {
    * Get value
    * @return value
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getValue() {
     return value;

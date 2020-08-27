@@ -6,11 +6,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contentType** | **String** |  |  [optional]
+**contentType** | **String** |  | 
 **data** | **String** |  |  [optional]
-**fileSchema** | [**FileSchema**](FileSchema.md) |  | 
-**fileSyntax** | [**FileSyntax**](FileSyntax.md) |  | 
-**key** | **Object** |  |  [optional]
+**fileSchema** | [**FileSchema**](FileSchema.md) |  |  [optional]
+**fileSyntax** | [**FileSyntax**](FileSyntax.md) |  |  [optional]
+**key** | **Object** |  | 
 **path** | **String** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 

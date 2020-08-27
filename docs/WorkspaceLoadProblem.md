@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exception** | **String** |  |  [optional]
+**exception** | **String** |  | 
 
 
 

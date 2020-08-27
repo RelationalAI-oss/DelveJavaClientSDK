@@ -7,9 +7,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **area** | [**Area**](Area.md) |  | 
-**endByte** | **Integer** |  |  [optional]
+**endByte** | **Integer** |  | 
 **input** | **Object** |  |  [optional]
-**startByte** | **Integer** |  |  [optional]
+**startByte** | **Integer** |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 

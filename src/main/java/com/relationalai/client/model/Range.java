@@ -128,8 +128,7 @@ public class Range {
    * Get endByte
    * @return endByte
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Integer getEndByte() {
     return endByte;
@@ -174,8 +173,7 @@ public class Range {
    * Get startByte
    * @return startByte
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Integer getStartByte() {
     return startByte;

@@ -98,8 +98,7 @@ public class Appl extends SyntaxNode {
    * Get error
    * @return error
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getError() {
     return error;
@@ -121,8 +120,7 @@ public class Appl extends SyntaxNode {
    * Get missing
    * @return missing
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getMissing() {
     return missing;
@@ -166,8 +164,7 @@ public class Appl extends SyntaxNode {
    * Get symbol
    * @return symbol
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getSymbol() {
     return symbol;

@@ -36,7 +36,7 @@ public class OutputProblem extends AbstractProblem {
 
   public static final String SERIALIZED_NAME_EXCEPTION_STACKTRACE = "exception_stacktrace";
   @SerializedName(SERIALIZED_NAME_EXCEPTION_STACKTRACE)
-  private String exceptionStacktrace = "";
+  private String exceptionStacktrace = "null";
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -56,8 +56,7 @@ public class OutputProblem extends AbstractProblem {
    * Get exception
    * @return exception
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getException() {
     return exception;
@@ -102,8 +101,7 @@ public class OutputProblem extends AbstractProblem {
    * Get name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getName() {
     return name;

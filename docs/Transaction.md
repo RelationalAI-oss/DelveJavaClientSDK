@@ -6,11 +6,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**abort** | **Boolean** |  |  [optional]
+**abort** | **Boolean** |  | 
 **actions** | [**List&lt;LabeledAction&gt;**](LabeledAction.md) |  |  [optional]
-**dbname** | **String** |  |  [optional]
+**dbname** | **String** |  | 
 **mode** | [**ModeEnum**](#ModeEnum) |  | 
-**readonly** | **Boolean** |  |  [optional]
+**readonly** | **Boolean** |  | 
 **sourceDbname** | **String** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 

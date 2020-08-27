@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**nonterm** | **String** |  |  [optional]
+**nonterm** | **String** |  | 
 **source** | [**Source**](Source.md) |  | 
 
 

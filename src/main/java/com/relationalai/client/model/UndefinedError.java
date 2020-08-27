@@ -75,8 +75,7 @@ public class UndefinedError extends AbstractProblem {
    * Get var
    * @return var
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getVar() {
     return var;

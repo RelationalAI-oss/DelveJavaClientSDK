@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  |  [optional]
+**name** | **String** |  | 
 **result** | [**ActionResult**](ActionResult.md) |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 

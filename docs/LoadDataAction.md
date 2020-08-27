@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rel** | **String** |  |  [optional]
+**rel** | **String** |  | 
 **value** | [**LoadData**](LoadData.md) |  | 
 
 

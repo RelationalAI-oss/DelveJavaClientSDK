@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  |  [optional]
-**path** | **String** |  |  [optional]
-**value** | **String** |  |  [optional]
+**name** | **String** |  | 
+**path** | **String** |  | 
+**value** | **String** |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 

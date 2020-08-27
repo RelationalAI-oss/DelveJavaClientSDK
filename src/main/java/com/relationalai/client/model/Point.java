@@ -97,8 +97,7 @@ public class Point {
    * Get column
    * @return column
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Integer getColumn() {
     return column;
@@ -120,8 +119,7 @@ public class Point {
    * Get row
    * @return row
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Integer getRow() {
     return row;

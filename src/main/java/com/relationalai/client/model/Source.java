@@ -101,8 +101,7 @@ public class Source {
    * Get name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getName() {
     return name;
@@ -124,8 +123,7 @@ public class Source {
    * Get path
    * @return path
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getPath() {
     return path;
@@ -147,8 +145,7 @@ public class Source {
    * Get value
    * @return value
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getValue() {
     return value;

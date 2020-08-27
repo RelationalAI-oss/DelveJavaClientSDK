@@ -120,8 +120,7 @@ public class ICViolation {
    * Get source
    * @return source
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getSource() {
     return source;

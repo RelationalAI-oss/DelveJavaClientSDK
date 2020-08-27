@@ -57,8 +57,7 @@ public class Literal extends SyntaxNode {
    * Get missing
    * @return missing
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getMissing() {
     return missing;
@@ -102,8 +101,7 @@ public class Literal extends SyntaxNode {
    * Get value
    * @return value
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getValue() {
     return value;

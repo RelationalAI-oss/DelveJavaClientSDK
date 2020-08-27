@@ -53,8 +53,7 @@ public class LoadDataAction extends Action {
    * Get rel
    * @return rel
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getRel() {
     return rel;

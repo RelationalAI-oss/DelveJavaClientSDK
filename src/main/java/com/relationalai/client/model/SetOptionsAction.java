@@ -32,23 +32,23 @@ import java.io.IOException;
 public class SetOptionsAction extends Action {
   public static final String SERIALIZED_NAME_ABORT_ON_ERROR = "abort_on_error";
   @SerializedName(SERIALIZED_NAME_ABORT_ON_ERROR)
-  private Boolean abortOnError = false;
+  private Boolean abortOnError;
 
   public static final String SERIALIZED_NAME_BROKEN = "broken";
   @SerializedName(SERIALIZED_NAME_BROKEN)
-  private Boolean broken = false;
+  private Boolean broken;
 
   public static final String SERIALIZED_NAME_DEBUG = "debug";
   @SerializedName(SERIALIZED_NAME_DEBUG)
-  private Boolean debug = false;
+  private Boolean debug;
 
   public static final String SERIALIZED_NAME_DEBUG_TRACE = "debug_trace";
   @SerializedName(SERIALIZED_NAME_DEBUG_TRACE)
-  private Boolean debugTrace = false;
+  private Boolean debugTrace;
 
   public static final String SERIALIZED_NAME_SILENT = "silent";
   @SerializedName(SERIALIZED_NAME_SILENT)
-  private Boolean silent = false;
+  private Boolean silent;
 
   public SetOptionsAction() {
     this.type = this.getClass().getSimpleName();

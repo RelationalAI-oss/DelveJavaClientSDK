@@ -68,8 +68,7 @@ public class ClientProblem extends AbstractProblem {
    * Get errorCode
    * @return errorCode
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getErrorCode() {
     return errorCode;
@@ -91,8 +90,7 @@ public class ClientProblem extends AbstractProblem {
    * Get isError
    * @return isError
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getIsError() {
     return isError;
@@ -114,8 +112,7 @@ public class ClientProblem extends AbstractProblem {
    * Get isException
    * @return isException
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Boolean getIsException() {
     return isException;
@@ -137,8 +134,7 @@ public class ClientProblem extends AbstractProblem {
    * Get message
    * @return message
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getMessage() {
     return message;
@@ -160,8 +156,7 @@ public class ClientProblem extends AbstractProblem {
    * Get path
    * @return path
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getPath() {
     return path;
@@ -183,8 +178,7 @@ public class ClientProblem extends AbstractProblem {
    * Get report
    * @return report
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getReport() {
     return report;

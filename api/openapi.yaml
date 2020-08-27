@@ -77,7 +77,8 @@ components:
       - $ref: '#/components/schemas/Action'
       properties:
         relname:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
       type: object
     CollectProblemsAction:
@@ -112,6 +113,7 @@ components:
           - RelKey
           type: string
       required:
+      - name
       - type
       type: object
     Relation:
@@ -166,7 +168,10 @@ components:
           - Source
           type: string
       required:
+      - name
+      - path
       - type
+      - value
       type: object
     InstallAction:
       allOf:
@@ -182,7 +187,8 @@ components:
       - $ref: '#/components/schemas/Action'
       properties:
         relname:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
       type: object
     ListSourceAction:
@@ -255,6 +261,14 @@ components:
         quotechar:
           default: ""
           type: string
+      required:
+      - datarow
+      - delim
+      - escapechar
+      - header_row
+      - ignorerepeated
+      - normalizenames
+      - quotechar
       type: object
     JSONFileSyntax:
       allOf:
@@ -266,7 +280,8 @@ components:
           default: ""
           type: string
         data:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
         file_schema:
           $ref: '#/components/schemas/FileSchema'
@@ -274,7 +289,8 @@ components:
           $ref: '#/components/schemas/FileSyntax'
         key: {}
         path:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
         type:
           default: LoadData
@@ -282,8 +298,8 @@ components:
           - LoadData
           type: string
       required:
-      - file_schema
-      - file_syntax
+      - content_type
+      - key
       - type
       type: object
     LoadDataAction:
@@ -296,6 +312,7 @@ components:
         value:
           $ref: '#/components/schemas/LoadData'
       required:
+      - rel
       - value
       type: object
     ModifyWorkspaceAction:
@@ -303,14 +320,16 @@ components:
       - $ref: '#/components/schemas/Action'
       properties:
         delete_edb:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
         delete_source:
           items:
             type: string
           type: array
         enable_library:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
       type: object
     ParseAction:
@@ -323,6 +342,7 @@ components:
         source:
           $ref: '#/components/schemas/Source'
       required:
+      - nonterm
       - source
       type: object
     QueryAction:
@@ -351,19 +371,19 @@ components:
       - $ref: '#/components/schemas/Action'
       properties:
         abort_on_error:
-          default: false
+          nullable: true
           type: boolean
         broken:
-          default: false
+          nullable: true
           type: boolean
         debug:
-          default: false
+          nullable: true
           type: boolean
         debug_trace:
-          default: false
+          nullable: true
           type: boolean
         silent:
-          default: false
+          nullable: true
           type: boolean
       type: object
     Pair_AnyValue_AnyValue_:
@@ -450,6 +470,13 @@ components:
         report:
           default: ""
           type: string
+      required:
+      - error_code
+      - is_error
+      - is_exception
+      - message
+      - path
+      - report
       type: object
     ExceptionProblem:
       allOf:
@@ -459,8 +486,11 @@ components:
           default: ""
           type: string
         exception_stacktrace:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
+      required:
+      - exception
       type: object
     IntegrityConstraintProblem:
       allOf:
@@ -469,6 +499,8 @@ components:
         exception:
           default: ""
           type: string
+      required:
+      - exception
       type: object
     ICViolation:
       properties:
@@ -484,6 +516,7 @@ components:
           type: string
       required:
       - rel_key
+      - source
       - type
       type: object
     IntegrityConstraintViolation:
@@ -503,11 +536,15 @@ components:
           default: ""
           type: string
         exception_stacktrace:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
         name:
           default: ""
           type: string
+      required:
+      - exception
+      - name
       type: object
     PersistProblem:
       allOf:
@@ -517,8 +554,11 @@ components:
           default: ""
           type: string
         exception_stacktrace:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
+      required:
+      - exception
       type: object
     SyntaxNode:
       discriminator:
@@ -544,6 +584,8 @@ components:
           - Point
           type: string
       required:
+      - column
+      - row
       - type
       type: object
     Area:
@@ -580,6 +622,8 @@ components:
           type: string
       required:
       - area
+      - end_byte
+      - start_byte
       - type
       type: object
     Appl:
@@ -602,7 +646,10 @@ components:
           default: ""
           type: string
       required:
+      - error
+      - missing
       - range
+      - symbol
       type: object
     Literal:
       allOf:
@@ -617,7 +664,9 @@ components:
           default: ""
           type: string
       required:
+      - missing
       - range
+      - value
       type: object
     Token:
       allOf:
@@ -630,6 +679,7 @@ components:
           type: string
       required:
       - range
+      - value
       type: object
     LinkedList:
       discriminator:
@@ -668,7 +718,6 @@ components:
         trace:
           $ref: '#/components/schemas/LinkedList'
       required:
-      - next
       - node
       - trace
       type: object
@@ -683,6 +732,7 @@ components:
           type: string
       required:
       - range
+      - var
       type: object
     WorkspaceLoadProblem:
       allOf:
@@ -691,6 +741,8 @@ components:
         exception:
           default: ""
           type: string
+      required:
+      - exception
       type: object
     CollectProblemsActionResult:
       allOf:
@@ -785,6 +837,7 @@ components:
           type: string
       required:
       - action
+      - name
       - type
       type: object
     Transaction:
@@ -793,7 +846,7 @@ components:
         dbname: dbname
         readonly: false
         abort: false
-        source_dbname: source_dbname
+        source_dbname: "null"
         type: Transaction
         actions:
         - name: name
@@ -828,7 +881,8 @@ components:
           default: false
           type: boolean
         source_dbname:
-          default: ""
+          default: "null"
+          nullable: true
           type: string
         type:
           default: Transaction
@@ -836,7 +890,10 @@ components:
           - Transaction
           type: string
       required:
+      - abort
+      - dbname
       - mode
+      - readonly
       - type
       type: object
     LabeledActionResult:
@@ -857,6 +914,7 @@ components:
           - LabeledActionResult
           type: string
       required:
+      - name
       - result
       - type
       type: object
@@ -921,6 +979,7 @@ components:
           - TransactionResult
           type: string
       required:
+      - aborted
       - type
       type: object
 

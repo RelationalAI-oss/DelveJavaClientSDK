@@ -6,15 +6,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**datarow** | **Integer** |  |  [optional]
-**delim** | **String** |  |  [optional]
-**escapechar** | **String** |  |  [optional]
+**datarow** | **Integer** |  | 
+**delim** | **String** |  | 
+**escapechar** | **String** |  | 
 **header** | **List&lt;String&gt;** |  |  [optional]
-**headerRow** | **Integer** |  |  [optional]
-**ignorerepeated** | **Boolean** |  |  [optional]
+**headerRow** | **Integer** |  | 
+**ignorerepeated** | **Boolean** |  | 
 **missingstrings** | **List&lt;String&gt;** |  |  [optional]
-**normalizenames** | **Boolean** |  |  [optional]
-**quotechar** | **String** |  |  [optional]
+**normalizenames** | **Boolean** |  | 
+**quotechar** | **String** |  | 
 
 
 

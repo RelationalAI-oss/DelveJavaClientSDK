@@ -120,8 +120,7 @@ public class LabeledAction {
    * Get name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getName() {
     return name;

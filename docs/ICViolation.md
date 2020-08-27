@@ -7,7 +7,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **relKey** | [**RelKey**](RelKey.md) |  | 
-**source** | **String** |  |  [optional]
+**source** | **String** |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
