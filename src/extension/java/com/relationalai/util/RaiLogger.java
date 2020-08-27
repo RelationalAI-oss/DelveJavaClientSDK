@@ -11,7 +11,7 @@ import org.slf4j.MarkerFactory;
 
 public class RaiLogger
 {
-    // TODO do more corase-grain mapping of logger instances to class.
+    // TODO do more coarse-grained mapping of logger instances to class.
     private static final Map<Class,Logger> loggerMap = new HashMap<Class,Logger>();
 
     public static final Marker FATAL = MarkerFactory.getMarker("FATAL");
