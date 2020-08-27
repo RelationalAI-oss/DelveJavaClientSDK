@@ -1,19 +1,13 @@
 package com.relationalai.util;
 
-import java.text.SimpleDateFormat;
-import java.security.SecureRandom;
-import java.util.Base64;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.stream.Stream;
-import java.io.IOException;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
 
 public class FormattingUtil
 {
@@ -94,14 +88,5 @@ public class FormattingUtil
         int firstDigit = toDigit(hexString.charAt(0));
         int secondDigit = toDigit(hexString.charAt(1));
         return (byte) ((firstDigit << 4) + secondDigit);
-    }
-
-    public static String fileToString(File file) throws IOException
-    {
-    	StringBuilder builder = new StringBuilder();
-    	Stream<String> stream = Files.lines(file.toPath(), StandardCharsets.UTF_8);
-    	stream.forEach(s -> builder.append(s).append("\n"));
-
-    	return builder.toString();
     }
 }
