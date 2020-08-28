@@ -191,6 +191,8 @@ public class DelveClient extends DefaultApi {
         QueryAction action = new QueryAction();
         action.setSource(src);
         action.addOutputsItem(out);
+        action.setInputs(new ArrayList<Relation>());
+        action.setPersist(new ArrayList<String>());
 
         return (QueryActionResult) run_action(conn, "single", action);
     }
