@@ -98,6 +98,7 @@ components:
         keys:
           items:
             $ref: '#/components/schemas/DBType'
+          nullable: true
           type: array
         name:
           default: ""
@@ -105,6 +106,7 @@ components:
         values:
           items:
             $ref: '#/components/schemas/DBType'
+          nullable: true
           type: array
         type:
           default: RelKey
@@ -148,6 +150,7 @@ components:
         inputs:
           items:
             $ref: '#/components/schemas/Relation'
+          nullable: true
           type: array
       type: object
     Source:
@@ -179,6 +182,7 @@ components:
         sources:
           items:
             $ref: '#/components/schemas/Source'
+          nullable: true
           type: array
       type: object
     ListEdbAction:
@@ -210,6 +214,7 @@ components:
         types:
           items:
             type: string
+          nullable: true
           type: array
       type: object
     JSONFileSchema:
@@ -242,6 +247,7 @@ components:
         header:
           items:
             type: string
+          nullable: true
           type: array
         header_row:
           default: 0
@@ -252,6 +258,7 @@ components:
         missingstrings:
           items:
             type: string
+          nullable: true
           type: array
         normalizenames:
           default: false
@@ -321,6 +328,7 @@ components:
         delete_source:
           items:
             type: string
+          nullable: true
           type: array
         enable_library:
           nullable: true
@@ -346,14 +354,17 @@ components:
         inputs:
           items:
             $ref: '#/components/schemas/Relation'
+          nullable: true
           type: array
         outputs:
           items:
             type: string
+          nullable: true
           type: array
         persist:
           items:
             type: string
+          nullable: true
           type: array
         source:
           $ref: '#/components/schemas/Source'
@@ -399,12 +410,14 @@ components:
         delta:
           items:
             $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
+          nullable: true
           type: array
         rel:
           $ref: '#/components/schemas/RelKey'
         updates:
           items:
             $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
+          nullable: true
           type: array
       required:
       - rel
@@ -428,6 +441,7 @@ components:
         result:
           items:
             $ref: '#/components/schemas/Relation'
+          nullable: true
           type: array
       type: object
     AbstractProblem:
@@ -519,6 +533,7 @@ components:
         sources:
           items:
             $ref: '#/components/schemas/ICViolation'
+          nullable: true
           type: array
       type: object
     OutputProblem:
@@ -624,6 +639,7 @@ components:
         arguments:
           items:
             $ref: '#/components/schemas/SyntaxNode'
+          nullable: true
           type: array
         error:
           default: false
@@ -742,6 +758,7 @@ components:
         problems:
           items:
             $ref: '#/components/schemas/AbstractProblem'
+          nullable: true
           type: array
       type: object
     ImportActionResult:
@@ -759,6 +776,7 @@ components:
         rels:
           items:
             $ref: '#/components/schemas/RelKey'
+          nullable: true
           type: array
       type: object
     ListSourceActionResult:
@@ -768,6 +786,7 @@ components:
         sources:
           items:
             $ref: '#/components/schemas/Source'
+          nullable: true
           type: array
       type: object
     LoadDataActionResult:
@@ -781,6 +800,7 @@ components:
         delete_edb_result:
           items:
             $ref: '#/components/schemas/RelKey'
+          nullable: true
           type: array
       type: object
     ParseActionResult:
@@ -790,6 +810,7 @@ components:
         problems:
           items:
             $ref: '#/components/schemas/AbstractProblem'
+          nullable: true
           type: array
       type: object
     QueryActionResult:
@@ -799,6 +820,7 @@ components:
         output:
           items:
             $ref: '#/components/schemas/Relation'
+          nullable: true
           type: array
       type: object
     SetOptionsActionResult:
@@ -855,6 +877,7 @@ components:
         actions:
           items:
             $ref: '#/components/schemas/LabeledAction'
+          nullable: true
           type: array
         dbname:
           default: ""
@@ -954,14 +977,17 @@ components:
         actions:
           items:
             $ref: '#/components/schemas/LabeledActionResult'
+          nullable: true
           type: array
         output:
           items:
             $ref: '#/components/schemas/Relation'
+          nullable: true
           type: array
         problems:
           items:
             $ref: '#/components/schemas/AbstractProblem'
+          nullable: true
           type: array
         type:
           default: TransactionResult
