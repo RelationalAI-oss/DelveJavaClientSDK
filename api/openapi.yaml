@@ -119,7 +119,11 @@ components:
       type: object
     Relation:
       example:
-        columns: ""
+        columns:
+        - - null
+          - null
+        - - null
+          - null
         rel_key:
           keys:
           - null
@@ -131,7 +135,13 @@ components:
           type: RelKey
         type: Relation
       properties:
-        columns: {}
+        columns:
+          items:
+            items:
+              $ref: '#/components/schemas/AnyValue'
+            type: array
+          nullable: true
+          type: array
         rel_key:
           $ref: '#/components/schemas/RelKey'
         type:
@@ -934,7 +944,11 @@ components:
     TransactionResult:
       example:
         output:
-        - columns: ""
+        - columns:
+          - - null
+            - null
+          - - null
+            - null
           rel_key:
             keys:
             - null
@@ -945,7 +959,11 @@ components:
             name: name
             type: RelKey
           type: Relation
-        - columns: ""
+        - columns:
+          - - null
+            - null
+          - - null
+            - null
           rel_key:
             keys:
             - null

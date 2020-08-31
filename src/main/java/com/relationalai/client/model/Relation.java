@@ -24,6 +24,8 @@ import com.relationalai.client.model.RelKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Relation
@@ -32,7 +34,7 @@ import java.io.IOException;
 public class Relation {
   public static final String SERIALIZED_NAME_COLUMNS = "columns";
   @SerializedName(SERIALIZED_NAME_COLUMNS)
-  private Object columns = null;
+  private List<List<Object>> columns = null;
 
   public static final String SERIALIZED_NAME_REL_KEY = "rel_key";
   @SerializedName(SERIALIZED_NAME_REL_KEY)
@@ -88,9 +90,17 @@ public class Relation {
   private TypeEnum type = TypeEnum.RELATION;
 
 
-  public Relation columns(Object columns) {
+  public Relation columns(List<List<Object>> columns) {
     
     this.columns = columns;
+    return this;
+  }
+
+  public Relation addColumnsItem(List<Object> columnsItem) {
+    if (this.columns == null) {
+      this.columns = new ArrayList<List<Object>>();
+    }
+    this.columns.add(columnsItem);
     return this;
   }
 
@@ -101,12 +111,12 @@ public class Relation {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Object getColumns() {
+  public List<List<Object>> getColumns() {
     return columns;
   }
 
 
-  public void setColumns(Object columns) {
+  public void setColumns(List<List<Object>> columns) {
     this.columns = columns;
   }
 
