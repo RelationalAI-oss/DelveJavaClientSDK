@@ -45,22 +45,6 @@ public class ClientSideAuthenticationUtil
      * CredentialScope + \n +
      * HashedCanonicalRequest
      **/
-    public static String getStringToSign(Request req, AuthorizationInfo authInfo)
-            throws NoSuchAlgorithmException, InvalidRequestException, IOException
-    {
-        StringBuilder stringToSign = new StringBuilder();
-
-        stringToSign.append(authInfo.getMethod().getStringForSignature());
-        stringToSign.append("\n");
-
-        stringToSign.append(authInfo.getCredentialScope().getStringForSignature());
-        stringToSign.append("\n");
-
-        stringToSign.append(hashedCanonicalRequest(req));
-
-        return stringToSign.toString();
-    }
-
     public static String getStringToSign(Request req, String accessKey, String region, String service)
             throws NoSuchAlgorithmException, InvalidRequestException, IOException
     {
