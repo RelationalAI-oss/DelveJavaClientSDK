@@ -60,9 +60,6 @@ public class AuthorizationInfo {
 
         String signatureHex = credentialsArr[2].substring(SIGNATURE_PREFIX.length());
 
-//        signature = AuthenticationUtil.fromHexString(signatureHex);
-//        byte[] signature = Base64.getDecoder().decode(encodedSig);
-
         // create AuthorizationInfo
         return new AuthorizationInfo(method, credentialScope, Arrays.asList(headers), signatureHex);
     }
@@ -73,10 +70,6 @@ public class AuthorizationInfo {
 
     public CredentialScope getCredentialScope() {
         return this.credentialScope;
-    }
-
-    public byte[] getSignature() {
-        return FormattingUtil.fromHexString(this.signatureHex);
     }
 
     /**

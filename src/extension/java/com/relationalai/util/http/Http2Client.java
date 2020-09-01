@@ -64,11 +64,4 @@ public final class Http2Client {
         // shoved it into the headers
         return request.newBuilder().header("Authorization", authHeader).build();
     }
-
-    public static String getResponseContent(Response response) throws IOException {
-        byte[] arr = response.body().bytes();
-
-        return new String(arr, 0, arr.length, CharsetUtil.UTF_8);
-    }
-
 }
