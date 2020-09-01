@@ -56,13 +56,10 @@ public class ClientSideAuthenticationUtil
 
         Date date = new Date();
 
-        // Append YYYYMMDD'T'HHMMSS'Z' date?
-        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
-        // stringToSign.append(dateFormat.format(date));
-        // stringToSign.append("\n");
-
         // CredentialScope
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        // TODO: Maybe we should change the granularity to smaller than a day, e.g., a minute
+        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmm'Z'");
         String dateFormatted = dateFormat.format(date);
         CredentialScope credScope = new CredentialScope(accessKey, dateFormatted, region, service, CredentialScope.TERMINATION_STRING);
         stringToSign.append(credScope.getStringForSignature());
