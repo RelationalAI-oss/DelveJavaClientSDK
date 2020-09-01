@@ -9,20 +9,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ClientConfig
-{
-    File _configDir;
-    InfraMetadataConfig.RaiRegion _region;
-    String _accessKey;
-    KeysetHandle _privateKeysetHandle;
-
-    InfraMetadataConfig.Infra _infra = InfraMetadataConfig.Infra.AWS;
-    String _raiHost = AWS_DEFAULT_HOST;
-    int _raiPort = 443;
-
+public class ClientConfig {
     public static final String AWS_DEFAULT_HOST = "aws.relationalai.com";
     public static final String AZURE_DEFAULT_HOST = "azure.relationalai.com";
-
     public static final String CONFIG_FILE_NAME = "config";
     public static final String RAI_ACCESS_KEY = "access_key";
     public static final String RAI_PRIVATE_KEY = "private_key_filename"; // pragma: allowlist secret
@@ -31,30 +20,47 @@ public class ClientConfig
     public static final String RAI_PORT = "port";
     public static final String REGION = "region";
     public static final String DEFAULT_PROFILE_NAME = "default";
+    File _configDir;
+    InfraMetadataConfig.RaiRegion _region;
+    String _accessKey;
+    KeysetHandle _privateKeysetHandle;
+    InfraMetadataConfig.Infra _infra = InfraMetadataConfig.Infra.AWS;
+    String _raiHost = AWS_DEFAULT_HOST;
+    int _raiPort = 443;
 
-    public static ClientConfig loadConfig(File configDir, String profileName) throws Exception
-    {
-        if ( !configDir.isDirectory() )
-        {
+    public ClientConfig(File configDir, InfraMetadataConfig.RaiRegion region,
+                        String accessKey, KeysetHandle privateKeysetHandle,
+                        String infra, String infraHost, String infraPortStr) {
+        this._configDir = configDir;
+        this._region = region;
+        this._accessKey = accessKey;
+        this._privateKeysetHandle = privateKeysetHandle;
+
+        if (infra != null && infra.trim().length() > 0) {
+            this._infra = InfraMetadataConfig.Infra.valueOf(infra.trim());
+        }
+
+        setHost(infraHost);
+        setPort(infraPortStr);
+    }
+
+    public static ClientConfig loadConfig(File configDir, String profileName) throws Exception {
+        if (!configDir.isDirectory()) {
             throw new Exception(configDir + " is not a directory");
         }
 
         File raiConfigFile = new File(configDir, CONFIG_FILE_NAME);
-        if ( !raiConfigFile.exists() )
-        {
+        if (!raiConfigFile.exists()) {
             return new ClientConfig(configDir, InfraMetadataConfig.DEFAULT_REGION, null, null, null, null, null);
-        }
-        else
-        {
+        } else {
             Ini ini = new Ini();
             ini.load(new FileReader(raiConfigFile));
 
             Ini.Section section = ini.get(profileName);
-            if ( section != null )
-            {
+            if (section != null) {
                 String regionName = section.get(REGION);
                 InfraMetadataConfig.RaiRegion region =
-                    InfraMetadataConfig.RaiRegion.fromName(regionName);
+                        InfraMetadataConfig.RaiRegion.fromName(regionName);
 
                 // rai infra host / port
                 String infra = section.get(RAI_INFRA);
@@ -65,148 +71,102 @@ public class ClientConfig
                 String accessKey = section.get(RAI_ACCESS_KEY);
                 String privateKeyFilename = section.get(RAI_PRIVATE_KEY);
 
-                if ( accessKey != null && privateKeyFilename != null )
-                {
+                if (accessKey != null && privateKeyFilename != null) {
                     // private key file is in the configDir
                     File privateKeyFile = new File(configDir, privateKeyFilename);
                     KeysetHandle privateKeysetHandle =
-                        privateKeyFile.exists() ? ClientSideAuthenticationUtil.getKeysetHandle(privateKeyFile) : null;
+                            privateKeyFile.exists() ? ClientSideAuthenticationUtil.getKeysetHandle(privateKeyFile) : null;
 
                     return new ClientConfig(configDir, region,
-                        accessKey, privateKeysetHandle,
-                        infra, infraHost, infraPortStr);
-                }
-                else
-                {
+                            accessKey, privateKeysetHandle,
+                            infra, infraHost, infraPortStr);
+                } else {
                     return new ClientConfig(configDir, region,
-                        null, null,
-                        infra, infraHost, infraPortStr);
+                            null, null,
+                            infra, infraHost, infraPortStr);
                 }
-            }
-            else
-            {
+            } else {
                 return new ClientConfig(configDir,
-                                        InfraMetadataConfig.DEFAULT_REGION,
-                                        null, null, null, null, null);
+                        InfraMetadataConfig.DEFAULT_REGION,
+                        null, null, null, null, null);
             }
         }
     }
 
-    public static File getConfigDir(File configDir)
-    {
-        if ( configDir == null )
-        {
+    public static File getConfigDir(File configDir) {
+        if (configDir == null) {
             return getDefaultConfigDir();
         }
 
         return configDir;
     }
 
-    public static File getDefaultConfigDir()
-    {
+    public static File getDefaultConfigDir() {
         String path = System.getProperty("user.home") + File.separator + ".rai";
         File raiConfigDir = new File(path);
 
-        if ( !raiConfigDir.exists())
-        {
+        if (!raiConfigDir.exists()) {
             raiConfigDir.mkdirs();
         }
 
         return raiConfigDir;
     }
 
-    public static File getConfigFile(File configDir) throws IOException
-    {
-        if ( configDir == null)
+    public static File getConfigFile(File configDir) throws IOException {
+        if (configDir == null)
             configDir = getDefaultConfigDir();
 
         File configFile = new File(configDir, ClientConfig.CONFIG_FILE_NAME);
 
         // Check that the file exists. If not create stub
-        if ( !configFile.exists())
-        {
+        if (!configFile.exists()) {
             configFile.createNewFile();
         }
 
         return configFile;
     }
 
-    public ClientConfig(File configDir, InfraMetadataConfig.RaiRegion region,
-        String accessKey, KeysetHandle privateKeysetHandle,
-        String infra, String infraHost, String infraPortStr)
-    {
-        this._configDir = configDir;
-        this._region = region;
-        this._accessKey = accessKey;
-        this._privateKeysetHandle = privateKeysetHandle;
-
-        if ( infra != null && infra.trim().length() > 0 )
-        {
-            this._infra = InfraMetadataConfig.Infra.valueOf(infra.trim());
-        }
-
-        setHost(infraHost);
-        setPort(infraPortStr);
-    }
-
-    private void setHost(String infraHost)
-    {
-        if ( infraHost != null && infraHost.trim().length() > 0)
-        {
+    private void setHost(String infraHost) {
+        if (infraHost != null && infraHost.trim().length() > 0) {
             this._raiHost = infraHost.trim();
-        }
-        else
-        {
+        } else {
             this._raiHost = getDefaultHost(this._infra);
         }
     }
 
-    private void setPort(String infraPortStr)
-    {
-        if ( infraPortStr != null && infraPortStr.trim().length() > 0 )
-        {
+    private void setPort(String infraPortStr) {
+        if (infraPortStr != null && infraPortStr.trim().length() > 0) {
             this._raiPort = Integer.parseInt(infraPortStr.trim());
-        }
-        else
-        {
+        } else {
             this._raiPort = 443;
         }
     }
 
-    private String getDefaultHost(InfraMetadataConfig.Infra infra)
-    {
-        if ( infra == InfraMetadataConfig.Infra.AWS )
-        {
+    private String getDefaultHost(InfraMetadataConfig.Infra infra) {
+        if (infra == InfraMetadataConfig.Infra.AWS) {
             return AWS_DEFAULT_HOST;
-        }
-        else
-        {
+        } else {
             return AZURE_DEFAULT_HOST;
         }
     }
 
-    public String getAccessKey()
-    {
+    public String getAccessKey() {
         return _accessKey;
     }
 
-    public String getRegionName()
-    {
+    public String getRegionName() {
         return _region.getName();
     }
 
-    public KeysetHandle getPrivateKeysetHandle()
-    {
+    public KeysetHandle getPrivateKeysetHandle() {
         return _privateKeysetHandle;
     }
 
-    public String getRaiHost()
-    {
+    public String getRaiHost() {
         return this._raiHost;
     }
 
-    public int getRaiPort()
-    {
+    public int getRaiPort() {
         return this._raiPort;
     }
 }

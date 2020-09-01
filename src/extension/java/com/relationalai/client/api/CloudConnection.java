@@ -2,7 +2,7 @@ package com.relationalai.client.api;
 
 import com.relationalai.client.model.Transaction;
 
-public class CloudConnection extends Connection{
+public class CloudConnection extends Connection {
     private ClientConfig clientConfig;
     private boolean verifySSL;
     private String computeName;

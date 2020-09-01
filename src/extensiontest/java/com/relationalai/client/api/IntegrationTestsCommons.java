@@ -25,17 +25,16 @@ public class IntegrationTestsCommons {
     /**
      * Issues a transaction to be executed
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public static void transactionPostTest(DelveClient api) throws ApiException {
         Connection conn = api.getConn();
         assert api.create_database(conn, true);
-        assert ! api.create_database(conn, false);
+        assert !api.create_database(conn, false);
 
 
-        assert  api.install_source(conn, "name", "name", "def foo = 1") != null;
+        assert api.install_source(conn, "name", "name", "def foo = 1") != null;
         QueryActionResult queryRes = api.query(conn, "name", "name", "def bar = 2", "bar");
         assert queryRes != null;
         System.out.println(queryRes);

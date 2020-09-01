@@ -27,8 +27,7 @@ public class LocalIntegrationTests {
     /**
      * Issues a transaction to be executed
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void transactionPostTest() throws ApiException {

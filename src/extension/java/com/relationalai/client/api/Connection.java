@@ -2,8 +2,7 @@ package com.relationalai.client.api;
 
 import com.relationalai.client.model.Transaction;
 
-public class Connection
-{
+public class Connection {
     public final static Transaction.ModeEnum DEFAULT_OPEN_MODE = Transaction.ModeEnum.OPEN;
     public final static String DEFAULT_SCHEME = "http";
     public final static String DEFAULT_HOST = "127.0.0.1";
@@ -41,7 +40,9 @@ public class Connection
         this.port = port;
     }
 
-    public String getBaseUrl() { return this.scheme + "://" + this.host + ":" + this.port; }
+    public String getBaseUrl() {
+        return this.scheme + "://" + this.host + ":" + this.port;
+    }
 
     public String getDbname() {
         return dbname;
@@ -63,9 +64,13 @@ public class Connection
         return port;
     }
 
-    public ClientConfig getClientConfig() { return null; }
+    public ClientConfig getClientConfig() {
+        return null;
+    }
 
-    public boolean isVerifySSL() { return DEFAULT_VERIFY_SSL; }
+    public boolean isVerifySSL() {
+        return DEFAULT_VERIFY_SSL;
+    }
 
     public String getComputeName() {
         return null;

@@ -23,14 +23,13 @@ import java.security.GeneralSecurityException;
  * logged. When run from the command-line, sends a single HEADERS frame to the server and gets back
  * a "Hello World" response.
  */
-public final class Http2Client
-{
+public final class Http2Client {
 
     static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
 
     public static Request signRequest(Request request, String accessKey, String regionName, KeysetHandle privateKeysetHandle, String serviceIdentifier)
             throws NullKeysetException, GeneralSecurityException, InvalidRequestException, IOException {
-        if ( privateKeysetHandle == null )
+        if (privateKeysetHandle == null)
             throw new NullKeysetException("Private keyset is null. Cannot sign request. Please make sure you have the appropriate entries in your rai_config file");
 
         // Initialize tink
@@ -41,12 +40,12 @@ public final class Http2Client
         String stringToSign = ClientSideAuthenticationUtil.getStringToSign(request, accessKey, regionName, serviceIdentifier);
 
         LOGGER.debug(
-            "Http2Client.signRequest: \n" +
-            "accessKey=" + accessKey +
-            "\nstringToSign=\n" +
-            "*********************\n" +
-            stringToSign +
-            "\n****** End string-to-sign **** \n");
+                "Http2Client.signRequest: \n" +
+                        "accessKey=" + accessKey +
+                        "\nstringToSign=\n" +
+                        "*********************\n" +
+                        stringToSign +
+                        "\n****** End string-to-sign **** \n");
 
         // Create signature
         PublicKeySign signer = PublicKeySignFactory.getPrimitive(privateKeysetHandle);
@@ -55,9 +54,9 @@ public final class Http2Client
         String hexSig = FormattingUtil.toHexString(signature).toLowerCase();
 
         LOGGER.debug(
-            "***** Signature (HEX)**** \n" +
-            hexSig +
-            "\n***** End Signature ****");
+                "***** Signature (HEX)**** \n" +
+                        hexSig +
+                        "\n***** End Signature ****");
 
         // make authorization header.
         String authHeader = ClientSideAuthenticationUtil.makeAuthorizationHeader(request, accessKey, regionName, serviceIdentifier, hexSig);

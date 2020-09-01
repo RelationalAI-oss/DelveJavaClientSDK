@@ -19,10 +19,39 @@ import java.security.cert.CertificateException;
 import java.util.*;
 
 public class DelveClient extends DefaultApi {
-    static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
     public final static boolean ENABLE_ACCEPT_HEADER = false;
-
     public final static String DEFAULT_SERVICE = "transaction";
+    static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
+    /*
+     * This is very bad practice and should NOT be used in production.
+     */
+    private static final TrustManager[] trustAllCerts = new TrustManager[]{
+            new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                }
+
+                @Override
+                public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                }
+
+                @Override
+                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                    return new java.security.cert.X509Certificate[]{};
+                }
+            }
+    };
+    private static final SSLContext trustAllSslContext;
+
+    static {
+        try {
+            trustAllSslContext = SSLContext.getInstance("SSL");
+            trustAllSslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static final SSLSocketFactory trustAllSslSocketFactory = trustAllSslContext.getSocketFactory();
     private static ApiClient defaultApiClient = new ExtendedApiClient();
 
     Connection conn;
@@ -46,10 +75,10 @@ public class DelveClient extends DefaultApi {
         this.service = service;
         ApiClient api = this.getApiClient();
         OkHttpClient client = api.getHttpClient();
-        if(!conn.isVerifySSL()) {
+        if (!conn.isVerifySSL()) {
             LOGGER.warn("Using the trustAllSslClient is highly discouraged and should not be used in Production!");
             OkHttpClient.Builder builder = client.newBuilder();
-            builder.sslSocketFactory(trustAllSslSocketFactory, (X509TrustManager)trustAllCerts[0]);
+            builder.sslSocketFactory(trustAllSslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             builder.hostnameVerifier(new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
@@ -85,9 +114,9 @@ public class DelveClient extends DefaultApi {
         // The following section determines the `Accept` HTTP header, but we had to disable
         // it for now, as the authentication mechanism on the infra side complains if any
         // header other than `Host` and `Content-Type` is available. We can re-enable this
-        if(ENABLE_ACCEPT_HEADER) {
+        if (ENABLE_ACCEPT_HEADER) {
             final String[] localVarAccepts = {
-                "application/json"
+                    "application/json"
             };
             final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
             if (localVarAccept != null) {
@@ -95,7 +124,7 @@ public class DelveClient extends DefaultApi {
             }
         }
 
-        if(conn instanceof CloudConnection) {
+        if (conn instanceof CloudConnection) {
             localVarQueryParams.add(new Pair("dbname", conn.getDbname()));
             localVarQueryParams.add(new Pair("open_mode", transaction.getMode().toString()));
             localVarQueryParams.add(new Pair("readonly", transaction.getReadonly() ? "true" : "false"));
@@ -112,7 +141,7 @@ public class DelveClient extends DefaultApi {
 
         localVarHeaderParams.put("Host", conn.getHost());
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[]{};
 
         localVarApiClient.setBasePath(conn.getBaseUrl());
 
@@ -120,7 +149,7 @@ public class DelveClient extends DefaultApi {
 
         ClientConfig clientConf = conn.getClientConfig();
 
-        if( clientConf != null ) {
+        if (clientConf != null) {
             try {
                 request = Http2Client.signRequest(request, clientConf.getAccessKey(), clientConf.getRegionName(), clientConf.getPrivateKeysetHandle(), service);
             } catch (Exception e) {
@@ -146,7 +175,7 @@ public class DelveClient extends DefaultApi {
         if (!response.getAborted() && response.getProblems().isEmpty()) {
             for (LabeledActionResult act : response.getActions()) {
                 if (name.equals(act.getName())) {
-                    ActionResult res = (ActionResult) act.getResult();
+                    ActionResult res = act.getResult();
                     return res;
                 }
             }
@@ -196,34 +225,4 @@ public class DelveClient extends DefaultApi {
 
         return (QueryActionResult) run_action(conn, "single", action);
     }
-
-    /*
-     * This is very bad practice and should NOT be used in production.
-     */
-    private static final TrustManager[] trustAllCerts = new TrustManager[] {
-        new X509TrustManager() {
-            @Override
-            public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-            }
-
-            @Override
-            public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-            }
-
-            @Override
-            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                return new java.security.cert.X509Certificate[]{};
-            }
-        }
-    };
-    private static final SSLContext trustAllSslContext;
-    static {
-        try {
-            trustAllSslContext = SSLContext.getInstance("SSL");
-            trustAllSslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-        } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private static final SSLSocketFactory trustAllSslSocketFactory = trustAllSslContext.getSocketFactory();
 }

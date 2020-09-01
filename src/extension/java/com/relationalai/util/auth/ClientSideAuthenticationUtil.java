@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.invoke.MethodHandles;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
@@ -33,11 +34,9 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class ClientSideAuthenticationUtil
-{
-    final static Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
-
+public class ClientSideAuthenticationUtil {
     public static final String AUTHORIZATION_HEADER = "authorization";
+    final static Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
 
     /**
      * String-to-sign:
@@ -46,8 +45,7 @@ public class ClientSideAuthenticationUtil
      * HashedCanonicalRequest
      **/
     public static String getStringToSign(Request req, String accessKey, String region, String service)
-            throws NoSuchAlgorithmException, InvalidRequestException, IOException
-    {
+            throws NoSuchAlgorithmException, InvalidRequestException, IOException {
         StringBuilder stringToSign = new StringBuilder();
 
         // Append Algorithm (e.g. RAI01-ED25519-SHA256)
@@ -74,14 +72,12 @@ public class ClientSideAuthenticationUtil
 
     /**
      * Compute the content of the authorization header, for CLIENT to include in the request
-     *
+     * <p>
      * Authorization header if of the following form:
      * <Algorithm (e.g. RAI01-ED25519-SHA256)> Credential=<CredentialScope>,SignedHeaders=<Headers>,Signature=<Signature>
-     *
      **/
     public static String makeAuthorizationHeader(Request req, String accessKey, String region, String serviceName, String signatureHex)
-        throws NoSuchAlgorithmException, InvalidRequestException, UnsupportedEncodingException
-    {
+            throws NoSuchAlgorithmException, InvalidRequestException, UnsupportedEncodingException {
         // Create AuthorizatinoInfo
         AuthorizationMethod method = new AuthorizationMethod();
 
@@ -108,8 +104,7 @@ public class ClientSideAuthenticationUtil
      * HexEncode(Hash(RequestPayload))
      */
     public static String hashedCanonicalRequest(Request req)
-            throws NoSuchAlgorithmException, InvalidRequestException, IOException
-    {
+            throws NoSuchAlgorithmException, InvalidRequestException, IOException {
         String reqMethod = req.method();
 
         StringBuilder canonicalRequest = new StringBuilder();
@@ -136,48 +131,38 @@ public class ClientSideAuthenticationUtil
 
         LOGGER.debug(
                 "Http2Client.hashedPayload: \n" +
-                "stringToHash=\n" +
-                "*********************\n" +
-                new String(reqBytes) +
-                "\n****** End hashed-payload **** \n");
+                        "stringToHash=\n" +
+                        "*********************\n" +
+                        new String(reqBytes) +
+                        "\n****** End hashed-payload **** \n");
 
         String hashedPayload = hashBytes(reqBytes);
 
         return hashedPayload;
     }
 
-    private static String hashBytes(byte[] reqBytes) throws NoSuchAlgorithmException
-    {
+    private static String hashBytes(byte[] reqBytes) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(reqBytes);
 
         return FormattingUtil.toHexString(hash).toLowerCase();
     }
 
-    public static List<String> getSignedHeaders(Request req) throws InvalidRequestException
-    {
+    public static List<String> getSignedHeaders(Request req) throws InvalidRequestException {
         ArrayList<String> headers = new ArrayList<String>();
 
         Headers reqHeaders = req.headers();
-        if ( reqHeaders.get("content-type") == null )
-        {
+        if (reqHeaders.get("content-type") == null) {
             throw new InvalidRequestException("Missing required headers content-type");
-        }
-        else
-        {
+        } else {
             headers.add("content-type");
         }
 
-        if ( reqHeaders.get("authority") == null && reqHeaders.get("host") == null)
-        {
+        if (reqHeaders.get("authority") == null && reqHeaders.get("host") == null) {
             throw new InvalidRequestException("Missing required headers authority");
-        }
-        else if ( reqHeaders.get("authority") != null )
-        {
+        } else if (reqHeaders.get("authority") != null) {
             headers.add("authority");
-        }
-        else
-        {
+        } else {
             headers.add("host");
         }
         Collections.sort(headers);
@@ -190,18 +175,15 @@ public class ClientSideAuthenticationUtil
      * format (based on the order of header names). This string is used in creating a
      * signature for the request.
      */
-    public static String canonicalAndSignedHeaders(Request req) throws InvalidRequestException
-    {
+    public static String canonicalAndSignedHeaders(Request req) throws InvalidRequestException {
         StringBuilder canonicalHeaders = new StringBuilder();
 
         Headers reqHeaders = req.headers();
-        if ( reqHeaders.get("content-type") == null)
-        {
+        if (reqHeaders.get("content-type") == null) {
             throw new InvalidRequestException("Missing required headers content-type");
         }
 
-        if ( reqHeaders.get("authority") == null && reqHeaders.get("host") == null )
-        {
+        if (reqHeaders.get("authority") == null && reqHeaders.get("host") == null) {
             throw new InvalidRequestException("Missing required headers authority");
         }
 
@@ -209,41 +191,36 @@ public class ClientSideAuthenticationUtil
         canonicalHeaders.append(reqHeaders.get("content-type").trim());
         canonicalHeaders.append("\n");
 
-        if ( reqHeaders.get("authority") != null )
-        {
+        if (reqHeaders.get("authority") != null) {
             canonicalHeaders.append("authority:");
             canonicalHeaders.append(reqHeaders.get("authority").trim());
             canonicalHeaders.append("\n");
         }
-        if ( reqHeaders.get("host") != null )
-        {
+        if (reqHeaders.get("host") != null) {
             canonicalHeaders.append("host:");
 
             // Sometimes host has port, and sometimes not. Get rid of the port
             String hostStr = reqHeaders.get("host");
             int colon = hostStr.indexOf(":");
-            if ( colon > 0 )
+            if (colon > 0) {
                 hostStr = hostStr.substring(0, colon);
+            }
             canonicalHeaders.append(hostStr.trim());
             canonicalHeaders.append("\n");
         }
         canonicalHeaders.append("\n");
 
         // add signed headers
-        if ( reqHeaders.get("authority") != null )
-        {
+        if (reqHeaders.get("authority") != null) {
             canonicalHeaders.append("authority;content-type");
-        }
-        else
-        {
+        } else {
             canonicalHeaders.append("content-type;host");
         }
         canonicalHeaders.append("\n");
         return canonicalHeaders.toString();
     }
 
-    public static String canonicalURI(Request req) throws UnsupportedEncodingException
-    {
+    public static String canonicalURI(Request req) throws UnsupportedEncodingException {
         // get the path, query parameters & values;
         QueryStringDecoder queryString = new QueryStringDecoder(req.url().uri());
 
@@ -251,46 +228,38 @@ public class ClientSideAuthenticationUtil
         StringBuilder canonicalRequest = new StringBuilder();
         Escaper escaper = UrlEscapers.urlPathSegmentEscaper();
         List<String> escapedSegments = new ArrayList();
-        for (String segment : queryString.path().split("/"))
-        {
+        for (String segment : queryString.path().split("/")) {
             escapedSegments.add(escaper.escape(escaper.escape(segment)));
         }
         String escapedPath = String.join("/", escapedSegments);
-        if (escapedPath.isEmpty())
-        {
+        if (escapedPath.isEmpty()) {
             canonicalRequest.append('/');
-        }
-        else
-        {
+        } else {
             canonicalRequest.append(escapedPath);
         }
         canonicalRequest.append('\n');
 
         // Canonical query string
         // sort the parameters
-        Map<String,List<String>> params = queryString.parameters();
-        if ( params.size() > 0 )
-        {
+        Map<String, List<String>> params = queryString.parameters();
+        if (params.size() > 0) {
             List<String> paramsTmp = new ArrayList();
-            TreeMap<String,List<String>> sortedParams = new TreeMap(params);
-            for ( Map.Entry<String, List<String>>  entry : sortedParams.entrySet() )
-            {
+            TreeMap<String, List<String>> sortedParams = new TreeMap(params);
+            for (Map.Entry<String, List<String>> entry : sortedParams.entrySet()) {
                 // sort the values.
                 ArrayList<String> values = new ArrayList(entry.getValue());
                 Collections.sort(values);
 
                 List<String> paramTmp = new ArrayList();
-                for ( String value : values )
-                {
+                for (String value : values) {
                     StringBuilder paramSB = new StringBuilder();
-                    paramSB.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                    paramSB.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
                     paramSB.append("=");
-                    String valueEnc = URLEncoder.encode(value, "UTF-8");
-                    String encodedEquals = URLEncoder.encode("=", "UTF-8");
-                    if (valueEnc.contains(encodedEquals))
-                    {
+                    String valueEnc = URLEncoder.encode(value, StandardCharsets.UTF_8);
+                    String encodedEquals = URLEncoder.encode("=", StandardCharsets.UTF_8);
+                    if (valueEnc.contains(encodedEquals)) {
                         // Double-encode '='
-                        valueEnc = valueEnc.replaceAll(encodedEquals, URLEncoder.encode(encodedEquals, "UTF-8"));
+                        valueEnc = valueEnc.replaceAll(encodedEquals, URLEncoder.encode(encodedEquals, StandardCharsets.UTF_8));
                     }
                     paramSB.append(valueEnc);
                     paramTmp.add(paramSB.toString());
@@ -305,34 +274,29 @@ public class ClientSideAuthenticationUtil
     }
 
     public static KeysetHandle getKeysetHandle(String keyString)
-        throws GeneralSecurityException, IOException
-    {
+            throws GeneralSecurityException, IOException {
         String tinkJson = JsonIterator.deserialize(keyString).get("tink").toString();
         KeysetHandle keysetHandle = CleartextKeysetHandle.read(JsonKeysetReader.withString(tinkJson));
         return keysetHandle;
     }
 
-    public static KeysetHandle getKeysetHandle(File keysetFile) throws Exception
-    {
+    public static KeysetHandle getKeysetHandle(File keysetFile) throws Exception {
         String json = JsonIterator.deserialize(Files.readAllBytes(keysetFile.toPath())).toString();
         return getKeysetHandle(json);
     }
 
-    public static String getKey(KeysetHandle keysetHandle) throws IOException
-    {
+    public static String getKey(KeysetHandle keysetHandle) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         CleartextKeysetHandle.write(keysetHandle,
-            JsonKeysetWriter.withOutputStream(outputStream));
+                JsonKeysetWriter.withOutputStream(outputStream));
         return new String(outputStream.toByteArray());
     }
 
-    public static String getRawKey(KeysetHandle keysetHandle) throws IOException
-    {
+    public static String getRawKey(KeysetHandle keysetHandle) throws IOException {
         String keyJson = getKey(keysetHandle);
         Any any = JsonIterator.deserialize(keyJson);
         Any keyArr = any.get("key");
-        for ( Any key : keyArr.asList())
-        {
+        for (Any key : keyArr.asList()) {
             return key.get("keyData").get("value").toString();
         }
 
@@ -340,8 +304,7 @@ public class ClientSideAuthenticationUtil
     }
 
     public static SshPublicPrivateKey generateSSHKeys(String passPhrase, String comment)
-        throws JSchException
-        {
+            throws JSchException {
         JSch jsch = new JSch();
         KeyPair keyPair = KeyPair.genKeyPair(jsch, KeyPair.RSA);
         ByteArrayOutputStream privateKeyBuff = new ByteArrayOutputStream(2048);
@@ -349,12 +312,9 @@ public class ClientSideAuthenticationUtil
 
         keyPair.writePublicKey(publicKeyBuff, (comment != null) ? comment : "SSHCerts");
 
-        if (passPhrase == null  || passPhrase.isEmpty())
-        {
+        if (passPhrase == null || passPhrase.isEmpty()) {
             keyPair.writePrivateKey(privateKeyBuff);
-        }
-        else
-        {
+        } else {
             keyPair.writePrivateKey(privateKeyBuff, passPhrase.getBytes());
         }
 
@@ -367,8 +327,9 @@ public class ClientSideAuthenticationUtil
 
         /**
          * Constructor.
+         *
          * @param sshPrivateKey SSH private key
-         * @param sshPublicKey SSH public key
+         * @param sshPublicKey  SSH public key
          */
         public SshPublicPrivateKey(String sshPrivateKey, String sshPublicKey) {
             this.sshPrivateKey = sshPrivateKey;
@@ -377,6 +338,7 @@ public class ClientSideAuthenticationUtil
 
         /**
          * Get SSH public key.
+         *
          * @return public key
          */
         public String getSshPublicKey() {
@@ -384,15 +346,8 @@ public class ClientSideAuthenticationUtil
         }
 
         /**
-         * Get SSH private key.
-         * @return private key
-         */
-        public String getSshPrivateKey() {
-            return sshPrivateKey;
-        }
-
-        /**
          * Set SSH public key.
+         *
          * @param sshPublicKey public key
          */
         public void setSshPublicKey(String sshPublicKey) {
@@ -400,7 +355,17 @@ public class ClientSideAuthenticationUtil
         }
 
         /**
+         * Get SSH private key.
+         *
+         * @return private key
+         */
+        public String getSshPrivateKey() {
+            return sshPrivateKey;
+        }
+
+        /**
          * Set SSH private key.
+         *
          * @param sshPrivateKey private key
          */
         public void setSshPrivateKey(String sshPrivateKey) {
