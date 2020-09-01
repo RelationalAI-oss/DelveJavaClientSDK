@@ -185,6 +185,11 @@ public class ClientSideAuthenticationUtil
         return headers;
     }
 
+    /**
+     * Given a HTTP Request, this function creates a string from some headers in a canonical
+     * format (based on the order of header names). This string is used in creating a
+     * signature for the request.
+     */
     public static String canonicalAndSignedHeaders(Request req) throws InvalidRequestException
     {
         StringBuilder canonicalHeaders = new StringBuilder();
