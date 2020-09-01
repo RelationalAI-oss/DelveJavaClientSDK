@@ -21,6 +21,7 @@ import java.util.*;
 public class DelveClient extends DefaultApi {
     public final static boolean ENABLE_ACCEPT_HEADER = false;
     public final static String DEFAULT_SERVICE = "transaction";
+    public final static String DEFAULT_SERVICE_PATH = string.Format("/{0}", DEFAULT_SERVICE);
     static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
     /*
      * This is very bad practice and should NOT be used in production.
@@ -103,8 +104,6 @@ public class DelveClient extends DefaultApi {
         ApiClient localVarApiClient = getApiClient();
 
         // create path and map variables
-        final String localVarPath = "/transaction";
-
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
@@ -145,7 +144,7 @@ public class DelveClient extends DefaultApi {
 
         localVarApiClient.setBasePath(conn.getBaseUrl());
 
-        Request request = localVarApiClient.buildRequest(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        Request request = localVarApiClient.buildRequest(DEFAULT_SERVICE_PATH, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
 
         ClientConfig clientConf = conn.getClientConfig();
 
