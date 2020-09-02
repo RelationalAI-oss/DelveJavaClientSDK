@@ -21,7 +21,10 @@ import java.util.*;
 public class DelveClient extends DefaultApi {
     public final static boolean ENABLE_ACCEPT_HEADER = false;
     public final static String DEFAULT_SERVICE = "transaction";
-    public final static String DEFAULT_SERVICE_PATH = string.Format("/{0}", DEFAULT_SERVICE);
+    public final static String DEFAULT_SERVICE_PATH = "/" + DEFAULT_SERVICE;
+    public final String JSON_CONTENT_TYPE = "application/json";
+    public final String CSV_CONTENT_TYPE = "text/csv";
+
     static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
     /*
      * This is very bad practice and should NOT be used in production.
