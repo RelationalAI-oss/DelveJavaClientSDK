@@ -42,6 +42,10 @@ public class TransactionResult {
   @SerializedName(SERIALIZED_NAME_ACTIONS)
   private List<LabeledActionResult> actions = null;
 
+  public static final String SERIALIZED_NAME_DEBUG_LEVEL = "debug_level";
+  @SerializedName(SERIALIZED_NAME_DEBUG_LEVEL)
+  private Integer debugLevel = 0;
+
   public static final String SERIALIZED_NAME_OUTPUT = "output";
   @SerializedName(SERIALIZED_NAME_OUTPUT)
   private List<Relation> output = null;
@@ -153,6 +157,28 @@ public class TransactionResult {
   }
 
 
+  public TransactionResult debugLevel(Integer debugLevel) {
+    
+    this.debugLevel = debugLevel;
+    return this;
+  }
+
+   /**
+   * Get debugLevel
+   * @return debugLevel
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public Integer getDebugLevel() {
+    return debugLevel;
+  }
+
+
+  public void setDebugLevel(Integer debugLevel) {
+    this.debugLevel = debugLevel;
+  }
+
+
   public TransactionResult output(List<Relation> output) {
     
     this.output = output;
@@ -248,6 +274,7 @@ public class TransactionResult {
     TransactionResult transactionResult = (TransactionResult) o;
     return Objects.equals(this.aborted, transactionResult.aborted) &&
         Objects.equals(this.actions, transactionResult.actions) &&
+        Objects.equals(this.debugLevel, transactionResult.debugLevel) &&
         Objects.equals(this.output, transactionResult.output) &&
         Objects.equals(this.problems, transactionResult.problems) &&
         Objects.equals(this.type, transactionResult.type);
@@ -255,7 +282,7 @@ public class TransactionResult {
 
   @Override
   public int hashCode() {
-    return Objects.hash(aborted, actions, output, problems, type);
+    return Objects.hash(aborted, actions, debugLevel, output, problems, type);
   }
 
 
@@ -265,6 +292,7 @@ public class TransactionResult {
     sb.append("class TransactionResult {\n");
     sb.append("    aborted: ").append(toIndentedString(aborted)).append("\n");
     sb.append("    actions: ").append(toIndentedString(actions)).append("\n");
+    sb.append("    debugLevel: ").append(toIndentedString(debugLevel)).append("\n");
     sb.append("    output: ").append(toIndentedString(output)).append("\n");
     sb.append("    problems: ").append(toIndentedString(problems)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");

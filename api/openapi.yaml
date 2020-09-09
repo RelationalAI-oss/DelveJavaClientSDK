@@ -866,6 +866,7 @@ components:
     Transaction:
       example:
         mode: OPEN
+        debug_level: 0
         dbname: dbname
         readonly: false
         abort: false
@@ -892,6 +893,9 @@ components:
         dbname:
           default: ""
           type: string
+        debug_level:
+          default: 0
+          type: integer
         mode:
           default: OPEN
           enum:
@@ -915,6 +919,7 @@ components:
       required:
       - abort
       - dbname
+      - debug_level
       - mode
       - readonly
       - type
@@ -974,6 +979,7 @@ components:
             name: name
             type: RelKey
           type: Relation
+        debug_level: 0
         aborted: false
         type: TransactionResult
         actions:
@@ -997,6 +1003,9 @@ components:
             $ref: '#/components/schemas/LabeledActionResult'
           nullable: true
           type: array
+        debug_level:
+          default: 0
+          type: integer
         output:
           items:
             $ref: '#/components/schemas/Relation'
@@ -1014,6 +1023,7 @@ components:
           type: string
       required:
       - aborted
+      - debug_level
       - type
       type: object
 

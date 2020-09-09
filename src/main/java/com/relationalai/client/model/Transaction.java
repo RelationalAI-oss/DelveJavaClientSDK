@@ -44,6 +44,10 @@ public class Transaction {
   @SerializedName(SERIALIZED_NAME_DBNAME)
   private String dbname = "";
 
+  public static final String SERIALIZED_NAME_DEBUG_LEVEL = "debug_level";
+  @SerializedName(SERIALIZED_NAME_DEBUG_LEVEL)
+  private Integer debugLevel = 0;
+
   /**
    * Gets or Sets mode
    */
@@ -234,6 +238,28 @@ public class Transaction {
   }
 
 
+  public Transaction debugLevel(Integer debugLevel) {
+    
+    this.debugLevel = debugLevel;
+    return this;
+  }
+
+   /**
+   * Get debugLevel
+   * @return debugLevel
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public Integer getDebugLevel() {
+    return debugLevel;
+  }
+
+
+  public void setDebugLevel(Integer debugLevel) {
+    this.debugLevel = debugLevel;
+  }
+
+
   public Transaction mode(ModeEnum mode) {
     
     this.mode = mode;
@@ -335,6 +361,7 @@ public class Transaction {
     return Objects.equals(this.abort, transaction.abort) &&
         Objects.equals(this.actions, transaction.actions) &&
         Objects.equals(this.dbname, transaction.dbname) &&
+        Objects.equals(this.debugLevel, transaction.debugLevel) &&
         Objects.equals(this.mode, transaction.mode) &&
         Objects.equals(this.readonly, transaction.readonly) &&
         Objects.equals(this.sourceDbname, transaction.sourceDbname) &&
@@ -343,7 +370,7 @@ public class Transaction {
 
   @Override
   public int hashCode() {
-    return Objects.hash(abort, actions, dbname, mode, readonly, sourceDbname, type);
+    return Objects.hash(abort, actions, dbname, debugLevel, mode, readonly, sourceDbname, type);
   }
 
 
@@ -354,6 +381,7 @@ public class Transaction {
     sb.append("    abort: ").append(toIndentedString(abort)).append("\n");
     sb.append("    actions: ").append(toIndentedString(actions)).append("\n");
     sb.append("    dbname: ").append(toIndentedString(dbname)).append("\n");
+    sb.append("    debugLevel: ").append(toIndentedString(debugLevel)).append("\n");
     sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
     sb.append("    readonly: ").append(toIndentedString(readonly)).append("\n");
     sb.append("    sourceDbname: ").append(toIndentedString(sourceDbname)).append("\n");

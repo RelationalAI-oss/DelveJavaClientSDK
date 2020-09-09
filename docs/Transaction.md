@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **abort** | **Boolean** |  | 
 **actions** | [**List&lt;LabeledAction&gt;**](LabeledAction.md) |  |  [optional]
 **dbname** | **String** |  | 
+**debugLevel** | **Integer** |  | 
 **mode** | [**ModeEnum**](#ModeEnum) |  | 
 **readonly** | **Boolean** |  | 
 **sourceDbname** | **String** |  |  [optional]
