@@ -130,6 +130,7 @@
                         </goals>
                         <configuration>
                             <sources>
+                                <source>src/extension/java</source>
                                 <source>src/main/java</source>
                             </sources>
                         </configuration>
@@ -142,6 +143,7 @@
                         </goals>
                         <configuration>
                             <sources>
+                                <source>src/extensiontest/java</source>
                                 <source>src/test/java</source>
                             </sources>
                         </configuration>
