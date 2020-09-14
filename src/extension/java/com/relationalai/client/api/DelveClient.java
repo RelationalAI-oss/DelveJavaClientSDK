@@ -191,14 +191,13 @@ public class DelveClient extends DefaultApi {
         xact.setDbname(conn.getDbname());
         xact.setActions(Collections.emptyList());
 
-        TransactionResult response = null;
-        try {
-            response = this.transactionPost(xact);
-        } catch (Exception e) {
-            return false;
+        TransactionResult response = this.transactionPost(xact);
+
+        if(!response.getProblems().isEmpty()) {
+            throw new RuntimeException(response.getProblems().toString());
         }
 
-        return !response.getAborted() && response.getProblems().isEmpty();
+        return !response.getAborted();
     }
 
     public InstallActionResult install_source(Connection conn, String name, String path, String src_str) throws ApiException {
