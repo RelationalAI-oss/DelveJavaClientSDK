@@ -62,6 +62,14 @@ public class TransactionResultTest {
     }
 
     /**
+     * Test the property 'debugLevel'
+     */
+    @Test
+    public void debugLevelTest() {
+        // TODO: test debugLevel
+    }
+
+    /**
      * Test the property 'output'
      */
     @Test

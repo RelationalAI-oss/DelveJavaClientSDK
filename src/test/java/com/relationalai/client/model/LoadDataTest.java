@@ -18,7 +18,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AnyValue;
 import com.relationalai.client.model.FileSchema;
 import com.relationalai.client.model.FileSyntax;
 import io.swagger.annotations.ApiModel;

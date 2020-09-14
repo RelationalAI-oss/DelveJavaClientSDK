@@ -68,6 +68,14 @@ public class TransactionTest {
     }
 
     /**
+     * Test the property 'debugLevel'
+     */
+    @Test
+    public void debugLevelTest() {
+        // TODO: test debugLevel
+    }
+
+    /**
      * Test the property 'mode'
      */
     @Test
@@ -81,6 +89,14 @@ public class TransactionTest {
     @Test
     public void readonlyTest() {
         // TODO: test readonly
+    }
+
+    /**
+     * Test the property 'sourceDbname'
+     */
+    @Test
+    public void sourceDbnameTest() {
+        // TODO: test sourceDbname
     }
 
     /**

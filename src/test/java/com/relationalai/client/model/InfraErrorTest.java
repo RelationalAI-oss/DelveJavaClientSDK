@@ -41,11 +41,11 @@ public class InfraErrorTest {
     }
 
     /**
-     * Test the property 'name'
+     * Test the property 'status'
      */
     @Test
-    public void nameTest() {
-        // TODO: test name
+    public void statusTest() {
+        // TODO: test status
     }
 
     /**

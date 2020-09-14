@@ -14,6 +14,7 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
+import com.relationalai.client.model.InfraError;
 import com.relationalai.client.model.Transaction;
 import com.relationalai.client.model.TransactionResult;
 import org.junit.Test;
