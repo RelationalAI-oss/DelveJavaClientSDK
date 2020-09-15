@@ -61,7 +61,9 @@ public class Transaction {
     
     OPEN_OR_CREATE("OPEN_OR_CREATE"),
     
-    BRANCH("BRANCH");
+    BRANCH("BRANCH"),
+    
+    BRANCH_OVERWRITE("BRANCH_OVERWRITE");
 
     private String value;
 

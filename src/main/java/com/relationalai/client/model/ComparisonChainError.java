@@ -27,23 +27,72 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * UndefinedError
+ * ComparisonChainError
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class UndefinedError extends FrontProblem {
+public class ComparisonChainError extends FrontProblem {
+  public static final String SERIALIZED_NAME_MSG = "msg";
+  @SerializedName(SERIALIZED_NAME_MSG)
+  private String msg = "";
+
+  public static final String SERIALIZED_NAME_NODE = "node";
+  @SerializedName(SERIALIZED_NAME_NODE)
+  private Object node = null;
+
   public static final String SERIALIZED_NAME_RANGE = "range";
   @SerializedName(SERIALIZED_NAME_RANGE)
   private Range range;
 
-  public static final String SERIALIZED_NAME_VAR = "var";
-  @SerializedName(SERIALIZED_NAME_VAR)
-  private String var = "";
-
-  public UndefinedError() {
+  public ComparisonChainError() {
     this.type = this.getClass().getSimpleName();
   }
 
-  public UndefinedError range(Range range) {
+  public ComparisonChainError msg(String msg) {
+    
+    this.msg = msg;
+    return this;
+  }
+
+   /**
+   * Get msg
+   * @return msg
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public String getMsg() {
+    return msg;
+  }
+
+
+  public void setMsg(String msg) {
+    this.msg = msg;
+  }
+
+
+  public ComparisonChainError node(Object node) {
+    
+    this.node = node;
+    return this;
+  }
+
+   /**
+   * Get node
+   * @return node
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Object getNode() {
+    return node;
+  }
+
+
+  public void setNode(Object node) {
+    this.node = node;
+  }
+
+
+  public ComparisonChainError range(Range range) {
     
     this.range = range;
     return this;
@@ -65,28 +114,6 @@ public class UndefinedError extends FrontProblem {
   }
 
 
-  public UndefinedError var(String var) {
-    
-    this.var = var;
-    return this;
-  }
-
-   /**
-   * Get var
-   * @return var
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public String getVar() {
-    return var;
-  }
-
-
-  public void setVar(String var) {
-    this.var = var;
-  }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -95,25 +122,27 @@ public class UndefinedError extends FrontProblem {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UndefinedError undefinedError = (UndefinedError) o;
-    return Objects.equals(this.range, undefinedError.range) &&
-        Objects.equals(this.var, undefinedError.var) &&
+    ComparisonChainError comparisonChainError = (ComparisonChainError) o;
+    return Objects.equals(this.msg, comparisonChainError.msg) &&
+        Objects.equals(this.node, comparisonChainError.node) &&
+        Objects.equals(this.range, comparisonChainError.range) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(range, var, super.hashCode());
+    return Objects.hash(msg, node, range, super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UndefinedError {\n");
+    sb.append("class ComparisonChainError {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    msg: ").append(toIndentedString(msg)).append("\n");
+    sb.append("    node: ").append(toIndentedString(node)).append("\n");
     sb.append("    range: ").append(toIndentedString(range)).append("\n");
-    sb.append("    var: ").append(toIndentedString(var)).append("\n");
     sb.append("}");
     return sb.toString();
   }
