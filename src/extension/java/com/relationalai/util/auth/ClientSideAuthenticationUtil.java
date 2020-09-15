@@ -280,7 +280,7 @@ public class ClientSideAuthenticationUtil {
         return keysetHandle;
     }
 
-    public static KeysetHandle getKeysetHandle(File keysetFile) throws Exception {
+    public static KeysetHandle getKeysetHandle(File keysetFile) throws GeneralSecurityException, IOException {
         String json = JsonIterator.deserialize(Files.readAllBytes(keysetFile.toPath())).toString();
         return getKeysetHandle(json);
     }

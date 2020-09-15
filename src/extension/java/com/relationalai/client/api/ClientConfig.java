@@ -1,6 +1,7 @@
 package com.relationalai.client.api;
 
 import com.google.crypto.tink.KeysetHandle;
+import com.relationalai.infra.UnrecognizedRegionException;
 import com.relationalai.infra.config.InfraMetadataConfig;
 import com.relationalai.util.auth.ClientSideAuthenticationUtil;
 import org.ini4j.Ini;
@@ -8,6 +9,7 @@ import org.ini4j.Ini;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class ClientConfig {
     public static final String AWS_DEFAULT_HOST = "aws.relationalai.com";
@@ -44,9 +46,15 @@ public class ClientConfig {
         setPort(infraPortStr);
     }
 
-    public static ClientConfig loadConfig(File configDir, String profileName) throws Exception {
+    public static ClientConfig loadConfig()
+            throws IOException, UnrecognizedRegionException, GeneralSecurityException {
+        return loadConfig(getDefaultConfigDir(), ClientConfig.DEFAULT_PROFILE_NAME);
+    }
+
+    public static ClientConfig loadConfig(File configDir, String profileName)
+            throws IOException, UnrecognizedRegionException, GeneralSecurityException {
         if (!configDir.isDirectory()) {
-            throw new Exception(configDir + " is not a directory");
+            throw new IOException(configDir + " is not a directory");
         }
 
         File raiConfigFile = new File(configDir, CONFIG_FILE_NAME);

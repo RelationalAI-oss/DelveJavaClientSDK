@@ -22,7 +22,7 @@ import org.junit.Test;
 public class LocalIntegrationTests {
 
     private final static String DATABSE_NAME = "testdb";
-    private final static DelveClient api = new DelveClient(DATABSE_NAME);
+    private final static DelveClient api = new DelveClient(new LocalConnection(DATABSE_NAME));
 
     /**
      * Issues a transaction to be executed

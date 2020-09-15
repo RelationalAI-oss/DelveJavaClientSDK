@@ -35,7 +35,7 @@ public class CloudIntegrationTests {
         try {
             api = new DelveClient(new CloudConnection(
                     DATABSE_NAME, DEFAULT_OPEN_MODE, DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT,
-                    ClientConfig.loadConfig(ClientConfig.getConfigDir(ClientConfig.getDefaultConfigDir()), ClientConfig.DEFAULT_PROFILE_NAME),
+                    Connection.DEFAULT_INFRA, Connection.DEFAULT_REGION, ClientConfig.loadConfig(),
                     DEFAULT_VERIFY_SSL, DEFAULT_COMPUTE_NAME
             ));
         } catch (Exception e) {

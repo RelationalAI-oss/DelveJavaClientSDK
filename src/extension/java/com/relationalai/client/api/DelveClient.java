@@ -61,14 +61,6 @@ public class DelveClient extends DefaultApi {
     Connection conn;
     String service;
 
-    public DelveClient(String dbname) {
-        this(dbname, DEFAULT_SERVICE);
-    }
-
-    public DelveClient(String dbname, String service) {
-        this(new Connection(dbname), service);
-    }
-
     public DelveClient(Connection conn) {
         this(conn, DEFAULT_SERVICE);
     }
@@ -127,7 +119,7 @@ public class DelveClient extends DefaultApi {
         }
 
         if (conn instanceof CloudConnection) {
-            localVarQueryParams.add(new Pair("dbname", conn.getDbname()));
+            localVarQueryParams.add(new Pair("dbname", conn.getDbName()));
             localVarQueryParams.add(new Pair("open_mode", transaction.getMode().toString()));
             localVarQueryParams.add(new Pair("readonly", transaction.getReadonly() ? "true" : "false"));
             localVarQueryParams.add(new Pair("empty", transaction.getActions() == null || transaction.getActions().isEmpty() ? "true" : "false"));
@@ -149,13 +141,16 @@ public class DelveClient extends DefaultApi {
 
         Request request = localVarApiClient.buildRequest(DEFAULT_SERVICE_PATH, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
 
-        ClientConfig clientConf = conn.getClientConfig();
+        // Do not sign requests on the LocalConnection
+        if( conn instanceof ManagementConnection || conn instanceof CloudConnection) {
+            ClientConfig clientConf = conn.getClientConfig();
 
-        if (clientConf != null) {
-            try {
-                request = Http2Client.signRequest(request, clientConf.getAccessKey(), clientConf.getRegionName(), clientConf.getPrivateKeysetHandle(), service);
-            } catch (Exception e) {
-                throw new ApiException(e);
+            if (clientConf != null) {
+                try {
+                    request = Http2Client.signRequest(request, clientConf.getAccessKey(), clientConf.getRegionName(), clientConf.getPrivateKeysetHandle(), service);
+                } catch (Exception e) {
+                    throw new ApiException(e);
+                }
             }
         }
 
@@ -165,7 +160,7 @@ public class DelveClient extends DefaultApi {
     public ActionResult run_action(Connection conn, String name, Action action) throws ApiException {
         Transaction xact = new Transaction();
         xact.setMode(Transaction.ModeEnum.OPEN);
-        xact.setDbname(conn.getDbname());
+        xact.setDbname(conn.getDbName());
 
         LabeledAction labeledAction = new LabeledAction();
         labeledAction.setName(name);
@@ -188,7 +183,7 @@ public class DelveClient extends DefaultApi {
     public boolean create_database(Connection conn, boolean overwrite) throws ApiException {
         Transaction xact = new Transaction();
         xact.setMode(overwrite ? Transaction.ModeEnum.CREATE_OVERWRITE : Transaction.ModeEnum.CREATE);
-        xact.setDbname(conn.getDbname());
+        xact.setDbname(conn.getDbName());
         xact.setActions(Collections.emptyList());
 
         TransactionResult response = this.transactionPost(xact);
