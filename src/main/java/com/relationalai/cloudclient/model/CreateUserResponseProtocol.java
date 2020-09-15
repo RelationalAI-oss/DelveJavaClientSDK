@@ -34,9 +34,9 @@ public class CreateUserResponseProtocol {
   @SerializedName(SERIALIZED_NAME_USER)
   private UserInfoProtocol user;
 
-  public static final String SERIALIZED_NAME_PRIVATE_KEY = "private_key"; //pragma: allowlist secret
+  public static final String SERIALIZED_NAME_PRIVATE_KEY = "private_key";
   @SerializedName(SERIALIZED_NAME_PRIVATE_KEY)
-  private String privateKey; //pragma: allowlist secret
+  private String privateKey;
 
 
   public CreateUserResponseProtocol user(UserInfoProtocol user) {
