@@ -20,17 +20,20 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.ActionResult;
+import com.relationalai.client.model.AbstractProblem;
+import com.relationalai.client.model.ArityMismatchError;
+import com.relationalai.client.model.ComparisonChainError;
+import com.relationalai.client.model.UndefinedError;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * LoadDataActionResult
+ * FrontProblem
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class LoadDataActionResult extends ActionResult {
-  public LoadDataActionResult() {
+public class FrontProblem extends AbstractProblem {
+  public FrontProblem() {
     this.type = this.getClass().getSimpleName();
   }
 
@@ -54,7 +57,7 @@ public class LoadDataActionResult extends ActionResult {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class LoadDataActionResult {\n");
+    sb.append("class FrontProblem {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("}");
     return sb.toString();

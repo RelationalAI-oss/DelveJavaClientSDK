@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.relational.ai/terms/
   title: Delve Client SDK
-  version: 1.0.0
+  version: 1.0.1
 servers:
 - url: http://127.0.0.1:8010
 paths:
@@ -509,6 +509,107 @@ components:
       required:
       - exception
       type: object
+    FrontProblem:
+      allOf:
+      - $ref: '#/components/schemas/AbstractProblem'
+      type: object
+    Point:
+      properties:
+        column:
+          default: 0
+          type: integer
+        row:
+          default: 0
+          type: integer
+        type:
+          default: Point
+          enum:
+          - Point
+          type: string
+      required:
+      - column
+      - row
+      - type
+      type: object
+    Area:
+      properties:
+        end_point:
+          $ref: '#/components/schemas/Point'
+        start_point:
+          $ref: '#/components/schemas/Point'
+        type:
+          default: Area
+          enum:
+          - Area
+          type: string
+      required:
+      - end_point
+      - start_point
+      - type
+      type: object
+    Range:
+      properties:
+        area:
+          $ref: '#/components/schemas/Area'
+        end_byte:
+          default: 0
+          type: integer
+        input: {}
+        start_byte:
+          default: 0
+          type: integer
+        type:
+          default: Range
+          enum:
+          - Range
+          type: string
+      required:
+      - area
+      - end_byte
+      - start_byte
+      - type
+      type: object
+    ArityMismatchError:
+      allOf:
+      - $ref: '#/components/schemas/FrontProblem'
+      properties:
+        msg:
+          default: ""
+          type: string
+        node: {}
+        range:
+          $ref: '#/components/schemas/Range'
+      required:
+      - msg
+      - range
+      type: object
+    ComparisonChainError:
+      allOf:
+      - $ref: '#/components/schemas/FrontProblem'
+      properties:
+        msg:
+          default: ""
+          type: string
+        node: {}
+        range:
+          $ref: '#/components/schemas/Range'
+      required:
+      - msg
+      - range
+      type: object
+    UndefinedError:
+      allOf:
+      - $ref: '#/components/schemas/FrontProblem'
+      properties:
+        range:
+          $ref: '#/components/schemas/Range'
+        var:
+          default: ""
+          type: string
+      required:
+      - range
+      - var
+      type: object
     IntegrityConstraintProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
@@ -584,62 +685,6 @@ components:
           default: ""
           type: string
       required:
-      - type
-      type: object
-    Point:
-      properties:
-        column:
-          default: 0
-          type: integer
-        row:
-          default: 0
-          type: integer
-        type:
-          default: Point
-          enum:
-          - Point
-          type: string
-      required:
-      - column
-      - row
-      - type
-      type: object
-    Area:
-      properties:
-        end_point:
-          $ref: '#/components/schemas/Point'
-        start_point:
-          $ref: '#/components/schemas/Point'
-        type:
-          default: Area
-          enum:
-          - Area
-          type: string
-      required:
-      - end_point
-      - start_point
-      - type
-      type: object
-    Range:
-      properties:
-        area:
-          $ref: '#/components/schemas/Area'
-        end_byte:
-          default: 0
-          type: integer
-        input: {}
-        start_byte:
-          default: 0
-          type: integer
-        type:
-          default: Range
-          enum:
-          - Range
-          type: string
-      required:
-      - area
-      - end_byte
-      - start_byte
       - type
       type: object
     Appl:
@@ -737,19 +782,6 @@ components:
       required:
       - node
       - trace
-      type: object
-    UndefinedError:
-      allOf:
-      - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        range:
-          $ref: '#/components/schemas/Range'
-        var:
-          default: ""
-          type: string
-      required:
-      - range
-      - var
       type: object
     WorkspaceLoadProblem:
       allOf:
@@ -894,7 +926,7 @@ components:
           default: ""
           type: string
         debug_level:
-          default: 0
+          nullable: true
           type: integer
         mode:
           default: OPEN
@@ -904,6 +936,7 @@ components:
           - CREATE_OVERWRITE
           - OPEN_OR_CREATE
           - BRANCH
+          - BRANCH_OVERWRITE
           type: string
         readonly:
           default: false
@@ -919,7 +952,6 @@ components:
       required:
       - abort
       - dbname
-      - debug_level
       - mode
       - readonly
       - type
@@ -1004,7 +1036,7 @@ components:
           nullable: true
           type: array
         debug_level:
-          default: 0
+          nullable: true
           type: integer
         output:
           items:
@@ -1023,7 +1055,6 @@ components:
           type: string
       required:
       - aborted
-      - debug_level
       - type
       type: object
 

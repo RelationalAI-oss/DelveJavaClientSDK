@@ -1,7 +1,7 @@
 # openapi-java-client
 
 Delve Client SDK
-- API version: 1.0.0
+- API version: 1.0.1
 
 This is a Client SDK for Delve API
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.relationalai</groupId>
   <artifactId>openapi-java-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.relationalai:openapi-java-client:1.0.0"
+compile "com.relationalai:openapi-java-client:1.0.1"
 ```
 
 ### Others
@@ -63,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-java-client-1.0.0.jar`
+* `target/openapi-java-client-1.0.1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -117,6 +117,7 @@ Class | Method | HTTP request | Description
  - [ActionResult](docs/ActionResult.md)
  - [Appl](docs/Appl.md)
  - [Area](docs/Area.md)
+ - [ArityMismatchError](docs/ArityMismatchError.md)
  - [CSVFileSchema](docs/CSVFileSchema.md)
  - [CSVFileSyntax](docs/CSVFileSyntax.md)
  - [CardinalityAction](docs/CardinalityAction.md)
@@ -124,10 +125,12 @@ Class | Method | HTTP request | Description
  - [ClientProblem](docs/ClientProblem.md)
  - [CollectProblemsAction](docs/CollectProblemsAction.md)
  - [CollectProblemsActionResult](docs/CollectProblemsActionResult.md)
+ - [ComparisonChainError](docs/ComparisonChainError.md)
  - [Cons](docs/Cons.md)
  - [ExceptionProblem](docs/ExceptionProblem.md)
  - [FileSchema](docs/FileSchema.md)
  - [FileSyntax](docs/FileSyntax.md)
+ - [FrontProblem](docs/FrontProblem.md)
  - [ICViolation](docs/ICViolation.md)
  - [ImportAction](docs/ImportAction.md)
  - [ImportActionResult](docs/ImportActionResult.md)
