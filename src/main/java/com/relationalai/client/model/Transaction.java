@@ -46,7 +46,7 @@ public class Transaction {
 
   public static final String SERIALIZED_NAME_DEBUG_LEVEL = "debug_level";
   @SerializedName(SERIALIZED_NAME_DEBUG_LEVEL)
-  private Integer debugLevel = 0;
+  private Integer debugLevel;
 
   /**
    * Gets or Sets mode
@@ -250,7 +250,8 @@ public class Transaction {
    * Get debugLevel
    * @return debugLevel
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
   public Integer getDebugLevel() {
     return debugLevel;

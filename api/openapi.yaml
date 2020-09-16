@@ -926,7 +926,7 @@ components:
           default: ""
           type: string
         debug_level:
-          default: 0
+          nullable: true
           type: integer
         mode:
           default: OPEN
@@ -952,7 +952,6 @@ components:
       required:
       - abort
       - dbname
-      - debug_level
       - mode
       - readonly
       - type
@@ -1037,7 +1036,7 @@ components:
           nullable: true
           type: array
         debug_level:
-          default: 0
+          nullable: true
           type: integer
         output:
           items:
@@ -1056,7 +1055,6 @@ components:
           type: string
       required:
       - aborted
-      - debug_level
       - type
       type: object
 
