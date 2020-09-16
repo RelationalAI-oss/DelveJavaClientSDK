@@ -20,58 +20,56 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AbstractProblem;
-import com.relationalai.client.model.LinkedList;
-import com.relationalai.client.model.SyntaxNode;
+import com.relationalai.client.model.FrontProblem;
+import com.relationalai.client.model.Range;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * SyntaxError
+ * ArityMismatchError
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class SyntaxError extends AbstractProblem {
-  public static final String SERIALIZED_NAME_NEXT = "next";
-  @SerializedName(SERIALIZED_NAME_NEXT)
-  private SyntaxNode next;
+public class ArityMismatchError extends FrontProblem {
+  public static final String SERIALIZED_NAME_MSG = "msg";
+  @SerializedName(SERIALIZED_NAME_MSG)
+  private String msg = "";
 
   public static final String SERIALIZED_NAME_NODE = "node";
   @SerializedName(SERIALIZED_NAME_NODE)
-  private SyntaxNode node;
+  private Object node = null;
 
-  public static final String SERIALIZED_NAME_TRACE = "trace";
-  @SerializedName(SERIALIZED_NAME_TRACE)
-  private LinkedList trace;
+  public static final String SERIALIZED_NAME_RANGE = "range";
+  @SerializedName(SERIALIZED_NAME_RANGE)
+  private Range range;
 
-  public SyntaxError() {
+  public ArityMismatchError() {
     this.type = this.getClass().getSimpleName();
   }
 
-  public SyntaxError next(SyntaxNode next) {
+  public ArityMismatchError msg(String msg) {
     
-    this.next = next;
+    this.msg = msg;
     return this;
   }
 
    /**
-   * Get next
-   * @return next
+   * Get msg
+   * @return msg
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
-  public SyntaxNode getNext() {
-    return next;
+  public String getMsg() {
+    return msg;
   }
 
 
-  public void setNext(SyntaxNode next) {
-    this.next = next;
+  public void setMsg(String msg) {
+    this.msg = msg;
   }
 
 
-  public SyntaxError node(SyntaxNode node) {
+  public ArityMismatchError node(Object node) {
     
     this.node = node;
     return this;
@@ -81,37 +79,38 @@ public class SyntaxError extends AbstractProblem {
    * Get node
    * @return node
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
-  public SyntaxNode getNode() {
+  public Object getNode() {
     return node;
   }
 
 
-  public void setNode(SyntaxNode node) {
+  public void setNode(Object node) {
     this.node = node;
   }
 
 
-  public SyntaxError trace(LinkedList trace) {
+  public ArityMismatchError range(Range range) {
     
-    this.trace = trace;
+    this.range = range;
     return this;
   }
 
    /**
-   * Get trace
-   * @return trace
+   * Get range
+   * @return range
   **/
   @ApiModelProperty(required = true, value = "")
 
-  public LinkedList getTrace() {
-    return trace;
+  public Range getRange() {
+    return range;
   }
 
 
-  public void setTrace(LinkedList trace) {
-    this.trace = trace;
+  public void setRange(Range range) {
+    this.range = range;
   }
 
 
@@ -123,27 +122,27 @@ public class SyntaxError extends AbstractProblem {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SyntaxError syntaxError = (SyntaxError) o;
-    return Objects.equals(this.next, syntaxError.next) &&
-        Objects.equals(this.node, syntaxError.node) &&
-        Objects.equals(this.trace, syntaxError.trace) &&
+    ArityMismatchError arityMismatchError = (ArityMismatchError) o;
+    return Objects.equals(this.msg, arityMismatchError.msg) &&
+        Objects.equals(this.node, arityMismatchError.node) &&
+        Objects.equals(this.range, arityMismatchError.range) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(next, node, trace, super.hashCode());
+    return Objects.hash(msg, node, range, super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SyntaxError {\n");
+    sb.append("class ArityMismatchError {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    next: ").append(toIndentedString(next)).append("\n");
+    sb.append("    msg: ").append(toIndentedString(msg)).append("\n");
     sb.append("    node: ").append(toIndentedString(node)).append("\n");
-    sb.append("    trace: ").append(toIndentedString(trace)).append("\n");
+    sb.append("    range: ").append(toIndentedString(range)).append("\n");
     sb.append("}");
     return sb.toString();
   }

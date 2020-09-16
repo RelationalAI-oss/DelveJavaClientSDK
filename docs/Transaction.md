@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **abort** | **Boolean** |  | 
 **actions** | [**List&lt;LabeledAction&gt;**](LabeledAction.md) |  |  [optional]
 **dbname** | **String** |  | 
-**debugLevel** | **Integer** |  | 
+**debugLevel** | **Integer** |  |  [optional]
 **mode** | [**ModeEnum**](#ModeEnum) |  | 
 **readonly** | **Boolean** |  | 
 **sourceDbname** | **String** |  |  [optional]
@@ -26,6 +26,7 @@ CREATE | &quot;CREATE&quot;
 CREATE_OVERWRITE | &quot;CREATE_OVERWRITE&quot;
 OPEN_OR_CREATE | &quot;OPEN_OR_CREATE&quot;
 BRANCH | &quot;BRANCH&quot;
+BRANCH_OVERWRITE | &quot;BRANCH_OVERWRITE&quot;
 
 
 
