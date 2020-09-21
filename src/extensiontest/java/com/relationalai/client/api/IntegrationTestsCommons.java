@@ -17,6 +17,8 @@ import com.relationalai.client.ApiException;
 import com.relationalai.client.model.QueryActionResult;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static com.relationalai.test.ExtendedTestCase.*;
 
 /**
@@ -30,14 +32,14 @@ public class IntegrationTestsCommons {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public static void transactionPostTest(DelveClient api) throws ApiException {
+    public static void transactionPostTest(DelveClient api) throws ApiException, IOException {
         Connection conn = api.getConn();
-        assertTrue( api.create_database(conn, true) );
-        assertThrows( RuntimeException.class, () -> api.create_database(conn, false) );
+        assertTrue( api.createDatabase(true) );
+        assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
 
 
-        assertNotNull( api.install_source(conn, "name", "name", "def foo = 1") );
-        QueryActionResult queryRes = api.query(conn, "name", "name", "def bar = 2", "bar");
+        assertNotNull( api.installSource("name", "name", "def foo = 1") );
+        QueryActionResult queryRes = api.query("name", "name", "def bar = 2", "bar");
         assertNotNull( queryRes );
         System.out.println(queryRes);
     }

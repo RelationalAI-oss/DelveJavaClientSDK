@@ -16,6 +16,9 @@ public abstract class Connection {
     private String host;
     private int port;
 
+    protected DelveClient client;
+    protected DelveCloudClient cloudClient;
+
     public Connection(Connection conn) {
         this.scheme = conn.scheme;
         this.host = conn.host;
@@ -85,5 +88,18 @@ public abstract class Connection {
 
     public int getDebugLevel() {
         return DEFAULT_DEBUG_LEVEL;
+    }
+
+    public DelveClient getClient() { return client; }
+
+    public DelveCloudClient getCloudClient() { return cloudClient; }
+
+    public void setClient(DelveClient client) { this.client = client; }
+
+    public void setCloudClient(DelveCloudClient cloudClient) { this.cloudClient = cloudClient; }
+
+    public void setConnectionOnClient() {
+        if (client != null) client.setConn(this);
+        if (cloudClient != null) cloudClient.setConn(this);
     }
 }

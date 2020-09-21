@@ -9,10 +9,15 @@ import com.relationalai.util.RaiLogger;
 import com.relationalai.util.http.Http2Client;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import javax.net.ssl.*;
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -157,10 +162,11 @@ public class DelveClient extends DefaultApi {
         return localVarApiClient.getHttpClient().newCall(request);
     }
 
-    public ActionResult run_action(Connection conn, String name, Action action) throws ApiException {
+    public ActionResult runAction(Connection conn, String name, Action action, boolean isReadOnly, Transaction.ModeEnum mode) throws ApiException {
         Transaction xact = new Transaction();
-        xact.setMode(Transaction.ModeEnum.OPEN);
+        xact.setMode(mode);
         xact.setDbname(conn.getDbName());
+        xact.setReadonly(isReadOnly);
 
         LabeledAction labeledAction = new LabeledAction();
         labeledAction.setName(name);
@@ -180,7 +186,11 @@ public class DelveClient extends DefaultApi {
         return null;
     }
 
-    public boolean create_database(Connection conn, boolean overwrite) throws ApiException {
+    public ActionResult runAction(Connection conn, String name, Action action) throws ApiException {
+        return runAction(conn, name, action, false, Transaction.ModeEnum.OPEN);
+    }
+
+    public boolean createDatabase(boolean overwrite) throws ApiException {
         Transaction xact = new Transaction();
         xact.setMode(overwrite ? Transaction.ModeEnum.CREATE_OVERWRITE : Transaction.ModeEnum.CREATE);
         xact.setDbname(conn.getDbName());
@@ -195,30 +205,312 @@ public class DelveClient extends DefaultApi {
         return !response.getAborted();
     }
 
-    public InstallActionResult install_source(Connection conn, String name, String path, String src_str) throws ApiException {
-        Source src = new Source();
-        src.setName(name);
-        src.setPath(path);
-        src.setValue(src_str);
+    public boolean branchDatabase(String sourceName) throws ApiException {
+        Transaction xact = new Transaction();
+        xact.setMode(Transaction.ModeEnum.BRANCH);
+        xact.setDbname(conn.getDbName());
+        xact.setActions(new ArrayList<LabeledAction>());
+        xact.setSourceDbname(sourceName);
+        xact.setReadonly(false);
+        TransactionResult response = this.transactionPost(xact);
 
-        InstallAction action = new InstallAction();
-        action.addSourcesItem(src);
+        if(!response.getProblems().isEmpty()) {
+            throw new RuntimeException(response.getProblems().toString());
+        }
 
-        return (InstallActionResult) run_action(conn, "single", action);
+        return !response.getAborted();
     }
 
-    public QueryActionResult query(Connection conn, String name, String path, String src_str, String out) throws ApiException {
+    public boolean installSource(String name, String path, String srcStr) throws ApiException, IOException {
+        Source src = new Source();
+        src.setName(name);
+        src.setPath(path);
+        src.setValue(srcStr);
+
+        return installSource(src);
+    }
+
+    public boolean installSource(Source src) throws IOException, ApiException {
+        return installSource(Arrays.asList(src));
+    }
+
+    public boolean installSource(List<Source> srcList) throws ApiException, IOException {
+        InstallAction action = new InstallAction();
+        for(Source src : srcList) {
+            _readFileFromPath(src);
+        }
+        action.setSources(srcList);
+        return runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN) != null;
+    }
+
+    public QueryActionResult query(
+            Source src,
+            List<Relation> inputs,
+            List<String> outputs,
+            List<String> persist,
+            boolean isReadOnly,
+            Transaction.ModeEnum mode
+    ) throws ApiException {
+        if (src == null) {
+            src = new Source();
+            src.setName("");
+            src.setPath("");
+            src.setValue("");
+        }
+        if (inputs == null)
+            inputs = new ArrayList<Relation>();
+        if (outputs == null)
+            outputs = new ArrayList<String>();
+        if (persist == null)
+            persist = new ArrayList<String>();
+
+        QueryAction action = new QueryAction();
+        action.setInputs(inputs);
+        action.setSource(src);
+        action.setOutputs(outputs);
+        action.setPersist(persist);
+
+        return (QueryActionResult) runAction(conn, "single", action, isReadOnly, mode);
+    }
+
+    public QueryActionResult query(
+            String name,
+            String path,
+            String srcStr,
+            List<Relation> inputs,
+            List<String> outputs,
+            List<String> persist,
+            boolean isReadOnly,
+            Transaction.ModeEnum mode
+    ) throws ApiException {
+        if (path == null) path = name;
+        Source src = new Source();
+        src.setName(name);
+        src.setPath(path);
+        src.setValue(srcStr);
+        return query(src, inputs, outputs, persist, isReadOnly, mode);
+    }
+
+    public QueryActionResult query(String name, String path, String src_str, String out) throws ApiException {
         Source src = new Source();
         src.setName(name);
         src.setPath(path);
         src.setValue(src_str);
 
-        QueryAction action = new QueryAction();
-        action.setSource(src);
-        action.addOutputsItem(out);
-        action.setInputs(new ArrayList<Relation>());
-        action.setPersist(new ArrayList<String>());
+        return query(src, new ArrayList<Relation>(), Arrays.asList(out), new ArrayList<>(), false, Transaction.ModeEnum.OPEN);
+    }
 
-        return (QueryActionResult) run_action(conn, "single", action);
+    public boolean deleteSource(List<String> scrNameList) throws ApiException {
+        ModifyWorkspaceAction action = new ModifyWorkspaceAction();
+        action.setDeleteSource(scrNameList);
+
+        return runAction(conn, "single", action) != null;
+    }
+
+    public boolean deleteSource(String srcName) throws ApiException {
+        return deleteSource(Arrays.asList(srcName));
+    }
+
+    public Map<String, Source> listSource() throws ApiException {
+        ListSourceAction action = new ListSourceAction();
+        ListSourceActionResult actionRes = (ListSourceActionResult) runAction(conn, "single", action);
+
+        Map resultDict = new HashMap<String, Source>();
+        for(Source src : actionRes.getSources()) {
+            resultDict.put(src.getName(), src);
+        }
+
+        return resultDict;
+    }
+
+    // TODO
+    public void updateEdb(){}
+
+    public LoadData jsonString(String data, Object key, FileSyntax syntax, FileSchema schema) {
+        LoadData loadData = new LoadData();
+        loadData.setData(data);
+        loadData.setContentType(JSON_CONTENT_TYPE);
+        loadData.setKey(key);
+        loadData.setFileSyntax(syntax);
+        loadData.setFileSchema(schema);
+
+        return loadData;
+    }
+
+    public LoadData jsonFile(String filePath, Object key, FileSyntax syntax, FileSchema schema) {
+        LoadData loadData = new LoadData();
+        loadData.setPath(filePath);
+        loadData.setContentType(JSON_CONTENT_TYPE);
+        loadData.setKey(key);
+        loadData.setFileSyntax(syntax);
+        loadData.setFileSchema(schema);
+
+        return loadData;
+    }
+
+    public LoadData csvString(String data, Object key, FileSyntax syntax, FileSchema schema) {
+        LoadData loadData = new LoadData();
+        loadData.setData(data);
+        loadData.setContentType(CSV_CONTENT_TYPE);
+        loadData.setKey(key);
+        loadData.setFileSyntax(syntax);
+        loadData.setFileSchema(schema);
+
+        return loadData;
+    }
+
+    public LoadData csvFile(String filePath, Object key, FileSyntax syntax, FileSchema schema) {
+        LoadData loadData = new LoadData();
+        loadData.setPath(filePath);
+        loadData.setContentType(CSV_CONTENT_TYPE);
+        loadData.setKey(key);
+        loadData.setFileSyntax(syntax);
+        loadData.setFileSchema(schema);
+
+        return loadData;
+    }
+
+    private void _handleNullFieldsForLoadData(LoadData loadData) {
+        if (!StringUtils.isEmpty(loadData.getData()) && !StringUtils.isEmpty(loadData.getPath())) {
+            String message = String.format(
+                    "Either `Path` or `Data` should be specified for `LoadData`." +
+                    "You have provided both: `Path`=%s and `Data`=%s", loadData.getPath(), loadData.getData());
+            throw new IllegalArgumentException(message);
+        }
+
+        if (StringUtils.isEmpty(loadData.getPath()) && StringUtils.isEmpty(loadData.getData())) {
+            throw new IllegalArgumentException("Either `Path` or `Data` is required.");
+        }
+
+        if (StringUtils.isEmpty(loadData.getContentType())) {
+            throw new IllegalArgumentException("`ContentType` is required.");
+        }
+
+        if (!loadData.getContentType().startsWith(JSON_CONTENT_TYPE) && !loadData.getContentType().startsWith(CSV_CONTENT_TYPE)) {
+            throw new IllegalArgumentException(String.format("`ContentType`=%s is not supported.", loadData.getContentType()));
+        }
+    }
+
+    private void _readFileFromPath(LoadData loadData) throws IOException {
+        if (!StringUtils.isEmpty(loadData.getPath()) && StringUtils.isEmpty(loadData.getData())) {
+            Path filePath = Paths.get(loadData.getPath());
+            if (Files.exists(filePath)) {
+                loadData.setData(Files.readString(filePath));
+                loadData.setPath(null);
+            }
+        }
+    }
+
+    private void _readFileFromPath(Source src) throws IOException {
+        if (!StringUtils.isEmpty(src.getPath())) {
+            Path filePath = Paths.get(src.getPath());
+            if (StringUtils.isEmpty(src.getName())) {
+                src.setName(filePath.getFileName().toString());
+            }
+            if (StringUtils.isEmpty(src.getValue()) && Files.exists(filePath)) {
+                src.setValue(Files.readString(filePath));
+            }
+        }
+    }
+
+    public boolean loadEdb(String rel, LoadData value) throws IOException, ApiException {
+        _handleNullFieldsForLoadData(value);
+        _readFileFromPath(value);
+        LoadDataAction action = new LoadDataAction();
+        action.setRel(rel);
+        action.setValue(value);
+
+        return runAction(conn, "single", action) != null;
+    }
+
+    public boolean loadEdb(
+            String rel,
+            String contentType,
+            String data,
+            String path,
+            Object key,
+            FileSyntax syntax,
+            FileSchema schema
+    ) throws IOException, ApiException {
+        if (key == null) key = new ArrayList();
+
+        LoadData loadData = new LoadData();
+        loadData.setContentType(contentType);
+        loadData.setData(data);
+        loadData.setPath(path);
+        loadData.setKey(key);
+        loadData.setFileSyntax(syntax);
+        loadData.setFileSchema(schema);
+
+        return loadEdb(rel, loadData);
+    }
+
+    public boolean loadCSV(
+            String rel,
+            String data,
+            String path,
+            Object key,
+            FileSyntax syntax,
+            FileSchema schema
+    ) throws IOException, ApiException {
+        return loadEdb(rel, CSV_CONTENT_TYPE, data, path, key, syntax, schema);
+    }
+
+    public boolean loadJSON(
+            String rel,
+            String data,
+            String path,
+            Object key
+    ) throws IOException, ApiException {
+        return loadEdb(rel, JSON_CONTENT_TYPE, data, path, key, new JSONFileSyntax(), new JSONFileSchema());
+    }
+
+    public List<RelKey> listEdb(String relName) throws ApiException {
+        ListEdbAction action = new ListEdbAction();
+        if (relName != null) action.setRelname(relName);
+        ListEdbActionResult actionRes = (ListEdbActionResult) runAction(conn, "single", action);
+        return actionRes.getRels();
+    }
+
+    public List<RelKey> deleteEdb(String relName) throws ApiException {
+        ModifyWorkspaceAction action = new ModifyWorkspaceAction();
+        action.setDeleteEdb(relName);
+        ModifyWorkspaceActionResult actionRes = (ModifyWorkspaceActionResult) runAction(conn, "single", action);
+        return actionRes.getDeleteEdbResult();
+    }
+
+    public boolean enableLibrary(String srcName) throws ApiException {
+        ModifyWorkspaceAction action = new ModifyWorkspaceAction();
+        action.setEnableLibrary(srcName);
+        return runAction(conn, "single", action) != null;
+    }
+
+    public List<Relation> cardinality(String relName) throws ApiException {
+        CardinalityAction action = new CardinalityAction();
+        if (relName != null) action.setRelname(relName);
+        return ((CardinalityActionResult) runAction(conn, "single", action)).getResult();
+    }
+
+    public List<AbstractProblem> collectProblems(String relName) throws ApiException {
+        CardinalityAction action = new CardinalityAction();
+        if (relName != null) action.setRelname(relName);
+        CollectProblemsActionResult actionRes = (CollectProblemsActionResult) runAction(conn, "single", action);
+        return actionRes.getProblems();
+    }
+
+    public boolean configure(
+            boolean debug,
+            boolean debugTrace,
+            boolean broken,
+            boolean silent,
+            boolean abortOnError
+    ) throws ApiException {
+        SetOptionsAction action = new SetOptionsAction();
+        action.setDebug(debug);
+        action.setDebugTrace(debugTrace);
+        action.setBroken(broken);
+        action.setSilent(silent);
+        action.setAbortOnError(abortOnError);
+        return runAction(conn, "single", action) != null;
     }
 }
