@@ -16,13 +16,15 @@ package com.relationalai.client.api;
 import com.relationalai.client.ApiException;
 import org.junit.Test;
 
+import java.io.IOException;
+
 /**
  * API tests for DefaultApi
  */
 public class LocalIntegrationTests {
 
     private final static String DATABSE_NAME = "testdb";
-    private final static DelveClient api = new DelveClient(new LocalConnection(DATABSE_NAME));
+    private final static LocalConnection api = new LocalConnection(DATABSE_NAME);
 
     /**
      * Issues a transaction to be executed
@@ -30,9 +32,8 @@ public class LocalIntegrationTests {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void transactionPostTest() throws ApiException {
-
-        IntegrationTestsCommons.transactionPostTest(api);
+    public void transactionPostTest() throws ApiException, IOException {
+        IntegrationTestsCommons.transactionPostLocalTest(api);
     }
 
 

@@ -15,6 +15,7 @@ public abstract class Connection {
     private String scheme;
     private String host;
     private int port;
+    private int debugLevel;
 
     protected DelveClient client;
     protected DelveCloudClient cloudClient;
@@ -23,19 +24,28 @@ public abstract class Connection {
         this.scheme = conn.scheme;
         this.host = conn.host;
         this.port = conn.port;
+        this.debugLevel = conn.debugLevel;
     }
 
     public Connection() {
-        this(DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT);
+        this(DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT, DEFAULT_DEBUG_LEVEL);
     }
 
     public Connection(
             String scheme,
             String host,
-            int port) {
+            int port
+    ) { this(scheme, host, port, DEFAULT_DEBUG_LEVEL); }
+
+    public Connection(
+            String scheme,
+            String host,
+            int port,
+            int debugLevel) {
         this.scheme = scheme;
         this.host = host;
         this.port = port;
+        this.debugLevel = debugLevel;
     }
 
     public String getDbName() {
@@ -87,8 +97,10 @@ public abstract class Connection {
     }
 
     public int getDebugLevel() {
-        return DEFAULT_DEBUG_LEVEL;
+        return this.debugLevel;
     }
+
+    public void setDebugLevel(int debugLevel) { this.debugLevel = debugLevel; }
 
     public DelveClient getClient() { return client; }
 

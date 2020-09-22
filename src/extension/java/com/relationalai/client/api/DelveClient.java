@@ -4,6 +4,9 @@ import com.relationalai.client.ApiCallback;
 import com.relationalai.client.ApiClient;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.Pair;
+import com.relationalai.client.builder.DataLoader;
+import com.relationalai.client.builder.SourceInstall;
+import com.relationalai.client.builder.Query;
 import com.relationalai.client.model.*;
 import com.relationalai.util.RaiLogger;
 import com.relationalai.util.http.Http2Client;
@@ -71,10 +74,14 @@ public class DelveClient extends DefaultApi {
     }
 
     public DelveClient(Connection conn, String service) {
+        this(conn, service, 100000);
+    }
+    public DelveClient(Connection conn, String service, int connectionTimeOut) {
         super(defaultApiClient);
         this.conn = conn;
         this.service = service;
         ApiClient api = this.getApiClient();
+        api.setConnectTimeout(connectionTimeOut);
         OkHttpClient client = api.getHttpClient();
         if (!conn.isVerifySSL()) {
             LOGGER.warn("Using the trustAllSslClient is highly discouraged and should not be used in Production!");
@@ -173,7 +180,13 @@ public class DelveClient extends DefaultApi {
         labeledAction.setAction(action);
         xact.addActionsItem(labeledAction);
 
+        if (conn.getDebugLevel() > 0)
+            System.out.println("=> Transaction: " + xact);
+
         TransactionResult response = this.transactionPost(xact);
+
+        if (conn.getDebugLevel() > 0)
+            System.out.println("=> TransactionResult: " + response);
 
         if (!response.getAborted() && response.getProblems().isEmpty()) {
             for (LabeledActionResult act : response.getActions()) {
@@ -221,83 +234,47 @@ public class DelveClient extends DefaultApi {
         return !response.getAborted();
     }
 
-    public boolean installSource(String name, String path, String srcStr) throws ApiException, IOException {
-        Source src = new Source();
-        src.setName(name);
-        src.setPath(path);
-        src.setValue(srcStr);
+    public boolean installSource(SourceInstall sourceInstall) throws ApiException, IOException {
+        if (sourceInstall.getSources() == null) {
+            Source src = new Source();
+            src.setName(sourceInstall.getName() == null ? "" : sourceInstall.getName());
+            src.setPath(sourceInstall.getPath() == null ? "" : sourceInstall.getPath());
+            src.setValue(sourceInstall.getValue() == null ? "" : sourceInstall.getValue());
+            sourceInstall.addSourcesItem(src);
+        }
 
-        return installSource(src);
-    }
-
-    public boolean installSource(Source src) throws IOException, ApiException {
-        return installSource(Arrays.asList(src));
-    }
-
-    public boolean installSource(List<Source> srcList) throws ApiException, IOException {
-        InstallAction action = new InstallAction();
-        for(Source src : srcList) {
+        for (Source src : sourceInstall.getSources()) {
             _readFileFromPath(src);
         }
-        action.setSources(srcList);
+
+        InstallAction action = new InstallAction();
+        action.setSources(sourceInstall.getSources());
+
         return runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
-    public QueryActionResult query(
-            Source src,
-            List<Relation> inputs,
-            List<String> outputs,
-            List<String> persist,
-            boolean isReadOnly,
-            Transaction.ModeEnum mode
-    ) throws ApiException {
-        if (src == null) {
-            src = new Source();
-            src.setName("");
-            src.setPath("");
-            src.setValue("");
+    public QueryActionResult query(Query query) throws ApiException {
+        if (query.getSource() == null) {
+            Source src = new Source();
+            src.setName(query.getName() == null ? "" : query.getName());
+            src.setPath(query.getPath() == null ? "" : query.getPath());
+            src.setValue(query.getValue() == null ? "" : query.getValue());
+            query.setSource(src);
         }
-        if (inputs == null)
-            inputs = new ArrayList<Relation>();
-        if (outputs == null)
-            outputs = new ArrayList<String>();
-        if (persist == null)
-            persist = new ArrayList<String>();
+        if (query.getInputs() == null)
+            query.setInputs(new ArrayList<Relation>());
+        if (query.getOutputs() == null)
+            query.setOutputs(new ArrayList<String>());
+        if (query.getPersist() == null)
+            query.setPersist(new ArrayList<String>());
 
         QueryAction action = new QueryAction();
-        action.setInputs(inputs);
-        action.setSource(src);
-        action.setOutputs(outputs);
-        action.setPersist(persist);
+        action.setSource(query.getSource());
+        action.setInputs(query.getInputs());
+        action.setOutputs(query.getOutputs());
+        action.setPersist(query.getPersist());
 
-        return (QueryActionResult) runAction(conn, "single", action, isReadOnly, mode);
-    }
-
-    public QueryActionResult query(
-            String name,
-            String path,
-            String srcStr,
-            List<Relation> inputs,
-            List<String> outputs,
-            List<String> persist,
-            boolean isReadOnly,
-            Transaction.ModeEnum mode
-    ) throws ApiException {
-        if (path == null) path = name;
-        Source src = new Source();
-        src.setName(name);
-        src.setPath(path);
-        src.setValue(srcStr);
-        return query(src, inputs, outputs, persist, isReadOnly, mode);
-    }
-
-    public QueryActionResult query(String name, String path, String src_str, String out) throws ApiException {
-        Source src = new Source();
-        src.setName(name);
-        src.setPath(path);
-        src.setValue(src_str);
-
-        return query(src, new ArrayList<Relation>(), Arrays.asList(out), new ArrayList<>(), false, Transaction.ModeEnum.OPEN);
+        return (QueryActionResult) runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN);
     }
 
     public boolean deleteSource(List<String> scrNameList) throws ApiException {
@@ -323,49 +300,60 @@ public class DelveClient extends DefaultApi {
         return resultDict;
     }
 
-    // TODO
-    public void updateEdb(){}
+    public boolean updateEdb(
+            RelKey rel,
+            List<PairAnyValueAnyValue> updates,
+            List<PairAnyValueAnyValue> delta
+    ) throws ApiException {
+        UpdateAction action = new UpdateAction();
+        action.setRel(rel);
+        action.setUpdates(updates);
+        action.setDelta(delta);
 
-    public LoadData jsonString(String data, Object key, FileSyntax syntax, FileSchema schema) {
+        return runAction(conn, "single", action) != null;
+    }
+
+    public LoadData jsonString(DataLoader dataLoader) {
         LoadData loadData = new LoadData();
-        loadData.setData(data);
+        loadData.setData(dataLoader.getData());
         loadData.setContentType(JSON_CONTENT_TYPE);
-        loadData.setKey(key);
-        loadData.setFileSyntax(syntax);
-        loadData.setFileSchema(schema);
+        loadData.setKey(dataLoader.getKey());
+        loadData.setFileSyntax(dataLoader.getSyntax());
+        loadData.setFileSchema(dataLoader.getSchema());
 
         return loadData;
     }
 
-    public LoadData jsonFile(String filePath, Object key, FileSyntax syntax, FileSchema schema) {
+    public LoadData jsonFile(DataLoader dataLoader) {
         LoadData loadData = new LoadData();
-        loadData.setPath(filePath);
+
+        loadData.setPath(dataLoader.getPath());
         loadData.setContentType(JSON_CONTENT_TYPE);
-        loadData.setKey(key);
-        loadData.setFileSyntax(syntax);
-        loadData.setFileSchema(schema);
+        loadData.setKey(dataLoader.getKey());
+        loadData.setFileSyntax(dataLoader.getSyntax());
+        loadData.setFileSchema(dataLoader.getSchema());
 
         return loadData;
     }
 
-    public LoadData csvString(String data, Object key, FileSyntax syntax, FileSchema schema) {
+    public LoadData csvString(DataLoader dataLoader) {
         LoadData loadData = new LoadData();
-        loadData.setData(data);
+        loadData.setData(dataLoader.getData());
         loadData.setContentType(CSV_CONTENT_TYPE);
-        loadData.setKey(key);
-        loadData.setFileSyntax(syntax);
-        loadData.setFileSchema(schema);
+        loadData.setKey(dataLoader.getKey());
+        loadData.setFileSyntax(dataLoader.getSyntax());
+        loadData.setFileSchema(dataLoader.getSchema());
 
         return loadData;
     }
 
-    public LoadData csvFile(String filePath, Object key, FileSyntax syntax, FileSchema schema) {
+    public LoadData csvFile(DataLoader dataLoader) {
         LoadData loadData = new LoadData();
-        loadData.setPath(filePath);
+        loadData.setPath(dataLoader.getPath());
         loadData.setContentType(CSV_CONTENT_TYPE);
-        loadData.setKey(key);
-        loadData.setFileSyntax(syntax);
-        loadData.setFileSchema(schema);
+        loadData.setKey(dataLoader.getKey());
+        loadData.setFileSyntax(dataLoader.getSyntax());
+        loadData.setFileSchema(dataLoader.getSchema());
 
         return loadData;
     }
@@ -413,56 +401,35 @@ public class DelveClient extends DefaultApi {
         }
     }
 
-    public boolean loadEdb(String rel, LoadData value) throws IOException, ApiException {
-        _handleNullFieldsForLoadData(value);
-        _readFileFromPath(value);
+    public boolean loadEdb(DataLoader dataLoader) throws IOException, ApiException {
+        String rel = dataLoader.getRel();
+        LoadData loadData = new LoadData();
+        loadData.setContentType(dataLoader.getContentType());
+        loadData.setData(dataLoader.getData());
+        loadData.setPath(dataLoader.getPath());
+        loadData.setKey(dataLoader.getKey() == null ? new ArrayList<>() : dataLoader.getKey());
+        loadData.setFileSyntax(dataLoader.getSyntax());
+        loadData.setFileSchema(dataLoader.getSchema());
+
+        _handleNullFieldsForLoadData(loadData);
+        _readFileFromPath(loadData);
         LoadDataAction action = new LoadDataAction();
         action.setRel(rel);
-        action.setValue(value);
+        action.setValue(loadData);
 
         return runAction(conn, "single", action) != null;
     }
 
-    public boolean loadEdb(
-            String rel,
-            String contentType,
-            String data,
-            String path,
-            Object key,
-            FileSyntax syntax,
-            FileSchema schema
-    ) throws IOException, ApiException {
-        if (key == null) key = new ArrayList();
-
-        LoadData loadData = new LoadData();
-        loadData.setContentType(contentType);
-        loadData.setData(data);
-        loadData.setPath(path);
-        loadData.setKey(key);
-        loadData.setFileSyntax(syntax);
-        loadData.setFileSchema(schema);
-
-        return loadEdb(rel, loadData);
+    public boolean loadCSV(DataLoader dataLoader) throws IOException, ApiException {
+        dataLoader.setContentType(CSV_CONTENT_TYPE);
+        return loadEdb(dataLoader);
     }
 
-    public boolean loadCSV(
-            String rel,
-            String data,
-            String path,
-            Object key,
-            FileSyntax syntax,
-            FileSchema schema
-    ) throws IOException, ApiException {
-        return loadEdb(rel, CSV_CONTENT_TYPE, data, path, key, syntax, schema);
-    }
-
-    public boolean loadJSON(
-            String rel,
-            String data,
-            String path,
-            Object key
-    ) throws IOException, ApiException {
-        return loadEdb(rel, JSON_CONTENT_TYPE, data, path, key, new JSONFileSyntax(), new JSONFileSchema());
+    public boolean loadJSON(DataLoader dataLoader) throws IOException, ApiException {
+        dataLoader.setContentType(JSON_CONTENT_TYPE);
+        dataLoader.setSyntax(new JSONFileSyntax());
+        dataLoader.setSchema(new JSONFileSchema());
+        return loadEdb(dataLoader);
     }
 
     public List<RelKey> listEdb(String relName) throws ApiException {

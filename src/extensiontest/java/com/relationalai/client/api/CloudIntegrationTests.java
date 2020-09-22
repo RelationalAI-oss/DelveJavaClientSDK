@@ -17,6 +17,8 @@ import com.relationalai.client.ApiException;
 import com.relationalai.client.model.Transaction;
 import org.junit.Test;
 
+import java.io.IOException;
+
 /**
  * API tests for DefaultApi
  */
@@ -29,15 +31,15 @@ public class CloudIntegrationTests {
     public final static boolean DEFAULT_VERIFY_SSL = false;
     private final static String DATABSE_NAME = "testclientdb11";
     private final static String DEFAULT_COMPUTE_NAME = DATABSE_NAME;
-    private static DelveClient api = null;
+    private static CloudConnection api = null;
 
     static {
         try {
-            api = new DelveClient(new CloudConnection(
+            api = new CloudConnection(
                     DATABSE_NAME, DEFAULT_OPEN_MODE, DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT,
                     Connection.DEFAULT_INFRA, Connection.DEFAULT_REGION, ClientConfig.loadConfig(),
                     DEFAULT_VERIFY_SSL, DEFAULT_COMPUTE_NAME
-            ));
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,9 +51,8 @@ public class CloudIntegrationTests {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void transactionPostTest() throws ApiException {
-
-        IntegrationTestsCommons.transactionPostTest(api);
+    public void transactionPostTest() throws ApiException, IOException {
+        IntegrationTestsCommons.transactionPostCloudTest(api);
     }
 
 

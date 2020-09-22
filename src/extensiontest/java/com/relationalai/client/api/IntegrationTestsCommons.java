@@ -14,10 +14,12 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
+import com.relationalai.client.builder.Query;
 import com.relationalai.client.model.QueryActionResult;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import static com.relationalai.test.ExtendedTestCase.*;
 
@@ -32,14 +34,36 @@ public class IntegrationTestsCommons {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public static void transactionPostTest(DelveClient api) throws ApiException, IOException {
-        Connection conn = api.getConn();
+    public static void transactionPostLocalTest(LocalConnection api) throws ApiException, IOException {
         assertTrue( api.createDatabase(true) );
         assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
 
+        Query query = Query.builder()
+                .name("name")
+                .path("name")
+                .value("def bar = 2")
+                .outputs(Arrays.asList("bar"))
+                .build();
 
         assertNotNull( api.installSource("name", "name", "def foo = 1") );
-        QueryActionResult queryRes = api.query("name", "name", "def bar = 2", "bar");
+        QueryActionResult queryRes = api.query(query);
+        assertNotNull( queryRes );
+        System.out.println(queryRes);
+    }
+
+    @Test
+    public static void transactionPostCloudTest(CloudConnection api) throws ApiException, IOException {
+        assertTrue( api.createDatabase(true) );
+        assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
+        Query query = Query.builder()
+                .name("name")
+                .path("name")
+                .value("def bar = 2")
+                .outputs(Arrays.asList("bar"))
+                .build();
+
+        assertNotNull( api.installSource("name", "name", "def foo = 1") );
+        QueryActionResult queryRes = api.query(query);
         assertNotNull( queryRes );
         System.out.println(queryRes);
     }
