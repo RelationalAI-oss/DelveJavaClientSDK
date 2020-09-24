@@ -126,7 +126,8 @@ public class ClientSideAuthenticationUtil {
     public static String hashedPayload(Request req) throws NoSuchAlgorithmException, IOException {
         final Request copy = req.newBuilder().build();
         final Buffer buffer = new Buffer();
-        copy.body().writeTo(buffer);
+        if (copy.body() != null)
+            copy.body().writeTo(buffer);
         byte[] reqBytes = buffer.readByteArray();
 
         LOGGER.debug(

@@ -2,7 +2,7 @@ package com.relationalai.client.api;
 
 import com.relationalai.client.model.*;
 import com.relationalai.cloudclient.ApiException;
-import com.relationalai.cloudclient.model.ListComputesResponseProtocol;
+import com.relationalai.cloudclient.model.*;
 import com.relationalai.infra.UnrecognizedRegionException;
 
 import java.io.IOException;
@@ -58,5 +58,29 @@ public class ManagementConnection extends Connection {
     public ListComputesResponseProtocol listComputes() throws ApiException {
         setConnectionOnClient();
         return cloudClient.listComputes();
+    }
+
+    public ListUsersResponseProtocol listUsers() throws ApiException {
+        setConnectionOnClient();
+        return cloudClient.listUsers();
+    }
+
+    public ListDatabasesResponseProtocol listDatabases() throws ApiException {
+        setConnectionOnClient();
+        return cloudClient.listDatabases();
+    }
+
+    public CreateComputeResponseProtocol createCompute(String displayName, String size, String region) throws ApiException{
+        setConnectionOnClient();
+        return cloudClient.createCompute(displayName, size, region);
+    }
+    public CreateUserResponseProtocol createUser(String username) throws ApiException {
+        setConnectionOnClient();
+        return cloudClient.createUser(username);
+    }
+
+    public DeleteComputeResponseProtocol deleteCompute(String computeName) throws ApiException {
+        setConnectionOnClient();
+        return cloudClient.deleteCompute(computeName);
     }
 }

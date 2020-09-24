@@ -26,7 +26,7 @@ import java.security.cert.CertificateException;
 import java.util.*;
 
 public class DelveClient extends DefaultApi {
-    public final static boolean ENABLE_ACCEPT_HEADER = false;
+    public final static boolean ENABLE_ACCEPT_HEADER = true;
     public final static String DEFAULT_SERVICE = "transaction";
     public final static String DEFAULT_SERVICE_PATH = "/" + DEFAULT_SERVICE;
     public final String JSON_CONTENT_TYPE = "application/json";
@@ -129,7 +129,7 @@ public class DelveClient extends DefaultApi {
             }
         }
 
-        if (conn instanceof CloudConnection) {
+        if (conn instanceof LocalConnection) {
             localVarQueryParams.add(new Pair("dbname", conn.getDbName()));
             localVarQueryParams.add(new Pair("open_mode", transaction.getMode().toString()));
             localVarQueryParams.add(new Pair("readonly", transaction.getReadonly() ? "true" : "false"));
