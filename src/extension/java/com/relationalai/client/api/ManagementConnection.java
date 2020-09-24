@@ -1,6 +1,8 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.model.*;
+import com.relationalai.cloudclient.ApiException;
+import com.relationalai.cloudclient.model.ListComputesResponseProtocol;
 import com.relationalai.infra.UnrecognizedRegionException;
 
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class ManagementConnection extends Connection {
         this.region = region;
         this.clientConfig = clientConfig == null ? ClientConfig.loadConfig() : clientConfig;
         this.verifySSL = verifySSL;
+        this.setCloudClient(new DelveCloudClient(this));
     }
 
     @Override
@@ -50,5 +53,10 @@ public class ManagementConnection extends Connection {
     @Override
     public boolean isVerifySSL() {
         return verifySSL;
+    }
+
+    public ListComputesResponseProtocol listComputes() throws ApiException {
+        setConnectionOnClient();
+        return cloudClient.listComputes();
     }
 }

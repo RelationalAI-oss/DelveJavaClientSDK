@@ -14,7 +14,7 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
-import com.relationalai.client.builder.Query;
+import com.relationalai.client.builder.*;
 import com.relationalai.client.model.QueryActionResult;
 import org.junit.Test;
 
@@ -38,6 +38,14 @@ public class IntegrationTestsCommons {
         assertTrue( api.createDatabase(true) );
         assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
 
+        SourceInstall src = SourceInstall.builder()
+                .name("name")
+                .path("")
+                .value("def foo = 1")
+                .build();
+
+        assertNotNull( api.installSource(src) );
+
         Query query = Query.builder()
                 .name("name")
                 .path("name")
@@ -45,16 +53,41 @@ public class IntegrationTestsCommons {
                 .outputs(Arrays.asList("bar"))
                 .build();
 
-        assertNotNull( api.installSource("name", "name", "def foo = 1") );
         QueryActionResult queryRes = api.query(query);
         assertNotNull( queryRes );
         System.out.println(queryRes);
+
+        FileSyntaxCSV syntax = FileSyntaxCSV.builder()
+                .header(Arrays.asList("A", "B", "C"))
+                .delim(",")
+                .build();
+
+        FileSchemaCSV schema = FileSchemaCSV.builder()
+                .types(Arrays.asList("Int64", "Int64", "Int64"))
+                .build();
+
+        DataLoader dataLoader = DataLoader.builder()
+                .rel("csv")
+                .data("A,B,C\n1,2,3\n4,5,6")
+                .syntax(syntax)
+                .schema(schema)
+                .build();
+
+         assertNotNull(api.loadCSV(dataLoader));
     }
 
     @Test
     public static void transactionPostCloudTest(CloudConnection api) throws ApiException, IOException {
         assertTrue( api.createDatabase(true) );
         assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
+
+        SourceInstall src = SourceInstall.builder()
+                .name("name")
+                .path("")
+                .value("def foo = 1")
+                .build();
+        assertNotNull( api.installSource(src) );
+
         Query query = Query.builder()
                 .name("name")
                 .path("name")
@@ -62,10 +95,27 @@ public class IntegrationTestsCommons {
                 .outputs(Arrays.asList("bar"))
                 .build();
 
-        assertNotNull( api.installSource("name", "name", "def foo = 1") );
         QueryActionResult queryRes = api.query(query);
         assertNotNull( queryRes );
         System.out.println(queryRes);
+
+        FileSyntaxCSV syntax = FileSyntaxCSV.builder()
+                .header(Arrays.asList("A", "B", "C"))
+                .delim(",")
+                .build();
+
+        FileSchemaCSV schema = FileSchemaCSV.builder()
+                .types(Arrays.asList("Int64", "Int64", "Int64"))
+                .build();
+
+        DataLoader dataLoader = DataLoader.builder()
+                .rel("csv")
+                .data("A,B,C\n1,2,3\n4,5,6")
+                .syntax(syntax)
+                .schema(schema)
+                .build();
+
+        assertNotNull(api.loadCSV(dataLoader));
     }
 
 

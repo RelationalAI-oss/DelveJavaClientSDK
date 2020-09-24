@@ -33,7 +33,7 @@ public class LocalConnection extends Connection {
         this.dbName = dbname;
 
         if(this.getClass() == LocalConnection.class) {
-            client = new DelveClient(this); //to register the connection with a client
+            this.setClient(new DelveClient(this)); //to register the connection with a client
         } else {
             // If it's a subtype of `LocalConnection`, then its association to a `DelveClient`
             // is done separately in the leaf class.
