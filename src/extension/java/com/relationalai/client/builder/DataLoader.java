@@ -8,7 +8,6 @@ import com.relationalai.client.model.LoadDataAction;
 @lombok.Setter
 @lombok.ToString(callSuper = true)
 public class DataLoader extends LoadDataAction {
-    String rel;
     String contentType;
     String data;
     String path;

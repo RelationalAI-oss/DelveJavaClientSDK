@@ -4,9 +4,7 @@ import com.relationalai.client.ApiCallback;
 import com.relationalai.client.ApiClient;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.Pair;
-import com.relationalai.client.builder.DataLoader;
-import com.relationalai.client.builder.SourceInstall;
-import com.relationalai.client.builder.Query;
+import com.relationalai.client.builder.*;
 import com.relationalai.client.model.*;
 import com.relationalai.util.RaiLogger;
 import com.relationalai.util.http.Http2Client;
@@ -16,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import javax.net.ssl.*;
+import java.io.File;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
@@ -209,7 +208,13 @@ public class DelveClient extends DefaultApi {
         xact.setDbname(conn.getDbName());
         xact.setActions(Collections.emptyList());
 
+        if (conn.getDebugLevel() > 0)
+            System.out.println("=> Transaction: " + xact);
+
         TransactionResult response = this.transactionPost(xact);
+
+        if (conn.getDebugLevel() > 0)
+            System.out.println("=> TransactionResult: " + response);
 
         if(!response.getProblems().isEmpty()) {
             throw new RuntimeException(response.getProblems().toString());
@@ -422,6 +427,14 @@ public class DelveClient extends DefaultApi {
 
     public boolean loadCSV(DataLoader dataLoader) throws IOException, ApiException {
         dataLoader.setContentType(CSV_CONTENT_TYPE);
+        FileSyntax syntax = dataLoader.getSyntax();
+        FileSchema schema = dataLoader.getSchema();
+        if(syntax instanceof FileSyntaxCSV) {
+            dataLoader.setSyntax(((FileSyntaxCSV) syntax).getCSVFileSyntax((FileSyntaxCSV)syntax));
+        }
+        if(schema instanceof CSVFileSchema) {
+            dataLoader.setSchema(((FileSchemaCSV) schema).getCSVFileSchema((FileSchemaCSV)schema));
+        }
         return loadEdb(dataLoader);
     }
 
