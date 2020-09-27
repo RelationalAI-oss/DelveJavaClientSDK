@@ -8,13 +8,13 @@ import java.util.List;
 @lombok.Getter
 @lombok.Setter
 @lombok.ToString(callSuper = true)
-public class SourceInstall extends InstallAction {
+public class InstallSourceArgs extends InstallAction {
     private String name;
     private String path;
     private String value;
 
     @lombok.Builder
-    public SourceInstall(
+    public InstallSourceArgs(
             String name,
             String path,
             String value,

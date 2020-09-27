@@ -7,7 +7,7 @@ import com.relationalai.client.model.LoadDataAction;
 @lombok.Getter
 @lombok.Setter
 @lombok.ToString(callSuper = true)
-public class DataLoader extends LoadDataAction {
+public class DataLoaderArgs extends LoadDataAction {
     String contentType;
     String data;
     String path;
@@ -16,7 +16,7 @@ public class DataLoader extends LoadDataAction {
     FileSchema schema;
 
     @lombok.Builder
-    public DataLoader(
+    public DataLoaderArgs(
             String rel,
             String contentType,
             String data,

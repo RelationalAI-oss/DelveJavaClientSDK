@@ -68,7 +68,7 @@ public class DelveCloudClient extends DefaultApi {
 
     @Override
     public Call computeGetCall(ApiCallback _callback) throws ApiException{
-        return call("/compute",null, "GET", _callback);
+        return call("/compute","{}", "GET", _callback);
     }
 
     @Override
@@ -131,9 +131,6 @@ public class DelveCloudClient extends DefaultApi {
                 }
             }
         }
-
-        System.out.println("==> Request: " + request);
-        System.out.println("==> Headers: " + request.headers());
 
         return localVarApiClient.getHttpClient().newCall(request);
     }

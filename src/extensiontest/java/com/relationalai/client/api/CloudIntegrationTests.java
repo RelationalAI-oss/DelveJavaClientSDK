@@ -14,6 +14,7 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
+import com.relationalai.client.builder.CloudConnectionArgs;
 import com.relationalai.client.model.Transaction;
 import org.junit.Test;
 
@@ -35,10 +36,10 @@ public class CloudIntegrationTests {
 
     static {
         try {
-            api = new CloudConnection(
+            api = new CloudConnection(new CloudConnectionArgs(
                     DATABSE_NAME, DEFAULT_OPEN_MODE, DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT,
                     Connection.DEFAULT_INFRA, Connection.DEFAULT_REGION, ClientConfig.loadConfig(),
-                    DEFAULT_VERIFY_SSL, DEFAULT_COMPUTE_NAME
+                    DEFAULT_VERIFY_SSL, DEFAULT_COMPUTE_NAME)
             );
         } catch (Exception e) {
             e.printStackTrace();

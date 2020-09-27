@@ -38,7 +38,7 @@ public class IntegrationTestsCommons {
         assertTrue( api.createDatabase(true) );
         assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
 
-        SourceInstall src = SourceInstall.builder()
+        InstallSourceArgs src = InstallSourceArgs.builder()
                 .name("name")
                 .path("")
                 .value("def foo = 1")
@@ -46,34 +46,34 @@ public class IntegrationTestsCommons {
 
         assertNotNull( api.installSource(src) );
 
-        Query query = Query.builder()
+        QueryArgs queryArgs = QueryArgs.builder()
                 .name("name")
                 .path("name")
                 .value("def bar = 2")
                 .outputs(Arrays.asList("bar"))
                 .build();
 
-        QueryActionResult queryRes = api.query(query);
+        QueryActionResult queryRes = api.query(queryArgs);
         assertNotNull( queryRes );
         System.out.println(queryRes);
 
-        FileSyntaxCSV syntax = FileSyntaxCSV.builder()
+        CSVFileSyntaxArgs syntax = CSVFileSyntaxArgs.builder()
                 .header(Arrays.asList("A", "B", "C"))
                 .delim(",")
                 .build();
 
-        FileSchemaCSV schema = FileSchemaCSV.builder()
+        CSVFileSchemaArgs schema = CSVFileSchemaArgs.builder()
                 .types(Arrays.asList("Int64", "Int64", "Int64"))
                 .build();
 
-        DataLoader dataLoader = DataLoader.builder()
+        DataLoaderArgs dataLoaderArgs = DataLoaderArgs.builder()
                 .rel("csv")
                 .data("A,B,C\n1,2,3\n4,5,6")
                 .syntax(syntax)
                 .schema(schema)
                 .build();
 
-         assertNotNull(api.loadCSV(dataLoader));
+         assertNotNull(api.loadCSV(dataLoaderArgs));
     }
 
     @Test
@@ -81,41 +81,41 @@ public class IntegrationTestsCommons {
         assertTrue( api.createDatabase(true) );
         assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
 
-        SourceInstall src = SourceInstall.builder()
+        InstallSourceArgs src = InstallSourceArgs.builder()
                 .name("name")
                 .path("")
                 .value("def foo = 1")
                 .build();
         assertNotNull( api.installSource(src) );
 
-        Query query = Query.builder()
+        QueryArgs queryArgs = QueryArgs.builder()
                 .name("name")
                 .path("name")
                 .value("def bar = 2")
                 .outputs(Arrays.asList("bar"))
                 .build();
 
-        QueryActionResult queryRes = api.query(query);
+        QueryActionResult queryRes = api.query(queryArgs);
         assertNotNull( queryRes );
         System.out.println(queryRes);
 
-        FileSyntaxCSV syntax = FileSyntaxCSV.builder()
+        CSVFileSyntaxArgs syntax = CSVFileSyntaxArgs.builder()
                 .header(Arrays.asList("A", "B", "C"))
                 .delim(",")
                 .build();
 
-        FileSchemaCSV schema = FileSchemaCSV.builder()
+        CSVFileSchemaArgs schema = CSVFileSchemaArgs.builder()
                 .types(Arrays.asList("Int64", "Int64", "Int64"))
                 .build();
 
-        DataLoader dataLoader = DataLoader.builder()
+        DataLoaderArgs dataLoaderArgs = DataLoaderArgs.builder()
                 .rel("csv")
                 .data("A,B,C\n1,2,3\n4,5,6")
                 .syntax(syntax)
                 .schema(schema)
                 .build();
 
-        assertNotNull(api.loadCSV(dataLoader));
+        assertNotNull(api.loadCSV(dataLoaderArgs));
     }
 
 

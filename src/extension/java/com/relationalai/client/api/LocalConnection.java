@@ -1,9 +1,9 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
-import com.relationalai.client.builder.DataLoader;
-import com.relationalai.client.builder.SourceInstall;
-import com.relationalai.client.builder.Query;
+import com.relationalai.client.builder.DataLoaderArgs;
+import com.relationalai.client.builder.InstallSourceArgs;
+import com.relationalai.client.builder.QueryArgs;
 import com.relationalai.client.model.*;
 
 import java.io.IOException;
@@ -17,6 +17,7 @@ public class LocalConnection extends Connection {
     public LocalConnection(String dbName) {
         this(dbName, DEFAULT_OPEN_MODE, DEFAULT_SCHEME, DEFAULT_HOST, DEFAULT_PORT);
     }
+    public LocalConnection(){}
 
     public LocalConnection(Connection conn) {
         this(conn.getDbName(), conn.getDefaultOpenMode(), conn.getScheme(), conn.getHost(), conn.getPort());
@@ -33,7 +34,7 @@ public class LocalConnection extends Connection {
         this.dbName = dbname;
 
         if(this.getClass() == LocalConnection.class) {
-            this.setClient(new DelveClient(this)); //to register the connection with a client
+            new DelveClient(this); //to register the connection with a client
         } else {
             // If it's a subtype of `LocalConnection`, then its association to a `DelveClient`
             // is done separately in the leaf class.
@@ -60,9 +61,9 @@ public class LocalConnection extends Connection {
         return client.createDatabase(overwrite);
     }
 
-    public boolean installSource(SourceInstall sourceInstall) throws IOException, ApiException {
+    public boolean installSource(InstallSourceArgs installSourceArgs) throws IOException, ApiException {
         setConnectionOnClient();
-        return client.installSource(sourceInstall);
+        return client.installSource(installSourceArgs);
     }
 
     public boolean deleteSource(List<String> srcNameList) throws ApiException {
@@ -80,9 +81,9 @@ public class LocalConnection extends Connection {
         return client.listSource();
     }
 
-    public QueryActionResult query(Query query) throws ApiException {
+    public QueryActionResult query(QueryArgs queryArgs) throws ApiException {
         setConnectionOnClient();
-        return client.query(query);
+        return client.query(queryArgs);
     }
 
     public boolean updateEdb(
@@ -94,39 +95,39 @@ public class LocalConnection extends Connection {
         return client.updateEdb(relKey, updates, delta);
     }
 
-    public LoadData jsonString(DataLoader dataLoader) {
+    public LoadData jsonString(DataLoaderArgs dataLoaderArgs) {
         setConnectionOnClient();
-        return client.jsonString(dataLoader);
+        return client.jsonString(dataLoaderArgs);
     }
 
-    public LoadData jsonFile(DataLoader dataLoader) {
+    public LoadData jsonFile(DataLoaderArgs dataLoaderArgs) {
         setConnectionOnClient();
-        return client.jsonFile(dataLoader);
+        return client.jsonFile(dataLoaderArgs);
     }
 
-    public LoadData csvString(DataLoader dataLoader) {
+    public LoadData csvString(DataLoaderArgs dataLoaderArgs) {
         setConnectionOnClient();
-        return client.csvString(dataLoader);
+        return client.csvString(dataLoaderArgs);
     }
 
-    public LoadData csvFile(DataLoader dataLoader) {
+    public LoadData csvFile(DataLoaderArgs dataLoaderArgs) {
         setConnectionOnClient();
-        return client.csvFile(dataLoader);
+        return client.csvFile(dataLoaderArgs);
     }
 
-    public boolean loadEdb(DataLoader dataLoader) throws IOException, ApiException {
+    public boolean loadEdb(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
         setConnectionOnClient();
-        return client.loadEdb(dataLoader);
+        return client.loadEdb(dataLoaderArgs);
     }
 
-    public boolean loadCSV(DataLoader dataLoader) throws IOException, ApiException {
+    public boolean loadCSV(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
         setConnectionOnClient();
-        return client.loadCSV(dataLoader);
+        return client.loadCSV(dataLoaderArgs);
     }
 
-    public boolean loadJSON(DataLoader dataLoader) throws IOException, ApiException {
+    public boolean loadJSON(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
         setConnectionOnClient();
-        return client.loadJSON(dataLoader);
+        return client.loadJSON(dataLoaderArgs);
     }
 
     public List<RelKey> listEdb(String relName) throws ApiException {

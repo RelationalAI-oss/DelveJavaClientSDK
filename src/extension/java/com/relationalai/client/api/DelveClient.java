@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import javax.net.ssl.*;
-import java.io.File;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
@@ -239,45 +238,45 @@ public class DelveClient extends DefaultApi {
         return !response.getAborted();
     }
 
-    public boolean installSource(SourceInstall sourceInstall) throws ApiException, IOException {
-        if (sourceInstall.getSources() == null) {
+    public boolean installSource(InstallSourceArgs installSourceArgs) throws ApiException, IOException {
+        if (installSourceArgs.getSources() == null) {
             Source src = new Source();
-            src.setName(sourceInstall.getName() == null ? "" : sourceInstall.getName());
-            src.setPath(sourceInstall.getPath() == null ? "" : sourceInstall.getPath());
-            src.setValue(sourceInstall.getValue() == null ? "" : sourceInstall.getValue());
-            sourceInstall.addSourcesItem(src);
+            src.setName(installSourceArgs.getName() == null ? "" : installSourceArgs.getName());
+            src.setPath(installSourceArgs.getPath() == null ? "" : installSourceArgs.getPath());
+            src.setValue(installSourceArgs.getValue() == null ? "" : installSourceArgs.getValue());
+            installSourceArgs.addSourcesItem(src);
         }
 
-        for (Source src : sourceInstall.getSources()) {
+        for (Source src : installSourceArgs.getSources()) {
             _readFileFromPath(src);
         }
 
         InstallAction action = new InstallAction();
-        action.setSources(sourceInstall.getSources());
+        action.setSources(installSourceArgs.getSources());
 
         return runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
-    public QueryActionResult query(Query query) throws ApiException {
-        if (query.getSource() == null) {
+    public QueryActionResult query(QueryArgs queryArgs) throws ApiException {
+        if (queryArgs.getSource() == null) {
             Source src = new Source();
-            src.setName(query.getName() == null ? "" : query.getName());
-            src.setPath(query.getPath() == null ? "" : query.getPath());
-            src.setValue(query.getValue() == null ? "" : query.getValue());
-            query.setSource(src);
+            src.setName(queryArgs.getName() == null ? "" : queryArgs.getName());
+            src.setPath(queryArgs.getPath() == null ? "" : queryArgs.getPath());
+            src.setValue(queryArgs.getValue() == null ? "" : queryArgs.getValue());
+            queryArgs.setSource(src);
         }
-        if (query.getInputs() == null)
-            query.setInputs(new ArrayList<Relation>());
-        if (query.getOutputs() == null)
-            query.setOutputs(new ArrayList<String>());
-        if (query.getPersist() == null)
-            query.setPersist(new ArrayList<String>());
+        if (queryArgs.getInputs() == null)
+            queryArgs.setInputs(new ArrayList<Relation>());
+        if (queryArgs.getOutputs() == null)
+            queryArgs.setOutputs(new ArrayList<String>());
+        if (queryArgs.getPersist() == null)
+            queryArgs.setPersist(new ArrayList<String>());
 
         QueryAction action = new QueryAction();
-        action.setSource(query.getSource());
-        action.setInputs(query.getInputs());
-        action.setOutputs(query.getOutputs());
-        action.setPersist(query.getPersist());
+        action.setSource(queryArgs.getSource());
+        action.setInputs(queryArgs.getInputs());
+        action.setOutputs(queryArgs.getOutputs());
+        action.setPersist(queryArgs.getPersist());
 
         return (QueryActionResult) runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN);
     }
@@ -318,47 +317,47 @@ public class DelveClient extends DefaultApi {
         return runAction(conn, "single", action) != null;
     }
 
-    public LoadData jsonString(DataLoader dataLoader) {
+    public LoadData jsonString(DataLoaderArgs dataLoaderArgs) {
         LoadData loadData = new LoadData();
-        loadData.setData(dataLoader.getData());
+        loadData.setData(dataLoaderArgs.getData());
         loadData.setContentType(JSON_CONTENT_TYPE);
-        loadData.setKey(dataLoader.getKey());
-        loadData.setFileSyntax(dataLoader.getSyntax());
-        loadData.setFileSchema(dataLoader.getSchema());
+        loadData.setKey(dataLoaderArgs.getKey());
+        loadData.setFileSyntax(dataLoaderArgs.getSyntax());
+        loadData.setFileSchema(dataLoaderArgs.getSchema());
 
         return loadData;
     }
 
-    public LoadData jsonFile(DataLoader dataLoader) {
+    public LoadData jsonFile(DataLoaderArgs dataLoaderArgs) {
         LoadData loadData = new LoadData();
 
-        loadData.setPath(dataLoader.getPath());
+        loadData.setPath(dataLoaderArgs.getPath());
         loadData.setContentType(JSON_CONTENT_TYPE);
-        loadData.setKey(dataLoader.getKey());
-        loadData.setFileSyntax(dataLoader.getSyntax());
-        loadData.setFileSchema(dataLoader.getSchema());
+        loadData.setKey(dataLoaderArgs.getKey());
+        loadData.setFileSyntax(dataLoaderArgs.getSyntax());
+        loadData.setFileSchema(dataLoaderArgs.getSchema());
 
         return loadData;
     }
 
-    public LoadData csvString(DataLoader dataLoader) {
+    public LoadData csvString(DataLoaderArgs dataLoaderArgs) {
         LoadData loadData = new LoadData();
-        loadData.setData(dataLoader.getData());
+        loadData.setData(dataLoaderArgs.getData());
         loadData.setContentType(CSV_CONTENT_TYPE);
-        loadData.setKey(dataLoader.getKey());
-        loadData.setFileSyntax(dataLoader.getSyntax());
-        loadData.setFileSchema(dataLoader.getSchema());
+        loadData.setKey(dataLoaderArgs.getKey());
+        loadData.setFileSyntax(dataLoaderArgs.getSyntax());
+        loadData.setFileSchema(dataLoaderArgs.getSchema());
 
         return loadData;
     }
 
-    public LoadData csvFile(DataLoader dataLoader) {
+    public LoadData csvFile(DataLoaderArgs dataLoaderArgs) {
         LoadData loadData = new LoadData();
-        loadData.setPath(dataLoader.getPath());
+        loadData.setPath(dataLoaderArgs.getPath());
         loadData.setContentType(CSV_CONTENT_TYPE);
-        loadData.setKey(dataLoader.getKey());
-        loadData.setFileSyntax(dataLoader.getSyntax());
-        loadData.setFileSchema(dataLoader.getSchema());
+        loadData.setKey(dataLoaderArgs.getKey());
+        loadData.setFileSyntax(dataLoaderArgs.getSyntax());
+        loadData.setFileSchema(dataLoaderArgs.getSchema());
 
         return loadData;
     }
@@ -406,15 +405,15 @@ public class DelveClient extends DefaultApi {
         }
     }
 
-    public boolean loadEdb(DataLoader dataLoader) throws IOException, ApiException {
-        String rel = dataLoader.getRel();
+    public boolean loadEdb(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
+        String rel = dataLoaderArgs.getRel();
         LoadData loadData = new LoadData();
-        loadData.setContentType(dataLoader.getContentType());
-        loadData.setData(dataLoader.getData());
-        loadData.setPath(dataLoader.getPath());
-        loadData.setKey(dataLoader.getKey() == null ? new ArrayList<>() : dataLoader.getKey());
-        loadData.setFileSyntax(dataLoader.getSyntax());
-        loadData.setFileSchema(dataLoader.getSchema());
+        loadData.setContentType(dataLoaderArgs.getContentType());
+        loadData.setData(dataLoaderArgs.getData());
+        loadData.setPath(dataLoaderArgs.getPath());
+        loadData.setKey(dataLoaderArgs.getKey() == null ? new ArrayList<>() : dataLoaderArgs.getKey());
+        loadData.setFileSyntax(dataLoaderArgs.getSyntax());
+        loadData.setFileSchema(dataLoaderArgs.getSchema());
 
         _handleNullFieldsForLoadData(loadData);
         _readFileFromPath(loadData);
@@ -425,24 +424,24 @@ public class DelveClient extends DefaultApi {
         return runAction(conn, "single", action) != null;
     }
 
-    public boolean loadCSV(DataLoader dataLoader) throws IOException, ApiException {
-        dataLoader.setContentType(CSV_CONTENT_TYPE);
-        FileSyntax syntax = dataLoader.getSyntax();
-        FileSchema schema = dataLoader.getSchema();
-        if(syntax instanceof FileSyntaxCSV) {
-            dataLoader.setSyntax(((FileSyntaxCSV) syntax).getCSVFileSyntax((FileSyntaxCSV)syntax));
+    public boolean loadCSV(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
+        dataLoaderArgs.setContentType(CSV_CONTENT_TYPE);
+        FileSyntax syntax = dataLoaderArgs.getSyntax();
+        FileSchema schema = dataLoaderArgs.getSchema();
+        if(syntax instanceof CSVFileSyntaxArgs) {
+            dataLoaderArgs.setSyntax(((CSVFileSyntaxArgs) syntax).getCSVFileSyntax((CSVFileSyntaxArgs)syntax));
         }
         if(schema instanceof CSVFileSchema) {
-            dataLoader.setSchema(((FileSchemaCSV) schema).getCSVFileSchema((FileSchemaCSV)schema));
+            dataLoaderArgs.setSchema(((CSVFileSchemaArgs) schema).getCSVFileSchema((CSVFileSchemaArgs)schema));
         }
-        return loadEdb(dataLoader);
+        return loadEdb(dataLoaderArgs);
     }
 
-    public boolean loadJSON(DataLoader dataLoader) throws IOException, ApiException {
-        dataLoader.setContentType(JSON_CONTENT_TYPE);
-        dataLoader.setSyntax(new JSONFileSyntax());
-        dataLoader.setSchema(new JSONFileSchema());
-        return loadEdb(dataLoader);
+    public boolean loadJSON(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
+        dataLoaderArgs.setContentType(JSON_CONTENT_TYPE);
+        dataLoaderArgs.setSyntax(new JSONFileSyntax());
+        dataLoaderArgs.setSchema(new JSONFileSchema());
+        return loadEdb(dataLoaderArgs);
     }
 
     public List<RelKey> listEdb(String relName) throws ApiException {

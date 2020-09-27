@@ -1,5 +1,6 @@
 package com.relationalai.client.api;
 
+import com.relationalai.client.builder.ManagementConnectionArgs;
 import com.relationalai.client.model.*;
 import com.relationalai.cloudclient.ApiException;
 import com.relationalai.cloudclient.model.*;
@@ -15,23 +16,15 @@ public class ManagementConnection extends Connection {
     private boolean verifySSL;
 
     public ManagementConnection() throws UnrecognizedRegionException, GeneralSecurityException, IOException {
-        this(Connection.DEFAULT_SCHEME, Connection.DEFAULT_HOST, Connection.DEFAULT_PORT, Connection.DEFAULT_INFRA,
-             Connection.DEFAULT_REGION, null, Connection.DEFAULT_VERIFY_SSL);
+        this(new ManagementConnectionArgs(Connection.DEFAULT_SCHEME, Connection.DEFAULT_HOST, Connection.DEFAULT_PORT, Connection.DEFAULT_INFRA,
+             Connection.DEFAULT_REGION, null, Connection.DEFAULT_VERIFY_SSL));
     }
-    public ManagementConnection(
-            String scheme,
-            String host,
-            int port,
-            RAIInfra infra,
-            RAIRegion region,
-            ClientConfig clientConfig,
-            boolean verifySSL
-    ) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
-        super(scheme, host, port);
-        this.infra = infra;
-        this.region = region;
-        this.clientConfig = clientConfig == null ? ClientConfig.loadConfig() : clientConfig;
-        this.verifySSL = verifySSL;
+    public ManagementConnection(ManagementConnectionArgs mngtConnArgs) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
+        super(mngtConnArgs.getScheme(), mngtConnArgs.getHost(), mngtConnArgs.getPort());
+        this.infra = mngtConnArgs.getInfra();
+        this.region = mngtConnArgs.getRegion();
+        this.clientConfig = mngtConnArgs.getClientConfig() == null ? ClientConfig.loadConfig() : mngtConnArgs.getClientConfig();
+        this.verifySSL = mngtConnArgs.getVerifySSL();
         this.setCloudClient(new DelveCloudClient(this));
     }
 

@@ -18,8 +18,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.ActionResult;
+import com.relationalai.client.model.Action;
 import com.relationalai.client.model.Relation;
+import com.relationalai.client.model.Source;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -31,17 +32,17 @@ import org.junit.Test;
 
 
 /**
- * Model tests for QueryActionResult
+ * Model tests for QueryAction
  */
-public class QueryActionResultTest {
-    private final QueryActionResult model = new QueryActionResult();
+public class QueryArgsActionTest {
+    private final QueryAction model = new QueryAction();
 
     /**
-     * Model tests for QueryActionResult
+     * Model tests for QueryAction
      */
     @Test
-    public void testQueryActionResult() {
-        // TODO: test QueryActionResult
+    public void testQueryAction() {
+        // TODO: test QueryAction
     }
 
     /**

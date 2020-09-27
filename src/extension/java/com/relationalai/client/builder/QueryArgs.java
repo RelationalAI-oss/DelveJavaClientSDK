@@ -9,13 +9,13 @@ import java.util.List;
 @lombok.Getter
 @lombok.Setter
 @lombok.ToString(callSuper = true)
-public class Query extends QueryAction {
+public class QueryArgs extends QueryAction {
     private String name;
     private String path;
     private String value;
 
     @lombok.Builder
-    public Query(
+    public QueryArgs(
             String name,
             String path,
             String value,
