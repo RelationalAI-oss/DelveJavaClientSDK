@@ -1,7 +1,7 @@
 # openapi-java-client
 
 Delve Client SDK
-- API version: 1.0.1
+- API version: 1.0.3
 
 This is a Client SDK for Delve API
 
@@ -44,7 +44,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.relationalai</groupId>
   <artifactId>openapi-java-client</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.3</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -54,7 +54,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.relationalai:openapi-java-client:1.0.1"
+compile "com.relationalai:openapi-java-client:1.0.3"
 ```
 
 ### Others
@@ -67,7 +67,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-java-client-1.0.1.jar`
+* `target/openapi-java-client-1.0.3.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
