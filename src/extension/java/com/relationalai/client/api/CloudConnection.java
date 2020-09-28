@@ -14,15 +14,16 @@ public class CloudConnection extends LocalConnection {
 
     public CloudConnection(Connection conn) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
           this(conn, Connection.DEFAULT_INFRA, Connection.DEFAULT_REGION, null, Connection.DEFAULT_VERIFY_SSL, null);
-      }
-     public CloudConnection(
+    }
+
+    public CloudConnection(
               Connection conn,
               RAIInfra infra,
               RAIRegion region,
               ClientConfig clientConfig,
               boolean verifySSL,
               String computeName
-      ) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
+    ) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
           this(new CloudConnectionArgs(
                   conn.getDbName(),
                   conn.getDefaultOpenMode(),
@@ -36,13 +37,13 @@ public class CloudConnection extends LocalConnection {
                   computeName
                   )
           );
-      }
+    }
 
-      public CloudConnection(String dbname) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
-          this(new CloudConnectionArgs(dbname, Connection.DEFAULT_OPEN_MODE, Connection.DEFAULT_SCHEME, Connection.DEFAULT_HOST,
+    public CloudConnection(String dbname) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
+        this(new CloudConnectionArgs(dbname, Connection.DEFAULT_OPEN_MODE, Connection.DEFAULT_SCHEME, Connection.DEFAULT_HOST,
                Connection.DEFAULT_PORT, Connection.DEFAULT_INFRA, Connection.DEFAULT_REGION, null,
                Connection.DEFAULT_VERIFY_SSL, null));
-      }
+    }
 
     public CloudConnection(CloudConnectionArgs args) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
         super(args.getDbname(), args.getDefaultOpenMode(), args.getScheme(), args.getHost(), args.getPort());

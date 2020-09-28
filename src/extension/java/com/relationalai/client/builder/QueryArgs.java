@@ -14,6 +14,16 @@ public class QueryArgs extends QueryAction {
     private String path;
     private String value;
 
+    /**
+     *
+     * @param name
+     * @param path
+     * @param value
+     * @param inputs
+     * @param outputs
+     * @param persist
+     * @param source
+     */
     @lombok.Builder
     public QueryArgs(
             String name,

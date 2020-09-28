@@ -128,7 +128,7 @@ public class DelveClient extends DefaultApi {
             }
         }
 
-        if (conn instanceof LocalConnection) {
+        if (conn instanceof CloudConnection) {
             localVarQueryParams.add(new Pair("dbname", conn.getDbName()));
             localVarQueryParams.add(new Pair("open_mode", transaction.getMode().toString()));
             localVarQueryParams.add(new Pair("readonly", transaction.getReadonly() ? "true" : "false"));
@@ -220,6 +220,10 @@ public class DelveClient extends DefaultApi {
         }
 
         return !response.getAborted();
+    }
+
+    public boolean createDatabase() throws ApiException {
+        return createDatabase(false);
     }
 
     public boolean branchDatabase(String sourceName) throws ApiException {
@@ -451,6 +455,10 @@ public class DelveClient extends DefaultApi {
         return actionRes.getRels();
     }
 
+    public List<RelKey> listEdb() throws ApiException {
+        return listEdb(null);
+    }
+
     public List<RelKey> deleteEdb(String relName) throws ApiException {
         ModifyWorkspaceAction action = new ModifyWorkspaceAction();
         action.setDeleteEdb(relName);
@@ -477,19 +485,17 @@ public class DelveClient extends DefaultApi {
         return actionRes.getProblems();
     }
 
-    public boolean configure(
-            boolean debug,
-            boolean debugTrace,
-            boolean broken,
-            boolean silent,
-            boolean abortOnError
-    ) throws ApiException {
+    public List<AbstractProblem> collectProblems() throws ApiException {
+        return collectProblems(null);
+    }
+
+    public boolean configure(ConfigureArgs configureArgs) throws ApiException {
         SetOptionsAction action = new SetOptionsAction();
-        action.setDebug(debug);
-        action.setDebugTrace(debugTrace);
-        action.setBroken(broken);
-        action.setSilent(silent);
-        action.setAbortOnError(abortOnError);
+        action.setDebug(configureArgs.isDebug());
+        action.setDebugTrace(configureArgs.isDebugTrace());
+        action.setBroken(configureArgs.isBroken());
+        action.setSilent(configureArgs.isSilent());
+        action.setAbortOnError(configureArgs.isAbortOnError());
         return runAction(conn, "single", action) != null;
     }
 }

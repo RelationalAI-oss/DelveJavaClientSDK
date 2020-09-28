@@ -1,6 +1,7 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
+import com.relationalai.client.builder.ConfigureArgs;
 import com.relationalai.client.builder.DataLoaderArgs;
 import com.relationalai.client.builder.InstallSourceArgs;
 import com.relationalai.client.builder.QueryArgs;
@@ -9,6 +10,7 @@ import com.relationalai.client.model.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 
 public class LocalConnection extends Connection {
     private String dbName;
@@ -23,6 +25,14 @@ public class LocalConnection extends Connection {
         this(conn.getDbName(), conn.getDefaultOpenMode(), conn.getScheme(), conn.getHost(), conn.getPort());
     }
 
+    /**
+     *
+     * @param dbname database to execute transactions with
+     * @param defaultOpenMode TransactionMode.OPEN`: How to open the database `dbname`
+     * @param scheme `http`: The scheme used for connecting to a running server (e.g., `http`)
+     * @param host `127.0.0.1`: The host of a running server
+     * @param port `8010`: The port of a running server
+     */
     public LocalConnection(
             String dbname,
             Transaction.ModeEnum defaultOpenMode,
@@ -34,7 +44,7 @@ public class LocalConnection extends Connection {
         this.dbName = dbname;
 
         if(this.getClass() == LocalConnection.class) {
-            new DelveClient(this); //to register the connection with a client
+            this.setClient(new DelveClient(this)); //to register the connection with a client
         } else {
             // If it's a subtype of `LocalConnection`, then its association to a `DelveClient`
             // is done separately in the leaf class.
@@ -135,6 +145,11 @@ public class LocalConnection extends Connection {
         return client.listEdb(relName);
     }
 
+    public List<RelKey> listEdb() throws ApiException {
+        setConnectionOnClient();
+        return client.listEdb();
+    }
+
     public List<RelKey> deleteEdb(String relName) throws ApiException {
         setConnectionOnClient();
         return client.deleteEdb(relName);
@@ -154,14 +169,13 @@ public class LocalConnection extends Connection {
         return client.collectProblems(relName);
     }
 
-    public boolean configure(
-            boolean debug,
-            boolean debugTrace,
-            boolean broken,
-            boolean silent,
-            boolean abortOnError
-    ) throws ApiException {
+    public List<AbstractProblem> collectProblems() throws ApiException {
         setConnectionOnClient();
-        return client.configure(debug, debugTrace, broken, silent, abortOnError);
+        return client.collectProblems();
+    }
+
+    public boolean configure(ConfigureArgs configureArgs) throws ApiException {
+        setConnectionOnClient();
+        return client.configure(configureArgs);
     }
 }
