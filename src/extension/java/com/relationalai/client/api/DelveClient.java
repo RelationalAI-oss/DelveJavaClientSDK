@@ -228,7 +228,7 @@ public class DelveClient extends DefaultApi {
 
     public boolean branchDatabase(String sourceName) throws ApiException {
         Transaction xact = new Transaction();
-        xact.setMode(Transaction.ModeEnum.BRANCH);
+        xact.setMode(Transaction.ModeEnum.CLONE);
         xact.setDbname(conn.getDbName());
         xact.setActions(new ArrayList<LabeledAction>());
         xact.setSourceDbname(sourceName);
