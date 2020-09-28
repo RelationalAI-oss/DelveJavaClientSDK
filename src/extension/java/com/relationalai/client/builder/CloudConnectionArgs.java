@@ -37,6 +37,7 @@ public class CloudConnectionArgs {
         this.defaultOpenMode = defaultOpenMode;
         this.scheme = scheme;
         this.host = host;
+        this.port = port;
         this.infra = infra;
         this.region = region;
         this.clientConfig = clientConfig;
