@@ -76,4 +76,8 @@ public class CloudConnection extends LocalConnection {
     public String getComputeName() {
         return computeName;
     }
+
+    public ManagementConnection getManagementConn() {
+        return managementConn;
+    }
 }
