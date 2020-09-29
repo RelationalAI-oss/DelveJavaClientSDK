@@ -79,7 +79,7 @@ public class IntegrationTestsCommons {
     @Test
     public static void transactionPostCloudTest(CloudConnection api) throws ApiException, IOException {
         assertTrue( api.createDatabase(true) );
-        assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
+        assertThrows( ApiException.class, () -> api.createDatabase(false) );
 
         InstallSourceArgs src = InstallSourceArgs.builder()
                 .name("name")
