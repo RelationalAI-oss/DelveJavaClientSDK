@@ -91,7 +91,7 @@ public class LocalConnection extends Connection {
         return client.listSource();
     }
 
-    public QueryActionResult query(QueryArgs queryArgs) throws ApiException {
+    public Map<RelKey, Relation> query(QueryArgs queryArgs) throws ApiException {
         setConnectionOnClient();
         return client.query(queryArgs);
     }
@@ -128,6 +128,16 @@ public class LocalConnection extends Connection {
     public boolean loadEdb(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
         setConnectionOnClient();
         return client.loadEdb(dataLoaderArgs);
+    }
+
+    public boolean loadEdb(String relName, Object[] columns) throws IOException, ApiException {
+        setConnectionOnClient();
+        return client.loadEdb(relName, columns);
+    }
+
+    public boolean loadEdb(String relName, List<List<Object>> columns) throws IOException, ApiException {
+        setConnectionOnClient();
+        return client.loadEdb(relName, columns);
     }
 
     public boolean loadCSV(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {

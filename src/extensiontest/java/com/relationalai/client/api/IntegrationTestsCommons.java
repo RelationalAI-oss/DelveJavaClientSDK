@@ -17,6 +17,7 @@ import com.relationalai.client.ApiException;
 import com.relationalai.client.builder.*;
 import com.relationalai.client.model.QueryActionResult;
 import com.relationalai.client.model.RelKey;
+import com.relationalai.client.model.Relation;
 import com.relationalai.cloudclient.model.CreateComputeResponseProtocol;
 import com.relationalai.cloudclient.model.ListComputesResponseProtocol;
 import org.junit.Test;
@@ -24,6 +25,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static com.relationalai.test.ExtendedTestCase.*;
@@ -57,7 +59,7 @@ public class IntegrationTestsCommons {
                 .outputs(Arrays.asList("bar"))
                 .build();
 
-        QueryActionResult queryRes = api.query(queryArgs);
+        Map<RelKey, Relation> queryRes = api.query(queryArgs);
         assertNotNull( queryRes );
         System.out.println(queryRes);
 
@@ -98,7 +100,7 @@ public class IntegrationTestsCommons {
                 .outputs(Arrays.asList("bar"))
                 .build();
 
-        QueryActionResult queryRes = api.query(queryArgs);
+        Map<RelKey, Relation> queryRes = api.query(queryArgs);
         assertNotNull( queryRes );
         System.out.println(queryRes);
 

@@ -68,7 +68,7 @@ public class DelveCloudClient extends DefaultApi {
 
     @Override
     public Call computeGetCall(ApiCallback _callback) throws ApiException{
-        return call("/compute","{}", "GET", _callback);
+        return call("/compute",null, "GET", _callback);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class DelveCloudClient extends DefaultApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarContentTypes = {
-                "application/json"
+                "application/json; charset=utf-8"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);

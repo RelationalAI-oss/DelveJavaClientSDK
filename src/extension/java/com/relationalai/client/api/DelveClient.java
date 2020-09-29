@@ -261,7 +261,7 @@ public class DelveClient extends DefaultApi {
         return runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
-    public QueryActionResult query(QueryArgs queryArgs) throws ApiException {
+    public Map<RelKey, Relation> query(QueryArgs queryArgs) throws ApiException {
         if (queryArgs.getSource() == null) {
             Source src = new Source();
             src.setName(queryArgs.getName() == null ? "" : queryArgs.getName());
@@ -282,7 +282,8 @@ public class DelveClient extends DefaultApi {
         action.setOutputs(queryArgs.getOutputs());
         action.setPersist(queryArgs.getPersist());
 
-        return (QueryActionResult) runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN);
+        QueryActionResult queryResult = (QueryActionResult) runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN);
+        return getRelationDict(queryResult);
     }
 
     public boolean deleteSource(List<String> scrNameList) throws ApiException {
@@ -428,6 +429,29 @@ public class DelveClient extends DefaultApi {
         return runAction(conn, "single", action) != null;
     }
 
+    public boolean loadEdb(String relName, Object[] columns) throws ApiException {
+        List<Object> col = new ArrayList<Object>();
+        Collections.addAll(col, columns);
+        return loadEdb(relName, Arrays.asList(col));
+    }
+
+    public boolean loadEdb(String relName, List<List<Object>> columns) throws ApiException {
+        Relation relation = new Relation();
+        relation.setRelKey(new RelKey().name(relName));
+        relation.setColumns(columns);
+        return loadEdb(relation);
+    }
+
+    public boolean loadEdb(Relation value) throws ApiException {
+        return loadEdb(Arrays.asList(value));
+    }
+
+    public boolean loadEdb(List<Relation> value) throws ApiException {
+        ImportAction action = new ImportAction();
+        action.setInputs(value);
+        return runAction(conn, "single", action) != null;
+    }
+
     public boolean loadCSV(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
         dataLoaderArgs.setContentType(CSV_CONTENT_TYPE);
         FileSyntax syntax = dataLoaderArgs.getSyntax();
@@ -497,5 +521,13 @@ public class DelveClient extends DefaultApi {
         action.setSilent(configureArgs.isSilent());
         action.setAbortOnError(configureArgs.isAbortOnError());
         return runAction(conn, "single", action) != null;
+    }
+
+    private Map<RelKey, Relation> getRelationDict(QueryActionResult queryActionResult) {
+        Map<RelKey, Relation> dict = new HashMap<RelKey, Relation>();
+        for(Relation rel : queryActionResult.getOutput()){
+            dict.put(rel.getRelKey(), rel);
+        }
+        return dict;
     }
 }
