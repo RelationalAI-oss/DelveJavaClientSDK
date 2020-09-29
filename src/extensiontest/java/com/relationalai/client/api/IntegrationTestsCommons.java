@@ -33,7 +33,6 @@ public class IntegrationTestsCommons {
      *
      * @throws ApiException if the Api call fails
      */
-    @Test
     public static void transactionPostLocalTest(LocalConnection api) throws ApiException, IOException {
         assertTrue( api.createDatabase(true) );
         assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
@@ -76,7 +75,6 @@ public class IntegrationTestsCommons {
          assertNotNull(api.loadCSV(dataLoaderArgs));
     }
 
-    @Test
     public static void transactionPostCloudTest(CloudConnection api) throws ApiException, IOException {
         assertTrue( api.createDatabase(true) );
         assertThrows( ApiException.class, () -> api.createDatabase(false) );
