@@ -16,10 +16,15 @@ package com.relationalai.client.api;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.builder.*;
 import com.relationalai.client.model.QueryActionResult;
+import com.relationalai.client.model.RelKey;
+import com.relationalai.cloudclient.model.CreateComputeResponseProtocol;
+import com.relationalai.cloudclient.model.ListComputesResponseProtocol;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 import static com.relationalai.test.ExtendedTestCase.*;
 
@@ -114,7 +119,29 @@ public class IntegrationTestsCommons {
                 .build();
 
         assertNotNull(api.loadCSV(dataLoaderArgs));
+
     }
 
+    public static String randomString() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        return generatedString;
+    }
+
+    public static void managementTests(ManagementConnection api) throws ApiException, IOException {
+        ListComputesResponseProtocol res = api.listComputes();
+        System.out.println(res);
+
+        CreateComputeResponseProtocol cres = api.createCompute(randomString(), "XS", "us-east");
+        System.out.println(cres);
+    }
 
 }
