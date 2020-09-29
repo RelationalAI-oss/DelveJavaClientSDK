@@ -58,7 +58,7 @@ public class CloudConnection extends LocalConnection {
                         args.isVerifySSL()
                 )
         );
-        this.computeName = computeName;
+        this.computeName = args.getComputeName();
         this.setClient(new DelveClient(this)); //to register the connection with a client
     }
 
