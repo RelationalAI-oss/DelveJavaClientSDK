@@ -2,7 +2,7 @@ package com.relationalai.client.api;
 
 import com.relationalai.client.builder.ManagementConnectionArgs;
 import com.relationalai.client.model.*;
-import com.relationalai.cloudclient.ApiException;
+import com.relationalai.client.ApiException;
 import com.relationalai.cloudclient.model.*;
 import com.relationalai.infra.UnrecognizedRegionException;
 
@@ -48,32 +48,60 @@ public class ManagementConnection extends Connection {
         return verifySSL;
     }
 
+    private ApiException convert(com.relationalai.cloudclient.ApiException e) {
+        return new ApiException(e.getMessage(), e, e.getCode(), e.getResponseHeaders(), e.getResponseBody());
+    }
+
     public ListComputesResponseProtocol listComputes() throws ApiException {
         setConnectionOnClient();
-        return cloudClient.listComputes();
+        try {
+            return cloudClient.listComputes();
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
     }
 
     public ListUsersResponseProtocol listUsers() throws ApiException {
         setConnectionOnClient();
-        return cloudClient.listUsers();
+        try {
+            return cloudClient.listUsers();
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
     }
 
     public ListDatabasesResponseProtocol listDatabases() throws ApiException {
         setConnectionOnClient();
-        return cloudClient.listDatabases();
+        try {
+            return cloudClient.listDatabases();
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
     }
 
     public CreateComputeResponseProtocol createCompute(String displayName, String size, String region) throws ApiException{
         setConnectionOnClient();
-        return cloudClient.createCompute(displayName, size, region);
+        try {
+            return cloudClient.createCompute(displayName, size, region);
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
     }
     public CreateUserResponseProtocol createUser(String username) throws ApiException {
         setConnectionOnClient();
-        return cloudClient.createUser(username);
+        try {
+            return cloudClient.createUser(username);
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
     }
 
     public DeleteComputeResponseProtocol deleteCompute(String computeName) throws ApiException {
         setConnectionOnClient();
-        return cloudClient.deleteCompute(computeName);
+        try {
+            return cloudClient.deleteCompute(computeName);
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
     }
 }
