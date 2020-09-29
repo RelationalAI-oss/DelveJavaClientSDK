@@ -62,6 +62,9 @@ public final class Http2Client {
         String authHeader = ClientSideAuthenticationUtil.makeAuthorizationHeader(request, accessKey, regionName, serviceIdentifier, hexSig);
 
         // shoved it into the headers
-        return request.newBuilder().header("Authorization", authHeader).header("User-Agent", "DelveClient/java").build();
+        return request.newBuilder()
+                      .header("Authorization", authHeader)
+                      .header("User-Agent", "DelveClient/1.0.3/java")
+                      .build();
     }
 }
