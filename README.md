@@ -16,10 +16,6 @@ Building the API client library requires:
 1. Java 1.7+
 2. Maven/Gradle
 
-Getting libraries using Nix
-```shell
-nix-shell -p openjdk11 maven -I nixpkgs=channel:nixos-20.03
-```
 ## Installation
 
 To install the API client library to your local Maven repository, simply execute:
