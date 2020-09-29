@@ -62,6 +62,15 @@ public class DelveCloudClient extends DefaultApi {
         return this.computeDelete(deleteComputeRequestProtocol);
     }
 
+    public void removeDefaultCompute(String dbName) throws ApiException {
+        UpdateDatabaseRequestProtocol updateDatabaseRequestProtocol = new UpdateDatabaseRequestProtocol();
+        updateDatabaseRequestProtocol.setDisplayName(dbName);
+        updateDatabaseRequestProtocol.removeDefaultCompute(true);
+        updateDatabaseRequestProtocol.dryrun(false);
+
+        this.databasePost(updateDatabaseRequestProtocol);
+    }
+
     public Connection getConn() { return conn; }
 
     public void setConn(Connection conn) { this.conn = conn; }
@@ -94,6 +103,11 @@ public class DelveCloudClient extends DefaultApi {
     @Override
     public Call computeDeleteCall(DeleteComputeRequestProtocol deleteComputeRequestProtocol, ApiCallback _callback) throws ApiException {
         return call("/compute", deleteComputeRequestProtocol, "DELETE", _callback);
+    }
+
+    @Override
+    public Call databasePostCall(UpdateDatabaseRequestProtocol updateDatabaseRequestProtocol, ApiCallback _callback) throws ApiException {
+        return call("/database", updateDatabaseRequestProtocol, "POST", _callback);
     }
 
     private Call call(String path, Object body, String method, ApiCallback _callback) throws ApiException {

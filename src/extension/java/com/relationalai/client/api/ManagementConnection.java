@@ -104,4 +104,13 @@ public class ManagementConnection extends Connection {
             throw convert(e);
         }
     }
+
+    public void removeDefaultCompute(String dbName) throws ApiException {
+        setConnectionOnClient();
+        try {
+            cloudClient.removeDefaultCompute(dbName);
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
+    }
 }
