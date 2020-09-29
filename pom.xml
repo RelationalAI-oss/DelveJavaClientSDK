@@ -2,32 +2,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.relationalai</groupId>
-    <artifactId>openapi-java-client</artifactId>
+    <artifactId>delve-java-client-sdk</artifactId>
     <packaging>jar</packaging>
-    <name>openapi-java-client</name>
+    <name>delve-java-client-sdk</name>
     <version>1.0.3</version>
-    <url>https://github.com/openapitools/openapi-generator</url>
+    <url>https://github.com/RelationalAI-oss/DelveJavaClientSDK</url>
     <description>OpenAPI Java</description>
     <scm>
-        <connection>scm:git:git@github.com:openapitools/openapi-generator.git</connection>
-        <developerConnection>scm:git:git@github.com:openapitools/openapi-generator.git</developerConnection>
-        <url>https://github.com/openapitools/openapi-generator</url>
+        <connection>scm:git:git@github.com:RelationalAI-oss/DelveJavaClientSDK.git</connection>
+        <developerConnection>scm:git:git@github.com:RelationalAI-oss/DelveJavaClientSDK.git</developerConnection>
+        <url>https://github.com/RelationalAI-oss/DelveJavaClientSDK</url>
     </scm>
 
     <licenses>
         <license>
-            <name>Unlicense</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <name>OpenAPI-Generator Contributors</name>
-            <email>team@openapitools.org</email>
-            <organization>OpenAPITools.org</organization>
-            <organizationUrl>http://openapitools.org</organizationUrl>
+            <name>Mohammad Dashti</name>
+            <email>mohammad.dashti@relational.ai</email>
+            <organization>RelationalAI</organization>
+            <organizationUrl>http://relational.ai</organizationUrl>
         </developer>
     </developers>
 
@@ -43,7 +44,7 @@
                     <maxmem>512m</maxmem>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
-                        <arg>-J-Xss4m</arg><!-- Compiling the generated JSON.java file may require larger stack size. -->
+                        <arg>-J-Xss400m</arg><!-- Compiling the generated JSON.java file may require larger stack size. -->
                     </compilerArgs>
                     <source>11</source>
                     <target>11</target>
