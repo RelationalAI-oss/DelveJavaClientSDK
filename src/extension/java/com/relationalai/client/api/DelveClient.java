@@ -80,6 +80,8 @@ public class DelveClient extends DefaultApi {
         this.service = service;
         ApiClient api = this.getApiClient();
         api.setConnectTimeout(connectionTimeOut);
+        api.setReadTimeout(connectionTimeOut);
+        api.setWriteTimeout(connectionTimeOut);
         OkHttpClient client = api.getHttpClient();
         if (!conn.isVerifySSL()) {
             LOGGER.warn("Using the trustAllSslClient is highly discouraged and should not be used in Production!");

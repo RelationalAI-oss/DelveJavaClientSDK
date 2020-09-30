@@ -26,11 +26,17 @@ public class DelveCloudClient extends DefaultApi {
         super(apiClient);
     }
 
-    public DelveCloudClient(Connection connection){
+    public DelveCloudClient(Connection connection, int connectionTimeOut){
         super(new ApiClient());
-        ApiClient apiClient = this.getApiClient();
+        this.getApiClient().setConnectTimeout(connectionTimeOut);
+        this.getApiClient().setWriteTimeout(connectionTimeOut);
+        this.getApiClient().setReadTimeout(connectionTimeOut);
         this.getApiClient().setBasePath(connection.getBaseUrl());
         this.getApiClient().setVerifyingSsl(connection.isVerifySSL());
+    }
+
+    public DelveCloudClient(Connection connection) {
+        this(connection, 100000);
     }
 
     public ListComputesResponseProtocol listComputes() throws ApiException { return this.computeGet(); }
