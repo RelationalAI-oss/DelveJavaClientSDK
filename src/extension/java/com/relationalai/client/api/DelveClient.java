@@ -429,6 +429,21 @@ public class DelveClient extends DefaultApi {
         return runAction(conn, "single", action) != null;
     }
 
+    public boolean loadEdb(String relName, Map<Object,Object> columns) throws ApiException {
+        Relation relation = new Relation();
+        RelKey relKey = new RelKey();
+        relKey.setName(relName);
+        List<Object> keys = new ArrayList<Object>(columns.keySet());
+        List<Object> values = new ArrayList<Object>(columns.values());
+
+        relKey.addKeysItem(getDelveType(keys.get(0).getClass()));
+        relKey.addValuesItem(getDelveType(values.get(0).getClass()));
+
+        relation.setRelKey(relKey);
+        relation.columns(Arrays.asList(keys, values));
+
+        return loadEdb(relation);
+    }
     public boolean loadEdb(String relName, List<Object> columns) throws ApiException {
         Relation relation = new Relation();
         RelKey relKey = new RelKey();
@@ -442,8 +457,10 @@ public class DelveClient extends DefaultApi {
     private String getDelveType(Class<?> jClass ) {
         if(jClass == Integer.class) {
             return "Int64";
-        } else if(jClass == String.class || jClass == Character.class) {
+        } else if(jClass == String.class) {
             return "String";
+        } else if (jClass == Character.class) {
+            return "Char";
         } else if(jClass == Float.class || jClass == Double.class) {
             return "Float64";
         } else {

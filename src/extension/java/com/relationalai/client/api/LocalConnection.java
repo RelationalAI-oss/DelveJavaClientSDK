@@ -135,6 +135,11 @@ public class LocalConnection extends Connection {
         return client.loadEdb(relName, columns);
     }
 
+    public boolean loadEdb(String relName, Map<Object, Object> columns) throws ApiException {
+        setConnectionOnClient();
+        return client.loadEdb(relName, columns);
+    }
+
     public boolean loadCSV(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
         setConnectionOnClient();
         return client.loadCSV(dataLoaderArgs);
