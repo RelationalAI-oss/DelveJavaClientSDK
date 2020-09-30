@@ -61,9 +61,9 @@ public class LocalConnection extends Connection {
         return defaultOpenMode;
     }
 
-    public boolean branchDatabase(String sourceDbName) throws ApiException {
+    public boolean cloneDatabase(String sourceDbName) throws ApiException {
         setConnectionOnClient();
-        return client.branchDatabase(sourceDbName);
+        return client.cloneDatabase(sourceDbName);
     }
 
     public boolean createDatabase(boolean overwrite) throws ApiException {
