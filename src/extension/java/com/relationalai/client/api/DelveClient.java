@@ -283,7 +283,7 @@ public class DelveClient extends DefaultApi {
         action.setPersist(queryArgs.getPersist());
 
         QueryActionResult queryResult = (QueryActionResult) runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN);
-        return getRelationDict(queryResult);
+        return queryResult == null ? null : getRelationDict(queryResult);
     }
 
     public boolean deleteSource(List<String> scrNameList) throws ApiException {
@@ -429,17 +429,26 @@ public class DelveClient extends DefaultApi {
         return runAction(conn, "single", action) != null;
     }
 
-    public boolean loadEdb(String relName, Object[] columns) throws ApiException {
-        List<Object> col = new ArrayList<Object>();
-        Collections.addAll(col, columns);
-        return loadEdb(relName, Arrays.asList(col));
+    public boolean loadEdb(String relName, List<Object> columns) throws ApiException {
+        Relation relation = new Relation();
+        RelKey relKey = new RelKey();
+        relKey.setName(relName);
+        relKey.addKeysItem(getDelveType(columns.get(0).getClass()));
+        relation.setRelKey(relKey);
+        relation.setColumns(Arrays.asList(columns));
+        return loadEdb(relation);
     }
 
-    public boolean loadEdb(String relName, List<List<Object>> columns) throws ApiException {
-        Relation relation = new Relation();
-        relation.setRelKey(new RelKey().name(relName));
-        relation.setColumns(columns);
-        return loadEdb(relation);
+    private String getDelveType(Class<?> jClass ) {
+        if(jClass == Integer.class) {
+            return "Int64";
+        } else if(jClass == String.class || jClass == Character.class) {
+            return "String";
+        } else if(jClass == Float.class || jClass == Double.class) {
+            return "Float64";
+        } else {
+            throw new IllegalArgumentException(String.format("Java type %s is not mapped to delve type", jClass));
+        }
     }
 
     public boolean loadEdb(Relation value) throws ApiException {

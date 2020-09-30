@@ -130,12 +130,7 @@ public class LocalConnection extends Connection {
         return client.loadEdb(dataLoaderArgs);
     }
 
-    public boolean loadEdb(String relName, Object[] columns) throws IOException, ApiException {
-        setConnectionOnClient();
-        return client.loadEdb(relName, columns);
-    }
-
-    public boolean loadEdb(String relName, List<List<Object>> columns) throws IOException, ApiException {
+    public boolean loadEdb(String relName, List<Object> columns) throws IOException, ApiException {
         setConnectionOnClient();
         return client.loadEdb(relName, columns);
     }
