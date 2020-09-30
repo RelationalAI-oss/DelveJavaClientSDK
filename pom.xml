@@ -23,6 +23,14 @@
         </license>
     </licenses>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub RelationalAI-oss Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/RelationalAI-oss/DelveJavaClientSDK</url>
+        </repository>
+    </distributionManagement>
+
     <developers>
         <developer>
             <name>Mohammad Dashti</name>
