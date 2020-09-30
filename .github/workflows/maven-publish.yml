@@ -24,6 +24,13 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
+    - name: Upload Release Assets
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        tag_name="${GITHUB_REF##*/}"
+        hub release edit $(find . -type f -name "delve-java-client-sdk-*.jar" -printf "-a %p ") -m "" "$tag_name"
+
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
