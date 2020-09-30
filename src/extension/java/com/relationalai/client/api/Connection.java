@@ -1,6 +1,7 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.model.*;
+import com.relationalai.infra.config.InfraMetadataConfig;
 
 public abstract class Connection {
     public final static String DEFAULT_SCHEME = "http";
@@ -8,8 +9,8 @@ public abstract class Connection {
     public final static int DEFAULT_PORT = 8010;
     public final static Transaction.ModeEnum DEFAULT_OPEN_MODE = Transaction.ModeEnum.OPEN;
     public final static boolean DEFAULT_VERIFY_SSL = true;
-    public final static RAIInfra DEFAULT_INFRA = RAIInfra.AZURE;
-    public final static RAIRegion DEFAULT_REGION = RAIRegion.US_EAST;
+    public final static InfraMetadataConfig.Infra DEFAULT_INFRA = InfraMetadataConfig.Infra.AZURE;
+    public final static InfraMetadataConfig.RaiRegion DEFAULT_REGION = InfraMetadataConfig.RaiRegion.US_EAST;
     public final static int DEFAULT_DEBUG_LEVEL = 0;
 
     private String scheme;
@@ -68,11 +69,11 @@ public abstract class Connection {
         return port;
     }
 
-    public RAIInfra getInfra() {
+    public InfraMetadataConfig.Infra getInfra() {
         throw new UnsupportedOperationException();
     }
 
-    public RAIRegion getRegion() {
+    public InfraMetadataConfig.RaiRegion getRegion() {
         throw new UnsupportedOperationException();
     }
 

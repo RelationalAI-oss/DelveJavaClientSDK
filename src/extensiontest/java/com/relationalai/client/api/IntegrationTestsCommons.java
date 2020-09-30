@@ -15,18 +15,16 @@ package com.relationalai.client.api;
 
 import com.relationalai.client.ApiException;
 import com.relationalai.client.builder.*;
-import com.relationalai.client.model.QueryActionResult;
+import com.relationalai.client.model.PairAnyValueAnyValue;
+import com.relationalai.client.model.RaiComputeSize;
 import com.relationalai.client.model.RelKey;
 import com.relationalai.client.model.Relation;
 import com.relationalai.cloudclient.model.CreateComputeResponseProtocol;
 import com.relationalai.cloudclient.model.ListComputesResponseProtocol;
-import org.junit.Test;
+import com.relationalai.infra.config.InfraMetadataConfig;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static com.relationalai.test.ExtendedTestCase.*;
 
@@ -41,9 +39,13 @@ public class IntegrationTestsCommons {
      * @throws ApiException if the Api call fails
      */
     public static void transactionPostLocalTest(LocalConnection api) throws ApiException, IOException {
+        // create database
+        // ============================================================================
         assertTrue( api.createDatabase(true) );
         assertThrows( RuntimeException.class, () -> api.createDatabase(false) );
 
+        // install source
+        // =============================================================================
         InstallSourceArgs src = InstallSourceArgs.builder()
                 .name("name")
                 .path("")
@@ -61,8 +63,9 @@ public class IntegrationTestsCommons {
 
         Map<RelKey, Relation> queryRes = api.query(queryArgs);
         assertNotNull( queryRes );
-        System.out.println(queryRes);
 
+        // load csv using syntax and schema
+        // ==============================================================================
         CSVFileSyntaxArgs syntax = CSVFileSyntaxArgs.builder()
                 .header(Arrays.asList("A", "B", "C"))
                 .delim(",")
@@ -79,7 +82,95 @@ public class IntegrationTestsCommons {
                 .schema(schema)
                 .build();
 
-         assertNotNull(api.loadCSV(dataLoaderArgs));
+        assertTrue(api.loadCSV(dataLoaderArgs));
+
+        // load csv without syntax and schema
+        DataLoaderArgs csvDataArgs = DataLoaderArgs.builder()
+                .rel("csv")
+                .data("A,B\n1,2\n2,3")
+                .build();
+
+        assertTrue(api.loadCSV(csvDataArgs));
+        // load Json
+        // ================================================================================
+        DataLoaderArgs jsonDataArgs = DataLoaderArgs.builder()
+                .rel("json")
+                .data("123")
+                .build();
+
+        assertTrue(api.loadJSON(jsonDataArgs));
+        // load edb
+        // ================================================================================
+        assertTrue(api.loadEdb("edb", Arrays.asList(1, 2)));
+
+        assertTrue(api.loadEdb("edb", Map.of(1, 'a', 2, 'b')));
+
+        //delete source
+        //==================================================================================
+        assertTrue(api.deleteSource("name"));
+
+        //delete edb
+        //==================================================================================
+        assertNotNull(api.deleteEdb("edb"));
+
+        //list source
+        //===================================================================================
+        api.createDatabase(true);
+        assertTrue(Arrays.asList("intrinsics", "stdlib", "ml").equals(new ArrayList<>(api.listSource().keySet())));
+
+        // query
+        // ==================================================================================
+        QueryArgs queryArgs1 = QueryArgs.builder()
+                .value("def foo = 3")
+                .outputs(Arrays.asList("foo"))
+                .build();
+        RelKey relKey = new RelKey()
+                .name("foo")
+                .keys(Arrays.asList("Int64"))
+                .values(new ArrayList<>());
+
+        Relation relation = new Relation()
+                .columns(Arrays.asList(Arrays.asList(3.0)))
+                .relKey(relKey);
+
+        assertTrue(new ArrayList<>(api.query(queryArgs1).values()).equals(Arrays.asList(relation)));
+
+        // update edb
+        // ===================================================================================
+
+        api.createDatabase(true);
+        Map<Object, Object> columns = Map.of('a', 1, 'b', 2, 'c', 3);
+
+         api.loadEdb("k", columns);
+
+        List<PairAnyValueAnyValue> updates = new ArrayList<>();
+        updates.add(new PairAnyValueAnyValue().first('a').second(+1));
+        updates.add(new PairAnyValueAnyValue().first('b').second(+2));
+        updates.add(new PairAnyValueAnyValue().first('c').second(-2));
+
+        QueryArgs queryArgs2 = QueryArgs.builder()
+                .outputs(Arrays.asList("k"))
+                .build();
+
+        RelKey relKey1 = (new ArrayList<RelKey>(api.query(queryArgs2).keySet())).get(0);
+
+        assertTrue(api.updateEdb(relKey1, updates, null));
+
+        // enable library
+        // ====================================================================================
+        api.createDatabase(true);
+        api.enableLibrary("stdlib");
+
+        // cardinality
+        // ====================================================================================
+        api.createDatabase(true);
+        DataLoaderArgs csvDataArgs1 = DataLoaderArgs.builder()
+                .rel("csv")
+                .data("A,B\n1,2\n2,3")
+                .build();
+
+        api.loadCSV(csvDataArgs1);
+        assertTrue(api.cardinality("csv").size() == 3);
     }
 
     public static void transactionPostCloudTest(CloudConnection api) throws ApiException, IOException {
@@ -142,7 +233,7 @@ public class IntegrationTestsCommons {
         ListComputesResponseProtocol res = api.listComputes();
         System.out.println(res);
 
-        CreateComputeResponseProtocol cres = api.createCompute(randomString(), "XS", "us-east");
+        CreateComputeResponseProtocol cres = api.createCompute(randomString(), RaiComputeSize.XL, InfraMetadataConfig.RaiRegion.US_EAST);
         System.out.println(cres);
     }
 

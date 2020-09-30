@@ -5,19 +5,25 @@ import com.relationalai.client.model.*;
 import com.relationalai.client.ApiException;
 import com.relationalai.cloudclient.model.*;
 import com.relationalai.infra.UnrecognizedRegionException;
+import com.relationalai.infra.config.InfraMetadataConfig;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 public class ManagementConnection extends Connection {
-    private RAIInfra infra;
-    private RAIRegion region;
+    private InfraMetadataConfig.Infra infra;
+    private InfraMetadataConfig.RaiRegion region;
     private ClientConfig clientConfig;
     private boolean verifySSL;
 
     public ManagementConnection() throws UnrecognizedRegionException, GeneralSecurityException, IOException {
         this(new ManagementConnectionArgs(Connection.DEFAULT_SCHEME, Connection.DEFAULT_HOST, Connection.DEFAULT_PORT, Connection.DEFAULT_INFRA,
              Connection.DEFAULT_REGION, null, Connection.DEFAULT_VERIFY_SSL));
+    }
+
+    public ManagementConnection(String scheme, Boolean isVerifySSL, ClientConfig clientConfig) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
+        this(new ManagementConnectionArgs(scheme, clientConfig._raiHost, clientConfig._raiPort, clientConfig._infra,
+                clientConfig._region, clientConfig, isVerifySSL));
     }
     public ManagementConnection(ManagementConnectionArgs mngtConnArgs) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
         super(mngtConnArgs.getScheme(), mngtConnArgs.getHost(), mngtConnArgs.getPort());
@@ -29,12 +35,12 @@ public class ManagementConnection extends Connection {
     }
 
     @Override
-    public RAIInfra getInfra() {
+    public InfraMetadataConfig.Infra getInfra() {
         return infra;
     }
 
     @Override
-    public RAIRegion getRegion() {
+    public InfraMetadataConfig.RaiRegion getRegion() {
         return region;
     }
 
@@ -47,6 +53,9 @@ public class ManagementConnection extends Connection {
     public boolean isVerifySSL() {
         return verifySSL;
     }
+
+    @Override
+    public Transaction.ModeEnum getDefaultOpenMode() { return Transaction.ModeEnum.OPEN; }
 
     private ApiException convert(com.relationalai.cloudclient.ApiException e) {
         return new ApiException(e.getMessage(), e, e.getCode(), e.getResponseHeaders(), e.getResponseBody());
@@ -79,10 +88,10 @@ public class ManagementConnection extends Connection {
         }
     }
 
-    public CreateComputeResponseProtocol createCompute(String displayName, String size, String region) throws ApiException{
+    public CreateComputeResponseProtocol createCompute(String displayName, RaiComputeSize size, InfraMetadataConfig.RaiRegion region) throws ApiException{
         setConnectionOnClient();
         try {
-            return cloudClient.createCompute(displayName, size, region);
+            return cloudClient.createCompute(displayName, size.toString(), region.getName());
         } catch (com.relationalai.cloudclient.ApiException e) {
             throw convert(e);
         }

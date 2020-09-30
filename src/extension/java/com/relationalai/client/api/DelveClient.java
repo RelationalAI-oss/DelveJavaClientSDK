@@ -30,6 +30,7 @@ public class DelveClient extends DefaultApi {
     public final static String DEFAULT_SERVICE_PATH = "/" + DEFAULT_SERVICE;
     public final String JSON_CONTENT_TYPE = "application/json";
     public final String CSV_CONTENT_TYPE = "text/csv";
+    public final int DEFAULT_TIMEOUT = 5 * 60 * 1000; // 5 mins
 
     static final Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
     /*
@@ -72,16 +73,17 @@ public class DelveClient extends DefaultApi {
     }
 
     public DelveClient(Connection conn, String service) {
-        this(conn, service, 100000);
+        this(conn, service, -1);
     }
     public DelveClient(Connection conn, String service, int connectionTimeOut) {
         super(defaultApiClient);
         this.conn = conn;
         this.service = service;
         ApiClient api = this.getApiClient();
-        api.setConnectTimeout(connectionTimeOut);
-        api.setReadTimeout(connectionTimeOut);
-        api.setWriteTimeout(connectionTimeOut);
+        int timeout = connectionTimeOut == -1 ? DEFAULT_TIMEOUT : connectionTimeOut;
+        api.setConnectTimeout(timeout);
+        api.setReadTimeout(timeout);
+        api.setWriteTimeout(timeout);
         OkHttpClient client = api.getHttpClient();
         if (!conn.isVerifySSL()) {
             LOGGER.warn("Using the trustAllSslClient is highly discouraged and should not be used in Production!");
@@ -285,7 +287,7 @@ public class DelveClient extends DefaultApi {
         action.setPersist(queryArgs.getPersist());
 
         QueryActionResult queryResult = (QueryActionResult) runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN);
-        return queryResult == null ? null : getRelationDict(queryResult);
+        return queryResult == null ? new HashMap<RelKey, Relation>() : getRelationDict(queryResult);
     }
 
     public boolean deleteSource(List<String> scrNameList) throws ApiException {
@@ -530,15 +532,10 @@ public class DelveClient extends DefaultApi {
         return ((CardinalityActionResult) runAction(conn, "single", action)).getResult();
     }
 
-    public List<AbstractProblem> collectProblems(String relName) throws ApiException {
-        CardinalityAction action = new CardinalityAction();
-        if (relName != null) action.setRelname(relName);
+    public List<AbstractProblem> collectProblems() throws ApiException {
+        CollectProblemsAction action = new CollectProblemsAction();
         CollectProblemsActionResult actionRes = (CollectProblemsActionResult) runAction(conn, "single", action);
         return actionRes.getProblems();
-    }
-
-    public List<AbstractProblem> collectProblems() throws ApiException {
-        return collectProblems(null);
     }
 
     public boolean configure(ConfigureArgs configureArgs) throws ApiException {

@@ -174,10 +174,6 @@ public class LocalConnection extends Connection {
         setConnectionOnClient();
         return client.cardinality(relName);
     }
-    public List<AbstractProblem> collectProblems(String relName) throws ApiException {
-        setConnectionOnClient();
-        return client.collectProblems(relName);
-    }
 
     public List<AbstractProblem> collectProblems() throws ApiException {
         setConnectionOnClient();

@@ -177,4 +177,8 @@ public class ClientConfig {
     public int getRaiPort() {
         return this._raiPort;
     }
+
+    public InfraMetadataConfig.Infra getRaiInfra() { return this._infra; }
+
+    public InfraMetadataConfig.RaiRegion getRaiRegion() { return this._region; }
 }

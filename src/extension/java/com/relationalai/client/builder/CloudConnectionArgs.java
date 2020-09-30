@@ -4,6 +4,7 @@ import com.relationalai.client.api.ClientConfig;
 import com.relationalai.client.model.RAIInfra;
 import com.relationalai.client.model.RAIRegion;
 import com.relationalai.client.model.Transaction;
+import com.relationalai.infra.config.InfraMetadataConfig;
 
 @lombok.Getter
 @lombok.Setter
@@ -14,8 +15,8 @@ public class CloudConnectionArgs {
     String scheme;
     String host;
     int port;
-    RAIInfra infra;
-    RAIRegion region;
+    InfraMetadataConfig.Infra infra;
+    InfraMetadataConfig.RaiRegion region;
     ClientConfig clientConfig;
     boolean verifySSL;
     String computeName;
@@ -27,8 +28,8 @@ public class CloudConnectionArgs {
             String scheme,
             String host,
             int port,
-            RAIInfra infra,
-            RAIRegion region,
+            InfraMetadataConfig.Infra infra,
+            InfraMetadataConfig.RaiRegion region,
             ClientConfig clientConfig,
             boolean verifySSL,
             String computeName

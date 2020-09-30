@@ -18,6 +18,7 @@ import java.util.Map;
 public class DelveCloudClient extends DefaultApi {
 
     private Connection conn;
+    public final int DEFAULT_TIMEOUT = 5 * 60 * 1000;// 5 mins
 
     public DelveCloudClient(){
         super();
@@ -28,15 +29,19 @@ public class DelveCloudClient extends DefaultApi {
 
     public DelveCloudClient(Connection connection, int connectionTimeOut){
         super(new ApiClient());
-        this.getApiClient().setConnectTimeout(connectionTimeOut);
-        this.getApiClient().setWriteTimeout(connectionTimeOut);
-        this.getApiClient().setReadTimeout(connectionTimeOut);
+
+        int timeout = connectionTimeOut == -1 ? DEFAULT_TIMEOUT : connectionTimeOut;
+
+        this.getApiClient().setConnectTimeout(timeout);
+        this.getApiClient().setWriteTimeout(timeout);
+        this.getApiClient().setReadTimeout(timeout);
+
         this.getApiClient().setBasePath(connection.getBaseUrl());
         this.getApiClient().setVerifyingSsl(connection.isVerifySSL());
     }
 
     public DelveCloudClient(Connection connection) {
-        this(connection, 100000);
+        this(connection, -1);
     }
 
     public ListComputesResponseProtocol listComputes() throws ApiException { return this.computeGet(); }

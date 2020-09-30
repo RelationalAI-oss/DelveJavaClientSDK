@@ -4,6 +4,7 @@ import com.relationalai.client.builder.CloudConnectionArgs;
 import com.relationalai.client.builder.ManagementConnectionArgs;
 import com.relationalai.client.model.*;
 import com.relationalai.infra.UnrecognizedRegionException;
+import com.relationalai.infra.config.InfraMetadataConfig;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -18,8 +19,8 @@ public class CloudConnection extends LocalConnection {
 
     public CloudConnection(
               Connection conn,
-              RAIInfra infra,
-              RAIRegion region,
+              InfraMetadataConfig.Infra infra,
+              InfraMetadataConfig.RaiRegion region,
               ClientConfig clientConfig,
               boolean verifySSL,
               String computeName
@@ -37,6 +38,25 @@ public class CloudConnection extends LocalConnection {
                   computeName
                   )
           );
+    }
+
+    public CloudConnection(
+            ManagementConnection mngtConn,
+            String dbName,
+            String computeName
+    ) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
+        this(new CloudConnectionArgs(
+                dbName,
+                mngtConn.getDefaultOpenMode(),
+                mngtConn.getScheme(),
+                mngtConn.getHost(),
+                mngtConn.getPort(),
+                mngtConn.getInfra(),
+                mngtConn.getRegion(),
+                mngtConn.getClientConfig(),
+                mngtConn.isVerifySSL(),
+                computeName
+        ));
     }
 
     public CloudConnection(String dbname) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
