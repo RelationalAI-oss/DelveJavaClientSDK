@@ -10,8 +10,8 @@ This is a Client SDK for Delve API
 ## Requirements
 
 Building the API client library requires:
-1. Java 1.7+
-2. Maven/Gradle
+1. Open JDK 11+
+2. Maven
 
 ## Installation
 
@@ -20,14 +20,6 @@ To install the API client library to your local Maven repository, simply execute
 ```shell
 mvn clean install
 ```
-
-To deploy it to a remote Maven repository instead, configure the settings of the repository and execute:
-
-```shell
-mvn clean deploy
-```
-
-Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) for more information.
 
 ### Maven users
 
@@ -38,17 +30,38 @@ Add this dependency to your project's POM:
   <groupId>com.relationalai</groupId>
   <artifactId>delve-java-client-sdk</artifactId>
   <version>1.0.3</version>
-  <scope>compile</scope>
 </dependency>
 ```
 
-### Gradle users
+To point maven to the repo, you also have to specify the `repositoriy` in the `pom.xml`.
 
-Add this dependency to your project's build file:
-
-```groovy
-compile "com.relationalai:delve-java-client-sdk:1.0.3"
+```xml
+<repositories>
+    <repository>
+        <id>github</id>
+        <name>GitHub RelationalAI-oss Apache Maven Packages</name>
+        <url>https://maven.pkg.github.com/RelationalAI-oss/DelveJavaClientSDK</url>
+    </repository>
+</repositories>
 ```
+
+The registry access is available through the GitHub api which is protected by an authorisation. So you have ro add the credentials to the Package Registry to your global `settings.xml`:
+`USER_HOME\.m2\settings.xml`
+
+```xml
+<servers>
+    <server>
+        <id>github</id>
+        <username>YOUR_USERNAME</username>
+        <password>YOUR_AUTH_TOKEN</password>
+    </server>
+</servers>
+```
+
+Replace the `YOUR_USERNAME` with your GitHub login name.
+Replace the `YOUR_AUTH_TOKEN` with a generated GitHub personal access token:
+*GitHub > Settings > Developer Settings > Personal access tokens > Generate new token*:
+The token needs at least the read:packages scope. Otherwise you will get a `Not authorized` exception.
 
 ### Getting libraries using Nix
 
