@@ -54,6 +54,10 @@ public class TransactionResult {
   @SerializedName(SERIALIZED_NAME_PROBLEMS)
   private List<AbstractProblem> problems = null;
 
+  public static final String SERIALIZED_NAME_VERSION = "version";
+  @SerializedName(SERIALIZED_NAME_VERSION)
+  private Integer version;
+
   /**
    * Gets or Sets type
    */
@@ -242,6 +246,29 @@ public class TransactionResult {
   }
 
 
+  public TransactionResult version(Integer version) {
+    
+    this.version = version;
+    return this;
+  }
+
+   /**
+   * Get version
+   * @return version
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Integer getVersion() {
+    return version;
+  }
+
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+
   public TransactionResult type(TypeEnum type) {
     
     this.type = type;
@@ -278,12 +305,13 @@ public class TransactionResult {
         Objects.equals(this.debugLevel, transactionResult.debugLevel) &&
         Objects.equals(this.output, transactionResult.output) &&
         Objects.equals(this.problems, transactionResult.problems) &&
+        Objects.equals(this.version, transactionResult.version) &&
         Objects.equals(this.type, transactionResult.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(aborted, actions, debugLevel, output, problems, type);
+    return Objects.hash(aborted, actions, debugLevel, output, problems, version, type);
   }
 
 
@@ -296,6 +324,7 @@ public class TransactionResult {
     sb.append("    debugLevel: ").append(toIndentedString(debugLevel)).append("\n");
     sb.append("    output: ").append(toIndentedString(output)).append("\n");
     sb.append("    problems: ").append(toIndentedString(problems)).append("\n");
+    sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -115,6 +115,10 @@ public class Transaction {
   @SerializedName(SERIALIZED_NAME_SOURCE_DBNAME)
   private String sourceDbname;
 
+  public static final String SERIALIZED_NAME_VERSION = "version";
+  @SerializedName(SERIALIZED_NAME_VERSION)
+  private Integer version;
+
   /**
    * Gets or Sets type
    */
@@ -330,6 +334,29 @@ public class Transaction {
   }
 
 
+  public Transaction version(Integer version) {
+    
+    this.version = version;
+    return this;
+  }
+
+   /**
+   * Get version
+   * @return version
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Integer getVersion() {
+    return version;
+  }
+
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+
   public Transaction type(TypeEnum type) {
     
     this.type = type;
@@ -368,12 +395,13 @@ public class Transaction {
         Objects.equals(this.mode, transaction.mode) &&
         Objects.equals(this.readonly, transaction.readonly) &&
         Objects.equals(this.sourceDbname, transaction.sourceDbname) &&
+        Objects.equals(this.version, transaction.version) &&
         Objects.equals(this.type, transaction.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(abort, actions, dbname, debugLevel, mode, readonly, sourceDbname, type);
+    return Objects.hash(abort, actions, dbname, debugLevel, mode, readonly, sourceDbname, version, type);
   }
 
 
@@ -388,6 +416,7 @@ public class Transaction {
     sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
     sb.append("    readonly: ").append(toIndentedString(readonly)).append("\n");
     sb.append("    sourceDbname: ").append(toIndentedString(sourceDbname)).append("\n");
+    sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
