@@ -30,9 +30,11 @@ public class ClientConfig {
     String _raiHost = AWS_DEFAULT_HOST;
     int _raiPort = 443;
 
-    public ClientConfig(File configDir, InfraMetadataConfig.RaiRegion region,
-                        String accessKey, KeysetHandle privateKeysetHandle,
-                        String infra, String infraHost, String infraPortStr) {
+    public ClientConfig(
+        File configDir, InfraMetadataConfig.RaiRegion region,
+        String accessKey, KeysetHandle privateKeysetHandle,
+        String infra, String infraHost, String infraPortStr
+    ) {
         this._configDir = configDir;
         this._region = region;
         this._accessKey = accessKey;

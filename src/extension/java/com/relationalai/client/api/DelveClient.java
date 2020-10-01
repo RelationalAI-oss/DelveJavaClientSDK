@@ -374,8 +374,9 @@ public class DelveClient extends DefaultApi {
     private void _handleNullFieldsForLoadData(LoadData loadData) {
         if (!StringUtils.isEmpty(loadData.getData()) && !StringUtils.isEmpty(loadData.getPath())) {
             String message = String.format(
-                    "Either `Path` or `Data` should be specified for `LoadData`." +
-                    "You have provided both: `Path`=%s and `Data`=%s", loadData.getPath(), loadData.getData());
+                "Either `Path` or `Data` should be specified for `LoadData`." +
+                "You have provided both: `Path`=%s and `Data`=%s", loadData.getPath(), loadData.getData()
+            );
             throw new IllegalArgumentException(message);
         }
 

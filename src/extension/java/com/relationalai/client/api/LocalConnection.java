@@ -34,11 +34,12 @@ public class LocalConnection extends Connection {
      * @param port `8010`: The port of a running server
      */
     public LocalConnection(
-            String dbname,
-            Transaction.ModeEnum defaultOpenMode,
-            String scheme,
-            String host,
-            int port) {
+        String dbname,
+        Transaction.ModeEnum defaultOpenMode,
+        String scheme,
+        String host,
+        int port
+    ) {
         super(scheme, host, port);
         this.defaultOpenMode = defaultOpenMode;
         this.dbName = dbname;

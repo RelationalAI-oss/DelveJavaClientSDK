@@ -17,13 +17,27 @@ public class ManagementConnection extends Connection {
     private boolean verifySSL;
 
     public ManagementConnection() throws UnrecognizedRegionException, GeneralSecurityException, IOException {
-        this(new ManagementConnectionArgs(Connection.DEFAULT_SCHEME, Connection.DEFAULT_HOST, Connection.DEFAULT_PORT, Connection.DEFAULT_INFRA,
-             Connection.DEFAULT_REGION, null, Connection.DEFAULT_VERIFY_SSL));
+        this(new ManagementConnectionArgs(
+            Connection.DEFAULT_SCHEME,
+            Connection.DEFAULT_HOST,
+            Connection.DEFAULT_PORT,
+            Connection.DEFAULT_INFRA,
+            Connection.DEFAULT_REGION,
+            null,
+            Connection.DEFAULT_VERIFY_SSL
+        ));
     }
 
     public ManagementConnection(String scheme, Boolean isVerifySSL, ClientConfig clientConfig) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
-        this(new ManagementConnectionArgs(scheme, clientConfig._raiHost, clientConfig._raiPort, clientConfig._infra,
-                clientConfig._region, clientConfig, isVerifySSL));
+        this(new ManagementConnectionArgs(
+            scheme,
+            clientConfig._raiHost,
+            clientConfig._raiPort,
+            clientConfig._infra,
+            clientConfig._region,
+            clientConfig,
+            isVerifySSL
+        ));
     }
     public ManagementConnection(ManagementConnectionArgs mngtConnArgs) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
         super(mngtConnArgs.getScheme(), mngtConnArgs.getHost(), mngtConnArgs.getPort());

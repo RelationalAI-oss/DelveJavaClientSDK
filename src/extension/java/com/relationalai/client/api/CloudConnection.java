@@ -18,26 +18,26 @@ public class CloudConnection extends LocalConnection {
     }
 
     public CloudConnection(
-              Connection conn,
-              InfraMetadataConfig.Infra infra,
-              InfraMetadataConfig.RaiRegion region,
-              ClientConfig clientConfig,
-              boolean verifySSL,
-              String computeName
+        Connection conn,
+        InfraMetadataConfig.Infra infra,
+        InfraMetadataConfig.RaiRegion region,
+        ClientConfig clientConfig,
+        boolean verifySSL,
+        String computeName
     ) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
-          this(new CloudConnectionArgs(
-                  conn.getDbName(),
-                  conn.getDefaultOpenMode(),
-                  conn.getScheme(),
-                  conn.getHost(),
-                  conn.getPort(),
-                  infra,
-                  region,
-                  clientConfig,
-                  verifySSL,
-                  computeName
-                  )
-          );
+        this(new CloudConnectionArgs(
+            conn.getDbName(),
+            conn.getDefaultOpenMode(),
+            conn.getScheme(),
+            conn.getHost(),
+            conn.getPort(),
+            infra,
+            region,
+            clientConfig,
+            verifySSL,
+            computeName
+            )
+        );
     }
 
     public CloudConnection(
@@ -46,16 +46,16 @@ public class CloudConnection extends LocalConnection {
             String computeName
     ) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
         this(new CloudConnectionArgs(
-                dbName,
-                mngtConn.getDefaultOpenMode(),
-                mngtConn.getScheme(),
-                mngtConn.getHost(),
-                mngtConn.getPort(),
-                mngtConn.getInfra(),
-                mngtConn.getRegion(),
-                mngtConn.getClientConfig(),
-                mngtConn.isVerifySSL(),
-                computeName
+            dbName,
+            mngtConn.getDefaultOpenMode(),
+            mngtConn.getScheme(),
+            mngtConn.getHost(),
+            mngtConn.getPort(),
+            mngtConn.getInfra(),
+            mngtConn.getRegion(),
+            mngtConn.getClientConfig(),
+            mngtConn.isVerifySSL(),
+            computeName
         ));
     }
 
@@ -68,15 +68,15 @@ public class CloudConnection extends LocalConnection {
     public CloudConnection(CloudConnectionArgs args) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
         super(args.getDbname(), args.getDefaultOpenMode(), args.getScheme(), args.getHost(), args.getPort());
         this.managementConn = new ManagementConnection(
-                new ManagementConnectionArgs(
-                        args.getScheme(),
-                        args.getHost(),
-                        args.getPort(),
-                        args.getInfra(),
-                        args.getRegion(),
-                        args.getClientConfig(),
-                        args.isVerifySSL()
-                )
+            new ManagementConnectionArgs(
+                args.getScheme(),
+                args.getHost(),
+                args.getPort(),
+                args.getInfra(),
+                args.getRegion(),
+                args.getClientConfig(),
+                args.isVerifySSL()
+            )
         );
         this.computeName = args.getComputeName();
         this.setClient(new DelveClient(this)); //to register the connection with a client
