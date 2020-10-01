@@ -16,6 +16,6 @@ public class CSVFileSchemaArgs extends CSVFileSchema {
 
     public CSVFileSchema getCSVFileSchema(CSVFileSchemaArgs CSVFileSchemaArgs) {
         return new CSVFileSchema()
-                .types(CSVFileSchemaArgs.getTypes() == null ? new ArrayList<>() : CSVFileSchemaArgs.getTypes());
+            .types(CSVFileSchemaArgs.getTypes() == null ? new ArrayList<>() : CSVFileSchemaArgs.getTypes());
     }
 }

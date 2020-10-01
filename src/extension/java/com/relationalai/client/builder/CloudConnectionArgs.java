@@ -23,16 +23,16 @@ public class CloudConnectionArgs {
 
     @lombok.Builder
     public CloudConnectionArgs(
-            String dbname,
-            Transaction.ModeEnum defaultOpenMode,
-            String scheme,
-            String host,
-            int port,
-            InfraMetadataConfig.Infra infra,
-            InfraMetadataConfig.RaiRegion region,
-            ClientConfig clientConfig,
-            boolean verifySSL,
-            String computeName
+        String dbname,
+        Transaction.ModeEnum defaultOpenMode,
+        String scheme,
+        String host,
+        int port,
+        InfraMetadataConfig.Infra infra,
+        InfraMetadataConfig.RaiRegion region,
+        ClientConfig clientConfig,
+        boolean verifySSL,
+        String computeName
     ) {
         this.dbname = dbname;
         this.defaultOpenMode = defaultOpenMode;

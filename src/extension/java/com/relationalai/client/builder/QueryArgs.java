@@ -26,13 +26,13 @@ public class QueryArgs extends QueryAction {
      */
     @lombok.Builder
     public QueryArgs(
-            String name,
-            String path,
-            String value,
-            List<Relation> inputs,
-            List<String> outputs,
-            List<String> persist,
-            Source source
+        String name,
+        String path,
+        String value,
+        List<Relation> inputs,
+        List<String> outputs,
+        List<String> persist,
+        Source source
     ) {
         this.name = name;
         this.path = path;

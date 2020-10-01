@@ -12,11 +12,11 @@ public class ConfigureArgs {
 
     @lombok.Builder
     public ConfigureArgs(
-            boolean debug,
-            boolean debugTrace,
-            boolean broken,
-            boolean silent,
-            boolean abortOnError
+        boolean debug,
+        boolean debugTrace,
+        boolean broken,
+        boolean silent,
+        boolean abortOnError
     ) {
         this.debug = debug;
         this.debugTrace = debugTrace;

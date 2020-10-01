@@ -17,13 +17,13 @@ public class DataLoaderArgs extends LoadDataAction {
 
     @lombok.Builder
     public DataLoaderArgs(
-            String rel,
-            String contentType,
-            String data,
-            String path,
-            Object key,
-            FileSyntax syntax,
-            FileSchema schema
+        String rel,
+        String contentType,
+        String data,
+        String path,
+        Object key,
+        FileSyntax syntax,
+        FileSchema schema
     ) {
         this.setRel(rel);
         this.contentType = contentType;

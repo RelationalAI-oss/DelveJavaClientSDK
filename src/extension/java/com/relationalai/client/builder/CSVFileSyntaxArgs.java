@@ -12,17 +12,16 @@ public class CSVFileSyntaxArgs extends CSVFileSyntax {
 
     @lombok.Builder
     public CSVFileSyntaxArgs(
-            List<String > header,
-            String delim,
-            Integer datarow,
-            String escapechar,
-            Integer headerRow,
-            Boolean ignorerepeated,
-            List<String> missingstrings,
-            Boolean normalizenames,
-            String quotechar
-            )
-    {
+        List<String > header,
+        String delim,
+        Integer datarow,
+        String escapechar,
+        Integer headerRow,
+        Boolean ignorerepeated,
+        List<String> missingstrings,
+        Boolean normalizenames,
+        String quotechar
+    ) {
         this.header(header);
         this.datarow(datarow);
         this.delim(delim);

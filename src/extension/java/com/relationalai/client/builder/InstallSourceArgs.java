@@ -15,10 +15,10 @@ public class InstallSourceArgs extends InstallAction {
 
     @lombok.Builder
     public InstallSourceArgs(
-            String name,
-            String path,
-            String value,
-            List<Source> sources
+        String name,
+        String path,
+        String value,
+        List<Source> sources
     ) {
         this.name = name;
         this.path = path;

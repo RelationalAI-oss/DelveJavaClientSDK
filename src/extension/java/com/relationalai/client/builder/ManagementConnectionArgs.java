@@ -19,14 +19,14 @@ public class ManagementConnectionArgs {
 
     @lombok.Builder
     public ManagementConnectionArgs(
-            String scheme,
-            String host,
-            int port,
-            InfraMetadataConfig.Infra infra,
-            InfraMetadataConfig.RaiRegion region,
-            ClientConfig clientConfig,
-            boolean verifySSL
-    ){
+        String scheme,
+        String host,
+        int port,
+        InfraMetadataConfig.Infra infra,
+        InfraMetadataConfig.RaiRegion region,
+        ClientConfig clientConfig,
+        boolean verifySSL
+    ) {
         this.scheme = scheme;
         this.host = host;
         this.port = port;
