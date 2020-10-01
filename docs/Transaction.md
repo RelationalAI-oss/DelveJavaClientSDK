@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **mode** | [**ModeEnum**](#ModeEnum) |  | 
 **readonly** | **Boolean** |  | 
 **sourceDbname** | **String** |  |  [optional]
+**version** | **Integer** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 

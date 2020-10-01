@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.relational.ai/terms/
   title: Delve Client SDK
-  version: 1.0.3
+  version: 1.0.4
 servers:
 - url: http://127.0.0.1:8010
 paths:
@@ -913,6 +913,7 @@ components:
           action:
             type: type
           type: LabeledAction
+        version: 6
       properties:
         abort:
           default: false
@@ -944,6 +945,9 @@ components:
         source_dbname:
           nullable: true
           type: string
+        version:
+          nullable: true
+          type: integer
         type:
           default: Transaction
           enum:
@@ -1023,6 +1027,7 @@ components:
             type: type
           name: name
           type: LabeledActionResult
+        version: 6
         problems:
         - type: type
         - type: type
@@ -1048,6 +1053,9 @@ components:
             $ref: '#/components/schemas/AbstractProblem'
           nullable: true
           type: array
+        version:
+          nullable: true
+          type: integer
         type:
           default: TransactionResult
           enum:

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **debugLevel** | **Integer** |  |  [optional]
 **output** | [**List&lt;Relation&gt;**](Relation.md) |  |  [optional]
 **problems** | [**List&lt;AbstractProblem&gt;**](AbstractProblem.md) |  |  [optional]
+**version** | **Integer** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 
 
