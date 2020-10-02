@@ -65,6 +65,8 @@ The token needs at least the read:packages scope. Otherwise you will get a `Not 
 
 ### Getting libraries using Nix
 
+You can use the following command:
+
 ```shell
 nix-shell -p openjdk11 maven -I nixpkgs=channel:nixos-20.03
 ```
