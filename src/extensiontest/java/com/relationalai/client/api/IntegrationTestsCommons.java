@@ -76,7 +76,7 @@ public class IntegrationTestsCommons {
                 .build();
 
         DataLoaderArgs dataLoaderArgs = DataLoaderArgs.builder()
-                .rel("csv")
+                .rel("csv1")
                 .data("A,B,C\n1,2,3\n4,5,6")
                 .syntax(syntax)
                 .schema(schema)
@@ -86,7 +86,7 @@ public class IntegrationTestsCommons {
 
         // load csv without syntax and schema
         DataLoaderArgs csvDataArgs = DataLoaderArgs.builder()
-                .rel("csv")
+                .rel("csv2")
                 .data("A,B\n1,2\n2,3")
                 .build();
 
