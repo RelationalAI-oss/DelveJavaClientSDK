@@ -132,12 +132,19 @@ public class DelveClient extends DefaultApi {
             }
         }
 
-        if (conn instanceof CloudConnection) {
+        if (conn instanceof LocalConnection) {
             localVarQueryParams.add(new Pair("dbname", conn.getDbName()));
-            localVarQueryParams.add(new Pair("open_mode", transaction.getMode().toString()));
-            localVarQueryParams.add(new Pair("readonly", transaction.getReadonly() ? "true" : "false"));
-            localVarQueryParams.add(new Pair("empty", transaction.getActions() == null || transaction.getActions().isEmpty() ? "true" : "false"));
+            if(!StringUtils.isEmpty(transaction.getSourceDbname())) {
+                localVarQueryParams.add(new Pair("source_dbname", transaction.getSourceDbname()));
+            }
+        }
+
+        localVarQueryParams.add(new Pair("open_mode", transaction.getMode().toString()));
+
+        if (conn instanceof ManagementConnection || conn instanceof CloudConnection) {
             localVarQueryParams.add(new Pair("region", conn.getClientConfig().getRegionName()));
+        }
+        if (conn instanceof ManagementConnection) {
             localVarQueryParams.add(new Pair("compute_name", conn.getComputeName()));
         }
 
