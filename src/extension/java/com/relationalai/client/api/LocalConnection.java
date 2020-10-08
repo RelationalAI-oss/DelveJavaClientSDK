@@ -8,6 +8,7 @@ import com.relationalai.client.builder.QueryArgs;
 import com.relationalai.client.model.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -99,11 +100,11 @@ public class LocalConnection extends Connection {
 
     public boolean updateEdb(
             RelKey relKey,
-            List<PairAnyValueAnyValue> updates,
-            List<PairAnyValueAnyValue> delta
+            List<Pair> updates,
+            List<Pair> delta
     ) throws ApiException {
         setConnectionOnClient();
-        return client.updateEdb(relKey, updates, delta);
+        return client.updateEdb(relKey, client.getAnyKeyValuePairFromPair(updates), client.getAnyKeyValuePairFromPair(delta));
     }
 
     public LoadData jsonString(DataLoaderArgs dataLoaderArgs) {

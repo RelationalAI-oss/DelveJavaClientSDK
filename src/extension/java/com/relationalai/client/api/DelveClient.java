@@ -71,7 +71,6 @@ public class DelveClient extends DefaultApi {
     public DelveClient(Connection conn) {
         this(conn, DEFAULT_SERVICE);
     }
-
     public DelveClient(Connection conn, String service) {
         this(conn, service, -1);
     }
@@ -208,10 +207,6 @@ public class DelveClient extends DefaultApi {
         return null;
     }
 
-    public ActionResult runAction(Connection conn, String name, Action action) throws ApiException {
-        return runAction(conn, name, action, false, Transaction.ModeEnum.OPEN);
-    }
-
     public boolean createDatabase(boolean overwrite) throws ApiException {
         Transaction xact = new Transaction();
         xact.setMode(overwrite ? Transaction.ModeEnum.CREATE_OVERWRITE : Transaction.ModeEnum.CREATE);
@@ -286,6 +281,8 @@ public class DelveClient extends DefaultApi {
             queryArgs.setOutputs(new ArrayList<String>());
         if (queryArgs.getPersist() == null)
             queryArgs.setPersist(new ArrayList<String>());
+        if (queryArgs.getReadOnly() == null)
+            queryArgs.setReadOnly(queryArgs.getPersist().size() == 0);
 
         QueryAction action = new QueryAction();
         action.setSource(queryArgs.getSource());
@@ -293,7 +290,7 @@ public class DelveClient extends DefaultApi {
         action.setOutputs(queryArgs.getOutputs());
         action.setPersist(queryArgs.getPersist());
 
-        QueryActionResult queryResult = (QueryActionResult) runAction(conn, "single", action, false, Transaction.ModeEnum.OPEN);
+        QueryActionResult queryResult = (QueryActionResult) runAction(conn, "single", action, queryArgs.getReadOnly(), Transaction.ModeEnum.OPEN);
         return queryResult == null ? new HashMap<RelKey, Relation>() : getRelationDict(queryResult);
     }
 
@@ -301,7 +298,7 @@ public class DelveClient extends DefaultApi {
         ModifyWorkspaceAction action = new ModifyWorkspaceAction();
         action.setDeleteSource(scrNameList);
 
-        return runAction(conn, "single", action) != null;
+        return runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
     public boolean deleteSource(String srcName) throws ApiException {
@@ -310,7 +307,7 @@ public class DelveClient extends DefaultApi {
 
     public Map<String, Source> listSource() throws ApiException {
         ListSourceAction action = new ListSourceAction();
-        ListSourceActionResult actionRes = (ListSourceActionResult) runAction(conn, "single", action);
+        ListSourceActionResult actionRes = (ListSourceActionResult) runAction(conn, "single",action, true, Transaction.ModeEnum.OPEN);
 
         Map resultDict = new HashMap<String, Source>();
         for(Source src : actionRes.getSources()) {
@@ -330,7 +327,7 @@ public class DelveClient extends DefaultApi {
         action.setUpdates(updates);
         action.setDelta(delta);
 
-        return runAction(conn, "single", action) != null;
+        return runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
     public LoadData jsonString(DataLoaderArgs dataLoaderArgs) {
@@ -438,7 +435,7 @@ public class DelveClient extends DefaultApi {
         action.setRel(rel);
         action.setValue(loadData);
 
-        return runAction(conn, "single", action) != null;
+        return runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
     public boolean loadEdb(String relName, Map<Object,Object> columns) throws ApiException {
@@ -487,7 +484,7 @@ public class DelveClient extends DefaultApi {
     public boolean loadEdb(List<Relation> value) throws ApiException {
         ImportAction action = new ImportAction();
         action.setInputs(value);
-        return runAction(conn, "single", action) != null;
+        return runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
     public boolean loadCSV(DataLoaderArgs dataLoaderArgs) throws IOException, ApiException {
@@ -513,7 +510,7 @@ public class DelveClient extends DefaultApi {
     public List<RelKey> listEdb(String relName) throws ApiException {
         ListEdbAction action = new ListEdbAction();
         if (relName != null) action.setRelname(relName);
-        ListEdbActionResult actionRes = (ListEdbActionResult) runAction(conn, "single", action);
+        ListEdbActionResult actionRes = (ListEdbActionResult) runAction(conn, "single",action, true, Transaction.ModeEnum.OPEN);
         return actionRes.getRels();
     }
 
@@ -524,25 +521,25 @@ public class DelveClient extends DefaultApi {
     public List<RelKey> deleteEdb(String relName) throws ApiException {
         ModifyWorkspaceAction action = new ModifyWorkspaceAction();
         action.setDeleteEdb(relName);
-        ModifyWorkspaceActionResult actionRes = (ModifyWorkspaceActionResult) runAction(conn, "single", action);
+        ModifyWorkspaceActionResult actionRes = (ModifyWorkspaceActionResult) runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN);
         return actionRes.getDeleteEdbResult();
     }
 
     public boolean enableLibrary(String srcName) throws ApiException {
         ModifyWorkspaceAction action = new ModifyWorkspaceAction();
         action.setEnableLibrary(srcName);
-        return runAction(conn, "single", action) != null;
+        return runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
     public List<Relation> cardinality(String relName) throws ApiException {
         CardinalityAction action = new CardinalityAction();
         if (relName != null) action.setRelname(relName);
-        return ((CardinalityActionResult) runAction(conn, "single", action)).getResult();
+        return ((CardinalityActionResult) runAction(conn, "single",action, true, Transaction.ModeEnum.OPEN)).getResult();
     }
 
     public List<AbstractProblem> collectProblems() throws ApiException {
         CollectProblemsAction action = new CollectProblemsAction();
-        CollectProblemsActionResult actionRes = (CollectProblemsActionResult) runAction(conn, "single", action);
+        CollectProblemsActionResult actionRes = (CollectProblemsActionResult) runAction(conn, "single",action, true, Transaction.ModeEnum.OPEN);
         return actionRes.getProblems();
     }
 
@@ -553,7 +550,7 @@ public class DelveClient extends DefaultApi {
         action.setBroken(configureArgs.isBroken());
         action.setSilent(configureArgs.isSilent());
         action.setAbortOnError(configureArgs.isAbortOnError());
-        return runAction(conn, "single", action) != null;
+        return runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN) != null;
     }
 
     private Map<RelKey, Relation> getRelationDict(QueryActionResult queryActionResult) {
@@ -562,5 +559,16 @@ public class DelveClient extends DefaultApi {
             dict.put(rel.getRelKey(), rel);
         }
         return dict;
+    }
+
+    public List<PairAnyValueAnyValue> getAnyKeyValuePairFromPair(List<com.relationalai.client.model.Pair> pairs) {
+        List<PairAnyValueAnyValue> raw = new ArrayList<>();
+        for (com.relationalai.client.model.Pair p : pairs) {
+            PairAnyValueAnyValue anyPair = new PairAnyValueAnyValue()
+                    .first(p.getKey())
+                    .second(p.getValue());
+            raw.add(anyPair);
+        }
+        return raw;
     }
 }

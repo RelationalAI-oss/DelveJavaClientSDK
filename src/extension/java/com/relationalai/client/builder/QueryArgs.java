@@ -13,6 +13,7 @@ public class QueryArgs extends QueryAction {
     private String name;
     private String path;
     private String value;
+    private Boolean readOnly;
 
     /**
      *
@@ -29,6 +30,7 @@ public class QueryArgs extends QueryAction {
         String name,
         String path,
         String value,
+        Boolean isReadOnly,
         List<Relation> inputs,
         List<String> outputs,
         List<String> persist,
@@ -37,6 +39,7 @@ public class QueryArgs extends QueryAction {
         this.name = name;
         this.path = path;
         this.value = value;
+        this.readOnly = readOnly == null ? null : readOnly;
         this.inputs(inputs);
         this.outputs(outputs);
         this.persist(persist);
