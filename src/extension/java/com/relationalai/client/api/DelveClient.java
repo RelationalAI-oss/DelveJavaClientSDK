@@ -196,7 +196,7 @@ public class DelveClient extends DefaultApi {
         if (conn.getDebugLevel() > 0)
             System.out.println("=> TransactionResult: " + response);
 
-        if (!response.getAborted() && response.getProblems().isEmpty()) {
+        if (!response.getAborted()) {
             for (LabeledActionResult act : response.getActions()) {
                 if (name.equals(act.getName())) {
                     ActionResult res = act.getResult();
@@ -571,7 +571,7 @@ public class DelveClient extends DefaultApi {
         List<PairAnyValueAnyValue> raw = new ArrayList<>();
         for (com.relationalai.client.model.Pair p : pairs) {
             PairAnyValueAnyValue anyPair = new PairAnyValueAnyValue()
-                    .first(p.getKey())
+                    .first(Arrays.asList(p.getKey()))
                     .second(p.getValue());
             raw.add(anyPair);
         }

@@ -29,7 +29,7 @@ public class LocalIntegrationTests {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void transactionPostTest() throws ApiException, IOException, InterruptedException {
+    public void ruAllTest() throws ApiException, IOException, InterruptedException {
         IntegrationTestsCommons.runAllTest();
     }
 }

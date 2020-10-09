@@ -77,7 +77,6 @@ public class IntegrationTestsCommons {
     }
 
     public static Map<RelKey, Relation> toRelation(String name, Map<Object, Object> columns, List<String> keys) {
-        System.out.println(columns);
         Relation relation = new Relation();
         RelKey relKey = new RelKey();
         relKey.setName(name);
@@ -220,8 +219,7 @@ public class IntegrationTestsCommons {
                 add(new Pair(5, +1));
             }
         };
-        // TODO we need to figure out why it fails
-        //assertTrue(conn.updateEdb(pRelKey, updates, null));
+        assertTrue(conn.updateEdb(pRelKey, updates, null));
 
         // load_csv
         // ===========================================================================
@@ -317,8 +315,7 @@ public class IntegrationTestsCommons {
                 .build();
 
         conn.installSource(installSourceArgs);
-        // TODO collect problems not working: fix me
-        //assertTrue(conn.collectProblems().size() == 2);
+        assertTrue(conn.collectProblems().size() == 2);
 
         // Set options
         // =====================================================================
