@@ -68,6 +68,11 @@ public class LocalConnection extends Connection {
         return client.cloneDatabase(sourceDbName);
     }
 
+    public boolean cloneDatabase(String sourceDbName, boolean overwrite) throws ApiException {
+        setConnectionOnClient();
+        return client.cloneDatabase(sourceDbName, overwrite);
+    }
+
     public boolean createDatabase(boolean overwrite) throws ApiException {
         setConnectionOnClient();
         return client.createDatabase(overwrite);

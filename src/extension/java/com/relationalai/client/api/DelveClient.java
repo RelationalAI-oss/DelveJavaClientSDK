@@ -233,8 +233,12 @@ public class DelveClient extends DefaultApi {
     }
 
     public boolean cloneDatabase(String sourceName) throws ApiException {
+        return cloneDatabase(sourceName, false);
+    }
+
+    public boolean cloneDatabase(String sourceName, boolean overwrite) throws ApiException {
         Transaction xact = new Transaction();
-        xact.setMode(Transaction.ModeEnum.CLONE);
+        xact.setMode(overwrite ? Transaction.ModeEnum.CLONE_OVERWRITE : Transaction.ModeEnum.CLONE);
         xact.setDbname(conn.getDbName());
         xact.setActions(new ArrayList<LabeledAction>());
         xact.setSourceDbname(sourceName);
@@ -562,6 +566,8 @@ public class DelveClient extends DefaultApi {
     }
 
     public List<PairAnyValueAnyValue> getAnyKeyValuePairFromPair(List<com.relationalai.client.model.Pair> pairs) {
+        if(pairs == null)
+            return null;
         List<PairAnyValueAnyValue> raw = new ArrayList<>();
         for (com.relationalai.client.model.Pair p : pairs) {
             PairAnyValueAnyValue anyPair = new PairAnyValueAnyValue()

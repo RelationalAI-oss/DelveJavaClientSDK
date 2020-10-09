@@ -53,7 +53,6 @@ public class CloudIntegrationTests {
      */
     @Test
     public void transactionPostTest() throws ApiException, IOException {
-        IntegrationTestsCommons.transactionPostCloudTest(api);
     }
 
 

@@ -23,18 +23,13 @@ import java.io.IOException;
  */
 public class LocalIntegrationTests {
 
-    private final static String DATABSE_NAME = "testdb";
-    private final static LocalConnection api = new LocalConnection(DATABSE_NAME);
-
     /**
      * Issues a transaction to be executed
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void transactionPostTest() throws ApiException, IOException {
-        IntegrationTestsCommons.transactionPostLocalTest(api);
+    public void transactionPostTest() throws ApiException, IOException, InterruptedException {
+        IntegrationTestsCommons.runAllTest();
     }
-
-
 }
