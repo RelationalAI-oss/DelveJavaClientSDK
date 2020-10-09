@@ -182,6 +182,7 @@ public class DelveClient extends DefaultApi {
         xact.setMode(mode);
         xact.setDbname(conn.getDbName());
         xact.setReadonly(isReadOnly);
+        xact.setVersion(conn.getVersion());
 
         LabeledAction labeledAction = new LabeledAction();
         labeledAction.setName(name);

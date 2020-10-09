@@ -17,6 +17,7 @@ public abstract class Connection {
     private String host;
     private int port;
     private int debugLevel;
+    private int version;
 
     protected DelveClient client;
     protected DelveCloudClient cloudClient;
@@ -110,6 +111,8 @@ public abstract class Connection {
     public void setClient(DelveClient client) { this.client = client; }
 
     public void setCloudClient(DelveCloudClient cloudClient) { this.cloudClient = cloudClient; }
+    public int getVersion() {  return version; }
+    public void setVersion(int version) { this.version = version;}
 
     public void setConnectionOnClient() {
         if (client != null) client.setConn(this);

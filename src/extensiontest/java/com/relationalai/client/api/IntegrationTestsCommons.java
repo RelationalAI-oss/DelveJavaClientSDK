@@ -97,7 +97,7 @@ public class IntegrationTestsCommons {
         // create database
         // ============================================================================
         assertTrue( conn.createDatabase(true) );
-        //assertThrows( RuntimeException.class, () -> conn.createDatabase(false) );
+        assertThrows( RuntimeException.class, () -> conn.createDatabase(false) );
 
         // install source
         // ============================================================================
