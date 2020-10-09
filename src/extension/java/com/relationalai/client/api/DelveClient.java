@@ -273,22 +273,6 @@ public class DelveClient extends DefaultApi {
     }
 
     public Map<RelKey, Relation> query(QueryArgs queryArgs) throws ApiException {
-        if (queryArgs.getSource() == null) {
-            Source src = new Source();
-            src.setName(queryArgs.getName() == null ? "" : queryArgs.getName());
-            src.setPath(queryArgs.getPath() == null ? "" : queryArgs.getPath());
-            src.setValue(queryArgs.getValue() == null ? "" : queryArgs.getValue());
-            queryArgs.setSource(src);
-        }
-        if (queryArgs.getInputs() == null)
-            queryArgs.setInputs(new ArrayList<Relation>());
-        if (queryArgs.getOutputs() == null)
-            queryArgs.setOutputs(new ArrayList<String>());
-        if (queryArgs.getPersist() == null)
-            queryArgs.setPersist(new ArrayList<String>());
-        if (queryArgs.getReadOnly() == null)
-            queryArgs.setReadOnly(queryArgs.getPersist().size() == 0);
-
         QueryAction action = new QueryAction();
         action.setSource(queryArgs.getSource());
         action.setInputs(queryArgs.getInputs());

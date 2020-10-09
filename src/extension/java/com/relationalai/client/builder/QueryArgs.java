@@ -4,6 +4,7 @@ import com.relationalai.client.model.QueryAction;
 import com.relationalai.client.model.Relation;
 import com.relationalai.client.model.Source;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @lombok.Getter
@@ -30,19 +31,27 @@ public class QueryArgs extends QueryAction {
         String name,
         String path,
         String value,
-        Boolean isReadOnly,
+        Boolean readOnly,
         List<Relation> inputs,
         List<String> outputs,
         List<String> persist,
         Source source
     ) {
-        this.name = name;
-        this.path = path;
-        this.value = value;
-        this.readOnly = readOnly == null ? null : readOnly;
-        this.inputs(inputs);
-        this.outputs(outputs);
-        this.persist(persist);
-        this.source(source);
+        this.name = name == null ? "" : name;
+        this.path = path == null ? "" : path;
+        this.value = value == null ? "" : value;
+        this.inputs(inputs == null ? new ArrayList<>() : inputs);
+        this.outputs(outputs == null ? new ArrayList<>() : outputs);
+        this.persist(persist == null ? new ArrayList<>() : persist);
+        this.readOnly = readOnly == null ? this.getPersist().size() == 0 : readOnly;
+        if (source == null) {
+            Source src = new Source();
+            src.setName(this.getName());
+            src.setPath(this.getPath());
+            src.setValue(this.getValue());
+            this.source(src);
+        } else {
+            this.source(source);
+        }
     }
 }

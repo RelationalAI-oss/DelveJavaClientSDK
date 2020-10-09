@@ -115,7 +115,7 @@ public abstract class Connection {
     public void setVersion(int version) { this.version = version;}
 
     public void setConnectionOnClient() {
-        if (client != null) client.setConn(this);
-        if (cloudClient != null) cloudClient.setConn(this);
+        if (client != null) { client.setConn(this); }
+        if (cloudClient != null) { cloudClient.setConn(this); }
     }
 }
