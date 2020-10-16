@@ -25,6 +25,7 @@ import com.relationalai.client.model.ExceptionProblem;
 import com.relationalai.client.model.FrontProblem;
 import com.relationalai.client.model.IntegrityConstraintProblem;
 import com.relationalai.client.model.IntegrityConstraintViolation;
+import com.relationalai.client.model.LoadDataProblem;
 import com.relationalai.client.model.OutputProblem;
 import com.relationalai.client.model.PersistProblem;
 import com.relationalai.client.model.SyntaxError;

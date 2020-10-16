@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.FileSchema;
 import com.relationalai.client.model.FileSyntax;
+import com.relationalai.client.model.Integration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -72,6 +73,14 @@ public class LoadDataTest {
     @Test
     public void fileSyntaxTest() {
         // TODO: test fileSyntax
+    }
+
+    /**
+     * Test the property 'integration'
+     */
+    @Test
+    public void integrationTest() {
+        // TODO: test integration
     }
 
     /**
