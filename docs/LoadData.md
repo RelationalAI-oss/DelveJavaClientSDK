@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **data** | **String** |  |  [optional]
 **fileSchema** | [**FileSchema**](FileSchema.md) |  |  [optional]
 **fileSyntax** | [**FileSyntax**](FileSyntax.md) |  |  [optional]
+**integration** | [**Integration**](Integration.md) |  |  [optional]
 **key** | **Object** |  | 
 **path** | **String** |  |  [optional]
 **type** | [**TypeEnum**](#TypeEnum) |  | 

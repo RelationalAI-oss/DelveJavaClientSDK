@@ -63,6 +63,7 @@ public class JSON {
                         classByDiscriminatorValue.put("FrontProblem", FrontProblem.class);
                         classByDiscriminatorValue.put("IntegrityConstraintProblem", IntegrityConstraintProblem.class);
                         classByDiscriminatorValue.put("IntegrityConstraintViolation", IntegrityConstraintViolation.class);
+                        classByDiscriminatorValue.put("LoadDataProblem", LoadDataProblem.class);
                         classByDiscriminatorValue.put("OutputProblem", OutputProblem.class);
                         classByDiscriminatorValue.put("PersistProblem", PersistProblem.class);
                         classByDiscriminatorValue.put("SyntaxError", SyntaxError.class);
@@ -129,6 +130,15 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("ArityMismatchError", ArityMismatchError.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(AzureIntegration.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("AzureIntegration", AzureIntegration.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }
@@ -214,6 +224,15 @@ public class JSON {
                                 getDiscriminatorValue(readElement, "type"));
                     }
           })
+                .registerTypeSelector(DefaultIntegration.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("DefaultIntegration", DefaultIntegration.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
                 .registerTypeSelector(ExceptionProblem.class, new TypeSelector() {
                     @Override
                     public Class getClassForElement(JsonElement readElement) {
@@ -289,6 +308,18 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("InstallActionResult", InstallActionResult.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(Integration.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("AzureIntegration", AzureIntegration.class);
+                        classByDiscriminatorValue.put("DefaultIntegration", DefaultIntegration.class);
+                        classByDiscriminatorValue.put("S3Integration", S3Integration.class);
+                        classByDiscriminatorValue.put("Integration", Integration.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }
@@ -403,6 +434,15 @@ public class JSON {
                                 getDiscriminatorValue(readElement, "type"));
                     }
           })
+                .registerTypeSelector(LoadDataProblem.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("LoadDataProblem", LoadDataProblem.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
                 .registerTypeSelector(ModifyWorkspaceAction.class, new TypeSelector() {
                     @Override
                     public Class getClassForElement(JsonElement readElement) {
@@ -480,6 +520,15 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("QueryActionResult", QueryActionResult.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(S3Integration.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("S3Integration", S3Integration.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }

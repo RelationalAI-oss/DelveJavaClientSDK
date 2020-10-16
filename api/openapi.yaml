@@ -289,6 +289,68 @@ components:
       allOf:
       - $ref: '#/components/schemas/FileSyntax'
       type: object
+    Integration:
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          default: ""
+          type: string
+      required:
+      - type
+      type: object
+    Pair_Symbol_String_:
+      properties:
+        first:
+          default: ""
+          type: string
+        second:
+          default: ""
+          type: string
+        type:
+          default: Pair_Symbol_String_
+          enum:
+          - Pair_Symbol_String_
+          type: string
+      required:
+      - first
+      - second
+      - type
+      type: object
+    AzureIntegration:
+      allOf:
+      - $ref: '#/components/schemas/Integration'
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/Pair_Symbol_String_'
+          nullable: true
+          type: array
+        name:
+          nullable: true
+          type: string
+        storage_allowed_locations:
+          items:
+            type: string
+          nullable: true
+          type: array
+        storage_blocked_locations:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tenant_id:
+          nullable: true
+          type: string
+      type: object
+    DefaultIntegration:
+      allOf:
+      - $ref: '#/components/schemas/Integration'
+      type: object
+    S3Integration:
+      allOf:
+      - $ref: '#/components/schemas/Integration'
+      type: object
     LoadData:
       properties:
         content_type:
@@ -301,6 +363,8 @@ components:
           $ref: '#/components/schemas/FileSchema'
         file_syntax:
           $ref: '#/components/schemas/FileSyntax'
+        integration:
+          $ref: '#/components/schemas/Integration'
         key: {}
         path:
           nullable: true
@@ -646,6 +710,16 @@ components:
             $ref: '#/components/schemas/ICViolation'
           nullable: true
           type: array
+      type: object
+    LoadDataProblem:
+      allOf:
+      - $ref: '#/components/schemas/AbstractProblem'
+      properties:
+        exception:
+          default: ""
+          type: string
+      required:
+      - exception
       type: object
     OutputProblem:
       allOf:
