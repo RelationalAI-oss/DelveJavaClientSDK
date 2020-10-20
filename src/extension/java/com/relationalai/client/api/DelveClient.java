@@ -417,6 +417,7 @@ public class DelveClient extends DefaultApi {
         loadData.setKey(dataLoaderArgs.getKey() == null ? new ArrayList<>() : dataLoaderArgs.getKey());
         loadData.setFileSyntax(dataLoaderArgs.getSyntax());
         loadData.setFileSchema(dataLoaderArgs.getSchema());
+        loadData.setIntegration(dataLoaderArgs.getIntegration());
 
         _handleNullFieldsForLoadData(loadData);
         _readFileFromPath(loadData);
