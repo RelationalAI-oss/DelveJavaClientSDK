@@ -255,19 +255,19 @@ public class IntegrationTestsCommons {
         credentialsPair.setFirst("azure_sas_token");
         credentialsPair.setSecond("SAS_TOKEN");
 
-        AzureIntegration azureIntegrationArgs = AzureIntegrationArgs.builder()
+
+        AzureIntegration azureIntegration = new AzureIntegration()
             .credentials(List.of(credentialsPair))
             .tenantId("<tenant_id>")
             .name("my_integration")
             .storageAllowedLocations(List.of("azure://myaccount.blob.core.windows.net/mycontainer1/mypath1/"))
-            .storageBlockedLocations(List.of("azure://myaccount.blob.core.windows.net/mycontainer1/mypath1/sensitive/"))
-            .build();
+            .storageBlockedLocations(List.of("azure://myaccount.blob.core.windows.net/mycontainer1/mypath1/sensitive/"));
 
         dataLoaderArgs = DataLoaderArgs.builder()
                 .rel("baz")
                 .schema(csvFileSchemaArgs)
                 .syntax(csvFileSyntaxArgs)
-                .integration(azureIntegrationArgs)
+                .integration(azureIntegration)
                 .data("D|E|F\n1|2|3\n1|2|3\n1|2|3\n1|2|3")
                 .build();
 
