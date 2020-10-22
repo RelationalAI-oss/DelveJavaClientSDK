@@ -191,4 +191,9 @@ public class LocalConnection extends Connection {
         setConnectionOnClient();
         return client.configure(configureArgs);
     }
+
+    public boolean status() throws ApiException {
+        setConnectionOnClient();
+        return client.status();
+    }
 }
