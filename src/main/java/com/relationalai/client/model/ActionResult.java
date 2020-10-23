@@ -31,6 +31,7 @@ import com.relationalai.client.model.ModifyWorkspaceActionResult;
 import com.relationalai.client.model.ParseActionResult;
 import com.relationalai.client.model.QueryActionResult;
 import com.relationalai.client.model.SetOptionsActionResult;
+import com.relationalai.client.model.StatusActionResult;
 import com.relationalai.client.model.UpdateActionResult;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

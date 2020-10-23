@@ -2,6 +2,7 @@ package com.relationalai.client.builder;
 
 import com.relationalai.client.model.FileSchema;
 import com.relationalai.client.model.FileSyntax;
+import com.relationalai.client.model.Integration;
 import com.relationalai.client.model.LoadDataAction;
 
 @lombok.Getter
@@ -14,6 +15,7 @@ public class DataLoaderArgs extends LoadDataAction {
     Object key;
     FileSyntax syntax;
     FileSchema schema;
+    Integration integration;
 
     @lombok.Builder
     public DataLoaderArgs(
@@ -23,7 +25,8 @@ public class DataLoaderArgs extends LoadDataAction {
         String path,
         Object key,
         FileSyntax syntax,
-        FileSchema schema
+        FileSchema schema,
+        Integration integration
     ) {
         this.setRel(rel);
         this.contentType = contentType;
@@ -32,5 +35,6 @@ public class DataLoaderArgs extends LoadDataAction {
         this.key = key;
         this.syntax = syntax;
         this.schema = schema;
+        this.integration = integration;
     }
 }

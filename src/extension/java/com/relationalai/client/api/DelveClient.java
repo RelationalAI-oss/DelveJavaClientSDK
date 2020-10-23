@@ -417,6 +417,7 @@ public class DelveClient extends DefaultApi {
         loadData.setKey(dataLoaderArgs.getKey() == null ? new ArrayList<>() : dataLoaderArgs.getKey());
         loadData.setFileSyntax(dataLoaderArgs.getSyntax());
         loadData.setFileSchema(dataLoaderArgs.getSchema());
+        loadData.setIntegration(dataLoaderArgs.getIntegration());
 
         _handleNullFieldsForLoadData(loadData);
         _readFileFromPath(loadData);
@@ -561,5 +562,10 @@ public class DelveClient extends DefaultApi {
             raw.add(anyPair);
         }
         return raw;
+    }
+
+    public boolean status() throws ApiException {
+        StatusAction action = new StatusAction();
+        return runAction(conn, "single", action, true, Transaction.ModeEnum.OPEN) != null;
     }
 }

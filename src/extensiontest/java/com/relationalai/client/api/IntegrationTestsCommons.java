@@ -94,6 +94,11 @@ public class IntegrationTestsCommons {
     public static void runAllTest() throws ApiException, IOException, InterruptedException {
         // create connection
         LocalConnection conn = createConnection();
+
+        // status
+        // ============================================================================
+        assertTrue( conn.status() );
+
         // create database
         // ============================================================================
         assertTrue( conn.createDatabase(true) );
@@ -249,6 +254,30 @@ public class IntegrationTestsCommons {
 
         assertTrue(conn.loadCSV(dataLoaderArgs));
         assertTrue(testQuery(conn, "def result = count[pos: bar[pos, :D]]", "result").equals(
+                toRelation("result", Arrays.asList(4.0), "Int64")));
+
+        PairSymbolString credentialsPair = new PairSymbolString();
+        credentialsPair.setFirst("azure_sas_token");
+        credentialsPair.setSecond("SAS_TOKEN");
+
+
+        AzureIntegration azureIntegration = new AzureIntegration()
+            .credentials(List.of(credentialsPair))
+            .tenantId("<tenant_id>")
+            .name("my_integration")
+            .storageAllowedLocations(List.of("azure://myaccount.blob.core.windows.net/mycontainer1/mypath1/"))
+            .storageBlockedLocations(List.of("azure://myaccount.blob.core.windows.net/mycontainer1/mypath1/sensitive/"));
+
+        dataLoaderArgs = DataLoaderArgs.builder()
+                .rel("baz")
+                .schema(csvFileSchemaArgs)
+                .syntax(csvFileSyntaxArgs)
+                .integration(azureIntegration)
+                .data("D|E|F\n1|2|3\n1|2|3\n1|2|3\n1|2|3")
+                .build();
+
+        assertTrue(conn.loadCSV(dataLoaderArgs));
+        assertTrue(testQuery(conn, "def result = count[pos: baz[pos, :D]]", "result").equals(
                 toRelation("result", Arrays.asList(4.0), "Int64")));
 
         // load json
