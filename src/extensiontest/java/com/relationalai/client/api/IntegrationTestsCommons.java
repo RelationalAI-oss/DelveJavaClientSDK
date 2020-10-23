@@ -94,6 +94,11 @@ public class IntegrationTestsCommons {
     public static void runAllTest() throws ApiException, IOException, InterruptedException {
         // create connection
         LocalConnection conn = createConnection();
+
+        // status
+        // ============================================================================
+        assertTrue( conn.status() );
+
         // create database
         // ============================================================================
         assertTrue( conn.createDatabase(true) );

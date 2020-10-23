@@ -563,4 +563,9 @@ public class DelveClient extends DefaultApi {
         }
         return raw;
     }
+
+    public boolean status() throws ApiException {
+        StatusAction action = new StatusAction();
+        return runAction(conn, "single", action, true, Transaction.ModeEnum.OPEN) != null;
+    }
 }

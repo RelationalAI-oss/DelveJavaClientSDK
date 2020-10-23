@@ -89,6 +89,7 @@ public class JSON {
                         classByDiscriminatorValue.put("ParseAction", ParseAction.class);
                         classByDiscriminatorValue.put("QueryAction", QueryAction.class);
                         classByDiscriminatorValue.put("SetOptionsAction", SetOptionsAction.class);
+                        classByDiscriminatorValue.put("StatusAction", StatusAction.class);
                         classByDiscriminatorValue.put("UpdateAction", UpdateAction.class);
                         classByDiscriminatorValue.put("Action", Action.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
@@ -110,6 +111,7 @@ public class JSON {
                         classByDiscriminatorValue.put("ParseActionResult", ParseActionResult.class);
                         classByDiscriminatorValue.put("QueryActionResult", QueryActionResult.class);
                         classByDiscriminatorValue.put("SetOptionsActionResult", SetOptionsActionResult.class);
+                        classByDiscriminatorValue.put("StatusActionResult", StatusActionResult.class);
                         classByDiscriminatorValue.put("UpdateActionResult", UpdateActionResult.class);
                         classByDiscriminatorValue.put("ActionResult", ActionResult.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
@@ -547,6 +549,24 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("SetOptionsActionResult", SetOptionsActionResult.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(StatusAction.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("StatusAction", StatusAction.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(StatusActionResult.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("StatusActionResult", StatusActionResult.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }

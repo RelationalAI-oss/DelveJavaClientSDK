@@ -465,6 +465,10 @@ components:
           nullable: true
           type: boolean
       type: object
+    StatusAction:
+      allOf:
+      - $ref: '#/components/schemas/Action'
+      type: object
     Pair_AnyValue_AnyValue_:
       properties:
         first: {}
@@ -940,6 +944,10 @@ components:
           type: array
       type: object
     SetOptionsActionResult:
+      allOf:
+      - $ref: '#/components/schemas/ActionResult'
+      type: object
+    StatusActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
       type: object
