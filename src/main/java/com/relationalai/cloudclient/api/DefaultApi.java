@@ -283,7 +283,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New compute </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New compute </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call computePutCall(CreateComputeRequestProtocol createComputeRequestProtocol, final ApiCallback _callback) throws ApiException {
@@ -338,7 +338,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New compute </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New compute </td><td>  -  </td></tr>
      </table>
      */
     public CreateComputeResponseProtocol computePut(CreateComputeRequestProtocol createComputeRequestProtocol) throws ApiException {
@@ -355,7 +355,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New compute </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New compute </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<CreateComputeResponseProtocol> computePutWithHttpInfo(CreateComputeRequestProtocol createComputeRequestProtocol) throws ApiException {
@@ -374,7 +374,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New compute </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New compute </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call computePutAsync(CreateComputeRequestProtocol createComputeRequestProtocol, final ApiCallback<CreateComputeResponseProtocol> _callback) throws ApiException {
@@ -701,7 +701,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New user </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New user </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call userPutCall(CreateUserRequestProtocol createUserRequestProtocol, final ApiCallback _callback) throws ApiException {
@@ -756,7 +756,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New user </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New user </td><td>  -  </td></tr>
      </table>
      */
     public CreateUserResponseProtocol userPut(CreateUserRequestProtocol createUserRequestProtocol) throws ApiException {
@@ -773,7 +773,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New user </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New user </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<CreateUserResponseProtocol> userPutWithHttpInfo(CreateUserRequestProtocol createUserRequestProtocol) throws ApiException {
@@ -792,7 +792,7 @@ public class DefaultApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> New user </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> New user </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call userPutAsync(CreateUserRequestProtocol createUserRequestProtocol, final ApiCallback<CreateUserResponseProtocol> _callback) throws ApiException {
