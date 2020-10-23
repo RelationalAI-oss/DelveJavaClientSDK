@@ -64,7 +64,7 @@ public final class Http2Client {
         // shoved it into the headers
         return request.newBuilder()
                       .header("Authorization", authHeader)
-                      .header("User-Agent", "DelveClient/1.0.11/java")
+                      .header("User-Agent", "DelveClient/1.0.12/java")
                       .build();
     }
 }
