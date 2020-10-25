@@ -16,7 +16,10 @@ package com.relationalai.client.api;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.builder.*;
 import com.relationalai.client.model.*;
+import com.relationalai.cloudclient.model.ComputeData;
 import com.relationalai.cloudclient.model.CreateComputeResponseProtocol;
+import com.relationalai.cloudclient.model.DeleteComputeResponseProtocol;
+import com.relationalai.cloudclient.model.DeleteComputeStatus;
 import com.relationalai.cloudclient.model.ListComputesResponseProtocol;
 import com.relationalai.infra.config.InfraMetadataConfig;
 
@@ -372,11 +375,22 @@ public class IntegrationTestsCommons {
     }
 
     public static void managementTests(ManagementConnection api) throws ApiException, IOException {
-        ListComputesResponseProtocol res = api.listComputes();
-        System.out.println(res);
+        ListComputesResponseProtocol lres = api.listComputes();
+        System.out.println(lres);
 
-        CreateComputeResponseProtocol cres = api.createCompute(randomString(), RaiComputeSize.XL, InfraMetadataConfig.RaiRegion.US_EAST);
+        String computeName = randomString();
+        CreateComputeResponseProtocol cres = api.createCompute(computeName, RaiComputeSize.XS,
+            InfraMetadataConfig.RaiRegion.US_EAST);
         System.out.println(cres);
+
+        RAIComputeFilters filters = new RAIComputeFilters(null, Arrays.asList(computeName, "random"),
+            Arrays.asList(RaiComputeSize.XS), null);
+        lres = api.listComputes(filters);
+        System.out.println(lres);
+
+        // TODO: api.deleteCompute seems broken
+        // DeleteComputeResponseProtocol dres = api.deleteCompute(lres.getComputeRequestsList().get(0).getComputeName());
+        // System.out.println(dres);
     }
 
 }
