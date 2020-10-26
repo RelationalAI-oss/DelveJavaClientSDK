@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**computeData** | [**ComputeData**](ComputeData.md) |  |  [optional]
+**compute** | [**ComputeInfoProtocol**](ComputeInfoProtocol.md) |  |  [optional]
 
 
 

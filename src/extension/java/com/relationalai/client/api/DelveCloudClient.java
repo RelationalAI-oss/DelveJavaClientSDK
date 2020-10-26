@@ -59,7 +59,7 @@ public class DelveCloudClient extends DefaultApi {
 
     public CreateComputeResponseProtocol createCompute(String displayName, String size, String region) throws ApiException{
         CreateComputeRequestProtocol createComputeRequestProtocol = new CreateComputeRequestProtocol();
-        createComputeRequestProtocol.setDisplayName(displayName);
+        createComputeRequestProtocol.setName(displayName);
         createComputeRequestProtocol.setSize(size);
         createComputeRequestProtocol.setRegion(region);
         createComputeRequestProtocol.setDryrun(false);
@@ -76,7 +76,7 @@ public class DelveCloudClient extends DefaultApi {
 
     public DeleteComputeResponseProtocol deleteCompute(String computeName) throws ApiException {
         DeleteComputeRequestProtocol deleteComputeRequestProtocol = new DeleteComputeRequestProtocol();
-        deleteComputeRequestProtocol.setComputeName(computeName);
+        deleteComputeRequestProtocol.setName(computeName);
         deleteComputeRequestProtocol.setDryrun(false);
 
         return this.computeDelete(deleteComputeRequestProtocol);

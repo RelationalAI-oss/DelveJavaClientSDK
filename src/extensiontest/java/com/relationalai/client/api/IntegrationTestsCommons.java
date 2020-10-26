@@ -16,7 +16,6 @@ package com.relationalai.client.api;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.builder.*;
 import com.relationalai.client.model.*;
-import com.relationalai.cloudclient.model.ComputeData;
 import com.relationalai.cloudclient.model.CreateComputeResponseProtocol;
 import com.relationalai.cloudclient.model.DeleteComputeResponseProtocol;
 import com.relationalai.cloudclient.model.DeleteComputeStatus;
