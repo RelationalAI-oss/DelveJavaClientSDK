@@ -55,8 +55,6 @@ public class CloudIntegrationTests {
     public void transactionPostTest() throws ApiException, IOException {
     }
 
-
-    @Test
     public void managementTest() throws ApiException, IOException {
         IntegrationTestsCommons.managementTests(api.getManagementConn());
     }

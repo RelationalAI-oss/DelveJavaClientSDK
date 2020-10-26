@@ -19,7 +19,7 @@ lib.overrideDerivation mavenBuild.build (oldAttrs: {
     cp -rv target/*.jar $out/
   '';
   checkPhase = ''
-    ${delveBinary}/bin/delve server &
+    #${delveBinary}/bin/delve server &
     PID=$!
     sleep 15s
     mvn --offline --settings ${mavenBuild.settings} test || kill -9 $PID && exit -1
