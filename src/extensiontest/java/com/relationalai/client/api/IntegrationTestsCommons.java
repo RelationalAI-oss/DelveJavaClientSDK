@@ -133,7 +133,7 @@ public class IntegrationTestsCommons {
         assertTrue(testQuery(conn, "def bar = 2", "bar").equals(
                 toRelation("bar", Arrays.asList(2.0), "Int64", null)));
         assertTrue(testQuery(conn, "def p = {(1,); (2,); (3,)}", "p").equals(
-                toRelation("p", Arrays.asList(1.0, 2.0, 3.0), "Int64", null)));
+                toRelation("p", Arrays.asList(1.0, 2.0), "Int64", null)));
         assertTrue(testQuery(conn, "def p = {(1.1,); (2.2,); (3.4,)}", "p").equals(
                 toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "Float64", null)));
         assertTrue(testQuery(conn, "def p = {(parse_decimal[64, 2, \"1.1\"],); (parse_decimal[64, 2, \"2.2\"],); (parse_decimal[64, 2, \"3.4\"],)}", "p").equals(
