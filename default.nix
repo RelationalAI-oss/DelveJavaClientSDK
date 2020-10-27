@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir $out
-    mvn --offline --settings ${mavenBuild.settings} package
+    mvn --offline --settings ${mavenBuild.settings} package -Dmaven.test.skip=true
     cp -rv target/*.jar $out/
   '';
 
