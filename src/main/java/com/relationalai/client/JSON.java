@@ -63,9 +63,9 @@ public class JSON {
                         classByDiscriminatorValue.put("FrontProblem", FrontProblem.class);
                         classByDiscriminatorValue.put("IntegrityConstraintProblem", IntegrityConstraintProblem.class);
                         classByDiscriminatorValue.put("IntegrityConstraintViolation", IntegrityConstraintViolation.class);
-                        classByDiscriminatorValue.put("LoadDataProblem", LoadDataProblem.class);
                         classByDiscriminatorValue.put("OutputProblem", OutputProblem.class);
                         classByDiscriminatorValue.put("PersistProblem", PersistProblem.class);
+                        classByDiscriminatorValue.put("StorageProblem", StorageProblem.class);
                         classByDiscriminatorValue.put("SyntaxError", SyntaxError.class);
                         classByDiscriminatorValue.put("UndefinedError", UndefinedError.class);
                         classByDiscriminatorValue.put("WorkspaceLoadProblem", WorkspaceLoadProblem.class);
@@ -436,15 +436,6 @@ public class JSON {
                                 getDiscriminatorValue(readElement, "type"));
                     }
           })
-                .registerTypeSelector(LoadDataProblem.class, new TypeSelector() {
-                    @Override
-                    public Class getClassForElement(JsonElement readElement) {
-                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
-                        classByDiscriminatorValue.put("LoadDataProblem", LoadDataProblem.class);
-                        return getClassByDiscriminator(classByDiscriminatorValue,
-                                getDiscriminatorValue(readElement, "type"));
-                    }
-          })
                 .registerTypeSelector(ModifyWorkspaceAction.class, new TypeSelector() {
                     @Override
                     public Class getClassForElement(JsonElement readElement) {
@@ -567,6 +558,15 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("StatusActionResult", StatusActionResult.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(StorageProblem.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("StorageProblem", StorageProblem.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }

@@ -715,16 +715,6 @@ components:
           nullable: true
           type: array
       type: object
-    LoadDataProblem:
-      allOf:
-      - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-      required:
-      - exception
-      type: object
     OutputProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
@@ -751,6 +741,16 @@ components:
           type: string
         exception_stacktrace:
           nullable: true
+          type: string
+      required:
+      - exception
+      type: object
+    StorageProblem:
+      allOf:
+      - $ref: '#/components/schemas/AbstractProblem'
+      properties:
+        exception:
+          default: ""
           type: string
       required:
       - exception
