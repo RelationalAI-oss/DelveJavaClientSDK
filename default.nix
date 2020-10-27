@@ -30,6 +30,9 @@ stdenv.mkDerivation rec {
   '';
 
   checkPhase = ''
+    mkdir home
+    export HOME=$PWD/home
+
     delve server &
     PID=$!
     sleep 15s
