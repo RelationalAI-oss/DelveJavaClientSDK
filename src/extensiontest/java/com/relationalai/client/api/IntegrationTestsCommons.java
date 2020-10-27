@@ -56,10 +56,14 @@ public class IntegrationTestsCommons {
     }
 
     public static Map<RelKey, Relation> toRelation(String name, List<Object> columns, String key) {
+        return toRelation(name, columns, key, null);
+    }
+
+    public static Map<RelKey, Relation> toRelation(String name, List<Object> columns, String key, String value) {
         RelKey relKey = new RelKey()
                 .name(name)
-                .keys(Arrays.asList(key))
-                .values(new ArrayList<>());
+                .keys(key == null ? new ArrayList<>() : Arrays.asList(key))
+                .values(value == null ? new ArrayList<>() : Arrays.asList(value));
 
         Relation relation = new Relation()
                 .columns(Arrays.asList(columns))
@@ -94,11 +98,6 @@ public class IntegrationTestsCommons {
     public static void runAllTest() throws ApiException, IOException, InterruptedException {
         // create connection
         LocalConnection conn = createConnection();
-
-        // status
-        // ============================================================================
-        assertTrue( conn.status() );
-
         // create database
         // ============================================================================
         assertTrue( conn.createDatabase(true) );
@@ -127,13 +126,13 @@ public class IntegrationTestsCommons {
         // query
         // ==============================================================================
         assertTrue(testQuery(conn, "def bar = 2", "bar").equals(
-                toRelation("bar", Arrays.asList(2.0), "Int64")));
+                toRelation("bar", Arrays.asList(2.0), "Int64", null)));
         assertTrue(testQuery(conn, "def p = {(1,); (2,); (3,)}", "p").equals(
-                toRelation("p", Arrays.asList(1.0, 2.0, 3.0), "Int64")));
+                toRelation("p", Arrays.asList(1.0, 2.0, 3.0), "Int64", null)));
         assertTrue(testQuery(conn, "def p = {(1.1,); (2.2,); (3.4,)}", "p").equals(
-                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "Float64")));
+                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "Float64", null)));
         assertTrue(testQuery(conn, "def p = {(parse_decimal[64, 2, \"1.1\"],); (parse_decimal[64, 2, \"2.2\"],); (parse_decimal[64, 2, \"3.4\"],)}", "p").equals(
-                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "FixedPointDecimals.FixedDecimal{Int64,2}")));
+                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "FixedPointDecimals.FixedDecimal{Int64,2}", null)));
         assertTrue(testQuery(conn, "def p = {(1, 5); (2, 7); (3, 9)}", "p").equals(
                 toRelation("p", new HashMap<>(){{put(1.0, 5.0); put(2.0, 7.0); put(3.0, 9.0);}}, Arrays.asList("Int64", "Int64"))));
 
@@ -256,30 +255,6 @@ public class IntegrationTestsCommons {
         assertTrue(testQuery(conn, "def result = count[pos: bar[pos, :D]]", "result").equals(
                 toRelation("result", Arrays.asList(4.0), "Int64")));
 
-        PairSymbolString credentialsPair = new PairSymbolString();
-        credentialsPair.setFirst("azure_sas_token");
-        credentialsPair.setSecond("SAS_TOKEN");
-
-
-        AzureIntegration azureIntegration = new AzureIntegration()
-            .credentials(List.of(credentialsPair))
-            .tenantId("<tenant_id>")
-            .name("my_integration")
-            .storageAllowedLocations(List.of("azure://myaccount.blob.core.windows.net/mycontainer1/mypath1/"))
-            .storageBlockedLocations(List.of("azure://myaccount.blob.core.windows.net/mycontainer1/mypath1/sensitive/"));
-
-        dataLoaderArgs = DataLoaderArgs.builder()
-                .rel("baz")
-                .schema(csvFileSchemaArgs)
-                .syntax(csvFileSyntaxArgs)
-                .integration(azureIntegration)
-                .data("D|E|F\n1|2|3\n1|2|3\n1|2|3\n1|2|3")
-                .build();
-
-        assertTrue(conn.loadCSV(dataLoaderArgs));
-        assertTrue(testQuery(conn, "def result = count[pos: baz[pos, :D]]", "result").equals(
-                toRelation("result", Arrays.asList(4.0), "Int64")));
-
         // load json
         // =====================================================================
         conn.createDatabase(true);
@@ -291,7 +266,7 @@ public class IntegrationTestsCommons {
         assertTrue(conn.listEdb().size() == 2);
 
         assertTrue(testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes").equals(
-                toRelation("cityRes", Arrays.asList("Vancouver"), "DelveFixedSizeStrings.FixedSizeString{100}")
+                toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{100}")
         ));
 
         dataLoaderArgs = DataLoaderArgs.builder()

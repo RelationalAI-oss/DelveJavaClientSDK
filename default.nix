@@ -8,22 +8,35 @@ with pkgs;
 let
   mavenBuild = buildMaven ./project-info.json;
 in
-lib.overrideDerivation mavenBuild.build (oldAttrs: {
-  buildInputs = [ openjdk11 maven ];
+stdenv.mkDerivation rec {
+  name = "delve-java-client-sdk-${version}";
+  version = "1.1.0";
+  src = ./.;
+
+  buildInputs = [
+    delveBinary
+    maven
+    openjdk11
+  ];
+
   buildPhase = ''
     mvn --offline --settings ${mavenBuild.settings} compile
   '';
+
   installPhase = ''
     mkdir $out
     mvn --offline --settings ${mavenBuild.settings} package
     cp -rv target/*.jar $out/
   '';
+
   checkPhase = ''
-    #${delveBinary}/bin/delve server &
+    delve server &
     PID=$!
     sleep 15s
-    mvn --offline --settings ${mavenBuild.settings} test || kill -9 $PID && exit -1
+    mvn --offline --settings ${mavenBuild.settings} test || (kill -9 $PID && exit 1)
+    echo "Shutting down delve server. Pid: $PID"
     kill -9 $PID
   '';
-  doCheck = doCheck;
-})
+
+  inherit doCheck;
+}
