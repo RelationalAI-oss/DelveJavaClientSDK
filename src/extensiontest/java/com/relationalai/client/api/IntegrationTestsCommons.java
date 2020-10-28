@@ -295,7 +295,7 @@ public class IntegrationTestsCommons {
         assertTrue(conn.listEdb().size() == 2);
 
         assertTrue(testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes").equals(
-                toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{100}")
+                toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}")
         ));
 
         dataLoaderArgs = DataLoaderArgs.builder()
