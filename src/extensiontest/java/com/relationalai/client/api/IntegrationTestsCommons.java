@@ -131,13 +131,13 @@ public class IntegrationTestsCommons {
         // query
         // ==============================================================================
         assertTrue(testQuery(conn, "def bar = 2", "bar").equals(
-                toRelation("bar", Arrays.asList(2.0), "Int64", null)));
+                toRelation("bar", Arrays.asList(2.0), "Int64")));
         assertTrue(testQuery(conn, "def p = {(1,); (2,); (3,)}", "p").equals(
-                toRelation("p", Arrays.asList(1.0, 2.0, 3.0), "Int64", null)));
+                toRelation("p", Arrays.asList(1.0, 2.0, 3.0), "Int64")));
         assertTrue(testQuery(conn, "def p = {(1.1,); (2.2,); (3.4,)}", "p").equals(
-                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "Float64", null)));
+                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "Float64")));
         assertTrue(testQuery(conn, "def p = {(parse_decimal[64, 2, \"1.1\"],); (parse_decimal[64, 2, \"2.2\"],); (parse_decimal[64, 2, \"3.4\"],)}", "p").equals(
-                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "FixedPointDecimals.FixedDecimal{Int64,2}", null)));
+                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "FixedPointDecimals.FixedDecimal{Int64,2}")));
         assertTrue(testQuery(conn, "def p = {(1, 5); (2, 7); (3, 9)}", "p").equals(
                 toRelation("p", new HashMap<>(){{put(1.0, 5.0); put(2.0, 7.0); put(3.0, 9.0);}}, Arrays.asList("Int64", "Int64"))));
 

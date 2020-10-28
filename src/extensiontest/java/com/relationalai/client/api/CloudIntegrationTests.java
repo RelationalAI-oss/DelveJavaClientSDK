@@ -16,6 +16,7 @@ package com.relationalai.client.api;
 import com.relationalai.client.ApiException;
 import com.relationalai.client.builder.CloudConnectionArgs;
 import com.relationalai.client.model.Transaction;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -55,6 +56,8 @@ public class CloudIntegrationTests {
     public void transactionPostTest() throws ApiException, IOException {
     }
 
+    @Ignore
+    @Test
     public void managementTest() throws ApiException, IOException {
         IntegrationTestsCommons.managementTests(api.getManagementConn());
     }

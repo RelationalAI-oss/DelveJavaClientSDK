@@ -102,6 +102,15 @@ public class ManagementConnection extends Connection {
         }
     }
 
+    public CreateComputeResponseProtocol createCompute(String displayName, RaiComputeSize size) throws ApiException {
+        setConnectionOnClient();
+        try {
+            return cloudClient.createCompute(displayName, size.toString());
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw  convert(e);
+        }
+    }
+
     public CreateComputeResponseProtocol createCompute(String displayName, RaiComputeSize size, InfraMetadataConfig.RaiRegion region) throws ApiException{
         setConnectionOnClient();
         try {

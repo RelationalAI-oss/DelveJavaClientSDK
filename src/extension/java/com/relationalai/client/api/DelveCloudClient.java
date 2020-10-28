@@ -48,6 +48,9 @@ public class DelveCloudClient extends DefaultApi {
     public ListUsersResponseProtocol listUsers() throws ApiException { return this.userGet(); }
     public ListDatabasesResponseProtocol listDatabases() throws ApiException { return this.databaseGet(); }
 
+    public CreateComputeResponseProtocol createCompute(String displayName, String size) throws ApiException {
+        return createCompute(displayName, size, conn.getRegion().getName());
+    }
     public CreateComputeResponseProtocol createCompute(String displayName, String size, String region) throws ApiException{
         CreateComputeRequestProtocol createComputeRequestProtocol = new CreateComputeRequestProtocol();
         createComputeRequestProtocol.setDisplayName(displayName);
