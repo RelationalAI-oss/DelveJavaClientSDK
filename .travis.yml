@@ -12,7 +12,7 @@ jdk:
 #   - chmod a+x ./gradlew
 script:
   # test using maven
-  - mvn -B package -Dmaven.test.skip=true --file pom.xml
+  - mvn test
   # test using gradle
   # - gradle test
   # test using sbt
