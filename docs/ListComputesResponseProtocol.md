@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**computeRequestsList** | [**List&lt;ComputeData&gt;**](ComputeData.md) |  |  [optional]
+**computes** | [**List&lt;ComputeInfoProtocol&gt;**](ComputeInfoProtocol.md) |  |  [optional]
 
 
 
