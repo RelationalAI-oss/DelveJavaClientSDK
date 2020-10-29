@@ -1,5 +1,6 @@
 package com.relationalai.client.api;
 
+import com.relationalai.client.model.RAIComputeFilters;
 import com.relationalai.cloudclient.ApiCallback;
 import com.relationalai.cloudclient.ApiClient;
 import com.relationalai.cloudclient.ApiException;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DelveCloudClient extends DefaultApi {
 
@@ -44,7 +46,14 @@ public class DelveCloudClient extends DefaultApi {
         this(connection, -1);
     }
 
-    public ListComputesResponseProtocol listComputes() throws ApiException { return this.computeGet(); }
+    public ListComputesResponseProtocol listComputes() throws ApiException { return this.computeGet(null, null, null, null); }
+    public ListComputesResponseProtocol listComputes(RAIComputeFilters filters) throws ApiException {
+        List<String> sizes = null;
+        if (filters.size != null) {
+            sizes = filters.size.stream().map(Enum::toString).collect(Collectors.toList());
+        }
+        return this.computeGet(filters.id, filters.name, sizes, filters.state);
+    }
     public ListUsersResponseProtocol listUsers() throws ApiException { return this.userGet(); }
     public ListDatabasesResponseProtocol listDatabases() throws ApiException { return this.databaseGet(); }
 
@@ -90,48 +99,67 @@ public class DelveCloudClient extends DefaultApi {
     public void setConn(Connection conn) { this.conn = conn; }
 
     @Override
-    public Call computeGetCall(ApiCallback _callback) throws ApiException{
-        return call("/compute",null, "GET", _callback);
+    public Call computeGetCall(List<String> id, List<String> name, List<String> size, List<String> state, ApiCallback _callback) throws ApiException{
+        ApiClient localVarApiClient = getApiClient();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (id != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "id", id));
+        }
+
+        if (name != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "name", name));
+        }
+
+        if (size != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "size", size));
+        }
+
+        if (state != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "state", state));
+        }
+
+        return call("/compute",null, "GET", localVarCollectionQueryParams, _callback);
     }
 
     @Override
     public Call userGetCall(ApiCallback _callback) throws ApiException {
-        return call("/user", null, "GET", _callback);
+        return call("/user", null, "GET", null, _callback);
     }
 
     @Override
     public Call databaseGetCall(ApiCallback _callback) throws ApiException {
-        return call("/database", null, "GET", _callback);
+        return call("/database", null, "GET", null, _callback);
     }
 
     @Override
     public Call computePutCall(CreateComputeRequestProtocol createComputeRequestProtocol, ApiCallback _callback) throws ApiException {
-        return call("/compute", createComputeRequestProtocol, "PUT", _callback);
+        return call("/compute", createComputeRequestProtocol, "PUT", null, _callback);
     }
 
     @Override
     public Call userPutCall(CreateUserRequestProtocol createUserRequestProtocol, ApiCallback _callback) throws ApiException {
-        return call("/user", null, "PUT", _callback);
+        return call("/user", null, "PUT", null, _callback);
     }
 
     @Override
     public Call computeDeleteCall(DeleteComputeRequestProtocol deleteComputeRequestProtocol, ApiCallback _callback) throws ApiException {
-        return call("/compute", deleteComputeRequestProtocol, "DELETE", _callback);
+        return call("/compute", deleteComputeRequestProtocol, "DELETE", null, _callback);
     }
 
     @Override
     public Call databasePostCall(UpdateDatabaseRequestProtocol updateDatabaseRequestProtocol, ApiCallback _callback) throws ApiException {
-        return call("/database", updateDatabaseRequestProtocol, "POST", _callback);
+        return call("/database", updateDatabaseRequestProtocol, "POST", null, _callback);
     }
 
-    private Call call(String path, Object body, String method, ApiCallback _callback) throws ApiException {
+    private Call call(
+        String path, Object body, String method, List<Pair> collectionQueryParams, ApiCallback _callback) throws ApiException {
         Object localVarPostBody = body;
         String localVarPath = path;
 
         ApiClient localVarApiClient = getApiClient();
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = collectionQueryParams == null ? new ArrayList<Pair>() : collectionQueryParams;
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();

@@ -84,6 +84,15 @@ public class ManagementConnection extends Connection {
         }
     }
 
+    public ListComputesResponseProtocol listComputes(RAIComputeFilters filters) throws ApiException {
+        setConnectionOnClient();
+        try {
+            return cloudClient.listComputes(filters);
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
+    }
+
     public ListUsersResponseProtocol listUsers() throws ApiException {
         setConnectionOnClient();
         try {
