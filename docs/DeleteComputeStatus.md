@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**computeName** | **String** |  |  [optional]
-**status** | **String** |  |  [optional]
+**name** | **String** |  |  [optional]
+**state** | **String** |  |  [optional]
 **message** | **String** |  |  [optional]
 
 

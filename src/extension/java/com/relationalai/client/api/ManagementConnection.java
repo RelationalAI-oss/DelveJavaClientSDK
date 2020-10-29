@@ -84,6 +84,15 @@ public class ManagementConnection extends Connection {
         }
     }
 
+    public ListComputesResponseProtocol listComputes(RAIComputeFilters filters) throws ApiException {
+        setConnectionOnClient();
+        try {
+            return cloudClient.listComputes(filters);
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
+    }
+
     public ListUsersResponseProtocol listUsers() throws ApiException {
         setConnectionOnClient();
         try {
@@ -99,6 +108,15 @@ public class ManagementConnection extends Connection {
             return cloudClient.listDatabases();
         } catch (com.relationalai.cloudclient.ApiException e) {
             throw convert(e);
+        }
+    }
+
+    public CreateComputeResponseProtocol createCompute(String displayName, RaiComputeSize size) throws ApiException {
+        setConnectionOnClient();
+        try {
+            return cloudClient.createCompute(displayName, size.toString());
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw  convert(e);
         }
     }
 

@@ -53,6 +53,10 @@ public class ClientConfig {
         return loadConfig(getDefaultConfigDir(), ClientConfig.DEFAULT_PROFILE_NAME);
     }
 
+    public static ClientConfig loadConfig(String profileName) throws UnrecognizedRegionException, GeneralSecurityException, IOException {
+        return  loadConfig(getDefaultConfigDir(), profileName);
+    }
+
     public static ClientConfig loadConfig(File configDir, String profileName)
             throws IOException, UnrecognizedRegionException, GeneralSecurityException {
         if (!configDir.isDirectory()) {

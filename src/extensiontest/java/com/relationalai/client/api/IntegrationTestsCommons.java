@@ -17,6 +17,8 @@ import com.relationalai.client.ApiException;
 import com.relationalai.client.builder.*;
 import com.relationalai.client.model.*;
 import com.relationalai.cloudclient.model.CreateComputeResponseProtocol;
+import com.relationalai.cloudclient.model.DeleteComputeResponseProtocol;
+import com.relationalai.cloudclient.model.DeleteComputeStatus;
 import com.relationalai.cloudclient.model.ListComputesResponseProtocol;
 import com.relationalai.infra.config.InfraMetadataConfig;
 
@@ -56,10 +58,14 @@ public class IntegrationTestsCommons {
     }
 
     public static Map<RelKey, Relation> toRelation(String name, List<Object> columns, String key) {
+        return toRelation(name, columns, key, null);
+    }
+
+    public static Map<RelKey, Relation> toRelation(String name, List<Object> columns, String key, String value) {
         RelKey relKey = new RelKey()
                 .name(name)
-                .keys(Arrays.asList(key))
-                .values(new ArrayList<>());
+                .keys(key == null ? new ArrayList<>() : Arrays.asList(key))
+                .values(value == null ? new ArrayList<>() : Arrays.asList(value));
 
         Relation relation = new Relation()
                 .columns(Arrays.asList(columns))
@@ -291,7 +297,7 @@ public class IntegrationTestsCommons {
         assertTrue(conn.listEdb().size() == 2);
 
         assertTrue(testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes").equals(
-                toRelation("cityRes", Arrays.asList("Vancouver"), "DelveFixedSizeStrings.FixedSizeString{100}")
+                toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}")
         ));
 
         dataLoaderArgs = DataLoaderArgs.builder()
@@ -372,11 +378,18 @@ public class IntegrationTestsCommons {
     }
 
     public static void managementTests(ManagementConnection api) throws ApiException, IOException {
-        ListComputesResponseProtocol res = api.listComputes();
-        System.out.println(res);
+        ListComputesResponseProtocol lres = api.listComputes();
+        System.out.println(lres);
 
-        CreateComputeResponseProtocol cres = api.createCompute(randomString(), RaiComputeSize.XL, InfraMetadataConfig.RaiRegion.US_EAST);
+        String computeName = randomString();
+        CreateComputeResponseProtocol cres = api.createCompute(computeName, RaiComputeSize.XS,
+            InfraMetadataConfig.RaiRegion.US_EAST);
         System.out.println(cres);
+
+        RAIComputeFilters filters = new RAIComputeFilters(null, Arrays.asList(computeName, "random"),
+            Arrays.asList(RaiComputeSize.XS), null);
+        lres = api.listComputes(filters);
+        System.out.println(lres);
     }
 
 }

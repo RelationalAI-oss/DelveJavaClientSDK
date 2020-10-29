@@ -67,7 +67,11 @@ public class DefaultApiTest {
      */
     @Test
     public void computeGetTest() throws ApiException {
-        ListComputesResponseProtocol response = api.computeGet();
+        List<String> id = null;
+        List<String> name = null;
+        List<String> size = null;
+        List<String> state = null;
+        ListComputesResponseProtocol response = api.computeGet(id, name, size, state);
 
         // TODO: test validations
     }
