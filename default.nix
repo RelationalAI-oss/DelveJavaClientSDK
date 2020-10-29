@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir $out
-    mvn --offline --settings ${mavenBuild.settings} package -Dmaven.test.skip=true
+    mvn --offline --settings ${mavenBuild.settings} package -DskipTests=true
     cp -rv target/*.jar $out/
   '';
 
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
     delve server &
     PID=$!
     sleep 15s
-    mvn --offline --settings ${mavenBuild.settings} test || (kill -9 $PID && exit 1)
+    mvn --offline --settings ${mavenBuild.settings} test -DskipTests=false || (kill -9 $PID && exit 1)
     echo "Shutting down delve server. Pid: $PID"
     kill -9 $PID
   '';
