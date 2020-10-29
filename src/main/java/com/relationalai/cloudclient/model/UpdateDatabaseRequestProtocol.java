@@ -47,7 +47,7 @@ public class UpdateDatabaseRequestProtocol {
 
 
   public UpdateDatabaseRequestProtocol displayName(String displayName) {
-
+    
     this.displayName = displayName;
     return this;
   }
@@ -70,7 +70,7 @@ public class UpdateDatabaseRequestProtocol {
 
 
   public UpdateDatabaseRequestProtocol defaultComputeName(String defaultComputeName) {
-
+    
     this.defaultComputeName = defaultComputeName;
     return this;
   }
@@ -93,7 +93,7 @@ public class UpdateDatabaseRequestProtocol {
 
 
   public UpdateDatabaseRequestProtocol removeDefaultCompute(Boolean removeDefaultCompute) {
-
+    
     this.removeDefaultCompute = removeDefaultCompute;
     return this;
   }
@@ -116,7 +116,7 @@ public class UpdateDatabaseRequestProtocol {
 
 
   public UpdateDatabaseRequestProtocol dryrun(Boolean dryrun) {
-
+    
     this.dryrun = dryrun;
     return this;
   }
@@ -183,3 +183,4 @@ public class UpdateDatabaseRequestProtocol {
   }
 
 }
+

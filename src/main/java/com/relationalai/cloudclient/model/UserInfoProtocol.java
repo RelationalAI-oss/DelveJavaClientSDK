@@ -47,7 +47,7 @@ public class UserInfoProtocol {
 
 
   public UserInfoProtocol accountName(String accountName) {
-
+    
     this.accountName = accountName;
     return this;
   }
@@ -70,7 +70,7 @@ public class UserInfoProtocol {
 
 
   public UserInfoProtocol username(String username) {
-
+    
     this.username = username;
     return this;
   }
@@ -93,7 +93,7 @@ public class UserInfoProtocol {
 
 
   public UserInfoProtocol status(String status) {
-
+    
     this.status = status;
     return this;
   }
@@ -116,7 +116,7 @@ public class UserInfoProtocol {
 
 
   public UserInfoProtocol accessKey1(String accessKey1) {
-
+    
     this.accessKey1 = accessKey1;
     return this;
   }
@@ -183,3 +183,4 @@ public class UserInfoProtocol {
   }
 
 }
+

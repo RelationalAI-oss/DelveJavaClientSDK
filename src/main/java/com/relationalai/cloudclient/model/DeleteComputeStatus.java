@@ -43,7 +43,7 @@ public class DeleteComputeStatus {
 
 
   public DeleteComputeStatus name(String name) {
-
+    
     this.name = name;
     return this;
   }
@@ -66,7 +66,7 @@ public class DeleteComputeStatus {
 
 
   public DeleteComputeStatus state(String state) {
-
+    
     this.state = state;
     return this;
   }
@@ -89,7 +89,7 @@ public class DeleteComputeStatus {
 
 
   public DeleteComputeStatus message(String message) {
-
+    
     this.message = message;
     return this;
   }
@@ -154,3 +154,4 @@ public class DeleteComputeStatus {
   }
 
 }
+

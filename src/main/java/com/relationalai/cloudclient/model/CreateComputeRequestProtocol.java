@@ -47,7 +47,7 @@ public class CreateComputeRequestProtocol {
 
 
   public CreateComputeRequestProtocol region(String region) {
-
+    
     this.region = region;
     return this;
   }
@@ -70,7 +70,7 @@ public class CreateComputeRequestProtocol {
 
 
   public CreateComputeRequestProtocol name(String name) {
-
+    
     this.name = name;
     return this;
   }
@@ -93,7 +93,7 @@ public class CreateComputeRequestProtocol {
 
 
   public CreateComputeRequestProtocol size(String size) {
-
+    
     this.size = size;
     return this;
   }
@@ -116,7 +116,7 @@ public class CreateComputeRequestProtocol {
 
 
   public CreateComputeRequestProtocol dryrun(Boolean dryrun) {
-
+    
     this.dryrun = dryrun;
     return this;
   }
@@ -183,3 +183,4 @@ public class CreateComputeRequestProtocol {
   }
 
 }
+

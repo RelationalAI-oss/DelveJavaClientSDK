@@ -38,7 +38,7 @@ public class ListUsersResponseProtocol {
 
 
   public ListUsersResponseProtocol users(List<UserInfoProtocol> users) {
-
+    
     this.users = users;
     return this;
   }
@@ -107,3 +107,4 @@ public class ListUsersResponseProtocol {
   }
 
 }
+

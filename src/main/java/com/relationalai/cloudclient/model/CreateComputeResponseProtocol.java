@@ -36,7 +36,7 @@ public class CreateComputeResponseProtocol {
 
 
   public CreateComputeResponseProtocol compute(ComputeInfoProtocol compute) {
-
+    
     this.compute = compute;
     return this;
   }
@@ -97,3 +97,4 @@ public class CreateComputeResponseProtocol {
   }
 
 }
+

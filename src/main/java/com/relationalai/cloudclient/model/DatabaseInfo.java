@@ -55,7 +55,7 @@ public class DatabaseInfo {
 
 
   public DatabaseInfo accountName(String accountName) {
-
+    
     this.accountName = accountName;
     return this;
   }
@@ -78,7 +78,7 @@ public class DatabaseInfo {
 
 
   public DatabaseInfo name(String name) {
-
+    
     this.name = name;
     return this;
   }
@@ -101,7 +101,7 @@ public class DatabaseInfo {
 
 
   public DatabaseInfo region(String region) {
-
+    
     this.region = region;
     return this;
   }
@@ -124,7 +124,7 @@ public class DatabaseInfo {
 
 
   public DatabaseInfo databaseId(String databaseId) {
-
+    
     this.databaseId = databaseId;
     return this;
   }
@@ -147,7 +147,7 @@ public class DatabaseInfo {
 
 
   public DatabaseInfo defaultComputeName(String defaultComputeName) {
-
+    
     this.defaultComputeName = defaultComputeName;
     return this;
   }
@@ -170,7 +170,7 @@ public class DatabaseInfo {
 
 
   public DatabaseInfo status(String status) {
-
+    
     this.status = status;
     return this;
   }
@@ -241,3 +241,4 @@ public class DatabaseInfo {
   }
 
 }
+

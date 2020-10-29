@@ -38,7 +38,7 @@ public class ListDatabasesResponseProtocol {
 
 
   public ListDatabasesResponseProtocol databases(List<DatabaseInfo> databases) {
-
+    
     this.databases = databases;
     return this;
   }
@@ -107,3 +107,4 @@ public class ListDatabasesResponseProtocol {
   }
 
 }
+

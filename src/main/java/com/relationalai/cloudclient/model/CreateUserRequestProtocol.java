@@ -39,7 +39,7 @@ public class CreateUserRequestProtocol {
 
 
   public CreateUserRequestProtocol username(String username) {
-
+    
     this.username = username;
     return this;
   }
@@ -62,7 +62,7 @@ public class CreateUserRequestProtocol {
 
 
   public CreateUserRequestProtocol dryrun(Boolean dryrun) {
-
+    
     this.dryrun = dryrun;
     return this;
   }
@@ -125,3 +125,4 @@ public class CreateUserRequestProtocol {
   }
 
 }
+

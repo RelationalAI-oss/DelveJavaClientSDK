@@ -79,7 +79,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol accountName(String accountName) {
-
+    
     this.accountName = accountName;
     return this;
   }
@@ -102,7 +102,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol id(String id) {
-
+    
     this.id = id;
     return this;
   }
@@ -125,7 +125,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol createdBy(String createdBy) {
-
+    
     this.createdBy = createdBy;
     return this;
   }
@@ -148,7 +148,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol name(String name) {
-
+    
     this.name = name;
     return this;
   }
@@ -171,7 +171,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol size(String size) {
-
+    
     this.size = size;
     return this;
   }
@@ -194,7 +194,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol region(String region) {
-
+    
     this.region = region;
     return this;
   }
@@ -217,7 +217,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol infrastructure(String infrastructure) {
-
+    
     this.infrastructure = infrastructure;
     return this;
   }
@@ -240,7 +240,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol state(String state) {
-
+    
     this.state = state;
     return this;
   }
@@ -263,7 +263,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol requestedOn(String requestedOn) {
-
+    
     this.requestedOn = requestedOn;
     return this;
   }
@@ -286,7 +286,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol createdOn(String createdOn) {
-
+    
     this.createdOn = createdOn;
     return this;
   }
@@ -309,7 +309,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol deletedOn(String deletedOn) {
-
+    
     this.deletedOn = deletedOn;
     return this;
   }
@@ -332,7 +332,7 @@ public class ComputeInfoProtocol {
 
 
   public ComputeInfoProtocol message(String message) {
-
+    
     this.message = message;
     return this;
   }
@@ -415,3 +415,4 @@ public class ComputeInfoProtocol {
   }
 
 }
+

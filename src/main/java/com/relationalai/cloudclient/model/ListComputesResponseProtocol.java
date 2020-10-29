@@ -38,7 +38,7 @@ public class ListComputesResponseProtocol {
 
 
   public ListComputesResponseProtocol computes(List<ComputeInfoProtocol> computes) {
-
+    
     this.computes = computes;
     return this;
   }
@@ -107,3 +107,4 @@ public class ListComputesResponseProtocol {
   }
 
 }
+

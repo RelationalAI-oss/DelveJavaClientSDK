@@ -39,7 +39,7 @@ public class DeleteComputeRequestProtocol {
 
 
   public DeleteComputeRequestProtocol name(String name) {
-
+    
     this.name = name;
     return this;
   }
@@ -62,7 +62,7 @@ public class DeleteComputeRequestProtocol {
 
 
   public DeleteComputeRequestProtocol dryrun(Boolean dryrun) {
-
+    
     this.dryrun = dryrun;
     return this;
   }
@@ -125,3 +125,4 @@ public class DeleteComputeRequestProtocol {
   }
 
 }
+

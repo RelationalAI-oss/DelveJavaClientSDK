@@ -36,7 +36,7 @@ public class DeleteComputeResponseProtocol {
 
 
   public DeleteComputeResponseProtocol status(DeleteComputeStatus status) {
-
+    
     this.status = status;
     return this;
   }
@@ -97,3 +97,4 @@ public class DeleteComputeResponseProtocol {
   }
 
 }
+

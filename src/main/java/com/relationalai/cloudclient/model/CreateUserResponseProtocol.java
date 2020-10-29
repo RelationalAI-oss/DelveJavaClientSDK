@@ -40,7 +40,7 @@ public class CreateUserResponseProtocol {
 
 
   public CreateUserResponseProtocol user(UserInfoProtocol user) {
-
+    
     this.user = user;
     return this;
   }
@@ -63,7 +63,7 @@ public class CreateUserResponseProtocol {
 
 
   public CreateUserResponseProtocol privateKey(String privateKey) {
-
+    
     this.privateKey = privateKey;
     return this;
   }
@@ -126,3 +126,4 @@ public class CreateUserResponseProtocol {
   }
 
 }
+

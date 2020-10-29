@@ -106,12 +106,12 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call computeDeleteValidateBeforeCall(DeleteComputeRequestProtocol deleteComputeRequestProtocol, final ApiCallback _callback) throws ApiException {
-
+        
         // verify the required parameter 'deleteComputeRequestProtocol' is set
         if (deleteComputeRequestProtocol == null) {
             throw new ApiException("Missing the required parameter 'deleteComputeRequestProtocol' when calling computeDelete(Async)");
         }
-
+        
 
         okhttp3.Call localVarCall = computeDeleteCall(deleteComputeRequestProtocol, _callback);
         return localVarCall;
@@ -120,7 +120,7 @@ public class DefaultApi {
 
     /**
      * Delete compute
-     *
+     * 
      * @param deleteComputeRequestProtocol Compute to be deleted (required)
      * @return DeleteComputeResponseProtocol
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -137,7 +137,7 @@ public class DefaultApi {
 
     /**
      * Delete compute
-     *
+     * 
      * @param deleteComputeRequestProtocol Compute to be deleted (required)
      * @return ApiResponse&lt;DeleteComputeResponseProtocol&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -155,7 +155,7 @@ public class DefaultApi {
 
     /**
      * Delete compute (asynchronously)
-     *
+     * 
      * @param deleteComputeRequestProtocol Compute to be deleted (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -224,7 +224,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-
+            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -235,7 +235,7 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call computeGetValidateBeforeCall(List<String> id, List<String> name, List<String> size, List<String> state, final ApiCallback _callback) throws ApiException {
-
+        
 
         okhttp3.Call localVarCall = computeGetCall(id, name, size, state, _callback);
         return localVarCall;
@@ -244,7 +244,7 @@ public class DefaultApi {
 
     /**
      * List computes
-     *
+     * 
      * @param id  (optional)
      * @param name  (optional)
      * @param size  (optional)
@@ -264,7 +264,7 @@ public class DefaultApi {
 
     /**
      * List computes
-     *
+     * 
      * @param id  (optional)
      * @param name  (optional)
      * @param size  (optional)
@@ -285,7 +285,7 @@ public class DefaultApi {
 
     /**
      * List computes (asynchronously)
-     *
+     * 
      * @param id  (optional)
      * @param name  (optional)
      * @param size  (optional)
@@ -349,12 +349,12 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call computePutValidateBeforeCall(CreateComputeRequestProtocol createComputeRequestProtocol, final ApiCallback _callback) throws ApiException {
-
+        
         // verify the required parameter 'createComputeRequestProtocol' is set
         if (createComputeRequestProtocol == null) {
             throw new ApiException("Missing the required parameter 'createComputeRequestProtocol' when calling computePut(Async)");
         }
-
+        
 
         okhttp3.Call localVarCall = computePutCall(createComputeRequestProtocol, _callback);
         return localVarCall;
@@ -363,7 +363,7 @@ public class DefaultApi {
 
     /**
      * Create compute
-     *
+     * 
      * @param createComputeRequestProtocol New compute (required)
      * @return CreateComputeResponseProtocol
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -380,7 +380,7 @@ public class DefaultApi {
 
     /**
      * Create compute
-     *
+     * 
      * @param createComputeRequestProtocol New compute (required)
      * @return ApiResponse&lt;CreateComputeResponseProtocol&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -398,7 +398,7 @@ public class DefaultApi {
 
     /**
      * Create compute (asynchronously)
-     *
+     * 
      * @param createComputeRequestProtocol New compute (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -447,7 +447,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-
+            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -458,7 +458,7 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call databaseGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-
+        
 
         okhttp3.Call localVarCall = databaseGetCall(_callback);
         return localVarCall;
@@ -467,7 +467,7 @@ public class DefaultApi {
 
     /**
      * List databases
-     *
+     * 
      * @return ListDatabasesResponseProtocol
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -483,7 +483,7 @@ public class DefaultApi {
 
     /**
      * List databases
-     *
+     * 
      * @return ApiResponse&lt;ListDatabasesResponseProtocol&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -500,7 +500,7 @@ public class DefaultApi {
 
     /**
      * List databases (asynchronously)
-     *
+     * 
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -541,7 +541,7 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-
+            
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -560,12 +560,12 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call databasePostValidateBeforeCall(UpdateDatabaseRequestProtocol updateDatabaseRequestProtocol, final ApiCallback _callback) throws ApiException {
-
+        
         // verify the required parameter 'updateDatabaseRequestProtocol' is set
         if (updateDatabaseRequestProtocol == null) {
             throw new ApiException("Missing the required parameter 'updateDatabaseRequestProtocol' when calling databasePost(Async)");
         }
-
+        
 
         okhttp3.Call localVarCall = databasePostCall(updateDatabaseRequestProtocol, _callback);
         return localVarCall;
@@ -574,7 +574,7 @@ public class DefaultApi {
 
     /**
      * Update database
-     *
+     * 
      * @param updateDatabaseRequestProtocol Database fields to be updated (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -589,7 +589,7 @@ public class DefaultApi {
 
     /**
      * Update database
-     *
+     * 
      * @param updateDatabaseRequestProtocol Database fields to be updated (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -606,7 +606,7 @@ public class DefaultApi {
 
     /**
      * Update database (asynchronously)
-     *
+     * 
      * @param updateDatabaseRequestProtocol Database fields to be updated (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -654,7 +654,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-
+            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -665,7 +665,7 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call userGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-
+        
 
         okhttp3.Call localVarCall = userGetCall(_callback);
         return localVarCall;
@@ -674,7 +674,7 @@ public class DefaultApi {
 
     /**
      * List users
-     *
+     * 
      * @return ListUsersResponseProtocol
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -690,7 +690,7 @@ public class DefaultApi {
 
     /**
      * List users
-     *
+     * 
      * @return ApiResponse&lt;ListUsersResponseProtocol&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -707,7 +707,7 @@ public class DefaultApi {
 
     /**
      * List users (asynchronously)
-     *
+     * 
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -767,12 +767,12 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call userPutValidateBeforeCall(CreateUserRequestProtocol createUserRequestProtocol, final ApiCallback _callback) throws ApiException {
-
+        
         // verify the required parameter 'createUserRequestProtocol' is set
         if (createUserRequestProtocol == null) {
             throw new ApiException("Missing the required parameter 'createUserRequestProtocol' when calling userPut(Async)");
         }
-
+        
 
         okhttp3.Call localVarCall = userPutCall(createUserRequestProtocol, _callback);
         return localVarCall;
@@ -781,7 +781,7 @@ public class DefaultApi {
 
     /**
      * Create user
-     *
+     * 
      * @param createUserRequestProtocol New user (required)
      * @return CreateUserResponseProtocol
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -798,7 +798,7 @@ public class DefaultApi {
 
     /**
      * Create user
-     *
+     * 
      * @param createUserRequestProtocol New user (required)
      * @return ApiResponse&lt;CreateUserResponseProtocol&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -816,7 +816,7 @@ public class DefaultApi {
 
     /**
      * Create user (asynchronously)
-     *
+     * 
      * @param createUserRequestProtocol New user (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
