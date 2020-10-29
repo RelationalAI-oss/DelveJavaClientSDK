@@ -387,10 +387,6 @@ public class IntegrationTestsCommons {
             Arrays.asList(RaiComputeSize.XS), null);
         lres = api.listComputes(filters);
         System.out.println(lres);
-
-        // TODO: api.deleteCompute seems broken
-        // DeleteComputeResponseProtocol dres = api.deleteCompute(lres.getComputeRequestsList().get(0).getComputeName());
-        // System.out.println(dres);
     }
 
 }
