@@ -58,10 +58,14 @@ public class IntegrationTestsCommons {
     }
 
     public static Map<RelKey, Relation> toRelation(String name, List<Object> columns, String key) {
+        return toRelation(name, columns, key, null);
+    }
+
+    public static Map<RelKey, Relation> toRelation(String name, List<Object> columns, String key, String value) {
         RelKey relKey = new RelKey()
                 .name(name)
-                .keys(Arrays.asList(key))
-                .values(new ArrayList<>());
+                .keys(key == null ? new ArrayList<>() : Arrays.asList(key))
+                .values(value == null ? new ArrayList<>() : Arrays.asList(value));
 
         Relation relation = new Relation()
                 .columns(Arrays.asList(columns))
@@ -293,7 +297,7 @@ public class IntegrationTestsCommons {
         assertTrue(conn.listEdb().size() == 2);
 
         assertTrue(testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes").equals(
-                toRelation("cityRes", Arrays.asList("Vancouver"), "DelveFixedSizeStrings.FixedSizeString{100}")
+                toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}")
         ));
 
         dataLoaderArgs = DataLoaderArgs.builder()
@@ -386,10 +390,6 @@ public class IntegrationTestsCommons {
             Arrays.asList(RaiComputeSize.XS), null);
         lres = api.listComputes(filters);
         System.out.println(lres);
-
-        // TODO: api.deleteCompute seems broken
-        // DeleteComputeResponseProtocol dres = api.deleteCompute(lres.getComputeRequestsList().get(0).getComputeName());
-        // System.out.println(dres);
     }
 
 }

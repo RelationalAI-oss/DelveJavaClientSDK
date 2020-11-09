@@ -20,55 +20,43 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.ArityMismatchError;
-import com.relationalai.client.model.ClientProblem;
-import com.relationalai.client.model.ComparisonChainError;
-import com.relationalai.client.model.ExceptionProblem;
-import com.relationalai.client.model.FrontProblem;
-import com.relationalai.client.model.IntegrityConstraintProblem;
-import com.relationalai.client.model.IntegrityConstraintViolation;
-import com.relationalai.client.model.OutputProblem;
-import com.relationalai.client.model.PersistProblem;
-import com.relationalai.client.model.StorageProblem;
-import com.relationalai.client.model.SyntaxError;
-import com.relationalai.client.model.UndefinedError;
-import com.relationalai.client.model.WorkspaceLoadProblem;
+import com.relationalai.client.model.AbstractProblem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * AbstractProblem
+ * StorageProblem
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class AbstractProblem {
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
-  protected String type = "";
+public class StorageProblem extends AbstractProblem {
+  public static final String SERIALIZED_NAME_EXCEPTION = "exception";
+  @SerializedName(SERIALIZED_NAME_EXCEPTION)
+  private String exception = "";
 
-  public AbstractProblem() {
+  public StorageProblem() {
     this.type = this.getClass().getSimpleName();
   }
 
-  public AbstractProblem type(String type) {
+  public StorageProblem exception(String exception) {
     
-    this.type = type;
+    this.exception = exception;
     return this;
   }
 
    /**
-   * Get type
-   * @return type
+   * Get exception
+   * @return exception
   **/
   @ApiModelProperty(required = true, value = "")
 
-  public String getType() {
-    return type;
+  public String getException() {
+    return exception;
   }
 
 
-  public void setType(String type) {
-    this.type = type;
+  public void setException(String exception) {
+    this.exception = exception;
   }
 
 
@@ -80,21 +68,23 @@ public class AbstractProblem {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AbstractProblem abstractProblem = (AbstractProblem) o;
-    return Objects.equals(this.type, abstractProblem.type);
+    StorageProblem storageProblem = (StorageProblem) o;
+    return Objects.equals(this.exception, storageProblem.exception) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type);
+    return Objects.hash(exception, super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AbstractProblem {\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("class StorageProblem {\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    exception: ").append(toIndentedString(exception)).append("\n");
     sb.append("}");
     return sb.toString();
   }
