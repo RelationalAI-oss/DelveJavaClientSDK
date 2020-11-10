@@ -111,19 +111,28 @@ public class ManagementConnection extends Connection {
         }
     }
 
-    public CreateComputeResponseProtocol createCompute(String displayName, RaiComputeSize size) throws ApiException {
+    public ListDatabasesResponseProtocol listDatabases(RAIDatabaseFilters filters) throws ApiException {
         setConnectionOnClient();
         try {
-            return cloudClient.createCompute(displayName, size.toString());
+            return cloudClient.listDatabases(filters);
+        } catch (com.relationalai.cloudclient.ApiException e) {
+            throw convert(e);
+        }
+    }
+
+    public CreateComputeResponseProtocol createCompute(String name, RaiComputeSize size) throws ApiException {
+        setConnectionOnClient();
+        try {
+            return cloudClient.createCompute(name, size.toString());
         } catch (com.relationalai.cloudclient.ApiException e) {
             throw  convert(e);
         }
     }
 
-    public CreateComputeResponseProtocol createCompute(String displayName, RaiComputeSize size, InfraMetadataConfig.RaiRegion region) throws ApiException{
+    public CreateComputeResponseProtocol createCompute(String name, RaiComputeSize size, InfraMetadataConfig.RaiRegion region) throws ApiException{
         setConnectionOnClient();
         try {
-            return cloudClient.createCompute(displayName, size.toString(), region.getName());
+            return cloudClient.createCompute(name, size.toString(), region.getName());
         } catch (com.relationalai.cloudclient.ApiException e) {
             throw convert(e);
         }

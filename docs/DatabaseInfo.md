@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **accountName** | **String** |  |  [optional]
 **name** | **String** |  |  [optional]
 **region** | **String** |  |  [optional]
-**databaseId** | **String** |  |  [optional]
+**id** | **String** |  |  [optional]
+**createdBy** | **String** |  |  [optional]
 **defaultComputeName** | **String** |  |  [optional]
 **status** | **String** |  |  [optional]
 

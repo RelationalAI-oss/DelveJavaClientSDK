@@ -1,6 +1,7 @@
 package com.relationalai.client.api;
 
 import com.relationalai.client.model.RAIComputeFilters;
+import com.relationalai.client.model.RAIDatabaseFilters;
 import com.relationalai.cloudclient.ApiCallback;
 import com.relationalai.cloudclient.ApiClient;
 import com.relationalai.cloudclient.ApiException;
@@ -55,14 +56,17 @@ public class DelveCloudClient extends DefaultApi {
         return this.computeGet(filters.id, filters.name, sizes, filters.state);
     }
     public ListUsersResponseProtocol listUsers() throws ApiException { return this.userGet(); }
-    public ListDatabasesResponseProtocol listDatabases() throws ApiException { return this.databaseGet(); }
-
-    public CreateComputeResponseProtocol createCompute(String displayName, String size) throws ApiException {
-        return createCompute(displayName, size, conn.getRegion().getName());
+    public ListDatabasesResponseProtocol listDatabases() throws ApiException { return this.databaseGet(null, null, null); }
+    public ListDatabasesResponseProtocol listDatabases(RAIDatabaseFilters filters) throws ApiException {
+        return this.databaseGet(filters.id, filters.name, filters.state); 
     }
-    public CreateComputeResponseProtocol createCompute(String displayName, String size, String region) throws ApiException{
+
+    public CreateComputeResponseProtocol createCompute(String name, String size) throws ApiException {
+        return createCompute(name, size, conn.getRegion().getName());
+    }
+    public CreateComputeResponseProtocol createCompute(String name, String size, String region) throws ApiException{
         CreateComputeRequestProtocol createComputeRequestProtocol = new CreateComputeRequestProtocol();
-        createComputeRequestProtocol.setName(displayName);
+        createComputeRequestProtocol.setName(name);
         createComputeRequestProtocol.setSize(size);
         createComputeRequestProtocol.setRegion(region);
         createComputeRequestProtocol.setDryrun(false);
@@ -87,7 +91,7 @@ public class DelveCloudClient extends DefaultApi {
 
     public void removeDefaultCompute(String dbName) throws ApiException {
         UpdateDatabaseRequestProtocol updateDatabaseRequestProtocol = new UpdateDatabaseRequestProtocol();
-        updateDatabaseRequestProtocol.setDisplayName(dbName);
+        updateDatabaseRequestProtocol.setName(dbName);
         updateDatabaseRequestProtocol.removeDefaultCompute(true);
         updateDatabaseRequestProtocol.dryrun(false);
 
@@ -127,8 +131,22 @@ public class DelveCloudClient extends DefaultApi {
     }
 
     @Override
-    public Call databaseGetCall(ApiCallback _callback) throws ApiException {
-        return call("/database", null, "GET", null, _callback);
+    public Call databaseGetCall(List<String> id, List<String> name, List<String> state, ApiCallback _callback) throws ApiException {
+        ApiClient localVarApiClient = getApiClient();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (id != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "id", id));
+        }
+
+        if (name != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "name", name));
+        }
+
+        if (state != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "state", state));
+        }
+
+        return call("/database",null, "GET", localVarCollectionQueryParams, _callback);
     }
 
     @Override

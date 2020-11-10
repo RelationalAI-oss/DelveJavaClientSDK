@@ -41,11 +41,11 @@ public class UpdateDatabaseRequestProtocolTest {
     }
 
     /**
-     * Test the property 'displayName'
+     * Test the property 'name'
      */
     @Test
-    public void displayNameTest() {
-        // TODO: test displayName
+    public void nameTest() {
+        // TODO: test name
     }
 
     /**
