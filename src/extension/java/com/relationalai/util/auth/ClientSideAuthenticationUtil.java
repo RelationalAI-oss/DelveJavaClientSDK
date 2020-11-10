@@ -32,19 +32,26 @@ import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class ClientSideAuthenticationUtil {
     public static final String AUTHORIZATION_HEADER = "authorization";
     final static Logger LOGGER = RaiLogger.getLogger(MethodHandles.lookup().lookupClass());
-
+    public static final String RAIDATE_HEADER = "x-rai-date";
+    public static final DateTimeFormatter SIGNATURE_DATE_FORMATTER = DateTimeFormatter
+        .ofPattern("yyyyMMdd'T'HHmmss'Z'").withZone(ZoneId.of("UTC"));
+    public static final DateTimeFormatter SCOPE_DATE_FORMATTER = DateTimeFormatter
+        .ofPattern("yyyyMMdd").withZone(ZoneId.of("UTC"));
     /**
      * String-to-sign:
      * Algorithm (e.g. RAI01-ED25519-SHA256) + \n +
      * CredentialScope + \n +
      * HashedCanonicalRequest
      **/
-    public static String getStringToSign(Request req, String accessKey, String region, String service)
+    public static String getStringToSign(Request req, Instant date, String accessKey, String region, String service)
             throws NoSuchAlgorithmException, InvalidRequestException, IOException {
         StringBuilder stringToSign = new StringBuilder();
 
@@ -52,14 +59,13 @@ public class ClientSideAuthenticationUtil {
         stringToSign.append(new AuthorizationMethod().getStringForSignature());
         stringToSign.append("\n");
 
-        Date date = new Date();
+        // Date
+        stringToSign.append(SIGNATURE_DATE_FORMATTER.format(date));
+        stringToSign.append("\n");
 
         // CredentialScope
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        // TODO: Maybe we should change the granularity to smaller than a day, e.g., a minute
-        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmm'Z'");
-        String dateFormatted = dateFormat.format(date);
-        CredentialScope credScope = new CredentialScope(accessKey, dateFormatted, region, service, CredentialScope.TERMINATION_STRING);
+        String scopeDateFormatted = SCOPE_DATE_FORMATTER.format(date);
+        CredentialScope credScope = new CredentialScope(accessKey, scopeDateFormatted, region, service, CredentialScope.TERMINATION_STRING);
         stringToSign.append(credScope.getStringForSignature());
         stringToSign.append("\n");
 
