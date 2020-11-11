@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.security.GeneralSecurityException;
+import java.time.Instant;
 
 /**
  * An HTTP2 client that allows you to send HTTP2 frames to a server. Inbound and outbound frames are
@@ -36,8 +37,10 @@ public final class Http2Client {
         // TODO : need to make sure this is only called once
         TinkConfig.register();
 
+        Instant date = Instant.now();
         // URL-encode serviceUri
-        String stringToSign = ClientSideAuthenticationUtil.getStringToSign(request, accessKey, regionName, serviceIdentifier);
+        String stringToSign = ClientSideAuthenticationUtil.getStringToSign(request, date,
+            accessKey, regionName, serviceIdentifier);
 
         LOGGER.debug(
                 "Http2Client.signRequest: \n" +
@@ -65,6 +68,8 @@ public final class Http2Client {
         return request.newBuilder()
                       .header("Authorization", authHeader)
                       .header("User-Agent", "DelveClient/1.1.1/java")
+                      .header(ClientSideAuthenticationUtil.RAIDATE_HEADER,
+                          ClientSideAuthenticationUtil.SIGNATURE_DATE_FORMATTER.format(date))
                       .build();
     }
 }

@@ -102,7 +102,10 @@ public class DefaultApiTest {
      */
     @Test
     public void databaseGetTest() throws ApiException {
-        ListDatabasesResponseProtocol response = api.databaseGet();
+        List<String> id = null;
+        List<String> name = null;
+        List<String> state = null;
+        ListDatabasesResponseProtocol response = api.databaseGet(id, name, state);
 
         // TODO: test validations
     }
