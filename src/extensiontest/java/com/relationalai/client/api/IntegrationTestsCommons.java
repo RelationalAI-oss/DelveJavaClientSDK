@@ -133,7 +133,7 @@ public class IntegrationTestsCommons {
         // query
         // ==============================================================================
         assertTrue(testQuery(conn, "def bar = 2", "bar").equals(
-                toRelation("bar", Arrays.asList(2.0), "Int64")));
+                toRelation("bar", Arrays.asList(2.0), null, "Int64")));
         assertTrue(testQuery(conn, "def p = {(1,); (2,); (3,)}", "p").equals(
                 toRelation("p", Arrays.asList(1.0, 2.0, 3.0), "Int64")));
         assertTrue(testQuery(conn, "def p = {(1.1,); (2.2,); (3.4,)}", "p").equals(
@@ -207,9 +207,9 @@ public class IntegrationTestsCommons {
 
         conn2.cloneDatabase(conn.getDbName(), true);
         assertTrue(testQuery(conn, null, "x").equals(
-                toRelation("x", Arrays.asList(1.0), "Int64")));
+                toRelation("x", Arrays.asList(1.0), null, "Int64")));
         assertTrue(testQuery(conn2, null, "x").equals(
-                toRelation("x", Arrays.asList(1.0), "Int64")));
+                toRelation("x", Arrays.asList(1.0), null, "Int64")));
 
         // update edb
         // ========================================================================
@@ -249,7 +249,7 @@ public class IntegrationTestsCommons {
 
         assertTrue(conn.loadCSV(dataLoaderArgs));
         assertTrue(testQuery(conn, "def result = count[pos: csv[pos, :A]]", "result").equals(
-                toRelation("result", Arrays.asList(2.0), "Int64")));
+                toRelation("result", Arrays.asList(2.0), null, "Int64")));
 
         dataLoaderArgs = DataLoaderArgs.builder()
                 .rel("bar")
@@ -260,7 +260,7 @@ public class IntegrationTestsCommons {
 
         assertTrue(conn.loadCSV(dataLoaderArgs));
         assertTrue(testQuery(conn, "def result = count[pos: bar[pos, :D]]", "result").equals(
-                toRelation("result", Arrays.asList(4.0), "Int64")));
+                toRelation("result", Arrays.asList(4.0), null, "Int64")));
 
         PairSymbolString credentialsPair = new PairSymbolString();
         credentialsPair.setFirst("azure_sas_token");
@@ -284,7 +284,7 @@ public class IntegrationTestsCommons {
 
         assertTrue(conn.loadCSV(dataLoaderArgs));
         assertTrue(testQuery(conn, "def result = count[pos: baz[pos, :D]]", "result").equals(
-                toRelation("result", Arrays.asList(4.0), "Int64")));
+                toRelation("result", Arrays.asList(4.0), null, "Int64")));
 
         // load json
         // =====================================================================
