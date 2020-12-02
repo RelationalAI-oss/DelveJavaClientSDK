@@ -39,7 +39,7 @@ public class CSVFileSyntaxArgs extends CSVFileSyntax {
                 .delim(StringUtils.isEmpty(CSVFileSyntaxArgs.getDelim()) ? "," : CSVFileSyntaxArgs.getDelim())
                 .datarow(CSVFileSyntaxArgs.getDatarow() == null ? -1 : CSVFileSyntaxArgs.getDatarow())
                 .escapechar(StringUtils.isEmpty(CSVFileSyntaxArgs.getEscapechar()) ? "\\" : CSVFileSyntaxArgs.getEscapechar())
-                .headerRow(CSVFileSyntaxArgs.getHeaderRow() == null ? -1 : CSVFileSyntaxArgs.getHeaderRow())
+                .headerRow(CSVFileSyntaxArgs.getHeaderRow() == null ? 1 : CSVFileSyntaxArgs.getHeaderRow())
                 .ignorerepeated(CSVFileSyntaxArgs.getIgnorerepeated() == null ? false : CSVFileSyntaxArgs.getIgnorerepeated())
                 .missingstrings(CSVFileSyntaxArgs.getMissingstrings())
                 .normalizenames(CSVFileSyntaxArgs.getNormalizenames() == null ? false : CSVFileSyntaxArgs.getNormalizenames())
