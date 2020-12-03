@@ -66,6 +66,7 @@ public class DefaultApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A successful result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> The transaction was aborted. The result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> All errors are also wrapped inside a TransactionResult </td><td>  -  </td></tr>
      </table>
@@ -123,6 +124,7 @@ public class DefaultApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A successful result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> The transaction was aborted. The result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> All errors are also wrapped inside a TransactionResult </td><td>  -  </td></tr>
      </table>
@@ -142,6 +144,7 @@ public class DefaultApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A successful result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> The transaction was aborted. The result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> All errors are also wrapped inside a TransactionResult </td><td>  -  </td></tr>
      </table>
@@ -163,6 +166,7 @@ public class DefaultApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A successful result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> The transaction was aborted. The result is wrapped inside a TransactionResult </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> All errors are also wrapped inside a TransactionResult </td><td>  -  </td></tr>
      </table>
