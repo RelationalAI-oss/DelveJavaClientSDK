@@ -67,7 +67,7 @@ public final class Http2Client {
         // shoved it into the headers
         return request.newBuilder()
                       .header("Authorization", authHeader)
-                      .header("User-Agent", "DelveClient/1.1.3/java")
+                      .header("User-Agent", "DelveClient/1.1.4/java")
                       .header(ClientSideAuthenticationUtil.RAIDATE_HEADER,
                           ClientSideAuthenticationUtil.SIGNATURE_DATE_FORMATTER.format(date))
                       .build();

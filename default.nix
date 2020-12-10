@@ -10,7 +10,7 @@ let
 in
 stdenv.mkDerivation rec {
   name = "delve-java-client-sdk-${version}";
-  version = "1.1.3";
+  version = "1.1.4";
   src = ./.;
 
   buildInputs = [
