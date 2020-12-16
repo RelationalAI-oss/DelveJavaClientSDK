@@ -23,6 +23,7 @@ import com.relationalai.client.model.ClientProblem;
 import com.relationalai.client.model.ComparisonChainError;
 import com.relationalai.client.model.ExceptionProblem;
 import com.relationalai.client.model.FrontProblem;
+import com.relationalai.client.model.InlineInconsistent;
 import com.relationalai.client.model.IntegrityConstraintProblem;
 import com.relationalai.client.model.IntegrityConstraintViolation;
 import com.relationalai.client.model.OutputProblem;

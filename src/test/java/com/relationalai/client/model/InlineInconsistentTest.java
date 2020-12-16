@@ -18,11 +18,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AbstractProblem;
-import com.relationalai.client.model.ArityMismatchError;
-import com.relationalai.client.model.ComparisonChainError;
-import com.relationalai.client.model.InlineInconsistent;
-import com.relationalai.client.model.UndefinedError;
+import com.relationalai.client.model.FrontProblem;
+import com.relationalai.client.model.Range;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -32,17 +29,17 @@ import org.junit.Test;
 
 
 /**
- * Model tests for FrontProblem
+ * Model tests for InlineInconsistent
  */
-public class FrontProblemTest {
-    private final FrontProblem model = new FrontProblem();
+public class InlineInconsistentTest {
+    private final InlineInconsistent model = new InlineInconsistent();
 
     /**
-     * Model tests for FrontProblem
+     * Model tests for InlineInconsistent
      */
     @Test
-    public void testFrontProblem() {
-        // TODO: test FrontProblem
+    public void testInlineInconsistent() {
+        // TODO: test InlineInconsistent
     }
 
     /**

@@ -672,6 +672,19 @@ components:
       - msg
       - range
       type: object
+    InlineInconsistent:
+      allOf:
+      - $ref: '#/components/schemas/FrontProblem'
+      properties:
+        name:
+          default: ""
+          type: string
+        range:
+          $ref: '#/components/schemas/Range'
+      required:
+      - name
+      - range
+      type: object
     UndefinedError:
       allOf:
       - $ref: '#/components/schemas/FrontProblem'

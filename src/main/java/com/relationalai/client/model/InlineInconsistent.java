@@ -20,23 +20,72 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.relationalai.client.model.AbstractProblem;
-import com.relationalai.client.model.ArityMismatchError;
-import com.relationalai.client.model.ComparisonChainError;
-import com.relationalai.client.model.InlineInconsistent;
-import com.relationalai.client.model.UndefinedError;
+import com.relationalai.client.model.FrontProblem;
+import com.relationalai.client.model.Range;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * FrontProblem
+ * InlineInconsistent
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class FrontProblem extends AbstractProblem {
-  public FrontProblem() {
+public class InlineInconsistent extends FrontProblem {
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name = "";
+
+  public static final String SERIALIZED_NAME_RANGE = "range";
+  @SerializedName(SERIALIZED_NAME_RANGE)
+  private Range range;
+
+  public InlineInconsistent() {
     this.type = this.getClass().getSimpleName();
   }
+
+  public InlineInconsistent name(String name) {
+    
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Get name
+   * @return name
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public String getName() {
+    return name;
+  }
+
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  public InlineInconsistent range(Range range) {
+    
+    this.range = range;
+    return this;
+  }
+
+   /**
+   * Get range
+   * @return range
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public Range getRange() {
+    return range;
+  }
+
+
+  public void setRange(Range range) {
+    this.range = range;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -46,20 +95,25 @@ public class FrontProblem extends AbstractProblem {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    InlineInconsistent inlineInconsistent = (InlineInconsistent) o;
+    return Objects.equals(this.name, inlineInconsistent.name) &&
+        Objects.equals(this.range, inlineInconsistent.range) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(name, range, super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FrontProblem {\n");
+    sb.append("class InlineInconsistent {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    range: ").append(toIndentedString(range)).append("\n");
     sb.append("}");
     return sb.toString();
   }

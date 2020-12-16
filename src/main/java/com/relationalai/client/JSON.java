@@ -61,6 +61,7 @@ public class JSON {
                         classByDiscriminatorValue.put("ComparisonChainError", ComparisonChainError.class);
                         classByDiscriminatorValue.put("ExceptionProblem", ExceptionProblem.class);
                         classByDiscriminatorValue.put("FrontProblem", FrontProblem.class);
+                        classByDiscriminatorValue.put("InlineInconsistent", InlineInconsistent.class);
                         classByDiscriminatorValue.put("IntegrityConstraintProblem", IntegrityConstraintProblem.class);
                         classByDiscriminatorValue.put("IntegrityConstraintViolation", IntegrityConstraintViolation.class);
                         classByDiscriminatorValue.put("OutputProblem", OutputProblem.class);
@@ -272,6 +273,7 @@ public class JSON {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("ArityMismatchError", ArityMismatchError.class);
                         classByDiscriminatorValue.put("ComparisonChainError", ComparisonChainError.class);
+                        classByDiscriminatorValue.put("InlineInconsistent", InlineInconsistent.class);
                         classByDiscriminatorValue.put("UndefinedError", UndefinedError.class);
                         classByDiscriminatorValue.put("FrontProblem", FrontProblem.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
@@ -292,6 +294,15 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("ImportActionResult", ImportActionResult.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(InlineInconsistent.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("InlineInconsistent", InlineInconsistent.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }
