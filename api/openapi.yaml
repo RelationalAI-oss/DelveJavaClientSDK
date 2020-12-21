@@ -685,6 +685,21 @@ components:
       - name
       - range
       type: object
+    ShadowError:
+      allOf:
+      - $ref: '#/components/schemas/FrontProblem'
+      properties:
+        range:
+          $ref: '#/components/schemas/Range'
+        shadowed: {}
+        shadower: {}
+        var:
+          default: ""
+          type: string
+      required:
+      - range
+      - var
+      type: object
     UndefinedError:
       allOf:
       - $ref: '#/components/schemas/FrontProblem'

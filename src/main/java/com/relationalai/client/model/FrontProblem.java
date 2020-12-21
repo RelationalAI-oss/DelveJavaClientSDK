@@ -24,6 +24,7 @@ import com.relationalai.client.model.AbstractProblem;
 import com.relationalai.client.model.ArityMismatchError;
 import com.relationalai.client.model.ComparisonChainError;
 import com.relationalai.client.model.InlineInconsistent;
+import com.relationalai.client.model.ShadowError;
 import com.relationalai.client.model.UndefinedError;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

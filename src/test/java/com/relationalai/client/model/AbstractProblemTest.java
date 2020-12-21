@@ -28,6 +28,7 @@ import com.relationalai.client.model.IntegrityConstraintProblem;
 import com.relationalai.client.model.IntegrityConstraintViolation;
 import com.relationalai.client.model.OutputProblem;
 import com.relationalai.client.model.PersistProblem;
+import com.relationalai.client.model.ShadowError;
 import com.relationalai.client.model.StorageProblem;
 import com.relationalai.client.model.SyntaxError;
 import com.relationalai.client.model.UndefinedError;

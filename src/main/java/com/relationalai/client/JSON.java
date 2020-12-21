@@ -66,6 +66,7 @@ public class JSON {
                         classByDiscriminatorValue.put("IntegrityConstraintViolation", IntegrityConstraintViolation.class);
                         classByDiscriminatorValue.put("OutputProblem", OutputProblem.class);
                         classByDiscriminatorValue.put("PersistProblem", PersistProblem.class);
+                        classByDiscriminatorValue.put("ShadowError", ShadowError.class);
                         classByDiscriminatorValue.put("StorageProblem", StorageProblem.class);
                         classByDiscriminatorValue.put("SyntaxError", SyntaxError.class);
                         classByDiscriminatorValue.put("UndefinedError", UndefinedError.class);
@@ -274,6 +275,7 @@ public class JSON {
                         classByDiscriminatorValue.put("ArityMismatchError", ArityMismatchError.class);
                         classByDiscriminatorValue.put("ComparisonChainError", ComparisonChainError.class);
                         classByDiscriminatorValue.put("InlineInconsistent", InlineInconsistent.class);
+                        classByDiscriminatorValue.put("ShadowError", ShadowError.class);
                         classByDiscriminatorValue.put("UndefinedError", UndefinedError.class);
                         classByDiscriminatorValue.put("FrontProblem", FrontProblem.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
@@ -551,6 +553,15 @@ public class JSON {
                     public Class getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("SetOptionsActionResult", SetOptionsActionResult.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(ShadowError.class, new TypeSelector() {
+                    @Override
+                    public Class getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("ShadowError", ShadowError.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "type"));
                     }
