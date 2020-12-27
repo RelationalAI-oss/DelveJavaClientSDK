@@ -459,9 +459,6 @@ components:
         abort_on_error:
           nullable: true
           type: boolean
-        broken:
-          nullable: true
-          type: boolean
         debug:
           nullable: true
           type: boolean
