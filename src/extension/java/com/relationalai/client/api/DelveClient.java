@@ -537,7 +537,6 @@ public class DelveClient extends DefaultApi {
         SetOptionsAction action = new SetOptionsAction();
         action.setDebug(configureArgs.isDebug());
         action.setDebugTrace(configureArgs.isDebugTrace());
-        action.setBroken(configureArgs.isBroken());
         action.setSilent(configureArgs.isSilent());
         action.setAbortOnError(configureArgs.isAbortOnError());
         return runAction(conn, "single",action, false, Transaction.ModeEnum.OPEN) != null;
