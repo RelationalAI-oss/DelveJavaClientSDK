@@ -197,6 +197,11 @@ public class DelveClient extends DefaultApi {
         if (conn.getDebugLevel() > 0)
             System.out.println("=> TransactionResult: " + response);
 
+        // Sync the reported database version to our local
+        // connection version. Important, as we want to ensure
+        // that in subsequent transactions this will be the
+        // minimum required version of the database. Note that
+        // only write transactions bump the version.
         Integer currentVersion = conn.getVersion();
         Integer responseVersion = response.getVersion();
         if (responseVersion > currentVersion) {
