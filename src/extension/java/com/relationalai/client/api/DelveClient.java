@@ -197,6 +197,12 @@ public class DelveClient extends DefaultApi {
         if (conn.getDebugLevel() > 0)
             System.out.println("=> TransactionResult: " + response);
 
+        Integer currentVersion = conn.getVersion();
+        Integer responseVersion = response.getVersion();
+        if (responseVersion > currentVersion) {
+            conn.setVersion(responseVersion);
+        }
+
         if (!response.getAborted()) {
             for (LabeledActionResult act : response.getActions()) {
                 if (name.equals(act.getName())) {
