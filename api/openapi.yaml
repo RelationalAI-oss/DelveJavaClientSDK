@@ -252,7 +252,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/FileSyntax'
       properties:
-        datarow:
+        data_row:
           default: 0
           type: integer
         delim:
@@ -284,7 +284,7 @@ components:
           default: ""
           type: string
       required:
-      - datarow
+      - data_row
       - delim
       - escapechar
       - header_row

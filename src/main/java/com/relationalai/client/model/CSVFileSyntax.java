@@ -32,9 +32,9 @@ import java.util.List;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class CSVFileSyntax extends FileSyntax {
-  public static final String SERIALIZED_NAME_DATAROW = "datarow";
-  @SerializedName(SERIALIZED_NAME_DATAROW)
-  private Integer datarow = 0;
+  public static final String SERIALIZED_NAME_DATA_ROW = "data_row";
+  @SerializedName(SERIALIZED_NAME_DATA_ROW)
+  private Integer dataRow = 0;
 
   public static final String SERIALIZED_NAME_DELIM = "delim";
   @SerializedName(SERIALIZED_NAME_DELIM)
@@ -72,25 +72,25 @@ public class CSVFileSyntax extends FileSyntax {
     this.type = this.getClass().getSimpleName();
   }
 
-  public CSVFileSyntax datarow(Integer datarow) {
+  public CSVFileSyntax dataRow(Integer dataRow) {
     
-    this.datarow = datarow;
+    this.dataRow = dataRow;
     return this;
   }
 
    /**
-   * Get datarow
-   * @return datarow
+   * Get dataRow
+   * @return dataRow
   **/
   @ApiModelProperty(required = true, value = "")
 
-  public Integer getDatarow() {
-    return datarow;
+  public Integer getDataRow() {
+    return dataRow;
   }
 
 
-  public void setDatarow(Integer datarow) {
-    this.datarow = datarow;
+  public void setDataRow(Integer dataRow) {
+    this.dataRow = dataRow;
   }
 
 
@@ -297,7 +297,7 @@ public class CSVFileSyntax extends FileSyntax {
       return false;
     }
     CSVFileSyntax csVFileSyntax = (CSVFileSyntax) o;
-    return Objects.equals(this.datarow, csVFileSyntax.datarow) &&
+    return Objects.equals(this.dataRow, csVFileSyntax.dataRow) &&
         Objects.equals(this.delim, csVFileSyntax.delim) &&
         Objects.equals(this.escapechar, csVFileSyntax.escapechar) &&
         Objects.equals(this.header, csVFileSyntax.header) &&
@@ -311,7 +311,7 @@ public class CSVFileSyntax extends FileSyntax {
 
   @Override
   public int hashCode() {
-    return Objects.hash(datarow, delim, escapechar, header, headerRow, ignorerepeated, missingstrings, normalizenames, quotechar, super.hashCode());
+    return Objects.hash(dataRow, delim, escapechar, header, headerRow, ignorerepeated, missingstrings, normalizenames, quotechar, super.hashCode());
   }
 
 
@@ -320,7 +320,7 @@ public class CSVFileSyntax extends FileSyntax {
     StringBuilder sb = new StringBuilder();
     sb.append("class CSVFileSyntax {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    datarow: ").append(toIndentedString(datarow)).append("\n");
+    sb.append("    dataRow: ").append(toIndentedString(dataRow)).append("\n");
     sb.append("    delim: ").append(toIndentedString(delim)).append("\n");
     sb.append("    escapechar: ").append(toIndentedString(escapechar)).append("\n");
     sb.append("    header: ").append(toIndentedString(header)).append("\n");
