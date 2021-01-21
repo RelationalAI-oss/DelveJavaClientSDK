@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**datarow** | **Integer** |  | 
+**dataRow** | **Integer** |  | 
 **delim** | **String** |  | 
 **escapechar** | **String** |  | 
 **header** | **List&lt;String&gt;** |  |  [optional]

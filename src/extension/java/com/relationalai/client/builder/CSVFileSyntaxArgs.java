@@ -14,7 +14,7 @@ public class CSVFileSyntaxArgs extends CSVFileSyntax {
     public CSVFileSyntaxArgs(
         List<String > header,
         String delim,
-        Integer datarow,
+        Integer dataRow,
         String escapechar,
         Integer headerRow,
         Boolean ignorerepeated,
@@ -23,7 +23,7 @@ public class CSVFileSyntaxArgs extends CSVFileSyntax {
         String quotechar
     ) {
         this.header(header);
-        this.datarow(datarow);
+        this.dataRow(dataRow);
         this.delim(delim);
         this.escapechar(escapechar);
         this.headerRow(headerRow);
@@ -37,7 +37,7 @@ public class CSVFileSyntaxArgs extends CSVFileSyntax {
         return new CSVFileSyntax()
                 .header(CSVFileSyntaxArgs.getHeader())
                 .delim(StringUtils.isEmpty(CSVFileSyntaxArgs.getDelim()) ? "," : CSVFileSyntaxArgs.getDelim())
-                .datarow(CSVFileSyntaxArgs.getDatarow() == null ? -1 : CSVFileSyntaxArgs.getDatarow())
+                .dataRow(CSVFileSyntaxArgs.getDataRow() == null ? -1 : CSVFileSyntaxArgs.getDataRow())
                 .escapechar(StringUtils.isEmpty(CSVFileSyntaxArgs.getEscapechar()) ? "\\" : CSVFileSyntaxArgs.getEscapechar())
                 .headerRow(CSVFileSyntaxArgs.getHeaderRow() == null ? 1 : CSVFileSyntaxArgs.getHeaderRow())
                 .ignorerepeated(CSVFileSyntaxArgs.getIgnorerepeated() == null ? false : CSVFileSyntaxArgs.getIgnorerepeated())
