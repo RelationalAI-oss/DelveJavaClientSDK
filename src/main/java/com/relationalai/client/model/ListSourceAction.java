@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.Action;
+import com.relationalai.client.model.CollectProblemsActionAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -30,9 +31,36 @@ import java.io.IOException;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ListSourceAction extends Action {
+  public static final String SERIALIZED_NAME_DUMMY = "dummy";
+  @SerializedName(SERIALIZED_NAME_DUMMY)
+  private String dummy;
+
   public ListSourceAction() {
     this.type = this.getClass().getSimpleName();
   }
+
+  public ListSourceAction dummy(String dummy) {
+    
+    this.dummy = dummy;
+    return this;
+  }
+
+   /**
+   * Get dummy
+   * @return dummy
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getDummy() {
+    return dummy;
+  }
+
+
+  public void setDummy(String dummy) {
+    this.dummy = dummy;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -42,12 +70,14 @@ public class ListSourceAction extends Action {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    ListSourceAction listSourceAction = (ListSourceAction) o;
+    return Objects.equals(this.dummy, listSourceAction.dummy) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(dummy, super.hashCode());
   }
 
 
@@ -56,6 +86,7 @@ public class ListSourceAction extends Action {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListSourceAction {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    dummy: ").append(toIndentedString(dummy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

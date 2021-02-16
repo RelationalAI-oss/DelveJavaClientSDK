@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.ActionResult;
+import com.relationalai.client.model.QueryActionResultAllOf;
 import com.relationalai.client.model.Relation;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -50,6 +51,14 @@ public class QueryActionResultTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'output'
+     */
+    @Test
+    public void outputTest() {
+        // TODO: test output
     }
 
 }

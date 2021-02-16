@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.AbstractProblem;
 import com.relationalai.client.model.ActionResult;
+import com.relationalai.client.model.CollectProblemsActionResultAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -50,6 +51,14 @@ public class ParseActionResultTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'problems'
+     */
+    @Test
+    public void problemsTest() {
+        // TODO: test problems
     }
 
 }

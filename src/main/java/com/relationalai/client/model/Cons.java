@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.relationalai.client.model.ConsAllOf;
 import com.relationalai.client.model.LinkedList;
 import com.relationalai.client.model.SyntaxNode;
 import io.swagger.annotations.ApiModel;
