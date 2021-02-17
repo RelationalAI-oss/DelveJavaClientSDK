@@ -1,7 +1,7 @@
 # Delve Java Client SDK
 
 Delve Client SDK
-- API version: 1.1.3
+- API version: 1.2.0
 
 This is a Client SDK for Delve API
 
@@ -29,7 +29,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.relationalai</groupId>
   <artifactId>delve-java-client-sdk</artifactId>
-  <version>1.1.3</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 
@@ -81,7 +81,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/delve-java-client-sdk-1.1.3.jar`
+* `target/delve-java-client-sdk-1.2.0.jar`
 * `target/lib/*.jar`
 
 ## Recommendation

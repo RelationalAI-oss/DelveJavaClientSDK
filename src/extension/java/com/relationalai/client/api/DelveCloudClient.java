@@ -98,6 +98,29 @@ public class DelveCloudClient extends DefaultApi {
         this.databasePost(updateDatabaseRequestProtocol);
     }
 
+    public ListComputeEventsResponse listComputeEvents(String computeId) throws ApiException {
+        return super.listComputeEvents(computeId);
+    }
+
+    public enum Period {
+        CURRENT_MONTH {
+            public String toString() {
+                return "current_month";
+            }
+        },
+        PREVIOUS_MONTH {
+            public String toString() {
+                return "previous_month";
+            }
+        }
+    }
+
+
+    public GetAccountCreditsResponse getAccountCredits() throws ApiException { return this.getAccountCredits(Period.CURRENT_MONTH); }
+    public GetAccountCreditsResponse getAccountCredits(Period period) throws ApiException {
+        return this.accountCreditsGet(period.toString());
+    }
+
     public Connection getConn() { return conn; }
 
     public void setConn(Connection conn) { this.conn = conn; }
