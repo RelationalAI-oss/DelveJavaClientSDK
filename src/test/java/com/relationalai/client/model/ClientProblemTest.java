@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.AbstractProblem;
+import com.relationalai.client.model.ClientProblemAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -47,6 +48,54 @@ public class ClientProblemTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'errorCode'
+     */
+    @Test
+    public void errorCodeTest() {
+        // TODO: test errorCode
+    }
+
+    /**
+     * Test the property 'isError'
+     */
+    @Test
+    public void isErrorTest() {
+        // TODO: test isError
+    }
+
+    /**
+     * Test the property 'isException'
+     */
+    @Test
+    public void isExceptionTest() {
+        // TODO: test isException
+    }
+
+    /**
+     * Test the property 'message'
+     */
+    @Test
+    public void messageTest() {
+        // TODO: test message
+    }
+
+    /**
+     * Test the property 'path'
+     */
+    @Test
+    public void pathTest() {
+        // TODO: test path
+    }
+
+    /**
+     * Test the property 'report'
+     */
+    @Test
+    public void reportTest() {
+        // TODO: test report
     }
 
 }

@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.Action;
+import com.relationalai.client.model.ParseActionAllOf;
 import com.relationalai.client.model.Source;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -48,6 +49,22 @@ public class ParseActionTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'nonterm'
+     */
+    @Test
+    public void nontermTest() {
+        // TODO: test nonterm
+    }
+
+    /**
+     * Test the property 'source'
+     */
+    @Test
+    public void sourceTest() {
+        // TODO: test source
     }
 
 }

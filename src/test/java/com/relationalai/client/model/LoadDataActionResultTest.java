@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.ActionResult;
+import com.relationalai.client.model.CollectProblemsActionAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -47,6 +48,14 @@ public class LoadDataActionResultTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'dummy'
+     */
+    @Test
+    public void dummyTest() {
+        // TODO: test dummy
     }
 
 }

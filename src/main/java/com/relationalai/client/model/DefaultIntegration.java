@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.relationalai.client.model.CollectProblemsActionAllOf;
 import com.relationalai.client.model.Integration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,9 +31,36 @@ import java.io.IOException;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class DefaultIntegration extends Integration {
+  public static final String SERIALIZED_NAME_DUMMY = "dummy";
+  @SerializedName(SERIALIZED_NAME_DUMMY)
+  private String dummy;
+
   public DefaultIntegration() {
     this.type = this.getClass().getSimpleName();
   }
+
+  public DefaultIntegration dummy(String dummy) {
+    
+    this.dummy = dummy;
+    return this;
+  }
+
+   /**
+   * Get dummy
+   * @return dummy
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getDummy() {
+    return dummy;
+  }
+
+
+  public void setDummy(String dummy) {
+    this.dummy = dummy;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -42,12 +70,14 @@ public class DefaultIntegration extends Integration {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    DefaultIntegration defaultIntegration = (DefaultIntegration) o;
+    return Objects.equals(this.dummy, defaultIntegration.dummy) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(dummy, super.hashCode());
   }
 
 
@@ -56,6 +86,7 @@ public class DefaultIntegration extends Integration {
     StringBuilder sb = new StringBuilder();
     sb.append("class DefaultIntegration {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    dummy: ").append(toIndentedString(dummy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

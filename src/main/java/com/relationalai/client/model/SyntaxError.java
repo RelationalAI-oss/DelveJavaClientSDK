@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.AbstractProblem;
 import com.relationalai.client.model.LinkedList;
+import com.relationalai.client.model.SyntaxErrorAllOf;
 import com.relationalai.client.model.SyntaxNode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

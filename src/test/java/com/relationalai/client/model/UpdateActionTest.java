@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.Action;
 import com.relationalai.client.model.PairAnyValueAnyValue;
 import com.relationalai.client.model.RelKey;
+import com.relationalai.client.model.UpdateActionAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -51,6 +52,30 @@ public class UpdateActionTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'delta'
+     */
+    @Test
+    public void deltaTest() {
+        // TODO: test delta
+    }
+
+    /**
+     * Test the property 'rel'
+     */
+    @Test
+    public void relTest() {
+        // TODO: test rel
+    }
+
+    /**
+     * Test the property 'updates'
+     */
+    @Test
+    public void updatesTest() {
+        // TODO: test updates
     }
 
 }

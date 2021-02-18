@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.AbstractProblem;
 import com.relationalai.client.model.ICViolation;
+import com.relationalai.client.model.IntegrityConstraintViolationAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -50,6 +51,14 @@ public class IntegrityConstraintViolationTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'sources'
+     */
+    @Test
+    public void sourcesTest() {
+        // TODO: test sources
     }
 
 }

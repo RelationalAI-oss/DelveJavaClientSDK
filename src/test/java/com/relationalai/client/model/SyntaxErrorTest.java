@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.AbstractProblem;
 import com.relationalai.client.model.LinkedList;
+import com.relationalai.client.model.SyntaxErrorAllOf;
 import com.relationalai.client.model.SyntaxNode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -49,6 +50,30 @@ public class SyntaxErrorTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'next'
+     */
+    @Test
+    public void nextTest() {
+        // TODO: test next
+    }
+
+    /**
+     * Test the property 'node'
+     */
+    @Test
+    public void nodeTest() {
+        // TODO: test node
+    }
+
+    /**
+     * Test the property 'trace'
+     */
+    @Test
+    public void traceTest() {
+        // TODO: test trace
     }
 
 }

@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.ActionResult;
+import com.relationalai.client.model.CollectProblemsActionAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -30,9 +31,36 @@ import java.io.IOException;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class UpdateActionResult extends ActionResult {
+  public static final String SERIALIZED_NAME_DUMMY = "dummy";
+  @SerializedName(SERIALIZED_NAME_DUMMY)
+  private String dummy;
+
   public UpdateActionResult() {
     this.type = this.getClass().getSimpleName();
   }
+
+  public UpdateActionResult dummy(String dummy) {
+    
+    this.dummy = dummy;
+    return this;
+  }
+
+   /**
+   * Get dummy
+   * @return dummy
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getDummy() {
+    return dummy;
+  }
+
+
+  public void setDummy(String dummy) {
+    this.dummy = dummy;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -42,12 +70,14 @@ public class UpdateActionResult extends ActionResult {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    UpdateActionResult updateActionResult = (UpdateActionResult) o;
+    return Objects.equals(this.dummy, updateActionResult.dummy) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(dummy, super.hashCode());
   }
 
 
@@ -56,6 +86,7 @@ public class UpdateActionResult extends ActionResult {
     StringBuilder sb = new StringBuilder();
     sb.append("class UpdateActionResult {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    dummy: ").append(toIndentedString(dummy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

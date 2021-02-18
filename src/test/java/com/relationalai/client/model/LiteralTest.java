@@ -18,6 +18,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.relationalai.client.model.LiteralAllOf;
 import com.relationalai.client.model.Range;
 import com.relationalai.client.model.SyntaxNode;
 import io.swagger.annotations.ApiModel;
@@ -48,6 +49,30 @@ public class LiteralTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'missing'
+     */
+    @Test
+    public void missingTest() {
+        // TODO: test missing
+    }
+
+    /**
+     * Test the property 'range'
+     */
+    @Test
+    public void rangeTest() {
+        // TODO: test range
+    }
+
+    /**
+     * Test the property 'value'
+     */
+    @Test
+    public void valueTest() {
+        // TODO: test value
     }
 
 }

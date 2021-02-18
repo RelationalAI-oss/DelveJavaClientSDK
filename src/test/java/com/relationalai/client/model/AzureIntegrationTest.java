@@ -18,6 +18,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.relationalai.client.model.AzureIntegrationAllOf;
 import com.relationalai.client.model.Integration;
 import com.relationalai.client.model.PairSymbolString;
 import io.swagger.annotations.ApiModel;
@@ -50,6 +51,46 @@ public class AzureIntegrationTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'credentials'
+     */
+    @Test
+    public void credentialsTest() {
+        // TODO: test credentials
+    }
+
+    /**
+     * Test the property 'name'
+     */
+    @Test
+    public void nameTest() {
+        // TODO: test name
+    }
+
+    /**
+     * Test the property 'storageAllowedLocations'
+     */
+    @Test
+    public void storageAllowedLocationsTest() {
+        // TODO: test storageAllowedLocations
+    }
+
+    /**
+     * Test the property 'storageBlockedLocations'
+     */
+    @Test
+    public void storageBlockedLocationsTest() {
+        // TODO: test storageBlockedLocations
+    }
+
+    /**
+     * Test the property 'tenantId'
+     */
+    @Test
+    public void tenantIdTest() {
+        // TODO: test tenantId
     }
 
 }
