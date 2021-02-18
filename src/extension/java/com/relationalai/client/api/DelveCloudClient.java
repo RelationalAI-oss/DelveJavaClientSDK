@@ -116,8 +116,8 @@ public class DelveCloudClient extends DefaultApi {
     }
 
 
-    public GetAccountCreditsResponse getAccountCredits() throws ApiException { return this.getAccountCredits(Period.CURRENT_MONTH); }
-    public GetAccountCreditsResponse getAccountCredits(Period period) throws ApiException {
+    public GetAccountCreditsResponse getAccountCreditUsage() throws ApiException { return this.getAccountCreditUsage(Period.CURRENT_MONTH); }
+    public GetAccountCreditsResponse getAccountCreditUsage(Period period) throws ApiException {
         return this.accountCreditsGet(period.toString());
     }
 
