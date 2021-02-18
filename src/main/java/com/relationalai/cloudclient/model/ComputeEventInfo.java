@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * ComputeEventInfo
@@ -47,7 +48,7 @@ public class ComputeEventInfo {
 
   public static final String SERIALIZED_NAME_TIME = "time";
   @SerializedName(SERIALIZED_NAME_TIME)
-  private String time;
+  private OffsetDateTime time;
 
 
   public ComputeEventInfo eventId(String eventId) {
@@ -142,7 +143,7 @@ public class ComputeEventInfo {
   }
 
 
-  public ComputeEventInfo time(String time) {
+  public ComputeEventInfo time(OffsetDateTime time) {
     
     this.time = time;
     return this;
@@ -155,12 +156,12 @@ public class ComputeEventInfo {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public String getTime() {
+  public OffsetDateTime getTime() {
     return time;
   }
 
 
-  public void setTime(String time) {
+  public void setTime(OffsetDateTime time) {
     this.time = time;
   }
 

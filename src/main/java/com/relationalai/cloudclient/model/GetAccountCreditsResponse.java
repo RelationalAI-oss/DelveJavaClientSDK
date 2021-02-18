@@ -25,7 +25,7 @@ import com.relationalai.cloudclient.model.StorageCreditsInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.time.OffsetDateTime;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * GetAccountCreditsResponse
@@ -34,11 +34,11 @@ import java.time.OffsetDateTime;
 public class GetAccountCreditsResponse {
   public static final String SERIALIZED_NAME_START_PERIOD = "start_period";
   @SerializedName(SERIALIZED_NAME_START_PERIOD)
-  private OffsetDateTime startPeriod = null;
+  private OffsetDateTime startPeriod;
 
   public static final String SERIALIZED_NAME_END_PERIOD = "end_period";
   @SerializedName(SERIALIZED_NAME_END_PERIOD)
-  private OffsetDateTime endPeriod = null;
+  private OffsetDateTime endPeriod;
 
   public static final String SERIALIZED_NAME_COMPUTE = "compute";
   @SerializedName(SERIALIZED_NAME_COMPUTE)
