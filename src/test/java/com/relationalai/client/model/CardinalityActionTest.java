@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.Action;
+import com.relationalai.client.model.CardinalityActionAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -47,6 +48,14 @@ public class CardinalityActionTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'relname'
+     */
+    @Test
+    public void relnameTest() {
+        // TODO: test relname
     }
 
 }

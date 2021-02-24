@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.Action;
+import com.relationalai.client.model.InstallActionAllOf;
 import com.relationalai.client.model.Source;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -50,6 +51,14 @@ public class InstallActionTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'sources'
+     */
+    @Test
+    public void sourcesTest() {
+        // TODO: test sources
     }
 
 }

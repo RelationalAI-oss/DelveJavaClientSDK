@@ -82,15 +82,11 @@ components:
     CardinalityAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        relname:
-          nullable: true
-          type: string
-      type: object
+      - $ref: '#/components/schemas/CardinalityAction_allOf'
     CollectProblemsAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     RelKey:
       example:
         keys:
@@ -163,13 +159,7 @@ components:
     ImportAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        inputs:
-          items:
-            $ref: '#/components/schemas/Relation'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/ImportAction_allOf'
     Source:
       properties:
         name:
@@ -195,25 +185,15 @@ components:
     InstallAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        sources:
-          items:
-            $ref: '#/components/schemas/Source'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/InstallAction_allOf'
     ListEdbAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        relname:
-          nullable: true
-          type: string
-      type: object
+      - $ref: '#/components/schemas/CardinalityAction_allOf'
     ListSourceAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     FileSchema:
       discriminator:
         propertyName: type
@@ -227,17 +207,11 @@ components:
     CSVFileSchema:
       allOf:
       - $ref: '#/components/schemas/FileSchema'
-      properties:
-        types:
-          items:
-            type: string
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/CSVFileSchema_allOf'
     JSONFileSchema:
       allOf:
       - $ref: '#/components/schemas/FileSchema'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     FileSyntax:
       discriminator:
         propertyName: type
@@ -251,51 +225,11 @@ components:
     CSVFileSyntax:
       allOf:
       - $ref: '#/components/schemas/FileSyntax'
-      properties:
-        datarow:
-          default: 0
-          type: integer
-        delim:
-          default: ""
-          type: string
-        escapechar:
-          default: ""
-          type: string
-        header:
-          items:
-            type: string
-          nullable: true
-          type: array
-        header_row:
-          default: 0
-          type: integer
-        ignorerepeated:
-          default: false
-          type: boolean
-        missingstrings:
-          items:
-            type: string
-          nullable: true
-          type: array
-        normalizenames:
-          default: false
-          type: boolean
-        quotechar:
-          default: ""
-          type: string
-      required:
-      - datarow
-      - delim
-      - escapechar
-      - header_row
-      - ignorerepeated
-      - normalizenames
-      - quotechar
-      type: object
+      - $ref: '#/components/schemas/CSVFileSyntax_allOf'
     JSONFileSyntax:
       allOf:
       - $ref: '#/components/schemas/FileSyntax'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     Integration:
       discriminator:
         propertyName: type
@@ -327,37 +261,15 @@ components:
     AzureIntegration:
       allOf:
       - $ref: '#/components/schemas/Integration'
-      properties:
-        credentials:
-          items:
-            $ref: '#/components/schemas/Pair_Symbol_String_'
-          nullable: true
-          type: array
-        name:
-          nullable: true
-          type: string
-        storage_allowed_locations:
-          items:
-            type: string
-          nullable: true
-          type: array
-        storage_blocked_locations:
-          items:
-            type: string
-          nullable: true
-          type: array
-        tenant_id:
-          nullable: true
-          type: string
-      type: object
+      - $ref: '#/components/schemas/AzureIntegration_allOf'
     DefaultIntegration:
       allOf:
       - $ref: '#/components/schemas/Integration'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     S3Integration:
       allOf:
       - $ref: '#/components/schemas/Integration'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     LoadData:
       properties:
         content_type:
@@ -389,90 +301,27 @@ components:
     LoadDataAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        rel:
-          default: ""
-          type: string
-        value:
-          $ref: '#/components/schemas/LoadData'
-      required:
-      - rel
-      - value
-      type: object
+      - $ref: '#/components/schemas/LoadDataAction_allOf'
     ModifyWorkspaceAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        delete_edb:
-          nullable: true
-          type: string
-        delete_source:
-          items:
-            type: string
-          nullable: true
-          type: array
-        enable_library:
-          nullable: true
-          type: string
-      type: object
+      - $ref: '#/components/schemas/ModifyWorkspaceAction_allOf'
     ParseAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        nonterm:
-          default: ""
-          type: string
-        source:
-          $ref: '#/components/schemas/Source'
-      required:
-      - nonterm
-      - source
-      type: object
+      - $ref: '#/components/schemas/ParseAction_allOf'
     QueryAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        inputs:
-          items:
-            $ref: '#/components/schemas/Relation'
-          nullable: true
-          type: array
-        outputs:
-          items:
-            type: string
-          nullable: true
-          type: array
-        persist:
-          items:
-            type: string
-          nullable: true
-          type: array
-        source:
-          $ref: '#/components/schemas/Source'
-      required:
-      - source
-      type: object
+      - $ref: '#/components/schemas/QueryAction_allOf'
     SetOptionsAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        abort_on_error:
-          nullable: true
-          type: boolean
-        debug:
-          nullable: true
-          type: boolean
-        debug_trace:
-          nullable: true
-          type: boolean
-        silent:
-          nullable: true
-          type: boolean
-      type: object
+      - $ref: '#/components/schemas/SetOptionsAction_allOf'
     StatusAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     Pair_AnyValue_AnyValue_:
       properties:
         first: {}
@@ -488,22 +337,7 @@ components:
     UpdateAction:
       allOf:
       - $ref: '#/components/schemas/Action'
-      properties:
-        delta:
-          items:
-            $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
-          nullable: true
-          type: array
-        rel:
-          $ref: '#/components/schemas/RelKey'
-        updates:
-          items:
-            $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
-          nullable: true
-          type: array
-      required:
-      - rel
-      type: object
+      - $ref: '#/components/schemas/UpdateAction_allOf'
     ActionResult:
       discriminator:
         propertyName: type
@@ -519,13 +353,7 @@ components:
     CardinalityActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      properties:
-        result:
-          items:
-            $ref: '#/components/schemas/Relation'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/CardinalityActionResult_allOf'
     AbstractProblem:
       discriminator:
         propertyName: type
@@ -541,56 +369,15 @@ components:
     ClientProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        error_code:
-          default: ""
-          type: string
-        is_error:
-          default: false
-          type: boolean
-        is_exception:
-          default: false
-          type: boolean
-        message:
-          default: ""
-          type: string
-        path:
-          default: ""
-          type: string
-        report:
-          default: ""
-          type: string
-      required:
-      - error_code
-      - is_error
-      - is_exception
-      - message
-      - path
-      - report
-      type: object
+      - $ref: '#/components/schemas/ClientProblem_allOf'
     ExceptionProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-        exception_stacktrace:
-          nullable: true
-          type: string
-      required:
-      - exception
-      type: object
+      - $ref: '#/components/schemas/ExceptionProblem_allOf'
     IntegrityConstraintProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-      required:
-      - exception
-      type: object
+      - $ref: '#/components/schemas/IntegrityConstraintProblem_allOf'
     ICViolation:
       properties:
         rel_key:
@@ -611,53 +398,19 @@ components:
     IntegrityConstraintViolation:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        sources:
-          items:
-            $ref: '#/components/schemas/ICViolation'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/IntegrityConstraintViolation_allOf'
     OutputProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-        exception_stacktrace:
-          nullable: true
-          type: string
-        name:
-          default: ""
-          type: string
-      required:
-      - exception
-      - name
-      type: object
+      - $ref: '#/components/schemas/OutputProblem_allOf'
     PersistProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-        exception_stacktrace:
-          nullable: true
-          type: string
-      required:
-      - exception
-      type: object
+      - $ref: '#/components/schemas/ExceptionProblem_allOf'
     StorageProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-      required:
-      - exception
-      type: object
+      - $ref: '#/components/schemas/IntegrityConstraintProblem_allOf'
     SyntaxNode:
       discriminator:
         propertyName: type
@@ -727,59 +480,15 @@ components:
     Appl:
       allOf:
       - $ref: '#/components/schemas/SyntaxNode'
-      properties:
-        arguments:
-          items:
-            $ref: '#/components/schemas/SyntaxNode'
-          nullable: true
-          type: array
-        error:
-          default: false
-          type: boolean
-        missing:
-          default: false
-          type: boolean
-        range:
-          $ref: '#/components/schemas/Range'
-        symbol:
-          default: ""
-          type: string
-      required:
-      - error
-      - missing
-      - range
-      - symbol
-      type: object
+      - $ref: '#/components/schemas/Appl_allOf'
     Literal:
       allOf:
       - $ref: '#/components/schemas/SyntaxNode'
-      properties:
-        missing:
-          default: false
-          type: boolean
-        range:
-          $ref: '#/components/schemas/Range'
-        value:
-          default: ""
-          type: string
-      required:
-      - missing
-      - range
-      - value
-      type: object
+      - $ref: '#/components/schemas/Literal_allOf'
     Token:
       allOf:
       - $ref: '#/components/schemas/SyntaxNode'
-      properties:
-        range:
-          $ref: '#/components/schemas/Range'
-        value:
-          default: ""
-          type: string
-      required:
-      - range
-      - value
-      type: object
+      - $ref: '#/components/schemas/Token_allOf'
     LinkedList:
       discriminator:
         propertyName: type
@@ -793,127 +502,67 @@ components:
     Cons:
       allOf:
       - $ref: '#/components/schemas/LinkedList'
-      properties:
-        head:
-          $ref: '#/components/schemas/SyntaxNode'
-        tail:
-          $ref: '#/components/schemas/LinkedList'
-      required:
-      - head
-      - tail
-      type: object
+      - $ref: '#/components/schemas/Cons_allOf'
     Nil:
       allOf:
       - $ref: '#/components/schemas/LinkedList'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     SyntaxError:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        next:
-          $ref: '#/components/schemas/SyntaxNode'
-        node:
-          $ref: '#/components/schemas/SyntaxNode'
-        trace:
-          $ref: '#/components/schemas/LinkedList'
-      required:
-      - node
-      - trace
-      type: object
+      - $ref: '#/components/schemas/SyntaxError_allOf'
     WorkspaceLoadProblem:
       allOf:
       - $ref: '#/components/schemas/AbstractProblem'
-      properties:
-        exception:
-          default: ""
-          type: string
-      required:
-      - exception
-      type: object
+      - $ref: '#/components/schemas/IntegrityConstraintProblem_allOf'
     CollectProblemsActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      properties:
-        problems:
-          items:
-            $ref: '#/components/schemas/AbstractProblem'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsActionResult_allOf'
     ImportActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     InstallActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     ListEdbActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      properties:
-        rels:
-          items:
-            $ref: '#/components/schemas/RelKey'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/ListEdbActionResult_allOf'
     ListSourceActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      properties:
-        sources:
-          items:
-            $ref: '#/components/schemas/Source'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/InstallAction_allOf'
     LoadDataActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     ModifyWorkspaceActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      properties:
-        delete_edb_result:
-          items:
-            $ref: '#/components/schemas/RelKey'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/ModifyWorkspaceActionResult_allOf'
     ParseActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      properties:
-        problems:
-          items:
-            $ref: '#/components/schemas/AbstractProblem'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsActionResult_allOf'
     QueryActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      properties:
-        output:
-          items:
-            $ref: '#/components/schemas/Relation'
-          nullable: true
-          type: array
-      type: object
+      - $ref: '#/components/schemas/QueryActionResult_allOf'
     SetOptionsActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     StatusActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     UpdateActionResult:
       allOf:
       - $ref: '#/components/schemas/ActionResult'
-      type: object
+      - $ref: '#/components/schemas/CollectProblemsAction_allOf'
     LabeledAction:
       example:
         name: name
@@ -1105,5 +754,379 @@ components:
       required:
       - aborted
       - type
+      type: object
+    CardinalityAction_allOf:
+      properties:
+        relname:
+          nullable: true
+          type: string
+      type: object
+    CollectProblemsAction_allOf:
+      properties:
+        dummy:
+          nullable: true
+          type: string
+      type: object
+    ImportAction_allOf:
+      properties:
+        inputs:
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+          type: array
+      type: object
+    InstallAction_allOf:
+      properties:
+        sources:
+          items:
+            $ref: '#/components/schemas/Source'
+          nullable: true
+          type: array
+      type: object
+    CSVFileSchema_allOf:
+      properties:
+        types:
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    CSVFileSyntax_allOf:
+      properties:
+        datarow:
+          default: 0
+          type: integer
+        delim:
+          default: ""
+          type: string
+        escapechar:
+          default: ""
+          type: string
+        header:
+          items:
+            type: string
+          nullable: true
+          type: array
+        header_row:
+          default: 0
+          type: integer
+        ignorerepeated:
+          default: false
+          type: boolean
+        missingstrings:
+          items:
+            type: string
+          nullable: true
+          type: array
+        normalizenames:
+          default: false
+          type: boolean
+        quotechar:
+          default: ""
+          type: string
+      required:
+      - datarow
+      - delim
+      - escapechar
+      - header_row
+      - ignorerepeated
+      - normalizenames
+      - quotechar
+      type: object
+    AzureIntegration_allOf:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/Pair_Symbol_String_'
+          nullable: true
+          type: array
+        name:
+          nullable: true
+          type: string
+        storage_allowed_locations:
+          items:
+            type: string
+          nullable: true
+          type: array
+        storage_blocked_locations:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tenant_id:
+          nullable: true
+          type: string
+      type: object
+    LoadDataAction_allOf:
+      properties:
+        rel:
+          default: ""
+          type: string
+        value:
+          $ref: '#/components/schemas/LoadData'
+      required:
+      - rel
+      - value
+      type: object
+    ModifyWorkspaceAction_allOf:
+      properties:
+        delete_edb:
+          nullable: true
+          type: string
+        delete_source:
+          items:
+            type: string
+          nullable: true
+          type: array
+        enable_library:
+          nullable: true
+          type: string
+      type: object
+    ParseAction_allOf:
+      properties:
+        nonterm:
+          default: ""
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+      required:
+      - nonterm
+      - source
+      type: object
+    QueryAction_allOf:
+      properties:
+        inputs:
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+          type: array
+        outputs:
+          items:
+            type: string
+          nullable: true
+          type: array
+        persist:
+          items:
+            type: string
+          nullable: true
+          type: array
+        source:
+          $ref: '#/components/schemas/Source'
+      required:
+      - source
+      type: object
+    SetOptionsAction_allOf:
+      properties:
+        abort_on_error:
+          nullable: true
+          type: boolean
+        debug:
+          nullable: true
+          type: boolean
+        debug_trace:
+          nullable: true
+          type: boolean
+        silent:
+          nullable: true
+          type: boolean
+      type: object
+    UpdateAction_allOf:
+      properties:
+        delta:
+          items:
+            $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
+          nullable: true
+          type: array
+        rel:
+          $ref: '#/components/schemas/RelKey'
+        updates:
+          items:
+            $ref: '#/components/schemas/Pair_AnyValue_AnyValue_'
+          nullable: true
+          type: array
+      required:
+      - rel
+      type: object
+    CardinalityActionResult_allOf:
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+          type: array
+      type: object
+    ClientProblem_allOf:
+      properties:
+        error_code:
+          default: ""
+          type: string
+        is_error:
+          default: false
+          type: boolean
+        is_exception:
+          default: false
+          type: boolean
+        message:
+          default: ""
+          type: string
+        path:
+          default: ""
+          type: string
+        report:
+          default: ""
+          type: string
+      required:
+      - error_code
+      - is_error
+      - is_exception
+      - message
+      - path
+      - report
+      type: object
+    ExceptionProblem_allOf:
+      properties:
+        exception:
+          default: ""
+          type: string
+        exception_stacktrace:
+          nullable: true
+          type: string
+      required:
+      - exception
+      type: object
+    IntegrityConstraintProblem_allOf:
+      properties:
+        exception:
+          default: ""
+          type: string
+      required:
+      - exception
+      type: object
+    IntegrityConstraintViolation_allOf:
+      properties:
+        sources:
+          items:
+            $ref: '#/components/schemas/ICViolation'
+          nullable: true
+          type: array
+      type: object
+    OutputProblem_allOf:
+      properties:
+        exception:
+          default: ""
+          type: string
+        exception_stacktrace:
+          nullable: true
+          type: string
+        name:
+          default: ""
+          type: string
+      required:
+      - exception
+      - name
+      type: object
+    Appl_allOf:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/SyntaxNode'
+          nullable: true
+          type: array
+        error:
+          default: false
+          type: boolean
+        missing:
+          default: false
+          type: boolean
+        range:
+          $ref: '#/components/schemas/Range'
+        symbol:
+          default: ""
+          type: string
+      required:
+      - error
+      - missing
+      - range
+      - symbol
+      type: object
+    Literal_allOf:
+      properties:
+        missing:
+          default: false
+          type: boolean
+        range:
+          $ref: '#/components/schemas/Range'
+        value:
+          default: ""
+          type: string
+      required:
+      - missing
+      - range
+      - value
+      type: object
+    Token_allOf:
+      properties:
+        range:
+          $ref: '#/components/schemas/Range'
+        value:
+          default: ""
+          type: string
+      required:
+      - range
+      - value
+      type: object
+    Cons_allOf:
+      properties:
+        head:
+          $ref: '#/components/schemas/SyntaxNode'
+        tail:
+          $ref: '#/components/schemas/LinkedList'
+      required:
+      - head
+      - tail
+      type: object
+    SyntaxError_allOf:
+      properties:
+        next:
+          $ref: '#/components/schemas/SyntaxNode'
+        node:
+          $ref: '#/components/schemas/SyntaxNode'
+        trace:
+          $ref: '#/components/schemas/LinkedList'
+      required:
+      - node
+      - trace
+      type: object
+    CollectProblemsActionResult_allOf:
+      properties:
+        problems:
+          items:
+            $ref: '#/components/schemas/AbstractProblem'
+          nullable: true
+          type: array
+      type: object
+    ListEdbActionResult_allOf:
+      properties:
+        rels:
+          items:
+            $ref: '#/components/schemas/RelKey'
+          nullable: true
+          type: array
+      type: object
+    ModifyWorkspaceActionResult_allOf:
+      properties:
+        delete_edb_result:
+          items:
+            $ref: '#/components/schemas/RelKey'
+          nullable: true
+          type: array
+      type: object
+    QueryActionResult_allOf:
+      properties:
+        output:
+          items:
+            $ref: '#/components/schemas/Relation'
+          nullable: true
+          type: array
       type: object
 

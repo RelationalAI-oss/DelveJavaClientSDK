@@ -18,6 +18,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.relationalai.client.model.CollectProblemsActionAllOf;
 import com.relationalai.client.model.Integration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -47,6 +48,14 @@ public class DefaultIntegrationTest {
     @Test
     public void typeTest() {
         // TODO: test type
+    }
+
+    /**
+     * Test the property 'dummy'
+     */
+    @Test
+    public void dummyTest() {
+        // TODO: test dummy
     }
 
 }

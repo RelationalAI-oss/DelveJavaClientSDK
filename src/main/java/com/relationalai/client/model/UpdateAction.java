@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import com.relationalai.client.model.Action;
 import com.relationalai.client.model.PairAnyValueAnyValue;
 import com.relationalai.client.model.RelKey;
+import com.relationalai.client.model.UpdateActionAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
