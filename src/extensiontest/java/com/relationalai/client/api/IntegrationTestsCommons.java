@@ -138,8 +138,16 @@ public class IntegrationTestsCommons {
                 toRelation("p", Arrays.asList(1.0, 2.0, 3.0), "Int64")));
         assertTrue(testQuery(conn, "def p = {(1.1,); (2.2,); (3.4,)}", "p").equals(
                 toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "Float64")));
-        assertTrue(testQuery(conn, "def p = {(parse_decimal[64, 2, \"1.1\"],); (parse_decimal[64, 2, \"2.2\"],); (parse_decimal[64, 2, \"3.4\"],)}", "p").equals(
-                toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "FixedPointDecimals.FixedDecimal{Int64,2}")));
+
+        // TODO: With Julia v1.6, type representation has slightly changed (cf. `FixedDecimal{Int64,2}` vs. `FixedDecimal{Int64, 2}`).
+        // Until we migrate to Julia v1.6, we therefore support both representations in this test.
+        assertTrue(
+            testQuery(conn, "def p = {(parse_decimal[64, 2, \"1.1\"],); (parse_decimal[64, 2, \"2.2\"],); (parse_decimal[64, 2, \"3.4\"],)}", "p")
+                .equals(toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "FixedPointDecimals.FixedDecimal{Int64,2}")) ||
+            testQuery(conn, "def p = {(parse_decimal[64, 2, \"1.1\"],); (parse_decimal[64, 2, \"2.2\"],); (parse_decimal[64, 2, \"3.4\"],)}", "p")
+                .equals(toRelation("p", Arrays.asList(1.1, 2.2, 3.4), "FixedPointDecimals.FixedDecimal{Int64, 2}"))
+        );
+
         assertTrue(testQuery(conn, "def p = {(1, 5); (2, 7); (3, 9)}", "p").equals(
                 toRelation("p", new HashMap<>(){{put(1.0, 5.0); put(2.0, 7.0); put(3.0, 9.0);}}, Arrays.asList("Int64", "Int64"))));
 
@@ -296,9 +304,14 @@ public class IntegrationTestsCommons {
         conn.loadJSON(dataLoaderArgs);
         assertTrue(conn.listEdb().size() == 2);
 
-        assertTrue(testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes").equals(
-                toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}")
-        ));
+        // TODO: With Julia v1.6, type representation has slightly changed.
+        // Until we migrate to Julia v1.6, we therefore support both representations in this test.
+        assertTrue(
+            testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes")
+                .equals(toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}")) ||
+            testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes")
+                .equals(toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.DefaultString"))
+        );
 
         dataLoaderArgs = DataLoaderArgs.builder()
                 .rel("json")
