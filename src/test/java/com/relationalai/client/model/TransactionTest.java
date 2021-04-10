@@ -84,6 +84,14 @@ public class TransactionTest {
     }
 
     /**
+     * Test the property 'nowaitDurable'
+     */
+    @Test
+    public void nowaitDurableTest() {
+        // TODO: test nowaitDurable
+    }
+
+    /**
      * Test the property 'readonly'
      */
     @Test
