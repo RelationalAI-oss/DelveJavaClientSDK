@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **accountName** | **String** |  |  [optional]
 **computeId** | **String** |  |  [optional]
 **event** | **String** |  |  [optional]
-**time** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**time** | **OffsetDateTime** |  |  [optional]
 
 
 
