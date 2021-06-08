@@ -304,13 +304,9 @@ public class IntegrationTestsCommons {
         conn.loadJSON(dataLoaderArgs);
         assertTrue(conn.listEdb().size() == 2);
 
-        // TODO: With Julia v1.6, type representation has slightly changed.
-        // Until we migrate to Julia v1.6, we therefore support both representations in this test.
         assertTrue(
             testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes")
-                .equals(toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}")) ||
-            testQuery(conn, "def cityRes(x) = exists(pos: json(:address, :city, x))", "cityRes")
-                .equals(toRelation("cityRes", Arrays.asList("Vancouver"), null, "DelveFixedSizeStrings.DefaultString"))
+                .equals(toRelation("cityRes", Arrays.asList("Vancouver"), null, "String"))
         );
 
         dataLoaderArgs = DataLoaderArgs.builder()
