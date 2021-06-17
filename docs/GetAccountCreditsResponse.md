@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**startPeriod** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
-**endPeriod** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**startPeriod** | **OffsetDateTime** |  |  [optional]
+**endPeriod** | **OffsetDateTime** |  |  [optional]
 **compute** | [**ComputeCreditsInfo**](ComputeCreditsInfo.md) |  |  [optional]
 **storage** | [**StorageCreditsInfo**](StorageCreditsInfo.md) |  |  [optional]
 

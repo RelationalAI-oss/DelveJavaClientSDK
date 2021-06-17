@@ -588,6 +588,7 @@ components:
     Transaction:
       example:
         mode: OPEN
+        nowait_durable: false
         debug_level: 0
         dbname: dbname
         readonly: false
@@ -629,6 +630,9 @@ components:
           - CLONE
           - CLONE_OVERWRITE
           type: string
+        nowait_durable:
+          default: false
+          type: boolean
         readonly:
           default: false
           type: boolean
@@ -647,6 +651,7 @@ components:
       - abort
       - dbname
       - mode
+      - nowait_durable
       - readonly
       - type
       type: object

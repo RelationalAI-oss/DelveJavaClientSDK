@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**columns** | [**List&lt;List&lt;Object&gt;&gt;**](List.md) |  |  [optional]
+**columns** | **List&lt;List&lt;Object&gt;&gt;** |  |  [optional]
 **relKey** | [**RelKey**](RelKey.md) |  | 
 **type** | [**TypeEnum**](#TypeEnum) |  | 
 

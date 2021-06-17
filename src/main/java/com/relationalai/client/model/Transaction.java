@@ -107,6 +107,10 @@ public class Transaction {
   @SerializedName(SERIALIZED_NAME_MODE)
   private ModeEnum mode = ModeEnum.OPEN;
 
+  public static final String SERIALIZED_NAME_NOWAIT_DURABLE = "nowait_durable";
+  @SerializedName(SERIALIZED_NAME_NOWAIT_DURABLE)
+  private Boolean nowaitDurable = false;
+
   public static final String SERIALIZED_NAME_READONLY = "readonly";
   @SerializedName(SERIALIZED_NAME_READONLY)
   private Boolean readonly = false;
@@ -289,6 +293,28 @@ public class Transaction {
   }
 
 
+  public Transaction nowaitDurable(Boolean nowaitDurable) {
+    
+    this.nowaitDurable = nowaitDurable;
+    return this;
+  }
+
+   /**
+   * Get nowaitDurable
+   * @return nowaitDurable
+  **/
+  @ApiModelProperty(required = true, value = "")
+
+  public Boolean getNowaitDurable() {
+    return nowaitDurable;
+  }
+
+
+  public void setNowaitDurable(Boolean nowaitDurable) {
+    this.nowaitDurable = nowaitDurable;
+  }
+
+
   public Transaction readonly(Boolean readonly) {
     
     this.readonly = readonly;
@@ -393,6 +419,7 @@ public class Transaction {
         Objects.equals(this.dbname, transaction.dbname) &&
         Objects.equals(this.debugLevel, transaction.debugLevel) &&
         Objects.equals(this.mode, transaction.mode) &&
+        Objects.equals(this.nowaitDurable, transaction.nowaitDurable) &&
         Objects.equals(this.readonly, transaction.readonly) &&
         Objects.equals(this.sourceDbname, transaction.sourceDbname) &&
         Objects.equals(this.version, transaction.version) &&
@@ -401,7 +428,7 @@ public class Transaction {
 
   @Override
   public int hashCode() {
-    return Objects.hash(abort, actions, dbname, debugLevel, mode, readonly, sourceDbname, version, type);
+    return Objects.hash(abort, actions, dbname, debugLevel, mode, nowaitDurable, readonly, sourceDbname, version, type);
   }
 
 
@@ -414,6 +441,7 @@ public class Transaction {
     sb.append("    dbname: ").append(toIndentedString(dbname)).append("\n");
     sb.append("    debugLevel: ").append(toIndentedString(debugLevel)).append("\n");
     sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
+    sb.append("    nowaitDurable: ").append(toIndentedString(nowaitDurable)).append("\n");
     sb.append("    readonly: ").append(toIndentedString(readonly)).append("\n");
     sb.append("    sourceDbname: ").append(toIndentedString(sourceDbname)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");

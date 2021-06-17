@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **dbname** | **String** |  | 
 **debugLevel** | **Integer** |  |  [optional]
 **mode** | [**ModeEnum**](#ModeEnum) |  | 
+**nowaitDurable** | **Boolean** |  | 
 **readonly** | **Boolean** |  | 
 **sourceDbname** | **String** |  |  [optional]
 **version** | **Integer** |  |  [optional]
